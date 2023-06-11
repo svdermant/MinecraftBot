@@ -317,19 +317,25 @@ on 100:text:!vault-convert*:%m-channel:  {
 }
 
 on 100:text:!startlog*:%m-channel: {
-  if ($2 !isnum) { msg %m-channel Eingabefehler um das Logging zu aktivieren Schreibe bitte: !startlog <zeit> hierbei | /msg %m-channel Hierbei darf <zeit> eine Zahl von 1s bis 60s betragen und nicht darüber }
+  if ($2 !isnum) { msg %m-channel Eingabefehler um das Logging zu aktivieren Schreibe bitte: !startlog <zeit> hierbei | /msg %m-channel Hierbei darf <zeit> eine Zahl von 1s bis 60s betragen und nicht darüber | /halt }
   if ($2 isnum) && ($2 >= 1) && ($2 <= 60) { 
     /timer.checklog1 0 $2 /checklog
     /msg %m-channel Chatlog wird gestartet.
+    /halt
   }
   else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
 }
 
 on 100:text:!stoplog:%m-channel: {
-  if ($timer(1).type == online) || ($timer(1).name == .checklog1) || ($timer(1).com == /checklog1) { 
-    msg %m-channel Timer aktiv
-    msg %m-channel Logging wird gestoppt 
-    /timer.checklog1 off
+  set %ti 0
+  set %maxtimer $timer(0)
+  while (%maxtimer  >= %ti) {
+    if ($timer(%maxtimer).type == online) && ($timer(%maxtimer)name == .checklog1) && ($timer(%maxtimer).com == /checklog) {
+      msg %m-channel Timer aktiv
+      msg %m-channel Logging wird gestoppt 
+      /timer $+ $timer(%maxtimer)name off
+    }
+    dec %maxtimer
   }
 }
 
