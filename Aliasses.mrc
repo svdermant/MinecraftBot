@@ -13,7 +13,7 @@ on 1:START: {
 
     set %m-channel $readini(system.dat, botinfo, mchannel) 
     if (%m-channel = $null) { echo 04*** Warnung kein MinecaftChannel gesetzt. Setze einen *** 
-    set %battlechan $?="Gib bitte den Minecraftraumnamen an bitte mit einer (#) am Anfang." |  writeini system.dat botinfo questchan %battlechan }
+    set %m-channel $?="Gib bitte den Minecraftraumnamen an bitte mit einer (#) am Anfang." |  writeini system.dat botinfo mchannel %m-channel }
     else { echo 12*** Der Minecraftraum wurde Erstellt:04 %battlechan 12*** }
 
     set %bot.name $readini(system.dat, botinfo, botname)
@@ -29,7 +29,7 @@ on 1:START: {
     if (%mProp = $null) { echo echo 4*** WARNUNG Es wurde keine Einstellungsdatei des MinecraftServers angegeben. Bitte behebe das Problem ...
       set %mProp $?="Bitte gib den Pfad zur Serverproperties datei an (zb C:\MeinServer\server.properties)" | writeini system.dat MineCraftServer ServerPropPfad %mProp
     }
-    set %rcon_password $readini(system.dat, MineCraftServer, rcon_password)
+    set %rcon_password $readini(system.dat, MineCraftServer, rconpass)
     if (%rcon_password = $null) { echo echo 4*** WARNUNG Es wurde keine Rconpassword des MinecraftServers angegeben. Bitte behebe das Problem ...
       set %rcon_password $?="Bitte gib das Rconpasswort an" | writeini system.dat MineCraftServer rconpass %rcon_password
     }
@@ -60,7 +60,7 @@ on 1:START: {
 
     echo 12***Legen nun bitte den IRC-Kanal fest, in dem der Bot verwendet werden soll.
     set %m-channel $?="Gib den Raumnamen an mit einer # zu beginn"
-    writeini system.dat botinfo questchan %m-channel
+    writeini system.dat botinfo mchannel %m-channel
     echo 12*** Der Bot wird nun in04 %m-channel laufen
 
     echo 12*** Lege nun bitte das Passwort fest, mit dem du den Bot bei Nickserv Registriert hast
@@ -84,13 +84,25 @@ on 1:START: {
     set %rpass $read(%mProp,w,rcon.password*)
     set %r.pass $remove(%rpass,rcon.password=)
     set %rcon_password $?="Gib das Rconpasswort an was in deiner Serverproperties datei steht"
-    if (%rcon_password == $null) { echo 4 Kein Rconpassword angegeben. Serverseitige funktionen deaktiviert. | /halt }
-    if (%rcon_password != %r.pass) { echo 4 Kein Rconpassword angegeben. Serverseitige funktionen deaktiviert. | /halt }
+    if (%rcon_password == $null) { 
+      echo 4 Kein Rconpassword angegeben. Serverseitige funktionen deaktiviert. 
+      set %first.run false
+      .auser 100 %bot.owner
+      $system_defaults_check 
+      /halt 
+    }
+    if (%rcon_password != %r.pass) {
+      echo 4 Kein Rconpassword angegeben. Serverseitige funktionen deaktiviert. 
+      set %first.run false
+      .auser 100 %bot.owner
+      $system_defaults_check 
+      /halt 
+      /halt 
+    }
     writeini system.dat MineCraftServer rconpass %rcon_password
 
     set %first.run false
     .auser 100 %bot.owner
-
     $system_defaults_check
   }
 
@@ -99,6 +111,10 @@ on 1:START: {
 
   if (($version > 6.3) && ($version < 7.41)) { echo 04*** Deine Version ist älter als die empfohlene Version für diesen Bot. Einige Dinge funktionieren möglicherweise nicht richtig. Es wird empfohlen, ein Update durchzuführen. 12*** }
   if ($version > 7.41) { echo 04*** Deine Version ist neuer als die empfohlene Version für diesen Bot. Obwohl er funktionieren sollte, ist es derzeit ungetestet und kann Macken oder Fehler aufweisen. Bei Problemen wird ein Downgrade auf 7.41 empfohlen. 12 *** }
+}
+
+on 1:EXIT: {
+  /save -rv vars.ini
 }
 
 ;;;;;;;;; Systemcheck ;;;;;;;;;;;;;;
@@ -119,9 +135,9 @@ alias system_defaults_check {
   set %moblist5 tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.ufferfish.anderingtrader
   set %moblist6 amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
 
-  Checke ob die Scripte geladen sind.
+  ;;;;Checke ob die Scripte geladen sind.
   load -rs Mcraft-Commands.mrc
-
+  /save -rv vars.ini
 }
 
 ;;;; Logsystem vom Minecraft Server ;;;;;;
