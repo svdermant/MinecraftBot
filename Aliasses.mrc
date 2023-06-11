@@ -78,7 +78,7 @@ on 1:START: {
     echo 12**Gib nun den Pfad deiner ServerProperties datei an
     set %mProp $?="Wo liegt die Servereinstellungsdatei"?
     if ($exists(%mProp) == $false) { echo 4 Der Pfad der Einstellungsdatei darf nicht leer sein. Startvorgang Abgebrochen | /exit | halt }
-    writeini system.dat MineCraftServer ServerPropPfad %mlog
+    writeini system.dat MineCraftServer ServerPropPfad %mProp
 
     echo 12**Gib nun das Rconpassword an dies wird Benötigt um Serverinterne funktionen zu steuern. Der Bot läüft zwar auch ohne aber man kann den Server dann schwer verwalten.
     set %rpass $read(%mProp,w,rcon.password*)

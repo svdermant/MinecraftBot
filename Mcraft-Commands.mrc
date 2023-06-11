@@ -316,6 +316,23 @@ on 100:text:!vault-convert*:%m-channel:  {
   if ($2 isletter) { msg $chan Du must ein Economy Plugin Angeben von dessen du die Währung in ein Anderes Konvertieren möchtest }
 }
 
+on 100:text:!startlog*:%m-channel: {
+  if ($2 !isnum) { msg %m-channel Eingabefehler um das Logging zu aktivieren Schreibe bitte: !startlog <zeit> hierbei | /msg %m-channel Hierbei darf <zeit> eine Zahl von 1s bis 60s betragen und nicht darüber }
+  if ($2 isnum) && ($2 >= 1) && ($2 <= 60) { 
+    /timer.checklog1 0 $2 /checklog
+    /msg %m-channel Chatlog wird gestartet.
+  }
+  else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
+}
+
+on 100:text:!stoplog:%m-channel: {
+  if ($timer(1).type == online) || ($timer(1).name == .checklog1) || ($timer(1).com == /checklog1) { 
+    msg %m-channel Timer aktiv
+    msg %m-channel Logging wird gestoppt 
+    /timer.checklog1 off
+  }
+}
+
 ;;;;;;;;; Server Stoppen ;;;;;;;;;;;;;
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
