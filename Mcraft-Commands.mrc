@@ -357,6 +357,8 @@ on 100:text:!Zeitsteuerung:%m-channel: {
 [18:32:30] <&McraftBot> ct night 420s worldname
 ;;
 
+;;; Plugin Bluemap benötigt ;;;;;
+
 on 100:text:!mapupdate:%m-channel: {
 
   msg %m-channel 4Achtung in ca. 10-15 Sekunden folgt ein Update der Karten. 
