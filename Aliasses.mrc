@@ -143,9 +143,9 @@ alias system_defaults_check {
 ;;;; Logsystem vom Minecraft Server ;;;;;;
 
 Alias checklog {
-  set %i $lines(C:\Users\Administrator\AppData\Roaming\mIRC\logs\latest.log)
-  if (%temp.r != $read(C:\Users\Administrator\AppData\Roaming\mIRC\logs\latest.log, %i)) {
-    set %temp.r $read(C:\Users\Administrator\AppData\Roaming\mIRC\logs\latest.log, %i)
+  set %i $lines(%mlog)
+  if (%temp.r != $read(%mlog, %i)) {
+    set %temp.r $read(%mlog, %i)
     set %time $timestamp
     set %temp.rv $remove(%temp.r, $timestamp, [<ip address withheld>], %time, $time)
     set %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
@@ -305,7 +305,7 @@ alias vault-ausgabe {
   if (%econ1 isin %Ecos.r3) && (%econ2 !isin %Ecos.r3) { /msg %m-channel Konte %econ2 nicht finden. Bitte sei dir Sicher das du es Richtig geschrieben hast. | /msg %reply-chan Gültige EcoPlugins sind: $remove(%Ecos.r3,Economy:) | halt }
   if (%econ1 isin %Ecos.r3) && (%econ2 isin %Ecos.r3) { 
     /msg %m-channel Währung wird von %econ1 zu %econ2 Konvertiert dieses kann einen Moment dauern.
-    /run rcon.exe -a localhost:25575 -p %dreckmist "vault-convert %econ1 %econ2"
+    /run rcon.exe -a localhost:25575 -p %rcon_password "vault-convert %econ1 %econ2"
     /remove vault-info.bat
     /remove vault-info.txt
   }
@@ -319,7 +319,7 @@ alias zeitsteuerung-tag {
     /timer.nacht3 off
     /timer.bacht2 off 
     /timer.tag1 1 1230 /msg %m-channel Der Abend bricht an.. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht.
-    /timer.fag1 1 1230 /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast Der Abend bricht an.. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht."
+    /timer.fag1 1 1230 /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast Der Abend bricht an.. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht."
     /timer.bag1 1 1240 /set %zeit nacht
     /timer.bag2 0 1 /zeitsteuerung-nacht
     /timer.bacht2 off
@@ -332,7 +332,7 @@ alias zeitsteuerung-nacht {
     /timer.bag2 off
     /timer.fag1 off 
     /timer.nacht1 1 510 /msg %m-channel  Der Tag bricht an.. ☼ ☼ 
-    /timer.nacht3 1 510 /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast Der Tag ☼  bricht an."
+    /timer.nacht3 1 510 /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast Der Tag ☼  bricht an."
     /timer.nacht2 1 510 /set %zeit tag
     /timer.bacht2 0 1 /zeitsteuerung-tag
   }
