@@ -17,9 +17,7 @@ libraries/*
 logs/*
 plugins/*
 plugins_diagnose/*
-scripsts/users.ini
-scripsts/scripts.rar
-scripsts/vars.ini
+scripsts/*
 sounds/*
 versions/*
 .console_history
@@ -29,6 +27,7 @@ eula.txt
 LICENSE.*
 newlist.txt
 *.ini
+!mirc.ini
 *.bat
 *.json
 *.jar
