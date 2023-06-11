@@ -1,0 +1,97 @@
+[2023-05-18 17:18:19] localhost:25575: help
+§e--------- §fHelp: Index (1/11) §e--------------------
+§7Use /help [n] to get page n of help.
+§7§6Aliases: §fLists command aliases
+§f§6Bukkit: §fAll commands for Bukkit
+§f§6Minecraft: §fAll commands for Minecraft
+§f§6/advancement: §fA Mojang provided command.
+§f§6/attribute: §fA Mojang provided command.
+§f§6/ban: §fA Mojang provided command.
+§f§6/ban-ip: §fA Mojang provided command.
+§f§6/banlist: §fA Mojang provided command.
+
+[2023-05-18 17:18:56] localhost:25575: online
+Unknown command. Type "/help" for help.
+
+[2023-05-18 17:19:27] localhost:25575: minecraft
+Unknown command. Type "/help" for help.
+
+[2023-05-18 17:19:32] localhost:25575: /minecraft
+Unknown command. Type "/help" for help.
+
+[2023-05-18 17:19:43] localhost:25575: help minecraft
+§e--------- §fHelp: Minecraft (1/9) §e-----------------
+§7Below is a list of all Minecraft commands:
+§7§6/advancement: §fA Mojang provided command.
+§f§6/attribute: §fA Mojang provided command.
+§f§6/ban: §fA Mojang provided command.
+§f§6/ban-ip: §fA Mojang provided command.
+§f§6/banlist: §fA Mojang provided command.
+§f§6/bossbar: §fA Mojang provided command.
+§f§6/clear: §fA Mojang provided command.
+§f§6/clone: §fA Mojang provided command.
+
+[2023-05-18 17:19:54] localhost:25575: help bukkit
+§e--------- §fHelp: Bukkit §e--------------------------
+§7Below is a list of all Bukkit commands:
+§7§6/help: §fShows the help menu
+§f§6/plugins: §fGets a list of plugins running on the server
+§f§6/reload: §fReloads the server configuration and plugins
+§f§6/timings: §fManages Spigot Timings data to see performance of the
+§fserver.
+§f§6/version: §fGets the version of this server including any
+§fplugins in use
+
+[2023-05-18 17:20:11] localhost:25575: kick
+Unknown or incomplete command, see below for error
+kick<--[HERE]
+
+[2023-05-18 17:20:22] localhost:25575: w
+Unknown or incomplete command, see below for error
+w<--[HERE]
+
+[2023-05-18 17:20:30] localhost:25575: version
+§f§oChecking version, please wait...
+
+[2023-05-18 17:20:50] localhost:25575: ..
+Unknown command. Type "/help" for help.
+
+[2023-05-18 17:21:08] localhost:25575: reload
+§cAre you sure you wish to reload your server? Doing so may cause bugs and memory leaks. It is recommended to restart instead of using /reload. To confirm, please type §e/reload confirm
+
+[2023-05-30 23:22:50] localhost:25575: rg list -w world
+
+
+[2023-05-30 23:22:58] localhost:25575: rg list -w Expert
+
+
+[2023-05-30 23:28:08] localhost:25575: clear
+§cFehler:§4 §4Spieler nicht gefunden.
+
+[2023-05-30 23:28:32] localhost:25575: rg list
+§cPlease specify the world with -w world_name.
+
+[2023-05-30 23:28:40] localhost:25575: rg list -w world
+
+
+[2023-05-30 23:29:49] localhost:25575: rg list -w world
+
+
+[2023-05-30 23:41:04] localhost:25575: rg list -w world
+
+
+[2023-05-30 23:41:26] localhost:25575: region
+§c/region <select|flag|migrateuuid|migrateheights|setpriority|teleport|save|flags|addowner|list|removeowner|remove|addmember|redefine|removemember|load|define|claim|toggle-bypass|setparent|info|migratedb>
+
+[2023-05-30 23:41:35] localhost:25575: region info
+§cPlease specify the world with -w world_name.
+
+[2023-05-30 23:41:41] localhost:25575: region info -w world
+§cPlease specify the region with /region info -w world_name region_name.
+
+[2023-05-30 23:41:53] localhost:25575: region info -w world testregion
+§cNo region could be found with the name of 'testregion'.
+
+[2023-05-30 23:42:06] localhost:25575: region info -w world testwelt
+
+

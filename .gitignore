@@ -24,7 +24,7 @@ sounds/*
 versions/*
 .console_history
 *.yml
-*.perm
+*.pem
 eula.txt
 LICENSE.*
 newlist.txt
@@ -32,3 +32,5 @@ newlist.txt
 *.bat
 *.json
 *.jar
+*.rar
+*.properties
