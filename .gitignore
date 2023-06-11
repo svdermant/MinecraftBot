@@ -26,7 +26,7 @@ versions/*
 eula.txt
 LICENSE.*
 newlist.txt
-mirc.ini
+*.ini
 *.bat
 *.exe
 *.json
