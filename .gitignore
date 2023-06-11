@@ -17,7 +17,7 @@ libraries/*
 logs/*
 plugins/*
 plugins_diagnose/*
-scripsts/*
+scripts/
 sounds/*
 versions/*
 .console_history
