@@ -6,7 +6,7 @@ on 100:text:!server settings:%m-channel: {
   var %s 2
   while (%s <= 59) {
     inc %s
-    set %settings $+ . $+ %s $read -l $+ %s server.properties
+    set %settings $+ . $+ %s $read -l $+ %s %mProp
   } 
   serverresult
 }
@@ -23,35 +23,35 @@ on 100:text:!set*:%m-channel: {
   if (%value !isin %valid-settings) { msg $chan  msg $chan 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Fehler: Keine Parameter und Optionen angegeben. Folgende können genutzt werden: %valid-settings }
   if (%value isin %num-settings) && (%v isnum) { 
     msg %m-channel: 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Einstellungen werden vorgenommen. Server muss eventuell Neugestartet werden.
-    /write -l1 server.properties [Settings]
-    /timer.write1 1 3 /writeini server.properties Settings %value %v
-    /timer.write2 1 3 /write -l1 server.properties #Minecraft Servereinstellungen 
-    /timer.write3 1 3 /write -il2 server.properties #Minecraft By Serkons
+    /write -l1 %mProp [Settings]
+    /timer.write1 1 3 /writeini %mProp Settings %value %v
+    /timer.write2 1 3 /write -l1 %mProp #Minecraft Servereinstellungen 
+    /timer.write3 1 3 /write -il2 %mProp #Minecraft By Serkons
     halt 
   }
   if (%value isin %num-settings) && (%v !isnum) { msg $chan 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Fehler: Bitte gib eine Zahl an aber keine Negative Zahl | halt }
   if (%value isin %true-false-settings) && (%value != level-type) && (%v == true) || (%v == false)  { 
     msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Einstellungen werden vorgenommen. Server muss eventuell Neugestartet werden.
-    /write -l1 server.properties [Settings]
-    /timer.write1 1 3 /writeini server.properties Settings %value %v
-    /timer.write2 1 3 /write -l1 server.properties #Minecraft Servereinstellungen 
-    /timer.write3 1 3 /write -il2 server.properties #Minecraft By Serkons
+    /write -l1 %mProp [Settings]
+    /timer.write1 1 3 /writeini %mProp Settings %value %v
+    /timer.write2 1 3 /write -l1 %mProp #Minecraft Servereinstellungen 
+    /timer.write3 1 3 /write -il2 %mProp #Minecraft By Serkons
     halt  
   }
   if (%value isin %true-false-settings) && (%value == level-type) && (%v == normal) || (%v == flat)  { 
     msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Einstellungen werden vorgenommen. Server muss eventuell Neugestartet werden.
-    /write -l1 server.properties [Settings]
-    /timer.write1 1 3 /writeini server.properties Settings %value minecraft\: $+ %v
-    /timer.write2 1 3 /write -l1 server.properties #Minecraft Servereinstellungen 
-    /timer.write3 1 3 /write -il2 server.properties #Minecraft By Serkons
+    /write -l1 %mProp [Settings]
+    /timer.write1 1 3 /writeini %mProp Settings %value minecraft\: $+ %v
+    /timer.write2 1 3 /write -l1 %mProp #Minecraft Servereinstellungen 
+    /timer.write3 1 3 /write -il2 %mProp #Minecraft By Serkons
     halt  
   }
   if (%value isin %true-false-settings) && (%value == level-name) && (%v != $null)  { 
     msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Einstellungen werden vorgenommen. Server muss eventuell Neugestartet werden.
-    /write -l1 server.properties [Settings]
-    /timer.write1 1 3 /writeini server.properties Settings %value %v
-    /timer.write2 1 3 /write -l1 server.properties #Minecraft Servereinstellungen 
-    /timer.write3 1 3 /write -il2 server.properties #Minecraft By Serkons
+    /write -l1 %mProp [Settings]
+    /timer.write1 1 3 /writeini %mProp Settings %value %v
+    /timer.write2 1 3 /write -l1 %mProp #Minecraft Servereinstellungen 
+    /timer.write3 1 3 /write -il2 %mProp #Minecraft By Serkons
     halt  
   }
   if (%value isin %true-false-settings) && (%v != true) || (%v != false) { msg $chan 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] 4 Fehler: Bitte setze den Wert true oder false. (Achtung bei !set level-type ist bitte Normal oder flat anzugeben.) | halt }
@@ -71,17 +71,17 @@ on 100:text:!recreate*:%m-channel: {
 
 on *:text:!say*:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 11(3Abgeschickt11)
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
 }
 on *:text:!bday:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9  11(3Abgeschickt11)
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  ♥ Herzlichen   "
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 ♣ Glückwunsch ♣  "
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  und Alles gute Geburtstag ♥ "
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  Serkons aka. Kamerot  ☻"
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 alles Liebe sowie Gesundheit und Erfolg  ☻"
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 und ein glückliches und gesundes neues Lebensjahr"
-  /run rcon.exe -a localhost:25575 -p %dreckmist "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 Gruß dein Script Kollege ;)"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  ♥ Herzlichen   "
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 ♣ Glückwunsch ♣  "
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  und Alles gute Geburtstag ♥ "
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  Serkons aka. Kamerot  ☻"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 alles Liebe sowie Gesundheit und Erfolg  ☻"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 und ein glückliches und gesundes neues Lebensjahr"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 Gruß dein Script Kollege ;)"
 }
 
 
@@ -161,7 +161,7 @@ on 100:text:!allowfire*:%m-channel: {
   if ($2 == $null) { msg %m-channel Fehler: Bitte gebe einen Weltnamen an | halt }
   if (%world isin $finddir($mircdir, $+ %world  $+ *,1)) { 
     msg %m-channel Welt existiert. Feuerausbreitung wird Aktiviert.
-    run rcon.exe -a localhost:25575 -p %dreckmist " allowfire %world "
+    run rcon.exe -a localhost:25575 -p %rcon_password " allowfire %world "
     halt 
   }
   else {
@@ -175,7 +175,7 @@ on 100:text:!stopfire*:%m-channel: {
   if ($2 == $null) { msg %m-channel Fehler: Bitte gebe einen Weltnamen an | halt }
   if (%world isin $finddir($mircdir, $+ %world  $+ *,1)) { 
     msg %m-channel Welt existiert. Feuerausbreitung wird Deaktiviert.
-    run rcon.exe -a localhost:25575 -p %dreckmist " stopfire %world "
+    run rcon.exe -a localhost:25575 -p %rcon_password " stopfire %world "
     halt 
   }
   else {
@@ -186,22 +186,22 @@ on 100:text:!stopfire*:%m-channel: {
 
 on 100:text:!slay*:%m-channel: {
   if ($2 == $null) { msg %m-channel Gib bitte einen Spielernamen an | halt }
-  if ($2 != $null) { msg %m-channel Spieler $2 wird geschlagen. | run rcon.exe -a localhost:25575 -p %dreckmist " slay $2 " }
+  if ($2 != $null) { msg %m-channel Spieler $2 wird geschlagen. | run rcon.exe -a localhost:25575 -p %rcon_password " slay $2 " }
 }
 
 on 100:text:!heal*:%m-channel: {
   if ($2 == $null) { msg %m-channel Gib bitte einen Spielernamen an | halt }
-  if ($2 != $null) { msg %m-channel Spieler $2 wird geheilt. | run rcon.exe -a localhost:25575 -p %dreckmist " heal $2 " }
+  if ($2 != $null) { msg %m-channel Spieler $2 wird geheilt. | run rcon.exe -a localhost:25575 -p %rcon_password " heal $2 " }
 }
 
 on 100:text:!god*:%m-channel: {
   if ($2 == $null) { msg %m-channel Gib bitte einen Spielernamen an | halt }
-  if ($2 != $null) { msg %m-channel Spieler $2 wird in den Godmode gesetz. | run rcon.exe -a localhost:25575 -p %dreckmist " god $2 " }
+  if ($2 != $null) { msg %m-channel Spieler $2 wird in den Godmode gesetz. | run rcon.exe -a localhost:25575 -p %rcon_password " god $2 " }
 }
 
 on 100:text:!ungod*:%m-channel: {
   if ($2 == $null) { msg %m-channel Gib bitte einen Spielernamen an | halt }
-  if ($2 != $null) { msg %m-channel Spieler $2 wird der Godmode entfernt | run rcon.exe -a localhost:25575 -p %dreckmist " god $2 " }
+  if ($2 != $null) { msg %m-channel Spieler $2 wird der Godmode entfernt | run rcon.exe -a localhost:25575 -p %rcon_password " god $2 " }
 }
 
 on 100:text:!halt-activity*:%m-channel: {
@@ -213,8 +213,8 @@ on 100:text:!halt-activity*:%m-channel: {
   if ($2 == confirm) { 
 
     msg %m-channel 04ACHTUNG!! Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!.
-    run rcon.exe -a localhost:25575 -p %dreckmist "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!."
-    run rcon.exe -a localhost:25575 -p %dreckmist "halt-activity confirm"
+    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!."
+    run rcon.exe -a localhost:25575 -p %rcon_password "halt-activity confirm"
   }
 }
 
@@ -227,8 +227,8 @@ on 100:text:!stoplag*:%m-channel: {
   if ($2 == -c) { 
 
     msg %m-channel 04ACHTUNG!! Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!.
-    run rcon.exe -a localhost:25575 -p %dreckmist "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!."
-    run rcon.exe -a localhost:25575 -p %dreckmist "stoplag -c"
+    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!."
+    run rcon.exe -a localhost:25575 -p %rcon_password "stoplag -c"
   }
 }
 
@@ -239,7 +239,7 @@ on 100:text:!region*:%m-channel: {
   if ($2 == list) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 == -w) && ($4 isin $finddir($mircdir, $+ $4 $+ *,1)) { 
 
-    write regionlist.bat rcon.exe -a localhost:25575 -p %dreckmist "rg list -w $4" > regionlist.txt
+    write regionlist.bat rcon.exe -a localhost:25575 -p %rcon_password "rg list -w $4" > regionlist.txt
     /timer.regionlist1 1 2 /run regionlist.bat
     /timer.regionlist2 1 4 /play %m-channel regionlist.txt
     ;;/timer.regionlist3 1 10 /remove regionlist.txt
@@ -265,7 +265,7 @@ on 100:text:!give*:%m-channel: {
     if ($2- != $null) {
       var %com $remove($1-,!)
       set -u5 %command 7,1[4-7] 11S14erver 11B14efehl4:7 %com 11(3Abgeschickt11)
-      /run rcon.exe -a localhost:25575 -p %dreckmist " %com "
+      /run rcon.exe -a localhost:25575 -p %rcon_password " %com "
     }
   }
 }
@@ -288,13 +288,13 @@ on 100:text:!spawnentity*:%m-channel: {
     if ($2- != $null) {
       var %com $remove($1-,!)
       set -u5 %command 7,1[4-7] 11S14erver 11B14efehl4:7 %com 11(3Abgeschickt11)
-      /run rcon.exe -a localhost:25575 -p %dreckmist " %com "
+      /run rcon.exe -a localhost:25575 -p %rcon_password " %com "
     }
   }
 }
 
 on *:text:!vault info:%m-channel: {
-  write vault-info.bat rcon.exe -a localhost:25575 -p %dreckmist "vault-info" > vault-info.txt
+  write vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
   /timer.run1 1 5 /run vault-info.bat
   /timer.run2 1 7 /play %m-channel vault-info.txt
   /timer.delete1 1 10 /remove vault-info.txt
@@ -306,7 +306,7 @@ on 100:text:!vault-convert*:%m-channel:  {
   if ($1 == .vault-convert) && ($3 != $null) { 
     set %econ1 $2
     set %econ2 $3
-    write vault-info.bat rcon.exe -a localhost:25575 -p %dreckmist "vault-info" > vault-info.txt
+    write vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
     /timer.run1 1 3 /run vault-info.bat
     /timer.run2 1 5 /vault-ausgabe
     /timer.delete1 1 10 /remove vault-info.txt
@@ -349,7 +349,7 @@ on 100:text:!Zeitsteuerung:%m-channel: {
   set %zeit tag
   /timer.nacht1 1 11 /zeitsteuerung-tag
   /msg %m-channel In 10 Sec wird die Zeit zurückgesetzt.
-  /timer.nacht2 1 10 /run rcon.exe -a localhost:25575 -p %dreckmist "day"
+  /timer.nacht2 1 10 /run rcon.exe -a localhost:25575 -p %rcon_password "day"
 }
 
 ;; Für Ingame Einstellung ;;;;;
@@ -364,7 +364,7 @@ on 100:text:!mapupdate:%m-channel: {
   msg %m-channel 4Achtung Alle Veränderungen die Währen dieser Zeit gemacht werden sind nicht ersichtlich.
   msg %m-channel Die Dauer des Updates ist nicht vorhersehbar es hängt davon ab wieviele chunks neu berechnet werden müssen.
   msg %m-channel Sofern dies Abgeschlossen ist sind alle änderungen Sichtbar.
-  /timer.mapupdate1 1 $rand(10,15) run rcon.exe -a localhost:25575 -p %dreckmist "save-all flush"
+  /timer.mapupdate1 1 $rand(10,15) run rcon.exe -a localhost:25575 -p %rcon_password "save-all flush"
 
 
 }
