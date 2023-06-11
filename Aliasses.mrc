@@ -209,7 +209,7 @@ alias lagausgabe {
   set %i 1
   set %zeilen $lines(C:\Users\Administrator\AppData\Roaming\mIRC\lag.txt)
   while (%i <= %zeilen) {
-    set %text $read -l $+ %i lag.txt
+    set %text $read -l $+ %i %pfad $+ lag.txt
     set %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
     inc %i
     msg %m-channel %text.result
@@ -282,7 +282,7 @@ alias serverresult {
 }
 
 alias ausgabe {
-  set %gomo $read(C:\Users\Administrator\AppData\Roaming\mIRC\task.txt, s,  java.exe)
+  set %gomo $read(%pfad $+ task.txt, s,  java.exe)
   set %pid $replace(%gomo, $chr(32),.)
   set %numtok $numtok(%pid,46)
   set -u5 %pidnumber $gettok(%pid,1,46)
@@ -291,12 +291,12 @@ alias ausgabe {
     msg %m-channel Achtung Welt wird gelöscht und beim Nächsten Neustart neu erstellt.
     /run cmd.exe /c RMDIR /S /Q %dir
     /halt
-    /remove task.txt
+    /remove %pfad $+ task.txt
   }
 }
 
 alias vault-ausgabe {
-  set %Ecos $read -l2 vault-info.txt
+  set %Ecos $read -l2 %pfad $+ vault-info.txt
   set %Ecos.r $remove(%Ecos, [Vault], ], [BagOfGold)
   set %Ecos.r1 $replace(%Ecos.r,$chr(32) $+ $chr(44) $+ $chr(32), $chr(44), $chr(44) $+ $chr(32), $chr(44), $chr(44),.,:,: $+ $chr(32))
   set %Ecos.r2 $remove(%Ecos.r1,$chr(32) )
@@ -306,8 +306,8 @@ alias vault-ausgabe {
   if (%econ1 isin %Ecos.r3) && (%econ2 isin %Ecos.r3) { 
     /msg %m-channel Währung wird von %econ1 zu %econ2 Konvertiert dieses kann einen Moment dauern.
     /run rcon.exe -a localhost:25575 -p %rcon_password "vault-convert %econ1 %econ2"
-    /remove vault-info.bat
-    /remove vault-info.txt
+    /remove %pfad $+ vault-info.bat
+    /remove %pfad $+ vault-info.txt
   }
   ;;$replace(%Ecos.r, $chr(32) $chr(44), $chr(44))
   ::timer.say1 1 3 /msg %reply-chan %Ecos.r3

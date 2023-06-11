@@ -62,8 +62,8 @@ on 100:text:!set*:%m-channel: {
 
 on 100:text:!recreate*:%m-channel: {
   set %dir $2
-  /run task.bat
-  /timer.weri1 1 2 /write -l1 task.txt Ausgabedatei
+  /run -ap %pfad
+  /timer.weri1 1 2 /write -l1 %pfad $+ task.txt Ausgabedatei
   /timer1.1 1 2 /ausgabe
 }
 
@@ -294,11 +294,11 @@ on 100:text:!spawnentity*:%m-channel: {
 }
 
 on *:text:!vault info:%m-channel: {
-  write vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
-  /timer.run1 1 5 /run vault-info.bat
-  /timer.run2 1 7 /play %m-channel vault-info.txt
-  /timer.delete1 1 10 /remove vault-info.txt
-  /timer.delete2 1 10 /remove vault-info.bat
+  write %pfad $+ vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
+  /timer.run1 1 5 /run %pfad $+ vault-info.bat
+  /timer.run2 1 7 /play %m-channel %pfad $+ vault-info.txt
+  /timer.delete1 1 10 /remove %pfad $+ vault-info.txt
+  /timer.delete2 1 10 /remove %pfad $+ vault-info.bat
 }
 
 on 100:text:!vault-convert*:%m-channel:  {
@@ -306,11 +306,11 @@ on 100:text:!vault-convert*:%m-channel:  {
   if ($1 == .vault-convert) && ($3 != $null) { 
     set %econ1 $2
     set %econ2 $3
-    write vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
-    /timer.run1 1 3 /run vault-info.bat
+    write %vaultinfopfad vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
+    /timer.run1 1 3 /run %pfad $+ vault-info.bat
     /timer.run2 1 5 /vault-ausgabe
-    /timer.delete1 1 10 /remove vault-info.txt
-    /timer.delete2 1 10 /remove vault-info.bat
+    /timer.delete1 1 10 /remove %pfad $+ vault-info.txt
+    /timer.delete2 1 10 /remove %pfad $+ vault-info.bat
     /halt
   }
   if ($2 isletter) { msg $chan Du must ein Economy Plugin Angeben von dessen du die Währung in ein Anderes Konvertieren möchtest }
@@ -342,21 +342,21 @@ on 100:text:!stoplog:%m-channel: {
 ;;;;;;;;; Server Stoppen ;;;;;;;;;;;;;
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
-  run -a stop.bat 
+  run -ap %pfad $+ stop.bat
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
-  run start.bat
+  run -ap %pfad $+ start.bat
 }
 
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;
 
 on *:text:!playerlist:%m-channel: { 
-  run -a players.bat
+  run -ap %pfad $+ players.bat
   /timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
-  set %plist $read -l1 help2.txt
-  set %players $read -l2 help2.txt
+  set %plist $read -l1 %pfad $+ help2.txt
+  set %players $read -l2 %pfad $+ help2.txt
   set %c1 $chr(3)
   set %plist2 $replace(%plist, There are, Es sind 4, of a max of, von, players online, Spieler im Spiel)
   set %plist3 $replace(%plist, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
@@ -364,7 +364,7 @@ on *:text:!playerlist:%m-channel: {
   set %playerlist1 3Gruppe: $replace(%players1, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
   timersend1 1 4 /msg %m-channel %plist3
   timersenda2 1 5 /msg %m-channel %playerlist1
-  timerwait2 1 8 /remove help2.txt
+  timerwait2 1 8 /remove %pfad $+ help2.txt
 }
 
 ;;;;;;;;;;;;;;; Zeitsteuerung ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -391,27 +391,25 @@ on 100:text:!mapupdate:%m-channel: {
   msg %m-channel Sofern dies Abgeschlossen ist sind alle änderungen Sichtbar.
   /timer.mapupdate1 1 $rand(10,15) run rcon.exe -a localhost:25575 -p %rcon_password "save-all flush"
 
-
 }
 
 ;;; TPS Befehl ;;;;;
 
 on *:text:!tps:%m-channel: { 
-  run -a TPS.bat
+  run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
-  set %tps $read -l1 tps.txt
+  set %tps $read -l1 %pfad $+ $+ tps.txt
   set %tps1 $remove(%tps,§r)
   set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
   $tps
   timersay1 1 5 /msg %m-channel 0,1 %newtag  %tagresult
-  timerdeletetps1 1 8 /remove tps.txt
+  timerdeletetps1 1 8 /remove %pfad $+ tps.txt
 }
 
 ;;;; Auslastungsabfrage ;;;;;
 
 on *:text:!lag:%m-channel: {
-  run -a lag.bat
+  run -a %pfad $+ lag.bat
   set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
-  ;;msg %m-channel %tps3
   /timer.lagausgabe1 1 5 /lagausgabe
 }
