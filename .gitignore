@@ -29,6 +29,7 @@ newlist.txt
 *.ini
 !mirc.ini
 *.bat
+mirc.exe
 *.json
 *.jar
 *.rar
