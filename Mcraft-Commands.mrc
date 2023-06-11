@@ -71,7 +71,7 @@ on 100:text:!recreate*:%m-channel: {
 
 on *:text:!say*:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 11(3Abgeschickt11)
-  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
+  /run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
 }
 on *:text:!bday:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9  11(3Abgeschickt11)
@@ -394,6 +394,11 @@ on 100:text:!mapupdate:%m-channel: {
 }
 
 ;;; TPS Befehl ;;;;;
+
+on 100:text:!batchpfad*:%m-channel: {
+  if ($2 == $null) { msg %m-channel Bitte gebe den Pfad zu allen Batchdateien an diese sollten sich im MinecraftSerververzeichniss befinden }
+  set %pfad $2-
+}
 
 on *:text:!tps:%m-channel: { 
   run -ap %pfad $+ TPS.bat
