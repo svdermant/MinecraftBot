@@ -23,7 +23,8 @@ und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
 
 # Kommen wir zum Inhalt der Dateien
 Die Start.bat sollte folgenden befehl beinhalten:
-> java.exe -Xmx14G -Xms1G -jar paper.jar -nogui <
+> java.exe -Xmx14G -Xms1G -jar paper.jar -nogui
+Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
 ## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
 
