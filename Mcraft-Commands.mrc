@@ -62,7 +62,7 @@ on 100:text:!set*:%m-channel: {
 
 on 100:text:!recreate*:%m-channel: {
   set %dir $2
-  /run -ap %pfad
+  //run -ap %pfad $+ task.bat
   /timer.weri1 1 2 /write -l1 %pfad $+ task.txt Ausgabedatei
   /timer1.1 1 2 /ausgabe
 }
@@ -240,10 +240,10 @@ on 100:text:!region*:%m-channel: {
   if ($2 == list) && ($3 == -w) && ($4 isin $finddir($mircdir, $+ $4 $+ *,1)) { 
 
     write regionlist.bat rcon.exe -a localhost:25575 -p %rcon_password "rg list -w $4" > regionlist.txt
-    /timer.regionlist1 1 2 /run regionlist.bat
-    /timer.regionlist2 1 4 /play %m-channel regionlist.txt
-    ;;/timer.regionlist3 1 10 /remove regionlist.txt
-    ;;/timer.regionlist4 1 10 /remove regionlist.bat
+    /timer.regionlist1 1 2 //run -ap %pfad $+ regionlist.bat
+    /timer.regionlist2 1 4 /play %m-channel %pfad $+ regionlist.txt
+    ;;/timer.regionlist3 1 10 /remove %pfad $+ regionlist.txt
+    ;;/timer.regionlist4 1 10 /remove %pfad $+ regionlist.bat
     halt
 
 
@@ -295,7 +295,7 @@ on 100:text:!spawnentity*:%m-channel: {
 
 on *:text:!vault info:%m-channel: {
   write %pfad $+ vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
-  /timer.run1 1 5 /run %pfad $+ vault-info.bat
+  /timer.run1 1 5 //run -ap %pfad $+ vault-info.bat
   /timer.run2 1 7 /play %m-channel %pfad $+ vault-info.txt
   /timer.delete1 1 10 /remove %pfad $+ vault-info.txt
   /timer.delete2 1 10 /remove %pfad $+ vault-info.bat
@@ -307,7 +307,7 @@ on 100:text:!vault-convert*:%m-channel:  {
     set %econ1 $2
     set %econ2 $3
     write %vaultinfopfad vault-info.bat rcon.exe -a localhost:25575 -p %rcon_password "vault-info" > vault-info.txt
-    /timer.run1 1 3 /run %pfad $+ vault-info.bat
+    /timer.run1 1 3 //run -ap %pfad $+ vault-info.bat
     /timer.run2 1 5 /vault-ausgabe
     /timer.delete1 1 10 /remove %pfad $+ vault-info.txt
     /timer.delete2 1 10 /remove %pfad $+ vault-info.bat
@@ -342,18 +342,18 @@ on 100:text:!stoplog:%m-channel: {
 ;;;;;;;;; Server Stoppen ;;;;;;;;;;;;;
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
-  run -ap %pfad $+ stop.bat
+  //run -ap %pfad $+ stop.bat
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
-  run -ap %pfad $+ start.bat
+  //run -ap %pfad $+ start.bat
 }
 
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;
 
 on *:text:!playerlist:%m-channel: { 
-  run -ap %pfad $+ players.bat
+  //run -ap %pfad $+ players.bat
   /timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
   set %plist $read -l1 %pfad $+ help2.txt
   set %players $read -l2 %pfad $+ help2.txt
@@ -401,7 +401,7 @@ on 100:text:!batchpfad*:%m-channel: {
 }
 
 on *:text:!tps:%m-channel: { 
-  run -ap %pfad $+ TPS.bat
+  //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   set %tps $read -l1 %pfad $+ $+ tps.txt
   set %tps1 $remove(%tps,§r)
@@ -414,7 +414,7 @@ on *:text:!tps:%m-channel: {
 ;;;; Auslastungsabfrage ;;;;;
 
 on *:text:!lag:%m-channel: {
-  run -a %pfad $+ lag.bat
+  //run -a %pfad $+ lag.bat
   set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   /timer.lagausgabe1 1 5 /lagausgabe
 }
