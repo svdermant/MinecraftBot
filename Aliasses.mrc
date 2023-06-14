@@ -117,6 +117,15 @@ on 1:EXIT: {
   /save -rv vars.ini
 }
 
+on 1:CONNECT: {
+  if ($me == $readini(system.dat, botinfo, botname)) {
+    /ns identify $readini(system.dat, botinfo, botpass)
+  }
+  if ($me != $readini(system.dat, botinfo, botname)) {
+    /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)
+  }
+}
+
 ;;;;;;;;; Systemcheck ;;;;;;;;;;;;;;
 
 alias system_defaults_check {
