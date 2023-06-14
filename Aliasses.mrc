@@ -215,11 +215,11 @@ Alias checklog {
 }
 
 alias lagausgabe {
-  set %i 1
-  set %zeilen $lines(%pfad $+ lag.txt)
+  var %i 1
+  var %zeilen $lines(%pfad $+ lag.txt)
   while (%i <= %zeilen) {
-    set %text $read -l $+ %i %pfad $+ lag.txt
-    set %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
+    var %text $read -l $+ %i %pfad $+ lag.txt
+    var %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
     inc %i
     msg %m-channel %text.result
   } 
