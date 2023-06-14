@@ -225,7 +225,7 @@ alias lagausgabe {
   } 
 }
 
-;;;; Ausgabe Serverresult vom !server settings Befehl ;;;;;;
+;;;; Ausgabe Serverresult vom !server settings Befehl! ;;;;;;
 
 alias serverresult {
   var %settings.4.r $remove(%settings.4,allow-nether=)
