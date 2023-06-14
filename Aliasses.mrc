@@ -149,7 +149,7 @@ alias system_defaults_check {
   /save -rv vars.ini
 }
 
-;;;; Logsystem vom Minecraft Server ;;;;;;
+;;;; Logsystem vom Minecraft Server version 1.19.4 ;;;;;;
 
 Alias checklog {
   set %i $lines(%mlog)
