@@ -188,7 +188,7 @@ Alias checklog {
       was slain by Piglin, 5[10Wurde von 4Piglin5 10erschlagen5], $&
       was slain by Vindicator, 5[10Wurde von 4Diener5 10erschlagen5], $&
       was slain by Ravager, 5[10Wurde von 4Verwüster5 10erschlagen5], $&
-      was slain by Zombie Villager, 5[10Wurde von 4Zombiedorfbewohner5 10erschlagen5], $&
+      was slain by Zombie Villager, 5[10Wurde vom 4Zombiedorfbewohner5 10erschlagen5], $&
       was killed by Elder Guardian using magic, 5[10Wurde von 4Großer Wächter5 10mit Magie getötet5], $&
       was slain by Elder Guardian, 5[10Wurde von 4Großer Wächter5 10erschlagen5], $&
       was slain by Enderman, 5[10Wurde von 4Enderman5 10erschlagen5], $&
