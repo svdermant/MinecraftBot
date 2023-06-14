@@ -326,7 +326,7 @@ alias zeitsteuerung-tag {
     /timer.nacht1 off
     /timer.nacht3 off
     /timer.bacht2 off 
-    /timer.tag1 1 1230 /msg %m-channel Der Abend bricht an.. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht.
+    /timer.tag1 1 1230 /msg %m-channel Der Abend bricht an. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht.
     /timer.fag1 1 1230 /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast Der Abend bricht an. Ihr solltet euer Haus ⌂ oder Bett ∟ aufsuchen falls ihr überleben wollt in der Kommenden nacht."
     /timer.bag1 1 1240 /set %zeit nacht
     /timer.bag2 0 1 /zeitsteuerung-nacht
@@ -348,6 +348,7 @@ alias zeitsteuerung-nacht {
 
 alias tps {
   if ( 20 isin %newtag ) { set -u10 %tagresult 10[11Ausgezeichnet!10] }
+  if ( 18 isin %newtag ] { set -u10 %tagresult 11[12Normale Auslastung10] }
 }
 
 alias scriptlines { 
