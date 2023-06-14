@@ -165,7 +165,7 @@ Alias checklog {
       was fireballed by Blaze, 5[10Wurde von 4Lohe5 10flambiert5], $&
       was fireballed by Ghast, 5[10Wurde von 4Ghast5 10flambiert5], $&
       was slain by Cave Spider, 5[10Wurde von 4Höhlenspinne5 10erschlagen5], $&
-      was blown up by Creeper, 5[10Wurde von 4Creeper5 10in die Luft gesprengt5], $&
+      was blown up by Creeper, 5[10Wurde vom 4Creeper5 10in die Luft gesprengt5], $&
       was slain by Wither Skeleton, 5[10Wurde von 4Wither Skelett5 10erschlagen5], $&
       was slain by Warden, 5[10Wurde von 4Wärter5 10erschlagen5], $&
       was slain by Piglin Brute, 5[10Wurde von 4Piglin Babar5 10erschlagen5], $&
