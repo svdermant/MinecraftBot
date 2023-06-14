@@ -168,7 +168,7 @@ Alias checklog {
       was blown up by Creeper, 5[10Wurde vom 4Creeper5 10in die Luft gesprengt5], $&
       was slain by Wither Skeleton, 5[10Wurde von 4Wither Skelett5 10erschlagen5], $&
       was slain by Warden, 5[10Wurde von 4Wärter5 10erschlagen5], $&
-      was slain by Piglin Brute, 5[10Wurde von 4Piglin Babar5 10erschlagen5], $&
+      was slain by Piglin Brute, 5[10Wurde von 4Piglin Babar!5 10erschlagen5], $&
       was slain by Husk, 5[10Wurde von 4Wüstenzombie5 10erschlagen5], $&
       was slain by Panda, 5[10Wurde von 4Panda5 10erschlagen5], $&
       was slain by Zoglin, 5[10Wurde von 4Zoglin5 10erschlagen5], $&
