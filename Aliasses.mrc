@@ -1,19 +1,19 @@
 ;;;;;; Mcraft Bot ;;;;;;;; V1.0
 
 on 1:START: {
-  echo 12*** Willkommen zum Minecraftbot by Serkons aka Rene ***
+  echo 12*** Willkommen zum Minecraftbot v1.0 by Serkons aka Rene ***
   /.titlebar MineCraftBot version 1.0 by Serkons
 
   if (%first.run = false) { 
     set %bot.owner $readini(system.dat, botinfo, bot.owner) 
-    if (%bot.owner = $null) { echo 4*** Warnun kein Botadmin gesetzt.. Bitte dies Beheben. **** 
-    set %bot.owner $?="Bitte gib den Namen an der den Bot benutzen möchte" |  writeini system.dat botinfo bot.owner %bot.owner | .auser 100 %bot.owner }
+    if (%bot.owner = $null) { echo 4*** Warnung kein Botadmin gesetzt.. Bitte dies Beheben. **** 
+    set %bot.owner $?="Bitte gib den Namen an den der Bot benutzen möchte" |  writeini system.dat botinfo bot.owner %bot.owner | .auser 100 %bot.owner }
     else { echo 12*** Die Botadminliste lautet zur Zeit:04 %bot.owner 12*** 
     }
 
     set %m-channel $readini(system.dat, botinfo, mchannel) 
     if (%m-channel = $null) { echo 04*** Warnung kein MinecaftChannel gesetzt. Setze einen *** 
-    set %m-channel $?="Gib bitte den Minecraftraumnamen an bitte mit einer (#) am Anfang." |  writeini system.dat botinfo mchannel %m-channel }
+    set %m-channel $?="Gib bitte den Minecraftraumnamen an bitte mit einer $chr(35) am Anfang." |  writeini system.dat botinfo mchannel %m-channel }
     else { echo 12*** Der Minecraftraum wurde Erstellt:04 %battlechan 12*** }
 
     set %bot.name $readini(system.dat, botinfo, botname)
@@ -54,12 +54,12 @@ on 1:START: {
     echo 12*** Großartig. Der Nickname des Bots ist nun auf 4 %bot.name  eingestellt
 
     echo 12*** Gib nun den Botbesitzer an  
-    set %bot.owner $?="Gib bitte den Namen an"
+    set %bot.owner $?="Gib bitte den Namen an von wem der Bot benutzt werden darf"
     writeini system.dat botinfo bot.owner %bot.owner
     echo 12*** Gut der Botowner ist auf 4 %bot.owner gestellt
 
     echo 12***Legen nun bitte den IRC-Kanal fest, in dem der Bot verwendet werden soll.
-    set %m-channel $?="Gib den Raumnamen an mit einer # zu beginn"
+    set %m-channel $?="Gib den Raumnamen an mit einer $chr(35) zu beginn"
     writeini system.dat botinfo mchannel %m-channel
     echo 12*** Der Bot wird nun in04 %m-channel laufen
 
@@ -73,7 +73,7 @@ on 1:START: {
     set %mlog $?="Gib jetzt den Pfad an. z.B: C:\MeinServer\Logs\latest.log"
     if ($exists(%mLog) == $false) { echo 4 Der Pfad der Serverlogdatei darf nicht leer sein. Startvorgang Abgebrochen | /exit | halt }
     writeini system.dat MineCraftServer LogPfad %mlog
-    echo 12*** Ok. Weiter geht es mit der Angabe der Einstellungsdatei
+    echo 12*** Ok. Weiter geht es mit der Angabe der Einstellungsdatei ***
 
     echo 12**Gib nun den Pfad deiner ServerProperties datei an
     set %mProp $?="Wo liegt die Servereinstellungsdatei"?
@@ -207,7 +207,7 @@ Alias checklog {
 
 alias lagausgabe {
   set %i 1
-  set %zeilen $lines(C:\Users\Administrator\AppData\Roaming\mIRC\lag.txt)
+  set %zeilen $lines(%pfad $+ lag.txt)
   while (%i <= %zeilen) {
     set %text $read -l $+ %i %pfad $+ lag.txt
     set %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
@@ -271,7 +271,6 @@ alias serverresult {
   var %settings.59.result $replace(%settings.59.r, true, 9ja, false, 4nein)
   var %settings.28.r $remove(%settings.28, level-type=)
   var %settings.28.result $replace(%settings.28.r, minecraft\:normal, Normal, minecraft\:flat, Flachland)
-
   msg %m-channel 10,1[7 Nether-Erlauben: 4 $+ %settings.4.result 10][7 Flugmodus Aktiv: 4 $+ %settings.3.result 10][7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result 10][7 RCON Befehle an OPS senden: 4 $+ %settings.6.result 10] 
   msg %m-channel 10,1[7 Debug Modus: 8 $+ %settings.7.result 10][7 Schwierigkeitsgrad: 8 $+ %settings.8.result 10][7 Befehlsblöcke erlauben: 4 $+ %settings.9.result 10][7 Remotezugriff: 4 $+ %settings.12.result 10][7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result 10]
   msg %m-channel 10,1[7 Nur Mojang Accounts: 4 $+ %settings.14.result 10][7 Privater Zugang: 4 $+ %settings.15.result 10][7 Erzwungener Spielmodus: 8 $+ %settings.17.result 10][7 Funktionslevel: 8 $+ %settings.18.result 10] 
@@ -339,7 +338,7 @@ alias zeitsteuerung-nacht {
 }
 
 alias tps {
-  if ( 20 isin %newtag ) { set -u10 %tagresult 10[11Ausgezeichnet!!10] }
+  if ( 20 isin %newtag ) { set -u10 %tagresult 10[11Ausgezeichnet!10] }
 }
 
 alias scriptlines { 
