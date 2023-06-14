@@ -339,7 +339,7 @@ alias zeitsteuerung-nacht {
 }
 
 alias tps {
-  if ( 20 isin %newtag ) { set -u10 %tagresult 10[11Ausgezeichnet!10] }
+  if ( 20 isin %newtag ) { set -u10 %tagresult 10[11Ausgezeichnet.10] }
 }
 
 alias scriptlines { 
