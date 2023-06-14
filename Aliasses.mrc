@@ -225,7 +225,7 @@ alias lagausgabe {
   } 
 }
 
-;;;; Ausgabe Serverresult vom !server settings Befehl! ;;;;;;
+;;;; Ausgabe Serverresult vom !server settings Befehl ;;;;;;
 
 alias serverresult {
   var %settings.4.r $remove(%settings.4,allow-nether=)
@@ -280,7 +280,7 @@ alias serverresult {
   var %settings.59.result $replace(%settings.59.r, true, 9ja, false, 4nein)
   var %settings.28.r $remove(%settings.28, level-type=)
   var %settings.28.result $replace(%settings.28.r, minecraft\:normal, Normal, minecraft\:flat, Flachland)
-  msg %m-channel 10,1[7 Nether-Erlauben: 4 $+ %settings.4.result 10][7 Flugmodus Aktiv: 4 $+ %settings.3.result 10][7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result 10][7 RCON Befehle an OPS senden: 4 $+ %settings.6.result 10] 
+  msg %m-channel 10,1[7 Nether Erlauben: 4 $+ %settings.4.result 10][7 Flugmodus Aktiv: 4 $+ %settings.3.result 10][7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result 10][7 RCON Befehle an OPS senden: 4 $+ %settings.6.result 10] 
   msg %m-channel 10,1[7 Debug Modus: 8 $+ %settings.7.result 10][7 Schwierigkeitsgrad: 8 $+ %settings.8.result 10][7 Befehlsblöcke erlauben: 4 $+ %settings.9.result 10][7 Remotezugriff: 4 $+ %settings.12.result 10][7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result 10]
   msg %m-channel 10,1[7 Nur Mojang Accounts: 4 $+ %settings.14.result 10][7 Privater Zugang: 4 $+ %settings.15.result 10][7 Erzwungener Spielmodus: 8 $+ %settings.17.result 10][7 Funktionslevel: 8 $+ %settings.18.result 10] 
   msg %m-channel 10,1[7 Spielmodus: 8 $+ %settings.19.result 10][7 Strukturen erzeugen: 4 $+ %settings.20.result 10][7 Online Spieler verstecken: 4 $+ %settings.23.result 10][7 Hauptwelt: 8 $+ %settings.26.r 10] 
