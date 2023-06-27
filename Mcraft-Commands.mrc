@@ -233,22 +233,33 @@ on 100:text:!stoplag*:%m-channel: {
 }
 
 on 100:text:!region*:%m-channel: {
+  var %wg WorldGuard
   if ($2 == $null) { msg %m-channel Bitte nutze für diesen Befehl noch einen der Unterbefehle: select|flag|migrateuuid|migrateheights|setpriority|teleport|save|flags|addowner|list|removeowner|remove|addmember|redefine|removemember|load|define|claim|toggle-bypass|setparent|info|migratedb }
   if ($2 == list) && ($3 == $null) { msg %m-channel Bitte gib eine Welt mittels -w Parameter an | halt }
   if ($2 == list) && ($3 == -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
-  if ($2 == list) && ($3 == -w) && ($4 isin $finddir($mircdir, $+ $4 $+ *,1)) { 
+  if ($2 == list) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg !isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { /msg %m-channel Die Welt existiert, aber das Plugin Worldguard fehlt, installiere es nach. | /halt } 
+  if ($2 == list) && ($3 == -w) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { /msg %m-channel Die Welt fehlt konnte keine regionen finden. | /halt }
+  if ($2 == list) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { 
+    msg $chan 12=====7[4Regionen in  $+ $4 $+ 7]12=====
+    set %curlines $lines(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml)
+    set %globalregion $calc(%curlines -5)
+    set %globalregionname $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%globalregion)
+    set %startline 13 
+    var %regionpos 0
+    set %emtyline $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,12)
+    if (regions: {} isin %emtyline) { msg $chan Keine Regionen gefunden | /halt }
+    while (%startline <= %globalregion) {
+      inc %regionpos 1
+      msg $chan %regionpos $+ : $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%startline)
+      inc %startline 8
+    }
 
-    write regionlist.bat rcon.exe -a localhost:25575 -p %rcon_password "rg list -w $4" > regionlist.txt
-    /timer.regionlist1 1 2 //run -ap %pfad $+ regionlist.bat
-    /timer.regionlist2 1 4 /play %m-channel %pfad $+ regionlist.txt
-    ;;/timer.regionlist3 1 10 /remove %pfad $+ regionlist.txt
-    ;;/timer.regionlist4 1 10 /remove %pfad $+ regionlist.bat
-    halt
 
-
+    /halt
   }
 }
+
 
 
 
@@ -399,6 +410,8 @@ on 100:text:!batchpfad*:%m-channel: {
   if ($2 == $null) { msg %m-channel Bitte gebe den Pfad zu allen Batchdateien an diese sollten sich im MinecraftSerververzeichniss befinden }
   set %pfad $2-
 }
+
+
 
 on *:text:!tps:%m-channel: { 
   //run -ap %pfad $+ TPS.bat
