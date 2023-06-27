@@ -248,7 +248,7 @@ on 100:text:!region*:%m-channel: {
     set %startline 13 
     var %regionpos 0
     set %emtyline $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,12)
-    if (regions: {} isin %emtyline) { msg $chan Keine Regionen gefunden | /halt }
+    if (regions: {} isin %emtyline) || ($exists(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml) == $false) { msg $chan Keine Regionen gefunden | /halt }
     while (%startline <= %globalregion) {
       inc %regionpos 1
       msg $chan %regionpos $+ : $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%startline)
