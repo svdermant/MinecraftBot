@@ -128,6 +128,12 @@ on *:text:!help*:%m-channel: {
     msg %m-channel 8!help bot-3Zeigt diese Hilfe an.
     msg %m-channel 8!Stop-3Server Stoppen
     msg %m-channel 8!start-3Server Starten
+    msg %m-channel 8!slay <player>-3Einen Spieler Schlagen
+    msg %m-channel 8!heal <player>-3Einen spieler Heilen
+    msg %m-channel 8!god <player>-3Unsterblichkeit bei spieler Aktivieren
+    msg %m-channel 8!ungod <player>-3Unsterblichkeit bei Spieler deaktivieren
+    msg %m-channel 8!startlog <zeit>-3Chatlog aktivieren (Bei zeit eine zeit in sec angeben bis maximal 60)
+    msg %m-channel 8!stoplog <zeit>-3Chatlog abschalten
     msg %m-channel 8!playerlist-3Zeigt Die Spielerliste an.
     msg %m-channel 8!Zeitsteuerung-3Syncronisiert Spielzeit mit Realzeit
     msg %m-channel 8!TPS-3Zeigt die Ticks Per Sekunde an.
@@ -416,7 +422,7 @@ on 100:text:!batchpfad*:%m-channel: {
 on *:text:!tps:%m-channel: { 
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
-  set %tps $read -l1 %pfad $+ $+ tps.txt
+  set %tps $read(%pfad $+ tps.txt,l,1)
   set %tps1 $remove(%tps,§r)
   set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
   $tps
