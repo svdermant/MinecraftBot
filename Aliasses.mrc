@@ -210,7 +210,8 @@ Alias checklog {
     set %te.1 $replace(%temp.rv4,$chr(32),.)
     set %te.1rem $gettok(%te.1,2,46)
     set %te.2 $remtok(%te.1,%te.1rem,1,46)
-    set %temp.rv3 $replace(%te.2,.,$chr(32))
+    set %temp.rv3a $replace(%te.2,.,$chr(32))
+    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3)
     ::: msg %checkchan 1,7[0-1]0,14 S4Y No.071 1][0,14 RolePlay Server 1,7[0-1] %temp.rv1
     ;; msg #Aygon-Minecraft 7,1[4-7] 11I14GameRPG 11N14o.2 4|-| 11M14inecraft 11S14erver 7[4-7]0,1 %temp.rv3 %command %tps3
     ;; msg #Bot-Lounge 7,1[4-7] 11C14hatlog 7]4▬7[11 I14game11RPG 9═►11 %SrvNR.2 9◄═ 7]4▬7[ 9→11M14inecraft9← 7,1[4-7]00,01 $+ %temp.rv3 %command %tps3   
