@@ -125,7 +125,6 @@ on *:text:!help*:%m-channel: {
     msg %m-channel 8!say <text>-3Eine Nachricht an den MinecraftServer Senden.
     msg %m-channel 8!give-3Gegenstand Geben.
     msg %m-channel 8!Spawnentity-3Monster Erzeugen
-    msg %m-channel 8!help bot-3Zeigt diese Hilfe an.
     msg %m-channel 8!Stop-3Server Stoppen
     msg %m-channel 8!start-3Server Starten
     msg %m-channel 8!slay <player>-3Einen Spieler Schlagen
