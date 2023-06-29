@@ -365,3 +365,34 @@ alias scriptlines {
   set %scriptlines %script.lines
   unset %script.lines 
 }
+
+;;;;; Regionsprüfung
+alias regioncheck  {
+  set %curlines $lines(%pfad $+ \plugins\WorldGuard\worlds\ $+ $2 $+ \regions.yml)
+  set %globalregion $calc(%curlines -5)
+  set %globalregionname $read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%globalregion)
+  set %startline 13 
+  var %regionpos 0
+  set %emtyline $read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,12)
+  if (regions: {} isin %emtyline) || ($exists(%pfad $+ \plugins\WorldGuard\worlds\ $+ $2 $+ \regions.yml) == $false) { msg $chan Keine Regionen gefunden | /halt }
+  while (%startline <= %globalregion) {
+    inc %regionpos 1
+    writeini regionnames.ini $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%startline), :)  Name $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%startline), :)
+    inc %startline 8
+  }
+  goto output
+  :output
+  /timer.delete1 1 5 /remove regionnames.ini
+  ;;; /msg $chan Ausgabe erfolgt.
+  set -u5 %regionname $readini(regionnames.ini, $1, name)
+  if (%regionname isin $readini(regionnames.ini, $1, name))  { 
+    ;;;/msg %m-channel Region $1 gefunden....
+    return 1
+    /halt
+  }
+  if (%regionname == $null) {
+    ;;; /msg %m-channel Region $1 fehlt
+    return 0
+    /halt
+  }
+}

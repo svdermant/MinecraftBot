@@ -259,11 +259,96 @@ on 100:text:!region*:%m-channel: {
       msg $chan %regionpos $+ : $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%startline)
       inc %startline 8
     }
-
-
     /halt
   }
+  if ($2 == select) && ($3 == $null) { /msg %m-channel Region bitte selectieren mit 8!region select -w weltname id | / halt }
+  if ($2 == select) && ($3 == -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
+  if ($2 == select) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
+  if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg !isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { /msg %m-channel Die Welt existiert, aber das Plugin Worldguard fehlt, installiere es nach. | /halt } 
+  if ($2 == select) && ($3 == -w) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { /msg %m-channel Die Welt fehlt konnte keine regionen finden. | /halt }
+  if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 == $null) { /msg %m-channel Es wurde keine Region angegeben | / halt }
+  if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 != $null) { 
+    set %curlines $lines(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml)
+    set %globalregion $calc(%curlines -5)
+    set %globalregionname $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%globalregion)
+    set %startline 13 
+    var %regionpos 0
+    set %emtyline $read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,12)
+    if (regions: {} isin %emtyline) || ($exists(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml) == $false) { msg $chan Keine Regionen gefunden | /halt }
+    while (%startline <= %globalregion) {
+      inc %regionpos 1
+      writeini regionnames.ini $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%startline), :)  Name $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,l,%startline), :)
+      inc %startline 8
+    }
+    goto output
+    :output
+    /timer.delete1 1 5 /remove regionnames.ini
+    ;;; /msg $chan Ausgabe erfolgt.
+    set -u5 %regionname $readini(regionnames.ini, $5, name)
+    if (%regionname isin $readini(regionnames.ini, $5, name))  { 
+      /msg %m-channel Region %regionname gefunden....
+      /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 %regionnane"
+      /set %regionsid %regionname
+      /halt
+    }
+    if (%regionname == $null) {
+      /msg %m-channel Region $5 fehlt
+      /halt
+    }
+  }
+  if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
+    set -u4 %flag $5
+    set  -u4 %welt $4
+    goto check
+    /halt
+  }
+  ;;;  if ($2 == flag) && ($3 != $null) && ($4 != -w) { msg %m-channel Zu wenige Parameter. Folgende eingabe muss sein. Beispiel Beispiel: !region flag regionsid -w weltname flag werte | /halt }
+  if ($2 == flag) && ($3 != $null) && ($4 == -w) && ($5 isin $finddir(%pfad, $+ $5 $+ *,1)) && ($regioncheck($3, $5) == 0) {
+    /msg %m-channel Fehler es gibt keine Region namens $3 in der Welt $5 $+ .
+    /halt
+  }
+  if ($2 == flag) && ($3 != $null) && ($4 == -w) && ($5 isin $finddir(%pfad, $+ $5 $+ *,1)) && ($regioncheck($3, $5) == 1) {
+    set %regionsid $3
+    set  -u4 %welt $5
+    set  -u4 %flag $6
+    :check
+    set %flaglist1 ability-pvp.allowed-cmds.block-break.block-place.block-trampling.blocked-cmds.build.chest-access.chorus-fruit-teleport.coral-fade.creeper-explosion.crop-growth.damage-animals.deny-message.deny-spawn.ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.enderdragon-block-damage.enderman-grief.enderpearl.entity-item-frame-destroy.entity-painting-destroy.entry.entry-deny-message.exit.exit-deny-message.exit-override
+    set %flaglist2 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup.lava-fire.lava-flow.leaf-decay.lighter.lightning
+    set %flaglist3 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered.mythic-drops-unidentified-item.natural-health-regen.natural-hunger-drain.nonplayer-protection-domains.notify-enter
+    set %flaglist4 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage
+    if ($regioncheck(%regionsid,%welt) == 1) {
+      if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) {
+        /msg %m-channel Flag %flag existiert.  
+        set %currentflag %flag
+        if (%currentflag == greeting) && ($7 == $null) || ($6 == $null) {
+          run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+          /msg %m-channel Greeting wurde zurückgesetzt.
+          /unset %regionsid
+          /halt
+        }
+        if (%currentflag == greeting) && ($6- != $null)  {
+          set %command $1- 
+          if (-w !isin $left(%command, 15)) { set %text $7- }
+          if (-w isin $left(%command, 15)) { set %text $6- }
+          run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+          /msg %m-channel Greeting wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          /halt
+        }
+        ;;; weitere Flags
+      }
+      if ($regioncheck(%regionsid.,%welt) == 0) {
+        /msg %m-channel Region existiert nicht flag %flag kann nicht gesetzt werden.
+      }
+    }
+    if ($2 == flag) && ($3 != $null) && ($4 == -w) && ($5 !isin $finddir(%pfad, $+ $5 $+ *,1)) {
+      msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3
+      /halt
+    }
+    if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag regionsid -w weltname flag werte. Oder die Region muss zuvor selectiert werden durch 8!region select -w weltname regionname | /halt }
+  }
 }
+
 
 
 
