@@ -159,7 +159,8 @@ Alias checklog {
     set %temp.rv $remove(%temp.r, $timestamp, [<ip address withheld>], %time, $time)
     set %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
       /INFO]:, /INFO]: $timestamp, [Async Chat Thread, MC-Chat, $&
-      Server Thread,11S14erver 11E14vent0],issued Server command:, Server Befehl4:7, $& 
+      Server Thread,11S14erver 11E14vent0],issued Server command:, Server Befehl4:7, $&
+      Craft Scheduler Thread, Craft-Planer-Thread, $& 
       fell from a high place, :5[10Ist aus Großer Höhe gefallen5, $&
       was shot by Skeleton, 5[10Wurde erschossen von: 4Skelett5], was stung to death, 5[10wurde zu Tode gestochen5], $&
       was fireballed by Blaze, 5[10Wurde von 4Lohe5 10flambiert5], $&
