@@ -250,14 +250,15 @@ on 100:text:!region*:%m-channel: {
     /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 $5"
     /msg %m-channel Region wurde Selectiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
     /msg %m-channel Für mehrere Optionen muss die Region erneut selectiert werden.
-    /set %regionsid $5
+    set %regionsid $5
   }
   if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
-    var %flag $5
-    var %welt $4
-    if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) {
+    set %flag $5
+    set  %welt $4
+    if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) || ($istok(%flaglist5,%flag,46) ==  $true) {
       /msg %m-channel Flag %flag existiert.  
       var %currentflag %flag
+      ;;; Greeting Flag
       if (%currentflag == greeting) && ($6- == $null) {
         run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
         /msg %m-channel Greeting wurde zurückgesetzt.
@@ -265,14 +266,70 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag == greeting) && ($6- != $null)  {
-        set %command $1- 
+        var %command $1- 
         if (-w isin $left(%command, 15)) { set %text $6- }
         run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
         /msg %m-channel Greeting wurde auf ( $+ %text $+ ) gesetzt.
+        ;;;/unset %regionsid
+        /halt
+      }
+      ;;; Passthrough Flag
+      if (%currentflag == passthrough) && ($6- == $null) {
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        /msg %m-channel passthrough wurde zurückgesetzt.
         /unset %regionsid
         /halt
       }
-      ;;; weitere Flags
+      if (%currentflag == passthrough) && ($6- != $null)  {
+        var %command $1- 
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        /msg %m-channel passthrough wurde auf ( $+ %text $+ ) gesetzt.
+        ;;;/unset %regionsid
+        /halt
+      }
+      ;;; Build Flag
+      if (%currentflag == Build) && ($6- == $null) {
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        /msg %m-channel Build wurde zurückgesetzt.
+        /unset %regionsid
+        /halt
+      }
+      if (%currentflag == Build) && ($6- != $null)  {
+        var %command $1- 
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        /msg %m-channel Build wurde auf ( $+ %text $+ ) gesetzt.
+        ;;;/unset %regionsid
+        /halt
+      }
+      ;;; Inteact Flag
+      if (%currentflag == Interact) && ($6- == $null) {
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        /msg %m-channel Interactwurde zurückgesetzt.
+        /unset %regionsid
+        /halt
+      }
+      if (%currentflag == Interact) && ($6- != $null)  {
+        var %command $1- 
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        /msg %m-channel Interact wurde auf ( $+ %text $+ ) gesetzt.
+        ;;;/unset %regionsid
+        /halt
+      }
+
+    }
+    if ($istok(%flaglist1,%flag,46) == $false) || ($istok(%flaglist2,%flag,46) ==  $false) || ($istok(%flaglist3,%flag,46) ==  $false)  || ($istok(%flaglist4,%flag,46) ==  $false) || ($istok(%flaglist5,%flag,46) ==  $false) {
+      /msg %m-channel Flag %flag existiert nicht. Bitte verwende eine der Folgenden FLags:
+      msg %m-channel %flaglist1
+      msg %m-channel %flaglist2
+      msg %m-channel %flaglist3
+      msg %m-channel %flaglist4
+      msg %m-channel %flaglist5
     }
   }
   if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
