@@ -143,6 +143,13 @@ alias system_defaults_check {
   set %moblist4 zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite
   set %moblist5 tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.ufferfish.anderingtrader
   set %moblist6 amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
+  set %flaglist1 ability-pvp.allowed-cmds.block-break.block-place.block-trampling.blocked-cmds.build.chest-access.chorus-fruit-teleport.coral-fade.creeper-explosion.crop-growth.damage-animals.deny-message.deny-spawn.ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.enderdragon-block-damage.enderman-grief.enderpearl.entity-item-frame-destroy.entity-painting-destroy.entry.entry-deny-message.exit.exit-deny-message.exit-override
+  set %flaglist2 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup.lava-fire.lava-flow.leaf-decay.lighter.lightning
+  set %flaglist3 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered.mythic-drops-unidentified-item.natural-health-regen.natural-hunger-drain.nonplayer-protection-domains.notify-enter
+  set %flaglist4 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage
+
+
+
 
   ;;;;Checke ob die Scripte geladen sind.
   load -rs Mcraft-Commands.mrc
@@ -152,13 +159,12 @@ alias system_defaults_check {
 ;;;; Logsystem vom Minecraft Server version 1.19.4 ;;;;;;
 
 Alias checklog {
-  set %i $lines(%mlog)
+  var %i $lines(%mlog)
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
-    set %time $timestamp
-    set %temp.rv $remove(%temp.r, $timestamp, [<ip address withheld>], %time, $time)
-    set %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
-      /INFO]:, /INFO]: $timestamp, [Async Chat Thread, MC-Chat, $&
+    var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
+    var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
+      /INFO]:, /INFO]:, [Async Chat Thread, MC-Chat, $&
       Server thread/INFO,11S14erver 11E14vent0],issued Server command:, Server Befehl4:7, $&
       Craft Scheduler Thread, Craft-Planer-Thread, $& 
       fell from a high place, 5[10Ist aus Großer Höhe gefallen5, $&
@@ -207,15 +213,12 @@ Alias checklog {
       was doomed to fall, 5[10Wurde zum absturz verdammt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
       drowned, :5[10Ertrank im Wasser5]) 
-    set %temp.rv4 $remove(%temp.rv2, $timestamp, $time, %rcon, %rcon2, %time, %rcon3)
-    set %te.1 $replace(%temp.rv4,$chr(32),.)
-    set %te.1rem $gettok(%te.1,2,46)
-    set %te.2 $remtok(%te.1,%te.1rem,1,46)
-    set %temp.rv3a $replace(%te.2,.,$chr(32))
-    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3)
-    ::: msg %checkchan 1,7[0-1]0,14 S4Y No.071 1][0,14 RolePlay Server 1,7[0-1] %temp.rv1
-    ;; msg #Aygon-Minecraft 7,1[4-7] 11I14GameRPG 11N14o.2 4|-| 11M14inecraft 11S14erver 7[4-7]0,1 %temp.rv3 %command %tps3
-    ;; msg #Bot-Lounge 7,1[4-7] 11C14hatlog 7]4▬7[11 I14game11RPG 9═►11 %SrvNR.2 9◄═ 7]4▬7[ 9→11M14inecraft9← 7,1[4-7]00,01 $+ %temp.rv3 %command %tps3   
+    var %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
+    var %te.1 $replace(%temp.rv4,$chr(32),.)
+    var %te.1rem $gettok(%te.1,2,46)
+    var %te.2 $remtok(%te.1,%te.1rem,1,46)
+    var %temp.rv3a $replace(%te.2,.,$chr(32))
+    var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:)
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3 $iif(%command != $null, -, %command) %tps3
   }
 }
@@ -296,10 +299,10 @@ alias serverresult {
 }
 
 alias ausgabe {
-  set %gomo $read(%pfad $+ task.txt, s,  java.exe)
-  set %pid $replace(%gomo, $chr(32),.)
-  set %numtok $numtok(%pid,46)
-  set -u5 %pidnumber $gettok(%pid,1,46)
+  var %gomo $read(%pfad $+ task.txt, s,  java.exe)
+  var %pid $replace(%gomo, $chr(32),.)
+  var %numtok $numtok(%pid,46)
+  var %pidnumber $gettok(%pid,1,46)
   if (%dir isin $finddir($mircdir, $+ %dir $+ *,1)) && (%pidnumber isnum) { msg %m-channel Sorry der Server Läuft bereits und ich konnte die Welt nicht löschen. Bitte stoppe ihn zuerst. Danke | halt }
   if (%dir isin $finddir($mircdir, $+ %dir $+ *,1)) && (%pidnumber == $null) { 
     msg %m-channel Achtung Welt wird gelöscht und beim Nächsten Neustart neu erstellt.
@@ -310,21 +313,17 @@ alias ausgabe {
 }
 
 alias vault-ausgabe {
-  set %Ecos $read -l2 %pfad $+ vault-info.txt
-  set %Ecos.r $remove(%Ecos, [Vault], ], [BagOfGold)
-  set %Ecos.r1 $replace(%Ecos.r,$chr(32) $+ $chr(44) $+ $chr(32), $chr(44), $chr(44) $+ $chr(32), $chr(44), $chr(44),.,:,: $+ $chr(32))
-  set %Ecos.r2 $remove(%Ecos.r1,$chr(32) )
-  set %Ecos.r3 $replace(%Ecos.r2,:,: $+ $chr(32))
-  if (%econ1 !isin %Ecos.r3) && (%econ2 !isin %Ecos.r3) { /msg %m-channel Konte %econ1 nicht finden. Bitte sei dir Sicher das du es Richtig geschrieben hast. | /msg %reply-chan Gültige EcoPlugins sind: $remove(%Ecos.r3,Economy:) | halt }
-  if (%econ1 isin %Ecos.r3) && (%econ2 !isin %Ecos.r3) { /msg %m-channel Konte %econ2 nicht finden. Bitte sei dir Sicher das du es Richtig geschrieben hast. | /msg %reply-chan Gültige EcoPlugins sind: $remove(%Ecos.r3,Economy:) | halt }
+  var %Ecos $read(%pfad $+ vault-info.txt,l,2)
+  var %Ecos.r $remove(%Ecos, [Vault], ], [BagOfGold)
+  var %Ecos.r1 $replace(%Ecos.r,$chr(32) $+ $chr(44) $+ $chr(32), $chr(44), $chr(44) $+ $chr(32), $chr(44), $chr(44),.,:,: $+ $chr(32))
+  var %Ecos.r2 $remove(%Ecos.r1,$chr(32) )
+  var %Ecos.r3 $replace(%Ecos.r2,:,: $+ $chr(32))
+  if (%econ1 !isin %Ecos.r3) && (%econ2 !isin %Ecos.r3) { /msg %m-channel Konte %econ1 nicht finden. Bitte sei dir Sicher das du es Richtig geschrieben hast. | /msg %m-channel Gültige EcoPlugins sind: $remove(%Ecos.r3,Economy:) | halt }
+  if (%econ1 isin %Ecos.r3) && (%econ2 !isin %Ecos.r3) { /msg %m-channel Konte %econ2 nicht finden. Bitte sei dir Sicher das du es Richtig geschrieben hast. | /msg %m-channel Gültige EcoPlugins sind: $remove(%Ecos.r3,Economy:) | halt }
   if (%econ1 isin %Ecos.r3) && (%econ2 isin %Ecos.r3) { 
     /msg %m-channel Währung wird von %econ1 zu %econ2 Konvertiert dieses kann einen Moment dauern.
     /run rcon.exe -a localhost:25575 -p %rcon_password "vault-convert %econ1 %econ2"
-    /remove %pfad $+ vault-info.bat
-    /remove %pfad $+ vault-info.txt
   }
-  ;;$replace(%Ecos.r, $chr(32) $chr(44), $chr(44))
-  ::timer.say1 1 3 /msg %reply-chan %Ecos.r3
 }
 
 alias zeitsteuerung-tag {
@@ -353,8 +352,8 @@ alias zeitsteuerung-nacht {
 }
 
 alias tps {
-  if (20 isin %newtag) { set -u10 %tagresult 10[11Ausgezeichnet!10] }
-  if (18 isin %newtag) { set -u10 %tagresult 11[12Normale Auslastung10] }
+  if (20 isin %newtag) { set %tagresult 10[11Ausgezeichnet!10] }
+  if (18 isin %newtag) { set %tagresult 11[12Normale Auslastung10] }
 }
 
 alias scriptlines { 
@@ -365,35 +364,4 @@ alias scriptlines {
   } 
   set %scriptlines %script.lines
   unset %script.lines 
-}
-
-;;;;; Regionsprüfung
-alias regioncheck  {
-  set %curlines $lines(%pfad $+ \plugins\WorldGuard\worlds\ $+ $2 $+ \regions.yml)
-  set %globalregion $calc(%curlines -5)
-  set %globalregionname $read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%globalregion)
-  set %startline 13 
-  var %regionpos 0
-  set %emtyline $read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,12)
-  if (regions: {} isin %emtyline) || ($exists(%pfad $+ \plugins\WorldGuard\worlds\ $+ $2 $+ \regions.yml) == $false) { msg $chan Keine Regionen gefunden | /halt }
-  while (%startline <= %globalregion) {
-    inc %regionpos 1
-    writeini regionnames.ini $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%startline), :)  Name $remove($read(%pfad $+ \plugins\WorldGuard\worlds\ $+  $2 $+ \regions.yml,l,%startline), :)
-    inc %startline 8
-  }
-  goto output
-  :output
-  /timer.delete1 1 5 /remove regionnames.ini
-  ;;; /msg $chan Ausgabe erfolgt.
-  set -u5 %regionname $readini(regionnames.ini, $1, name)
-  if (%regionname isin $readini(regionnames.ini, $1, name))  { 
-    ;;;/msg %m-channel Region $1 gefunden....
-    return 1
-    /halt
-  }
-  if (%regionname == $null) {
-    ;;; /msg %m-channel Region $1 fehlt
-    return 0
-    /halt
-  }
 }
