@@ -11,6 +11,30 @@ on 100:text:!server settings:%m-channel: {
   serverresult
 }
 
+on *:text:!regcheck*:#: {
+
+  var %world $2
+  var %region $3
+  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  set -s %regionlist $getallyml(%file,regions)
+  if ($istok(%regionlist,%region,32)) { msg #support region %region exists }
+  else { msg $chan region %region does'nt exist }
+}
+
+on *:text:!regset*:#: {
+  var %world $2
+  var %region $3
+  var %member $4
+  var %value $5
+  var  %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  var %regionlist $getallyml(%file,regions)
+  if (!$istok(%regionlist,%region,32)) { 
+    write $qt(%file) $str(@,4) $+ $3: $+ $crlf $+ $str(@,8) $+ $4: $5
+    convert@tospace %file
+  }
+  else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
+}
+
 ;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
 on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
 
@@ -218,7 +242,7 @@ on 100:text:!halt-activity*:%m-channel: {
   if ($2 == confirm) { 
 
     msg %m-channel 04ACHTUNG!! Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!.
-    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!."
+    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast @4ACHTUNG!!@r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server Eingefroren!."
     run rcon.exe -a localhost:25575 -p %rcon_password "halt-activity confirm"
   }
 }
@@ -232,7 +256,7 @@ on 100:text:!stoplag*:%m-channel: {
   if ($2 == -c) { 
 
     msg %m-channel 04ACHTUNG!! Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!.
-    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast §4ACHTUNG!!§r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!."
+    run rcon.exe -a localhost:25575 -p %rcon_password "broadcast @4ACHTUNG!!@r Jegliches Lebewesen und jegliche Bewegung etc wird auf den Gesamten Server wieder Zugelassen!."
     run rcon.exe -a localhost:25575 -p %rcon_password "stoplag -c"
   }
 }
@@ -339,9 +363,11 @@ on 100:text:!region*:%m-channel: {
   if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag -w weltname flag werte.  Bitte Selectiere die region zuvor| /halt }
 }
 
+on 100:text:!get:#: {
 
+  msg $chan $getallregions(C:\MineCraftBot\plugins\WorldGuard\worlds\world\regions.yml)
 
-
+}
 
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
 
@@ -450,9 +476,9 @@ on *:text:!playerlist:%m-channel: {
   var %players $read(%pfad $+ help2.txt,l,2)
   var %c1 $chr(3)
   var %plist2 $replace(%plist, There are, Es sind 4, of a max of, von, players online, Spieler im Spiel)
-  var %plist3 $replace(%plist, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
-  var %players1 $replace(%players, §6default§r:, 4(7Standard4), §6§7[§6Owner§7]§r§r:, 14[7Owner14])
-  var %playerlist1 3Gruppe: $replace(%players1, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
+  var %plist3 $replace(%plist, @6, %c1 $+ 7, @4, %c1 $+ 5, @c, %c1 $+ 41, @f, %c1 $+ 0, @r, $chr(3))
+  var %players1 $replace(%players, @6default@r:, 4(7Standard4), @6@7[@6Owner@7]@r@r:, 14[7Owner14])
+  var %playerlist1 3Gruppe: $replace(%players1, @6, %c1 $+ 7, @4, %c1 $+ 5, @c, %c1 $+ 41, @f, %c1 $+ 0, @r, $chr(3))
   timersend1 1 4 /msg %m-channel %plist3
   if (%players1 != $null) { /timersend2 1 5 /msg %m-channel %playerlist1 }
   timerwait2 1 8 /remove %pfad $+ help2.txt
@@ -497,8 +523,8 @@ on *:text:!tps:%m-channel: {
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   set %tps $read(%pfad $+ tps.txt,l,1)
-  set %tps1 $remove(%tps,§r)
-  set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
+  set %tps1 $remove(%tps,@r)
+  set %newtag $replace(%tps1,@6,$chr(3) $+ 7,@a,$chr(3) $+ 9 $+ $chr(32))
   $tps
   timersay1 1 5 /msg %m-channel 0,1 %newtag  %tagresult
   timerdeletetps1 1 8 /remove %pfad $+ tps.txt

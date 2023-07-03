@@ -157,8 +157,6 @@ alias system_defaults_check {
   /save -rv vars.ini
 }
 
-;;;; Logsystem vom Minecraft Server version 1.19.4 ;;;;;;
-
 Alias checklog {
   var %i $lines(%mlog)
   if (%temp.r != $read(%mlog, %i)) {
@@ -229,7 +227,7 @@ alias lagausgabe {
   var %zeilen $lines(%pfad $+ lag.txt)
   while (%i <= %zeilen) {
     var %text $read -l $+ %i %pfad $+ lag.txt
-    var %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
+    var %text.result $replace(%text, @6, $chr(3) $+ 07, @c, $chr(3) $+ 04, @a, $chr(3) $+ 09)
     inc %i
     msg %m-channel %text.result
   } 
@@ -365,4 +363,39 @@ alias scriptlines {
   } 
   set %scriptlines %script.lines
   unset %script.lines 
+}
+
+alias getallyml { var %n,%t $gettok($1-,2,32),%a 2,%s 0 | while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { inc %s 4 | inc %a | var %t $gettok($1-,%a,32) } | var %l $readn + 1 | while (1) { var -p %v $read($1,tnr,/(.*),%l) | var -p %v $regml(1) | if ($prop) { if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ : (.*)/)) return $regml(1) } | elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { var %n %n $regml(1) } | if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { break } | var %l $readn + 1 } | return %n }
+alias setallyml {
+  var %n,%t $2,%a 2,%s 0 
+  while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) {
+    inc %s 4 
+    inc %a
+    var %t $($ $+ %a,2)
+    if (%a == $calc($0 - 0)) break 
+  }
+  var %l $readn + 1 
+  while (1) {
+    var -p %v $read($1,tnr,/(.*)/,%l) 
+    var -p %v $regml(1) 
+    if ($prop) {
+      if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ : (.*)/)) {
+        write -l $readn $qt($1) $str(@,%s) $+ $prop $+ : %t
+        convert@tospace $1
+        return
+      } 
+    } 
+    if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { 
+      write -il $readn $qt($1) $str(@,%s) $+ $prop $+ : %t
+      convert@tospace $1
+      return
+    }
+    var %l $readn + 1
+  }
+}
+
+alias convert@tospace {
+  bread $qt($1-) 0 $lof($1-) &a
+  breplace &a 64 32
+  bwrite -c $qt($1-) 0 -1 &a
 }
