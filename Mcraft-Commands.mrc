@@ -11,30 +11,6 @@ on 100:text:!server settings:%m-channel: {
   serverresult
 }
 
-on *:text:!regcheck*:#: {
-
-  var %world $2
-  var %region $3
-  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
-  set -s %regionlist $getallyml(%file,regions)
-  if ($istok(%regionlist,%region,32)) { msg #support region %region exists }
-  else { msg $chan region %region does'nt exist }
-}
-
-on *:text:!regset*:#: {
-  var %world $2
-  var %region $3
-  var %member $4
-  var %value $5
-  var  %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
-  var %regionlist $getallyml(%file,regions)
-  if (!$istok(%regionlist,%region,32)) { 
-    write $qt(%file) $str(@,4) $+ $3: $+ $crlf $+ $str(@,8) $+ $4: $5
-    convert@tospace %file
-  }
-  else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
-}
-
 ;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
 on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
 
@@ -363,10 +339,29 @@ on 100:text:!region*:%m-channel: {
   if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag -w weltname flag werte.  Bitte Selectiere die region zuvor| /halt }
 }
 
-on 100:text:!get:#: {
+;;;;; Some Stuff from Quims
 
-  msg $chan $getallregions(C:\MineCraftBot\plugins\WorldGuard\worlds\world\regions.yml)
+on *:text:!regcheck*:#: {
+  var %world $2
+  var %region $3
+  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  set -s %regionlist $getallyml(%file,regions)
+  if ($istok(%regionlist,%region,32)) { msg #support region %region exists }
+  else { msg $chan region %region does'nt exist }
+}
 
+on *:text:!regset*:#: {
+  var %world $2
+  var %region $3
+  var %member $4
+  var %value $5
+  var  %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  var %regionlist $getallyml(%file,regions)
+  if (!$istok(%regionlist,%region,32)) { 
+    write $qt(%file) $str(@,4) $+ $3: $+ $crlf $+ $str(@,8) $+ $4: $5
+    convert@tospace %file
+  }
+  else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
 }
 
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
