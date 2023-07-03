@@ -364,6 +364,10 @@ alias scriptlines {
   set %scriptlines %script.lines
   unset %script.lines 
 }
+
+
+
+
 ;;; Some Stuff from Quims
 
 alias getallyml { var %n,%t $gettok($1-,2,32),%a 2,%s 0 | while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { inc %s 4 | inc %a | var %t $gettok($1-,%a,32) } | var %l $readn + 1 | while (1) { var -p %v $read($1,tnr,/(.*),%l) | var -p %v $regml(1) | if ($prop) { if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ : (.*)/)) return $regml(1) } | elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { var %n %n $regml(1) } | if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { break } | var %l $readn + 1 } | return %n }

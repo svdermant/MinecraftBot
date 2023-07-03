@@ -339,6 +339,24 @@ on 100:text:!region*:%m-channel: {
   if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag -w weltname flag werte.  Bitte Selectiere die region zuvor| /halt }
 }
 
+;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
+
+on 100:text:!give*:%m-channel: {
+  if ($left($1,5) == !give) && ($2 == $null) {
+    msg %m-channel 14(give) - Einen Spieler einen Gegenstand geben:
+    msg %m-channel 8!give <player> <item> 14[amount] 7Gibt dem Gewünschten Spieler 64 oder die (Angegebene Megen) des angegebenen Gegenstandes.
+    msg %m-channel 8!give <player> <item> <amount> <meta> 7 Spieler 64 oder die (Angegebene Megen) des angegebenen Gegenstandes 
+    msg %m-channel 7mit den angegebenen Metadaten
+  }
+  else {
+    if ($2- != $null) {
+      var %com $remove($1-,!)
+      set -u5 %command 7,1[4-7] 11S14erver 11B14efehl4:7 %com 11(3Abgeschickt11)
+      /run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+    }
+  }
+}
+
 ;;;;; Some Stuff from Quims
 
 on *:text:!regcheck*:#: {
@@ -362,24 +380,6 @@ on *:text:!regset*:#: {
     convert@tospace %file
   }
   else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
-}
-
-;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
-
-on 100:text:!give*:%m-channel: {
-  if ($left($1,5) == !give) && ($2 == $null) {
-    msg %m-channel 14(give) - Einen Spieler einen Gegenstand geben:
-    msg %m-channel 8!give <player> <item> 14[amount] 7Gibt dem Gewünschten Spieler 64 oder die (Angegebene Megen) des angegebenen Gegenstandes.
-    msg %m-channel 8!give <player> <item> <amount> <meta> 7 Spieler 64 oder die (Angegebene Megen) des angegebenen Gegenstandes 
-    msg %m-channel 7mit den angegebenen Metadaten
-  }
-  else {
-    if ($2- != $null) {
-      var %com $remove($1-,!)
-      set -u5 %command 7,1[4-7] 11S14erver 11B14efehl4:7 %com 11(3Abgeschickt11)
-      /run rcon.exe -a localhost:25575 -p %rcon_password " %com "
-    }
-  }
 }
 
 ;;;;;;;; !spawnentity command ;;;;;;;;;;;;;;;
