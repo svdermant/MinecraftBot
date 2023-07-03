@@ -49,3 +49,8 @@ Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pf
   
 Der Bot hat die Version 1.0
 
+Ein dank geht an Folgende leute:
+A Thanks to the following people that helped me to get any features..
+
+1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+
