@@ -404,3 +404,14 @@ alias convert@tospace {
   breplace &a 64 32
   bwrite -c $qt($1-) 0 -1 &a
 }
+
+;;;; My Stuff
+
+alias regcheck {
+  set -u10 %world $1
+  set -u10 %region $2
+  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  set -s %regionlist $getallyml(%file,regions)
+  if ($istok(%regionlist,%region,32) == $true) { set -u8 %regexists 1 }
+  else { set -u8 %regexists 0 }
+}
