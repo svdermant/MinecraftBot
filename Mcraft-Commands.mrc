@@ -245,13 +245,13 @@ on 100:text:!region*:%m-channel: {
   if ($2 == list) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 == -w) && ($4 isin $finddir($mircdir, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { 
     var %regionlist1 $getallYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,regions)
-    if (%regionlist1 == $null) { msg %m-channel Die Welt $4 hat derzeit Keine Regionen | /halt }
+    if (%regionlist1 == $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Die Welt $4 hat derzeit Keine Regionen 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 | /halt }
     if (%regionlist1 != $null) {
       var %maxregions $numtok(%regionlist1,32)
       var %x = 1
-      msg %m-channel Die Welt $4 hat folgende Regionen
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Die Welt $4 hat folgende Regionen:
       while (%maxregions >= %x) { 
-        msg %m-channel $gettok(%regionlist1,%x,32)
+        msg %m-channel 7,1[8►7] $gettok(%regionlist1,%x,32)
         inc %x
       }
     }
