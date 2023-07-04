@@ -77,7 +77,7 @@ on *:text:!bday:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9  11(3Abgeschickt11)
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  ♥ Herzlichen   "
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 ♣ Glückwunsch ♣  "
-  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  und Alles gute Geburtstag ♥ "
+  /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  und Alles gute zum Geburtstag ♥ "
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  Serkons aka. Kamerot  ☻"
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 alles Liebe sowie Gesundheit und Erfolg  ☻"
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 und ein glückliches und gesundes neues Lebensjahr"
@@ -573,14 +573,15 @@ on 100:text:!batchpfad*:%m-channel: {
   set %pfad $2-
 }
 
+
 ;;; TPS Befehl ;;;;;
 
-on *:text:!tps:%m-channel: { 
+on *:text:*!tps*:%m-channel: { 
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   set %tps $read(%pfad $+ tps.txt,l,1)
-  set %tps1 $remove(%tps,@r)
-  set %newtag $replace(%tps1,@6,$chr(3) $+ 7,@a,$chr(3) $+ 9 $+ $chr(32))
+  set %tps1 $remove(%tps,§r)
+  set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
   $tps
   timersay1 1 5 /msg %m-channel 0,1 %newtag  %tagresult
   timerdeletetps1 1 8 /remove %pfad $+ tps.txt
@@ -589,7 +590,11 @@ on *:text:!tps:%m-channel: {
 ;;;; Auslastungsabfrage ;;;;;
 
 on *:text:!lag:%m-channel: {
-  //run -a %pfad $+ lag.bat
-  set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
+  //run -ap %pfad $+ lag.bat
+  set %lag $read(%pfad $+ lag.txt,l,2)
+  set %lag1 $remove(%lag,§r)
+  set %newlag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
+  $tps
+  set %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   /timer.lagausgabe1 1 5 /lagausgabe
 }

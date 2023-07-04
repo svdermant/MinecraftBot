@@ -228,9 +228,22 @@ alias lagausgabe {
   while (%i <= %zeilen) {
     var %text $read -l $+ %i %pfad $+ lag.txt
     var %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
-    inc %i
-    msg %m-channel %text.result
+    write -l $+ %i lagres.txt 9,1[4-9]7  %text.result 9,1[4-9]
+    inc %i 
+    ;;; msg %m-channel 
   } 
+  if (20 isin $read(lagres.txt,l,2)) { var %input $read(lagres.txt,l,2) | var %inputrep $replace(%input,20, 20 10[11Ausgezeichnet!10])  | write -l2 lagres.txt %inputrep }
+  /timer.ausgabe2 1 10 /lagausgabe2
+}
+
+alias lagausgabe2 {
+  var %x 1
+  var %zeilen2 $lines(lagres.txt)
+  while (%x <= %zeilen2) {
+
+    msg %m-channel $read(lagres.txt,l,%x)
+    inc %x
+  }
 }
 
 ;;;; Ausgabe Serverresult vom !server settings Befehl ;;;;;;
@@ -292,7 +305,7 @@ alias serverresult {
   msg %m-channel 10,1[7 Debug Modus: 8 $+ %settings.7.result 10][7 Schwierigkeitsgrad: 8 $+ %settings.8.result 10][7 Befehlsblöcke erlauben: 4 $+ %settings.9.result 10][7 Remotezugriff: 4 $+ %settings.12.result 10][7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result 10]
   msg %m-channel 10,1[7 Nur Mojang Accounts: 4 $+ %settings.14.result 10][7 Privater Zugang: 4 $+ %settings.15.result 10][7 Erzwungener Spielmodus: 8 $+ %settings.17.result 10][7 Funktionslevel: 8 $+ %settings.18.result 10] 
   msg %m-channel 10,1[7 Spielmodus: 8 $+ %settings.19.result 10][7 Strukturen erzeugen: 4 $+ %settings.20.result 10][7 Online Spieler verstecken: 4 $+ %settings.23.result 10][7 Hauptwelt: 8 $+ %settings.26.r 10] 
-  msg %m-channel 10,1[7 Seed: 4 $iif(%settings.27.r == $null, 4 Zufällig  , $+ %settings.27.r) 10][7 Welttyp: 8 $+ %settings.28.result 10][7 Max Spieler: 12 $+ %settings.30.r 10][7 Weltgrenze liegt bei: 12 $+ %settings.32.r 7Blöcken 10][7 MOTD: 8 $+ %settings.33.r 10][7 PVP: 4 $+ %settings.39.result 10]
+  msg %m-channel 10,1[7 Seed: 4 $iif(%settings.27.r == $null, 4 Zufällig  , $+ %settings.27.r) 10][7 Welttyp: 8 $+ %settings.28.result 10][7 Max Spieler: 12 $+ %settings.30.r 10][7 Weltgrenze liegt bei: 12 $+ %settings.32.r 7Blöcken 10][7 MOTD: 8 $+ %settings.33.r 10][7 PVP: 4 $+ %settings.39.result 10]
   msg %m-channel 10,1[7 Serverport: 12 $+ %settings.49.r 10][7 Simulationsentfernung: 12 %settings.50.r 10][7 Tiere erzeugen: 04 $+ %settings.51.result 10][7 Monster erzeugen: 04 $+ %settings.52.result 10] 
   msg %m-channel 10,1[7 NPC's erzeugen: 04 $+ %settings.53.result 10][7 Spawn Schutz: 12 $+ %settings.54.r 7Blöcke 10][7 Privater Server: 04 $+ %settings.59.result 10]
 }
@@ -353,6 +366,8 @@ alias zeitsteuerung-nacht {
 alias tps {
   if (20 isin %newtag) { set %tagresult 10[11Ausgezeichnet!10] }
   if (18 isin %newtag) { set %tagresult 11[12Normale Auslastung10] }
+  if (20 isin %newlag) { set %tagresult2 10[11Ausgezeichnet!10] }
+  if (18 isin %newlag) { set %tagresult2 11[12Normale Auslastung10] }
 }
 
 alias scriptlines { 
