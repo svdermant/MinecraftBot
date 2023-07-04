@@ -370,7 +370,45 @@ alias scriptlines {
 
 ;;; Some Stuff from Quims
 
-alias getallyml { var %n,%t $gettok($1-,2,32),%a 2,%s 0 | while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { inc %s 4 | inc %a | var %t $gettok($1-,%a,32) } | var %l $readn + 1 | while (1) { var -p %v $read($1,tnr,/(.*),%l) | var -p %v $regml(1) | if ($prop) { if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ : (.*)/)) return $regml(1) } | elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { var %n %n $regml(1) } | if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { break } | var %l $readn + 1 } | return %n }
+alias getallyml { 
+  ;this is old code i had fixed it
+  var %n,%t $2,%a 2,%s 0 
+  while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { 
+    inc %s 4 
+    inc %a
+    var %t $($ $+ %a,2) 
+  } 
+  var %l $readn + 1 
+  while (1) { 
+    var -p %v $read($1,tnr,/(.*),%l) 
+    var -p %v $regml(1) 
+    if ($prop) { 
+      if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ : (.*)/)) {
+        var %rm $regml(1)
+        if ($regex($regml(1),^(\{.*\}|\[.*\]|[^{}\[\]]+)$)) return %rm
+        var %r %rm
+        while (1) {
+          var %t $read($1,tn,$calc($readn + 1))
+          var %r %r $+ %t
+          if ($right(%t,1) isin }]) break
+        }
+        return %r
+        echo -ag %r
+      } 
+    } 
+    elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { 
+      var %n %n $regml(1) 
+    } 
+    if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { 
+      break 
+    }
+    var %l $readn + 1
+  }
+  return %n
+  echo -ag %n 
+}
+
+
 alias setallyml {
   var %n,%t $2,%a 2,%s 0 
   while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) {
@@ -408,10 +446,6 @@ alias convert@tospace {
 ;;;; My Stuff
 
 alias regcheck {
-  set -u10 %world $1
-  set -u10 %region $2
-  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
-  set -s %regionlist $getallyml(%file,regions)
-  if ($istok(%regionlist,%region,32) == $true) { set -u8 %regexists 1 }
-  else { set -u8 %regexists 0 }
+  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ $1 $+ \regions.yml
+  return $istok($getallyml(%file,regions),$2,32)
 }

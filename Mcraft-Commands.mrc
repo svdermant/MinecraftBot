@@ -256,6 +256,30 @@ on 100:text:!region*:%m-channel: {
       }
     }
   }
+  ;;;; Region Info;;;;;;;;
+  if ($2 == info) && ($3 == $null) { msg %m-channel Bitte gib eine Region an. | halt }
+  if ($2 == info) && ($3 != $null) && ($4 == -w) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 !isin $finddir(%pfad, $+ $5 $+ *,1)) { msg %m-channel Welt $5 existiert nicht und somit konnte $3 nicht gefunden werden. | /halt }
+  if ($2 == info) && ($3 != $null) && ($4 == -w) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 isin $finddir(%pfad, $+ $5 $+ *,1)) {
+    set %world $5
+    set %region $3
+    set %regcheck $regcheck(%world,%region) 
+    if (%regcheck) && ($4 == -w) && (%world isin $finddir(%pfad, $+ %world $+ *,1)) { 
+      ;;;msg $chan region %region existiert
+      set %params $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region)
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Information über Region %region 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]
+      set %maxparams $numtok(%params,32)
+      var %i = 1
+      while (%maxparams >= %i) { 
+        ;;set %parama $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region).flags
+        ;;msg $chan 7,1[8►7] $gettok(%params,%i,32) $+ : $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region). [ $+ [ $gettok(%params,%i,32) ] ]
+        msg $chan 7,1[8►7] $gettok(%params,%i,32) $+ :  $replace($getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region). [ $+ [ $gettok(%params,%i,32) ] ], istder,ist der) 
+        inc %i
+      }
+    }
+    if (!%regcheck) && ($4 == -w) && (%world isin $finddir(%pfad, $+ %world $+ *,1)) { msg %m-channel region %region existiert nicht | /halt }
+  }
+  ;;; Region select
+
   if ($2 == select) && ($3 == $null) { /msg %m-channel Region bitte selectieren mit 8!region select -w weltname id | / halt }
   if ($2 == select) && ($3 == -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == select) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
@@ -265,15 +289,15 @@ on 100:text:!region*:%m-channel: {
   if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 != $null) { 
     var %world $4
     var %region $5
-    $regcheck(%world,%region)
-    if (%regexists == 1) {
+
+    if ($regcheck(%world,%region)) {
       /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 $5"
       /msg %m-channel Region wurde Selectiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
       /msg %m-channel Für mehrere Optionen muss die Region erneut selectiert werden.
       set %regionsid $5
       /halt
     }
-    if (%regexists == 0) { msg %m-channel Die Region $5 existiert nicht in der Welt $4 | halt }
+    else { msg %m-channel Die Region $5 existiert nicht in der Welt $4 | halt }
   }
   if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
     set %flag $5
@@ -384,9 +408,9 @@ on 100:text:!give*:%m-channel: {
 on 100:text:!regexist*:%m-channel: {
   var %world $2
   var %region $3
-  $regcheck(%world,%region) 
-  if (%regexists == 1) { msg %m-channel region %region existiert }
-  if (%regexists == 0) { msg %m-channel region %region existiert nicht! }
+  ;do you understand how it's working? with the else? yes
+  if ($regcheck(%world,%region)) { msg %m-channel region %region existiert }
+  else { msg %m-channel region %region existiert nicht! }
 }
 
 ;;;;; Some Stuff from Quims
