@@ -227,7 +227,7 @@ alias lagausgabe {
   var %zeilen $lines(%pfad $+ lag.txt)
   while (%i <= %zeilen) {
     var %text $read -l $+ %i %pfad $+ lag.txt
-    var %text.result $replace(%text, @6, $chr(3) $+ 07, @c, $chr(3) $+ 04, @a, $chr(3) $+ 09)
+    var %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
     inc %i
     msg %m-channel %text.result
   } 
