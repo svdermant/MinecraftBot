@@ -300,13 +300,14 @@ on 100:text:!region*:%m-channel: {
   }
   if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
     set %flag $5
-    set  %welt $4
+    set %welt $4
     if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) || ($istok(%flaglist5,%flag,46) ==  $true) {
       /msg %m-channel Flag %flag existiert.  
       var %currentflag %flag
       ;;; Greeting Flag
       if (%currentflag == greeting) && ($6- == $null) {
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Greeting wurde zurückgesetzt.
         /unset %regionsid
         /halt
@@ -314,14 +315,16 @@ on 100:text:!region*:%m-channel: {
       if (%currentflag == greeting) && ($6- != $null)  {
         var %command $1- 
         if (-w isin $left(%command, 15)) { set %text $6- }
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Greeting wurde auf ( $+ %text $+ ) gesetzt.
         ;;;/unset %regionsid
         /halt
       }
       ;;; Passthrough Flag
       if (%currentflag == passthrough) && ($6- == $null) {
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel passthrough wurde zurückgesetzt.
         /unset %regionsid
         /halt
@@ -330,41 +333,44 @@ on 100:text:!region*:%m-channel: {
         var %command $1- 
         if ($6 == allow) { set %text $6 }
         if ($6 == deny) { set %text $6 }
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel passthrough wurde auf ( $+ %text $+ ) gesetzt.
         ;;;/unset %regionsid
         /halt
       }
       ;;; Build Flag
       if (%currentflag == Build) && ($6- == $null) {
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Build wurde zurückgesetzt.
         /unset %regionsid
         /halt
       }
       if (%currentflag == Build) && ($6- != $null)  {
-        var %command $1- 
         if ($6 == allow) { set %text $6 }
         if ($6 == deny) { set %text $6 }
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Build wurde auf ( $+ %text $+ ) gesetzt.
         ;;;/unset %regionsid
         /halt
       }
       ;;; Inteact Flag
       if (%currentflag == Interact) && ($6- == $null) {
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag "
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Interactwurde zurückgesetzt.
         /unset %regionsid
         /halt
       }
       if (%currentflag == Interact) && ($6- != $null)  {
-        var %command $1- 
         if ($6 == allow) { set %text $6 }
         if ($6 == deny) { set %text $6 }
-        run -ap rcon.exe -a localhost:25575 -p %rcon_password " region flag %regionsid -w %welt %currentflag %text "
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Interact wurde auf ( $+ %text $+ ) gesetzt.
-        ;;;/unset %regionsid
+        /unset %regionsid
         /halt
       }
 
