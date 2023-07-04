@@ -269,10 +269,9 @@ on 100:text:!region*:%m-channel: {
       msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Information über Region %region 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]
       set %maxparams $numtok(%params,32)
       var %i = 1
+      var %h $chr(3) $+ 0,1
       while (%maxparams >= %i) { 
-        ;;set %parama $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region).flags
-        ;;msg $chan 7,1[8►7] $gettok(%params,%i,32) $+ : $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region). [ $+ [ $gettok(%params,%i,32) ] ]
-        msg $chan 7,1[8►7] $gettok(%params,%i,32) $+ :  $replace($getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region). [ $+ [ $gettok(%params,%i,32) ] ], istder,ist der) 
+        msg $chan 7,1[8►7]0,1 $gettok(%params,%i,32) $+ :  $replace($getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region). [ $+ [ $gettok(%params,%i,32) ] ], istder,ist der,allow,4allow $+ %h,global, 13global $+ %h) 
         inc %i
       }
     }
