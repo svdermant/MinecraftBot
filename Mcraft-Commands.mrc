@@ -652,7 +652,7 @@ on 100:text:!batchpfad*:%m-channel: {
 
 ;;; TPS Befehl ;;;;;
 
-on *:text:*!tps*:%m-channel: { 
+on *:text:!tps:%m-channel: { 
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   timersay1 1 8 /tpsausgabe
