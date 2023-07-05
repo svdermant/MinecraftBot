@@ -655,12 +655,7 @@ on 100:text:!batchpfad*:%m-channel: {
 on *:text:*!tps*:%m-channel: { 
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
-  set %tps $read(%pfad $+ tps.txt,l,1)
-  set %tps1 $remove(%tps,§r)
-  set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
-  $tps
-  timersay1 1 5 /msg %m-channel 0,1 %newtag  %tagresult
-  timerdeletetps1 1 8 /remove %pfad $+ tps.txt
+  timersay1 1 8 /tpsausgabe
 }
 
 ;;;; Auslastungsabfrage ;;;;;

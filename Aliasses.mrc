@@ -396,6 +396,14 @@ alias scriptlines {
   unset %script.lines 
 }
 
+alias tpsausgabe {
+  set %tps $read -l $+ 1 %pfad $+ tps.txt
+  set %tps1 $remove(%tps,§r)
+  set %newtag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
+  $tps
+  /msg %m-channel %newtag %tagresult
+  /timer.deletetps1 1 7 /remove %pfad $+ tps.txt
+}
 
 
 
