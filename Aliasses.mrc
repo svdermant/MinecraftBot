@@ -227,12 +227,28 @@ alias lagausgabe {
   var %zeilen $lines(%pfad $+ lag.txt)
   while (%i <= %zeilen) {
     var %text $read -l $+ %i %pfad $+ lag.txt
-    var %text.result $replace(%text, §6, $chr(3) $+ 07, §c, $chr(3) $+ 04, §a, $chr(3) $+ 09)
-    write -l $+ %i lagres.txt 9,1[4-9]7  %text.result 9,1[4-9]
+    var %text.result $replace(%text, $&
+      Laufzeit:,7L14aufzeit4:9, $&
+      Stunden,11S14tunden9, $&
+      Minuten,11M14inuten9, $&
+      Sekunden,11S14ekunden9, $&
+      Aktuelle TPS , 7A14ktuelle TPS, $&
+      Maximaler Speicher: , 7M14aximaler 7S14peicher4:9, $& 
+      Reservierter Speicher: , 7R14eservierter 7S14peicher4:9, $& 
+      Freier Speicher: , 7F14reier 7S14peicher4:9, $& 
+      World ",7W14orld4:9, $&
+      Nether ",7N14ether4:9, $&
+      The End ",7T14he 7E14nd4:9, $&
+      ": ,4//, $&
+      chunks,11C14hunks, $&
+      einheiten,11E14inheiten, $&
+      tiles,11T14iles, $&
+      §6, $chr(3) $+ 07, §c, $chr(3) $+ 09, §a, $chr(3) $+ 09)
+    write -l $+ %i lagres.txt  7,1[9▒7]4  %text.result 7,1[9▒7]4
     inc %i 
     ;;; msg %m-channel 
   } 
-  if (20 isin $read(lagres.txt,l,2)) { var %input $read(lagres.txt,l,2) | var %inputrep $replace(%input,20, 20 10[11Ausgezeichnet!10])  | write -l2 lagres.txt %inputrep }
+  if (20 isin $read(lagres.txt,l,2)) { var %input $read(lagres.txt,l,2) | var %inputrep $replace(%input,20, 20 10[11A14usgezeichnet9!10])  | write -l2 lagres.txt %inputrep }
   /timer.ausgabe2 1 10 /lagausgabe2
 }
 
@@ -301,13 +317,13 @@ alias serverresult {
   var %settings.59.result $replace(%settings.59.r, true, 9ja, false, 4nein)
   var %settings.28.r $remove(%settings.28, level-type=)
   var %settings.28.result $replace(%settings.28.r, minecraft\:normal, Normal, minecraft\:flat, Flachland)
-  msg %m-channel 10,1[7 Nether Erlauben: 4 $+ %settings.4.result 10][7 Flugmodus Aktiv: 4 $+ %settings.3.result 10][7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result 10][7 RCON Befehle an OPS senden: 4 $+ %settings.6.result 10] 
-  msg %m-channel 10,1[7 Debug Modus: 8 $+ %settings.7.result 10][7 Schwierigkeitsgrad: 8 $+ %settings.8.result 10][7 Befehlsblöcke erlauben: 4 $+ %settings.9.result 10][7 Remotezugriff: 4 $+ %settings.12.result 10][7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result 10]
-  msg %m-channel 10,1[7 Nur Mojang Accounts: 4 $+ %settings.14.result 10][7 Privater Zugang: 4 $+ %settings.15.result 10][7 Erzwungener Spielmodus: 8 $+ %settings.17.result 10][7 Funktionslevel: 8 $+ %settings.18.result 10] 
-  msg %m-channel 10,1[7 Spielmodus: 8 $+ %settings.19.result 10][7 Strukturen erzeugen: 4 $+ %settings.20.result 10][7 Online Spieler verstecken: 4 $+ %settings.23.result 10][7 Hauptwelt: 8 $+ %settings.26.r 10] 
-  msg %m-channel 10,1[7 Seed: 4 $iif(%settings.27.r == $null, 4 Zufällig  , $+ %settings.27.r) 10][7 Welttyp: 8 $+ %settings.28.result 10][7 Max Spieler: 12 $+ %settings.30.r 10][7 Weltgrenze liegt bei: 12 $+ %settings.32.r 7Blöcken 10][7 MOTD: 8 $+ %settings.33.r 10][7 PVP: 4 $+ %settings.39.result 10]
-  msg %m-channel 10,1[7 Serverport: 12 $+ %settings.49.r 10][7 Simulationsentfernung: 12 %settings.50.r 10][7 Tiere erzeugen: 04 $+ %settings.51.result 10][7 Monster erzeugen: 04 $+ %settings.52.result 10] 
-  msg %m-channel 10,1[7 NPC's erzeugen: 04 $+ %settings.53.result 10][7 Spawn Schutz: 12 $+ %settings.54.r 7Blöcke 10][7 Privater Server: 04 $+ %settings.59.result 10]
+  msg %m-channel 10,1 $+ %head003 7 Nether Erlauben: 4 $+ %settings.4.result  %head002 7 Flugmodus Aktiv: 4 $+ %settings.3.result %head002 7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result %head002 7 RCON Befehle an OPS senden: 4 $+ %settings.6.result %head003 
+  msg %m-channel 10,1 $+ %head003 7 Debug Modus: 8 $+ %settings.7.result %head002 7 Schwierigkeitsgrad: 8 $+ %settings.8.result %head002 7 Befehlsblöcke erlauben: 4 $+ %settings.9.result %head002 7 Remotezugriff: 4 $+ %settings.12.result %head002 7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result %head003
+  msg %m-channel 10,1 $+ %head003 7Nur Mojang Accounts: 4 $+ %settings.14.result %head002 7 Privater Zugang: 4 $+ %settings.15.result %head002 7 Erzwungener Spielmodus: 8 $+ %settings.17.result %head002 7 Funktionslevel: 8 $+ %settings.18.result %head003 
+  msg %m-channel 10,1 $+ %head003 7Spielmodus: 8 $+ %settings.19.result %head002 7 Strukturen erzeugen: 4 $+ %settings.20.result %head002 7 Online Spieler verstecken: 4 $+ %settings.23.result %head002 7 Hauptwelt: 8 $+ %settings.26.r %head003 
+  msg %m-channel 10,1 $+ %head003 7 Seed: 4 $iif(%settings.27.r == $null, 4 Zufällig  , $+ %settings.27.r) %head002 7 Welttyp: 8 $+ %settings.28.result %head002 7 Max Spieler: 12 $+ %settings.30.r %head002 7 Weltgrenze liegt bei: 12 $+ %settings.32.r 7Blöcken %head002 7 MOTD: 8 $+ %settings.33.r %head002 7 PVP: 4 $+ %settings.39.result %head003
+  msg %m-channel 10,1 $+ %head003 7Serverport: 12 $+ %settings.49.r %head002 7 Simulationsentfernung: 12 %settings.50.r %head002 7 Tiere erzeugen: 04 $+ %settings.51.result %head002 7 Monster erzeugen: 04 $+ %settings.52.result %head003
+  msg %m-channel 10,1 $+ %head003 7 NPC's erzeugen: 04 $+ %settings.53.result %head002 7 Spawn Schutz: 12 $+ %settings.54.r 7Blöcke %head002 7 Privater Server: 04 $+ %settings.59.result %head003
 }
 
 alias ausgabe {
@@ -364,9 +380,9 @@ alias zeitsteuerung-nacht {
 }
 
 alias tps {
-  if (20 isin %newtag) { set %tagresult 10[11Ausgezeichnet!10] }
+  if (20 isin %newtag) { set %tagresult 10[11A4u7s9g10e13z14e8i7c12h9n6e3t9!4!9!10] }
   if (18 isin %newtag) { set %tagresult 11[12Normale Auslastung10] }
-  if (20 isin %newlag) { set %tagresult2 10[11Ausgezeichnet!10] }
+  if (20 isin %newlag) { set %tagresult2  10[11A4u7s9g10e13z14e8i7c12h9n6e3t9!3!9!10] }
   if (18 isin %newlag) { set %tagresult2 11[12Normale Auslastung10] }
 }
 
