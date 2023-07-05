@@ -253,7 +253,8 @@ on 100:text:!region*:%m-channel: {
   if ($2 == list) && ($3 == $null) { msg %m-channel Bitte gib eine Welt mittels -w Parameter an | halt }
   if ($2 == list) && ($3 == -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
-  if ($2 == list) && ($3 == -w) && ($4 isin $finddir($mircdir, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { 
+  if ($2 == list) && ($3 == -w) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { msg %m-channel Die Welt $4 Existiert nicht, kann keine Regionen finden. | /halt }
+  if ($2 == list) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { 
     var %regionlist1 $getallYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,regions)
     if (%regionlist1 == $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Die Welt $4 hat derzeit Keine Regionen 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 | /halt }
     if (%regionlist1 != $null) {
@@ -313,6 +314,7 @@ on 100:text:!region*:%m-channel: {
     set %welt $4
     if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) || ($istok(%flaglist5,%flag,46) ==  $true) {
       /msg %m-channel Flag %flag existiert.  
+      if (!%regionsid) { /msg %m-channel Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
       var %currentflag %flag
       ;;; Greeting Flag
       if (%currentflag == greeting) && ($6- == $null) {
@@ -320,6 +322,7 @@ on 100:text:!region*:%m-channel: {
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Greeting wurde zurückgesetzt.
         /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       if (%currentflag == greeting) && ($6- != $null)  {
@@ -328,7 +331,8 @@ on 100:text:!region*:%m-channel: {
         set %com rg f %regionsid %currentflag -w %welt %text
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Greeting wurde auf ( $+ %text $+ ) gesetzt.
-        ;;;/unset %regionsid
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       ;;; Passthrough Flag
@@ -337,6 +341,7 @@ on 100:text:!region*:%m-channel: {
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel passthrough wurde zurückgesetzt.
         /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       if (%currentflag == passthrough) && ($6- != $null)  {
@@ -346,7 +351,8 @@ on 100:text:!region*:%m-channel: {
         set %com rg f %regionsid %currentflag -w %welt %text
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel passthrough wurde auf ( $+ %text $+ ) gesetzt.
-        ;;;/unset %regionsid
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       ;;; Build Flag
@@ -355,6 +361,7 @@ on 100:text:!region*:%m-channel: {
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Build wurde zurückgesetzt.
         /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       if (%currentflag == Build) && ($6- != $null)  {
@@ -363,7 +370,8 @@ on 100:text:!region*:%m-channel: {
         set %com rg f %regionsid %currentflag -w %welt %text
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Build wurde auf ( $+ %text $+ ) gesetzt.
-        ;;;/unset %regionsid
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
       ;;; Inteact Flag
@@ -381,6 +389,64 @@ on 100:text:!region*:%m-channel: {
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Interact wurde auf ( $+ %text $+ ) gesetzt.
         /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      ;;; block-break Flag
+      if (%currentflag == block-break) && ($6- == $null) {
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel block-break wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == block-break) && ($6- != $null)  {
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel block-break wurde auf ( $+ %text $+ ) gesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      ;;; block-place Flag
+      if (%currentflag == block-place) && ($6- == $null) {
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel block-place wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag ==  block-place) && ($6- != $null)  {
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel block-place wurde auf ( $+ %text $+ ) gesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      ;;; use Flag
+      if (%currentflag == use) && ($6- == $null) {
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel use wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag ==  use) && ($6- != $null)  {
+        if ($6 == allow) { set %text $6 }
+        if ($6 == deny) { set %text $6 }
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel use wurde auf ( $+ %text $+ ) gesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
         /halt
       }
 
@@ -605,6 +671,6 @@ on *:text:!lag:%m-channel: {
   set %lag1 $remove(%lag,§r)
   set %newlag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
   $tps
-  set %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
+  set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   /timer.lagausgabe1 1 5 /lagausgabe
 }
