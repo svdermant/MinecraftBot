@@ -16,7 +16,7 @@ on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG
 
 ;;;;;;;;;;;;;; Stream + Topic ;;;;;;;;;;;;;;;
 on *:text:!stream*:%m-channel: {
-  if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://www.youtube.com/@igamerpg/streams 7[9▒7,1] |  /halt }
+  if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://www.youtube.com/@igamerpg 7[9▒7,1] |  /halt }
   if ($2 != $null) {
     set %topic-m-channel  7,1[9▒7] 4->11M14inecraft4<- 7[9▒7]9 $2- $+ 4.0 Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Actualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot
     topic %m-channel %topic-m-channel
