@@ -2,6 +2,13 @@
 Ein Mircbot zum Verwalten eines Minecraft Servers<br>
 Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 
+# Derzeitige Aufgaben.
+- [x] Fehler behoben der bei !region info auftrat
+- [x] Fehler behoben bei !lag
+- [x] Fehler behoben bei !tps
+- [ ] Weitere Worldguard Flags hinzufügen (damage-animals, chestaccess, ride)
+- [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
+
 # Installation
 1. Lade dir Zuerst die Software von www.mirc.com herunter und installiere es.
 2. Downloade dann den Bot als Zip herunter oder Verwende git clone dazu...
@@ -50,8 +57,18 @@ Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pf
 Der Bot hat die Version 1.0
 
 Ein dank geht an Folgende leute:
-A Thanks to the following people that helped me to get any features..
+A Thanks to the following people that helped me to get any features:
 
-1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
-2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
+# Information für Fragen und Probleme
+Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet.<br>
+Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
+
+Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
+Aber Probleme die beim Betrieb des Bots auftreten sind bitte über Github zu melden.<br>
+Erstellt dazu bitte ein Issue auf Github danke.
+
+# Quims 
+An user of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+# SoCId 
+Mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
