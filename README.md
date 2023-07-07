@@ -59,6 +59,11 @@ Der Bot hat die Version 1.0
 Ein dank geht an Folgende leute:
 A Thanks to the following people that helped me to get any features:
 
+# Quims 
+An user of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+# SoCId 
+Mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
+
 # Information für Fragen und Probleme
 Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet.<br>
 Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
@@ -66,9 +71,3 @@ Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](htt
 Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
 Aber Probleme die beim Betrieb des Bots auftreten sind bitte über Github zu melden.<br>
 Erstellt dazu bitte ein Issue auf Github danke.
-
-# Quims 
-An user of (irc.swiftirc.net) he helps me to get & write data to a yml file.
-# SoCId 
-Mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
-
