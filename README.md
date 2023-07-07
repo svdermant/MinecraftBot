@@ -53,4 +53,5 @@ Ein dank geht an Folgende leute:
 A Thanks to the following people that helped me to get any features..
 
 1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+2. SoCid mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
