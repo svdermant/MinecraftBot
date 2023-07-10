@@ -347,14 +347,25 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == passthrough) && ($6- != $null)  {
         var %command $1- 
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel passthrough wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
       ;;; Build Flag
       if (%currentflag == Build) && ($6- == $null) {
@@ -366,14 +377,25 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag == Build) && ($6- != $null)  {
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel Build wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
       ;;; Inteact Flag
       if (%currentflag == Interact) && ($6- == $null) {
@@ -384,14 +406,25 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag == Interact) && ($6- != $null)  {
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel Interact wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
       ;;; block-break Flag
       if (%currentflag == block-break) && ($6- == $null) {
@@ -403,14 +436,25 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag == block-break) && ($6- != $null)  {
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel block-break wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
       ;;; block-place Flag
       if (%currentflag == block-place) && ($6- == $null) {
@@ -422,34 +466,48 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag ==  block-place) && ($6- != $null)  {
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel block-place wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
-      }
-      ;;; use Flag
-      if (%currentflag == use) && ($6- == $null) {
-        set %com rg f %regionsid %currentflag -w %welt
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel use wurde zurückgesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
       if (%currentflag ==  use) && ($6- != $null)  {
-        if ($6 == allow) { set %text $6 }
-        if ($6 == deny) { set %text $6 }
-        set %com rg f %regionsid %currentflag -w %welt %text
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
-        /msg %m-channel use wurde auf ( $+ %text $+ ) gesetzt.
-        /unset %regionsid
-        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        /halt
+        if ($6 == allow) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
       }
+      ;;; Damage Animals
 
     }
     if ($istok(%flaglist1,%flag,46) == $false) || ($istok(%flaglist2,%flag,46) ==  $false) || ($istok(%flaglist3,%flag,46) ==  $false)  || ($istok(%flaglist4,%flag,46) ==  $false) || ($istok(%flaglist5,%flag,46) ==  $false) {
