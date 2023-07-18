@@ -181,7 +181,7 @@ on 100:text:!allowfire*:%m-channel: {
     halt 
   }
   else {
-    msg %m-channel Welt %world Existiert nicht. Feuerausbreitung kann nicht aktiviert werden.
+    msg %m-channel 0Welt 7[0 $+  %world $+ 7]0 Existiert nicht. Feuerausbreitung kann nicht aktiviert werden.
     halt
   }
 }
