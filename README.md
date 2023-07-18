@@ -6,7 +6,8 @@ Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 - [x] Fehler behoben der bei !region info auftrat
 - [x] Fehler behoben bei !lag
 - [x] Fehler behoben bei !tps
-- [ ] Weitere Worldguard Flags hinzufügen (damage-animals, chestaccess, ride)
+- [x] Weitere Worldguard Flags hinzugefügt (damage-animals, chestaccess, ride)
+- [ ] Weitere Worldguard Flags hinzugefügt (pvp, sleep, respawn-anchors)
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
 # Installation
