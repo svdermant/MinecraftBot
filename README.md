@@ -2,14 +2,6 @@
 Ein Mircbot zum Verwalten eines Minecraft Servers<br>
 Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 
-# Derzeitige Aufgaben.
-- [x] Fehler behoben der bei !region info auftrat
-- [x] Fehler behoben bei !lag
-- [x] Fehler behoben bei !tps
-- [x] Weitere Worldguard Flags hinzugefügt (damage-animals, chestaccess, ride)
-- [ ] Weitere Worldguard Flags hinzugefügt (pvp, sleep, respawn-anchors)
-- [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
-
 # Installation
 1. Lade dir Zuerst die Software von www.mirc.com herunter und installiere es.
 2. Downloade dann den Bot als Zip herunter oder Verwende git clone dazu...
@@ -55,20 +47,19 @@ Der Inhalt der Tps.bat
 
 Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pfad> den Pfad zum Serverordner angeben.
   
-Der Bot hat die Version 1.0
+# Wichtige Anmerkung für Leute die den Respawn Anchor auch in der Oberwelt nutzbar haben wollen.
+1. Gehe auf https://gitlab.com/schoentoon/respawn-anchors-worldguard und lade dir das Datapack und das Plugin runter
+2. Entpacke das Datapack und kopiere den inhalt in deinen weltenordner die struktur sollte wie folgt sein: world/datapacks/respawn-anchors-worldguard/data/ 
+3. Kopiere das Plugin in den Pluginordner 
+4. Starte deinen MinecraftServer via Bot oder Manuell
+5. Erstelle mit Worldedit und Worldguard eine Region
+6. Setze dann folgende flags respawn-anchors auf allow und respawn-anchor-explode auf deny
+7. wenn du /rg i regionname eintippst und beide flags sichtbar sind sollte der respawn anker in der Oberwelt funktionieren.
+8. Falls nicht erstelle ein issue auf Github.  
 
-Ein dank geht an Folgende leute:
-A Thanks to the following people that helped me to get any features:
+# Ein dank geht an Folgende leute:
+A Thanks to the following people that helped me to get any features..
 
-# Quims 
-An user of (irc.swiftirc.net) he helps me to get & write data to a yml file.
-# SoCId 
-Mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
+1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
-# Information für Fragen und Probleme
-Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet.<br>
-Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
-
-Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
-Aber Probleme die beim Betrieb des Bots auftreten sind bitte über Github zu melden.<br>
-Erstellt dazu bitte ein Issue auf Github danke.
