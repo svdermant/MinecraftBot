@@ -260,6 +260,7 @@ alias lagausgabe2 {
     msg %m-channel $read(lagres.txt,l,%x)
     inc %x
   }
+  /timerdelete.lag1 1 6 /remove lagres.txt
 }
 
 ;;;; Ausgabe Serverresult vom !server settings Befehl ;;;;;;
