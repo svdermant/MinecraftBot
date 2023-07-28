@@ -302,23 +302,25 @@ on 100:text:!region*:%m-channel: {
     var %region $5
 
     if ($regcheck(%world,%region)) {
+      set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
       /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 $5"
       /msg %m-channel Region wurde Selectiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
       /msg %m-channel Für mehrere Optionen muss die Region erneut selectiert werden.
       set %regionsid $5
       /halt
     }
-    else { msg %m-channel Die Region $5 existiert nicht in der Welt $4 | halt }
+    else { msg %m-channel 3[7WorldGuard3] 4FEHLER: Die Region $5 existiert nicht in der Welt $4 | halt }
   }
   if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
     set %flag $5
     set %welt $4
     if ($istok(%flaglist1,%flag,46) == $true) || ($istok(%flaglist2,%flag,46) == $true) || ($istok(%flaglist3,%flag,46) == $true)  || ($istok(%flaglist4,%flag,46) == $true) || ($istok(%flaglist5,%flag,46) ==  $true) {
-      /msg %m-channel Flag %flag existiert.  
-      if (!%regionsid) { /msg %m-channel Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
+      if (!%regionsid) { /msg %m-channel 4FEHLER:  Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
       var %currentflag %flag
       ;;; Greeting Flag
       if (%currentflag == greeting) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Greeting wurde zurückgesetzt.
@@ -327,6 +329,8 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if (%currentflag == greeting) && ($6- != $null)  {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         var %command $1- 
         if (-w isin $left(%command, 15)) { set %text $6- }
         set %com rg f %regionsid %currentflag -w %welt %text
@@ -338,6 +342,8 @@ on 100:text:!region*:%m-channel: {
       }
       ;;; Passthrough Flag
       if (%currentflag == passthrough) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel passthrough wurde zurückgesetzt.
@@ -348,6 +354,8 @@ on 100:text:!region*:%m-channel: {
       if (%currentflag == passthrough) && ($6- != $null)  {
         var %command $1- 
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -357,6 +365,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -365,10 +375,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Build Flag
       if (%currentflag == Build) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Build wurde zurückgesetzt.
@@ -378,6 +390,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == Build) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -387,6 +401,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -395,10 +411,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Inteact Flag
       if (%currentflag == Interact) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel Interactwurde zurückgesetzt.
@@ -407,6 +425,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == Interact) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -416,6 +436,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -424,10 +446,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; block-break Flag
       if (%currentflag == block-break) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel block-break wurde zurückgesetzt.
@@ -437,6 +461,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == block-break) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -446,6 +472,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -454,10 +482,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; block-place Flag
       if (%currentflag == block-place) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel block-place wurde zurückgesetzt.
@@ -467,6 +497,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag ==  block-place) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -476,6 +508,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -484,10 +518,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Use Flag
       if (%currentflag == use) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -497,6 +533,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag ==  use) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -506,6 +544,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -514,10 +554,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Damage Animals
       if (%currentflag == damage-animals) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -527,6 +569,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag ==  damage-animals) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -536,6 +580,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -544,10 +590,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; ChestAccess Flag
       if (%currentflag == chest-access) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -557,6 +605,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == chest-access) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -566,6 +616,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -574,10 +626,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;: ride flag
       if (%currentflag == ride ) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -587,6 +641,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == ride) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -596,6 +652,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -604,10 +662,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; pvp flag
       if (%currentflag == pvp) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -617,6 +677,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == pvp) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -626,6 +688,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -634,10 +698,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; flag
       if (%currentflag == sleep ) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -647,6 +713,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == sleep) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -656,6 +724,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -664,10 +734,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Respawn-Anchors Flag
       if (%currentflag == respawn-anchors ) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -677,6 +749,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == respawn-anchors) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -686,6 +760,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -694,10 +770,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       } 
       ;;; Respawn-Anchors Explode Flag
       if (%currentflag == respawn-anchor-explode) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -707,6 +785,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == respawn-anchor-explode) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -716,6 +796,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -724,10 +806,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; tnt flag
       if (%currentflag == tnt) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -737,6 +821,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == tnt) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -746,6 +832,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -754,10 +842,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; vehicle-place flag
       if (%currentflag == vehicle-place) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -767,6 +857,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == vehicle-place) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -776,6 +868,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -784,10 +878,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; vehicle-destroy flag
       if (%currentflag == vehicle-destroy) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -797,6 +893,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag ==  vehicle-destroy) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -806,6 +904,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -814,10 +914,12 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; lighter flag
       if (%currentflag == lighter) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
         //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
         /msg %m-channel %currentflag wurde zurückgesetzt.
@@ -827,6 +929,8 @@ on 100:text:!region*:%m-channel: {
       }
       if (%currentflag == lighter) && ($6- != $null)  {
         if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -836,6 +940,8 @@ on 100:text:!region*:%m-channel: {
           /halt
         }
         if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
           set %text $6 
           set %com rg f %regionsid %currentflag -w %welt %text
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
@@ -844,7 +950,367 @@ on 100:text:!region*:%m-channel: {
           //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
           /halt
         }
-        if ($6 != deny) || ($6 != allow) { msg %m-channel Falscher wert. Bitte gib ein Allow oder deny an. | /halt }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; block-trampling
+      if (%currentflag == block-trampling) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == block-trampling) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set %text $6 
+          set -u3 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; frosted-ice-form
+      if (%currentflag == frosted-ice-form) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == frosted-ice-form) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; item-frame-rotation
+      if (%currentflag == item-frame-rotation) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == item-frame-rotation) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; firework-damage
+      if (%currentflag == firework-damage) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == firework-damage) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; use-anvil
+      if (%currentflag == use-anvil) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == use-anvil) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; use-dripleaf
+      if (%currentflag == use-dripleaf) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == use-dripleaf) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!          
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; Creeper Explosion Flag
+      if (%currentflag == creeper-explosion) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == creeper-explosion) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; Enderdragopn-Block-damage flag
+      if (%currentflag == enderdragon-block-damage) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == enderdragon-block-damag) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; Ghast-FireBall
+      if (%currentflag == ghast-fireball) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == ghast-fireball) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; Other-Explosion flag
+      if (%currentflag == other-explosion) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel %currentflag wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == other-explosion) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel %currentflag wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }         
     }
     if ($istok(%flaglist1,%flag,46) == $false) || ($istok(%flaglist2,%flag,46) ==  $false) || ($istok(%flaglist3,%flag,46) ==  $false)  || ($istok(%flaglist4,%flag,46) ==  $false) || ($istok(%flaglist5,%flag,46) ==  $false) {

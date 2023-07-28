@@ -2,12 +2,15 @@
 Ein Mircbot zum Verwalten eines Minecraft Servers<br>
 Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 
-# Derzeitige Aufgaben.
+# Derzeigtige Aufgaben.
+Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Fehler behoben der bei !region info auftrat
 - [x] Fehler behoben bei !lag
 - [x] Fehler behoben bei !tps
 - [x] Weitere Worldguard Flags hinzugefügt (damage-animals, chestaccess, ride)
 - [x] Weitere Worldguard Flags hinzugefügt (pvp, sleep, respawn-anchors, respawn-anchor-explode, tnt, vehicle-destroy, vehicle-place, lighter)
+- [x] Weitere Worldguard Flags hinzugefügt (block-trampling, frosted-ice-form, item-frame-rotation, firework-damage, use-anvil, use-dripleaf, creeper-explosion, enderdragon-block-damage, other-explosion, ghast-fireball)
+- [x] Kleine Optiomierungen am !region select und am !region flag befehl
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
 # Installation
