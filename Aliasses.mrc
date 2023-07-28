@@ -159,13 +159,17 @@ alias system_defaults_check {
 
 Alias checklog {
   var %i $lines(%mlog)
+  var %sev 11S10erver  
+  var %cp Craft-Planer-Thread
+  var %cp2 Craft Scheduler Thread
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
     var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
     var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
       /INFO]:, /INFO]:, [Async Chat Thread, MC-Chat, $&
-      Server thread/INFO,11S14erver 11E14vent0],issued Server command:, Server Befehl4:7, $&
-      Craft Scheduler Thread, Craft-Planer-Thread, $& 
+      [Server Thread,  14[11S10erver 11E10vent14], $&
+      issued Server command:, Server Befehl4:7, $&
+      Craft Scheduler Thread, Craft-Planer-Thread, $&
       fell from a high place, 5[10Ist aus Großer Höhe gefallen5, $&
       was shot by Skeleton, 5[10Wurde erschossen von: 4Skelett5], was stung to death, 5[10wurde zu Tode gestochen5], $&
       was fireballed by Blaze, 5[10Wurde von 4Lohe5 10flambiert5], $&
@@ -215,10 +219,18 @@ Alias checklog {
     var %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
     var %te.1 $replace(%temp.rv4,$chr(32),.)
     var %te.1rem $gettok(%te.1,2,46)
+    var %te.2rem $gettok(%te.1,3,46)
     var %te.2 $remtok(%te.1,%te.1rem,1,46)
     var %temp.rv3a $replace(%te.2,.,$chr(32))
-    var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:)
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3 $iif(%command != $null, -, %command) %tps3
+    var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
+    if (MC-Chat isin %temp.rv3) { 
+      var %te.3rem $gettok(%te.1,5,46)
+      var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
+      var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,%te.3rem)
+      var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
+      var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))     
+    }
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev isin %te.2rem || %cp isin %te2.rem || %cp2 isin %te2.rem || MC-Chat isin %te.2rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
   }
 }
 
