@@ -158,7 +158,6 @@ alias system_defaults_check {
 }
 
 alias checklog-lvl {
-
   set %lvl-log.r %temp.r
   set %lvl-tok $replace(%lvl-log.r,$chr(32),.)
   set %lvl-tok1rem $remtok(%lvl-tok,$gettok(%lvl-tok,1,46),46)
@@ -168,7 +167,8 @@ alias checklog-lvl {
     set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
       was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde vom 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
       was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel $+5 10 flambiert5], $&
-      was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet)
+      was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet, $&
+      was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von 4Ghast LvL:7 %moblevel $+ 55 10flambiert5])
     msg %m-channel Gelevelte Log: %lvl-log.rv
     /halt
   }
@@ -176,9 +176,9 @@ alias checklog-lvl {
   set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
     was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde vom 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
     was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel $+5 10 flambiert5], $&
-    was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet)
+    was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet, $&
+    was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von 4Ghast LvL:7 %moblevel $+ 55 10flambiert5])
   msg %m-channel Gelevelte Log: %lvl-log.rv
-
 }
 
 
@@ -190,7 +190,7 @@ Alias checklog {
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
     if (Lvl isin %temp.r) { /checklog-lvl | /halt }
-    var %temp.rv $remove(%temp.r, [<ip address withheld>], $time,Secure],[Rcon])
+    var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
     var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
       /INFO]:, /INFO]:, [Async Chat Thread, 14[11M10C-11C11hat14], $&
       [Server Thread,  14[11S10erver 11E10vent14], $&
@@ -241,17 +241,19 @@ Alias checklog {
       was slain by Blaze, 5[10Wurde von 4Lohe5 10erschlagen5], $&
       blew up, 5[10Wurde in die Luft gesprengt!5], $&
       was doomed to fall, 5[10Wurde zum absturz verdammt!5], $&
+      burned to death, 5[10zu tode verbrannt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
       drowned, :5[10Ertrank im Wasser5]) 
     var %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
     var %te.1 $replace(%temp.rv4,$chr(32),.)
     var %te.1rem $gettok(%te.1,2,46)
-    var %te.2rem $gettok(%te.1,3,46)
+    var %te.2rem $gettok(%te.1,5,46)
     var %te.2 $remtok(%te.1,%te.1rem,1,46)
     var %temp.rv3a $replace(%te.2,.,$chr(32))
     var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
     var %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
     var %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
+    var %temp.rv3a $remove(%temp.rv3a,%te.2rem, - $+ $chr(32) - $+ $chr(32))
     if (MC-Chat isin %temp.rv3) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
@@ -259,9 +261,10 @@ Alias checklog {
       var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))     
     }
+    if (%say isin %temp.r) { var %say.msg $replace(%te.2,.,$chr(32)) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /unset %say | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /unset %laglag | /halt }
     if (Closing Server isin %temp.rv3a) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3a | /halt }
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3a,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
   }
 }
 
