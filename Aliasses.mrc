@@ -243,14 +243,14 @@ Alias checklog {
       was doomed to fall, 5[10Wurde zum absturz verdammt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
       drowned, :5[10Ertrank im Wasser5]) 
-    set %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
-    set %te.1 $replace(%temp.rv4,$chr(32),.)
-    set %te.1rem $gettok(%te.1,2,46)
-    set %te.2rem $gettok(%te.1,3,46)
-    set %te.2 $remtok(%te.1,%te.1rem,1,46)
-    set %temp.rv3a $replace(%te.2,.,$chr(32))
-    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
-    set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
+    var %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
+    var %te.1 $replace(%temp.rv4,$chr(32),.)
+    var %te.1rem $gettok(%te.1,2,46)
+    var %te.2rem $gettok(%te.1,3,46)
+    var %te.2 $remtok(%te.1,%te.1rem,1,46)
+    var %temp.rv3a $replace(%te.2,.,$chr(32))
+    var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
+    var %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
     if (MC-Chat isin %temp.rv3) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
