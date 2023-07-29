@@ -157,6 +157,31 @@ alias system_defaults_check {
   /save -rv vars.ini
 }
 
+alias checklog-lvl {
+
+  set %lvl-log.r %temp.r
+  set %lvl-tok $replace(%lvl-log.r,$chr(32),.)
+  set %lvl-tok1rem $remtok(%lvl-tok,$gettok(%lvl-tok,1,46),46)
+  set %moblevel $gettok(%lvl-tok1rem,8,46)
+  if (%moblevel == Lvl) { set %moblevel $gettok(%lvl-tok1rem,9,46) 
+    set %lvl-log.rv3 $replace(%lvl-tok1rem,.,$chr(32))
+    set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
+      was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde vom 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
+      was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel $+5 10 flambiert5], $&
+      was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet)
+    msg %m-channel Gelevelte Log: %lvl-log.rv
+    /halt
+  }
+  set %lvl-log.rv3 $replace(%lvl-tok1rem,.,$chr(32))
+  set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
+    was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde vom 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
+    was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel $+5 10 flambiert5], $&
+    was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe LvL:7 %moblevel $+ 5 geröstet)
+  msg %m-channel Gelevelte Log: %lvl-log.rv
+
+}
+
+
 Alias checklog {
   var %i $lines(%mlog)
   var %sev 11S10erver  
@@ -164,6 +189,7 @@ Alias checklog {
   var %cp2 Craft Scheduler Thread
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
+    if (Lvl isin %temp.r) { /checklog-lvl | /halt }
     var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
     var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
       /INFO]:, /INFO]:, [Async Chat Thread, MC-Chat, $&
@@ -171,7 +197,8 @@ Alias checklog {
       issued Server command:, Server Befehl4:7, $&
       Craft Scheduler Thread, Craft-Planer-Thread, $&
       fell from a high place, 5[10Ist aus Großer Höhe gefallen5, $&
-      was shot by Skeleton, 5[10Wurde erschossen von: 4Skelett5], was stung to death, 5[10wurde zu Tode gestochen5], $&
+      was shot by Skeleton, 5[10Wurde erschossen von: 4Skelett5], $&
+      was stung to death, 5[10wurde zu Tode gestochen5], $&
       was fireballed by Blaze, 5[10Wurde von 4Lohe5 10flambiert5], $&
       was fireballed by Ghast, 5[10Wurde von 4Ghast5 10flambiert5], $&
       was slain by Cave Spider, 5[10Wurde von 4Höhlenspinne5 10erschlagen5], $&
