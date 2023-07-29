@@ -186,16 +186,16 @@ Alias checklog {
   var %i $lines(%mlog)
   var %sev 11S10erver  
   var %cp Craft-Planer-Thread
-  var %cp2 Craft Scheduler Thread
+  var %cp2 [Craft-Planer-Thread]
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
     if (Lvl isin %temp.r) { /checklog-lvl | /halt }
     var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
     var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
-      /INFO]:, /INFO]:, [Async Chat Thread, MC-Chat, $&
+      /INFO]:, /INFO]:, [Async Chat Thread, 14[11M10C-11C11hat14], $&
       [Server Thread,  14[11S10erver 11E10vent14], $&
       issued Server command:, Server Befehl4:7, $&
-      Craft Scheduler Thread, Craft-Planer-Thread, $&
+      [Craft Scheduler Thread, 14[11C10raft-11P10laner-11T10hread14], $&
       fell from a high place, 5[10Ist aus Großer Höhe gefallen5, $&
       was shot by Skeleton, 5[10Wurde erschossen von: 4Skelett5], $&
       was stung to death, 5[10wurde zu Tode gestochen5], $&
@@ -243,13 +243,14 @@ Alias checklog {
       was doomed to fall, 5[10Wurde zum absturz verdammt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
       drowned, :5[10Ertrank im Wasser5]) 
-    var %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
-    var %te.1 $replace(%temp.rv4,$chr(32),.)
-    var %te.1rem $gettok(%te.1,2,46)
-    var %te.2rem $gettok(%te.1,3,46)
-    var %te.2 $remtok(%te.1,%te.1rem,1,46)
-    var %temp.rv3a $replace(%te.2,.,$chr(32))
-    var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
+    set %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
+    set %te.1 $replace(%temp.rv4,$chr(32),.)
+    set %te.1rem $gettok(%te.1,2,46)
+    set %te.2rem $gettok(%te.1,3,46)
+    set %te.2 $remtok(%te.1,%te.1rem,1,46)
+    set %temp.rv3a $replace(%te.2,.,$chr(32))
+    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
+    set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
     if (MC-Chat isin %temp.rv3) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
@@ -257,7 +258,8 @@ Alias checklog {
       var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))     
     }
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev isin %te.2rem || %cp isin %te2.rem || %cp2 isin %te2.rem || MC-Chat isin %te.2rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
+    if (Closing Server isin %temp.rv3a) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3a | /halt }
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
   }
 }
 
