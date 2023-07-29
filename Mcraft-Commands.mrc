@@ -1523,6 +1523,7 @@ on *:text:!tps:%m-channel: {
 ;;;; Auslastungsabfrage ;;;;;
 
 on *:text:!lag:%m-channel: {
+  set %laglag on
   //run -ap %pfad $+ lag.bat
   set %lag $read(%pfad $+ lag.txt,l,2)
   set %lag1 $remove(%lag,§r)

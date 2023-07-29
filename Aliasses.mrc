@@ -190,7 +190,7 @@ Alias checklog {
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
     if (Lvl isin %temp.r) { /checklog-lvl | /halt }
-    var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
+    var %temp.rv $remove(%temp.r, [<ip address withheld>], $time,Secure],[Rcon])
     var %temp.rv2 %Head-3 $replace( $+ %temp.rv, logged in with entity, 9meldet sich an mit, left the game, 14Verlies den Server00, $&
       /INFO]:, /INFO]:, [Async Chat Thread, 14[11M10C-11C11hat14], $&
       [Server Thread,  14[11S10erver 11E10vent14], $&
@@ -251,6 +251,7 @@ Alias checklog {
     var %temp.rv3a $replace(%te.2,.,$chr(32))
     var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
     var %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
+    var %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
     if (MC-Chat isin %temp.rv3) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
@@ -258,6 +259,7 @@ Alias checklog {
       var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))     
     }
+    if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /unset %laglag | /halt }
     if (Closing Server isin %temp.rv3a) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3a | /halt }
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
   }
