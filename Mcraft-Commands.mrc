@@ -213,7 +213,7 @@ on 100:text:!heal*:%m-channel: {
 
 on 100:text:!god*:%m-channel: {
   if ($2 == $null) { msg %m-channel Gib bitte einen Spielernamen an | halt }
-  if ($2 != $null) { msg %m-channel Spieler $2 wird in den Godmode gesetz. | run rcon.exe -a localhost:25575 -p %rcon_password " god $2 " }
+  if ($2 != $null) { set %god on | set %p $2 | msg %m-channel Spieler $2 wird in den Godmode gesetz. | run rcon.exe -a localhost:25575 -p %rcon_password " god $2 " }
 }
 
 on 100:text:!ungod*:%m-channel: {

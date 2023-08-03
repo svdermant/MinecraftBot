@@ -164,39 +164,44 @@ alias checklog-lvl {
   set %moblevel $gettok(%lvl-tok1rem,8,46)
   if (%moblevel == Lvl) { set %moblevel $gettok(%lvl-tok1rem,9,46) 
     set %lvl-log.rv3 $replace(%lvl-tok1rem,.,$chr(32))
-    set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
+    set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde von LvL:7 %moblevel 4Skelett10  erschossen5], $&
       [Server thread/INFO]:,14[11S10erver 11E10vent14], $&
-      was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
-      was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel 5 10 flambiert5], $&
-      was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe 10 LvL:7 %moblevel 5  geröstet, $&
-      was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von 4Ghast10 LvL:7 %moblevel 5 10flambiert5], $&
-      was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von 4Höhlenspinne10 LvL:7 %moblevel 5 10erschlagen5], $&
-      was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von 4Wither Skelett10 LvL:7 %moblevel 5 10erschlagen5], $&
-      was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von 4Wächter10 LvL:7 %moblevel 5 10erschlagen5], $&
-      was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von 4Piglin10 LvL:7 %moblevel 5 10erschlagen5], $&
-      was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von 4Wüstenzombie10 LvL:7 %moblevel 5 10erschlagen5], $&
-      was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von 4Panda10 LvL:7 %moblevel 5 10erschlagen5], $&    
-      was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von 4Zoglin10 LvL:7 %moblevel 5 10erschlagen5]. $&
-      was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von 4Wolf10 LvL:7 %moblevel 5 10erschlagen5])
+      was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von LvL:7 %moblevel 4Creeper 10 in die Luft gesprengt5], $&
+      using, mit, $&
+      was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von LvL:7 %moblevel 4Lohe10 flambiert5], $&
+      was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit  LvL:7 %moblevel 5Lohe 10geröstet, $&
+      was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von LvL:7 %moblevel 4Ghast10flambiert5], $&
+      was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von LvL:7 %moblevel 4Höhlenspinne10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von LvL:7 %moblevel 4Wither Skelett10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von LvL:7 %moblevel 4Wächter10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von LvL:7 %moblevel 4Piglin10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von LvL:7 %moblevel 4Wüstenzombie10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von LvL:7 %moblevel 4Panda10erschlagen5], $&    
+      was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von LvL:7 %moblevel 4Zoglin10erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von LvL:7 %moblevel 4Wolf10erschlagen5], $&
+      was shot by Lvl %moblevel $chr(124) Pillager, 5[10Wurde von LvL:7 %moblevel 4Plünderer10erschossen5], $&
+      was slain by Lvl %moblevel $chr(124) Hoglin, 5[10Wurde von LvL:7 %moblevel 4Hoglin10erschlagen5])
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32)0,1 %lvl-log.rv
     /halt
   }
   set %lvl-log.rv3 $replace(%lvl-tok1rem,.,$chr(32))
-  set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde erschossen von: 4Skelett10 LvL:7 %moblevel $+ 5], $&
+  set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde von LvL:7 %moblevel 4Skelett10  erschossen5], $&
     [Server thread/INFO]:,14[11S10erver 11E10vent14], $&
-    was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von 4Creeper 10 LvL:7 %moblevel $+ 5 10in die Luft gesprengt5],using, mit, $&
-    was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von 4Lohe10 LvL:7 %moblevel 5 10 flambiert5], $&
-    was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit Lohe 10 LvL:7 %moblevel 5  geröstet, $&
-    was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von 4Ghast10 LvL:7 %moblevel 5 10flambiert5], $&
-    was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von 4Höhlenspinne10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von 4Wither Skelett10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von 4Wächter10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Piglin Brute, 5[10Wurde von 4Piglin Babar10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von 4Piglin10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von 4Wüstenzombie10 LvL:7 %moblevel 5 10erschlagen5], $&
-    was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von 4Panda10 LvL:7 %moblevel 5 10erschlagen5], $&    
-    was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von 4Zoglin10 LvL:7 %moblevel 5 10erschlagen5]. $&
-    was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von 4Wolf10 LvL:7 %moblevel 5 10erschlagen5])
+    was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von LvL:7 %moblevel 4Creeper 10 in die Luft gesprengt5], $&
+    using, mit, $&
+    was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von LvL:7 %moblevel 4Lohe10 flambiert5], $&
+    was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit  LvL:7 %moblevel 5Lohe 10geröstet, $&
+    was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von LvL:7 %moblevel 4Ghast10flambiert5], $&
+    was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von LvL:7 %moblevel 4Höhlenspinne10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von LvL:7 %moblevel 4Wither Skelett10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von LvL:7 %moblevel 4Wächter10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von LvL:7 %moblevel 4Piglin10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von LvL:7 %moblevel 4Wüstenzombie10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von LvL:7 %moblevel 4Panda10erschlagen5], $&    
+    was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von LvL:7 %moblevel 4Zoglin10erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von LvL:7 %moblevel 4Wolf10erschlagen5], $&
+    was shot by Lvl %moblevel $chr(124) Pillager, 5[10Wurde von LvL:7 %moblevel 4Plünderer10erschossen5], $&
+    was slain by Lvl %moblevel $chr(124) Hoglin, 5[10Wurde von LvL:7 %moblevel 4Hoglin10erschlagen5])
   msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32) 0,1 %lvl-log.rv
 }
 
@@ -286,6 +291,7 @@ Alias checklog {
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
       /halt
     }
+    if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%login isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
     if (%left isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
