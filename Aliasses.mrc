@@ -156,31 +156,52 @@ alias system_defaults_check {
   load -rs Mcraft-Commands.mrc
   /save -rv vars.ini
 }
+//echo -a $gettok(%lvl-tok,13-,46)
 
 alias checklog-lvl {
   set %lvl-log.r %temp.r
   set %lvl-tok $replace(%lvl-log.r,$chr(32),.)
   set %lvl-tok1rem $remtok(%lvl-tok,$gettok(%lvl-tok,1,46),46)
+  set %item $gettok(%lvl-tok,13-,46) 
   set %moblevel $gettok(%lvl-tok1rem,8,46)
   if (%moblevel == Lvl) { set %moblevel $gettok(%lvl-tok1rem,9,46) 
     set %lvl-log.rv3 $replace(%lvl-tok1rem,.,$chr(32))
     set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde von LvL:7 %moblevel 4Skelett10  erschossen5], $&
       [Server thread/INFO]:,14[11S10erver 11E10vent14], $&
       was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von LvL:7 %moblevel 4Creeper 10 in die Luft gesprengt5], $&
-      using, mit, $&
       was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von LvL:7 %moblevel 4Lohe10 flambiert5], $&
       was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit  LvL:7 %moblevel 5Lohe 10 geröstet, $&
       was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von LvL:7 %moblevel 4Ghast10 flambiert5], $&
       was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von LvL:7 %moblevel 4Höhlenspinne10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Spider, 5[10Wurde von LvL:7 %moblevel 4Spinne10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von LvL:7 %moblevel 4Wither Skelett10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von LvL:7 %moblevel 4Wächter10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Zombiefied Piglin, 5[10Wurde von LvL:7 %moblevel 4Zombiefizierter Piglin10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von LvL:7 %moblevel 4Piglin10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von LvL:7 %moblevel 4Wüstenzombie10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von LvL:7 %moblevel 4Panda10 erschlagen5], $&    
       was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von LvL:7 %moblevel 4Zoglin10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von LvL:7 %moblevel 4Wolf10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Magma Cube, 5[10Wurde von LvL:7 %moblevel 4Magma Würfel10 erschlagen5], $&
       was shot by Lvl %moblevel $chr(124) Pillager, 5[10Wurde von LvL:7 %moblevel 4Plünderer10 erschossen5], $&
+      was shot by Lvl %moblevel $chr(124) Stray, 5[10Wurde von LvL:7 %moblevel 4Eiswanderer10 erschossen5], $&
+      was slain by Lvl %moblevel $chr(124) Zombie Villager, 5[10Wurde von LvL:7 %moblevel 4Zombiedorfbewohner10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Zombie, 5[10Wurde von LvL:7 %moblevel 4Zombie10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Elder Guardian, 5[10Wurde von LvL:7 %moblevel 4Großer Wächter10 erschlagen5], $&
+      was killed trying to hurt %moblevel $chr(124) Elder Guardian, 5[10Wurde beim Versuch LvL:7 %moblevel 4Großer Wächter10 zu verletzen getötet5], $&
+      was killed by Lvl %moblevel $chr(124) Witch using magic, 5[10Wurde von LvL:7 %moblevel 4Hexe10 mit Magie getötet5], $&
+      was slain by Lvl %moblevel $chr(124) Enderman,5[10Wurde von LvL:7 %moblevel 4Enderman10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Shulker,5[10Wurde von LvL:7 %moblevel 4Shulker10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Vindicator, 5[10Wurde von LvL:7 %moblevel 4Diener10 erschlagen5], $&
+      was killed by Lvl  %moblevel $chr(124) Elder Guardian using magic, 5[10Wurde von LvL:7 %moblevel 4Großer Wächter10 mit Magie getötet5], $&
+      was slain by Lvl %moblevel $chr(124) Endermite,5[10Wurde von LvL:7 %moblevel 4Endermite10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Vex, 5[10Wurde von LvL:7 %moblevel 4Plagegeist10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Polar Bear, 5[10Wurde von LvL:7 %moblevel 4Polar Bär10 erschlagen5], $&
+      was slain by Lvl %moblevel $chr(124) Drowned, 5[10Wurde von LvL:7 %moblevel 4Ertrunkener10 erschlagen5], $&
+      was impaled by Lvl %moblevel $chr(124) Drowned, 5[10Wurde von LvL:7 %moblevel 4Ertrunkener10 aufgespießt5], $&
+      was slain by Lvl %moblevel $chr(124) Ravager, 5[10Wurde von LvL:7 %moblevel 4Verwüster10 erschlagen5], $&
       was slain by Lvl %moblevel $chr(124) Hoglin, 5[10Wurde von LvL:7 %moblevel 4Hoglin10 erschlagen5])
+    if (using isin %lvl-log.rv) && (%item != $null) { set %lvl-log.rv $replace(%lvl-log.rv,using,mit) | /unset %item }
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32)0,1 %lvl-log.rv
     /halt
   }
@@ -188,20 +209,39 @@ alias checklog-lvl {
   set %lvl-log.rv $replace(%lvl-log.rv3, was shot by Lvl %moblevel $chr(124) Skeleton,  5[10Wurde von LvL:7 %moblevel 4Skelett10  erschossen5], $&
     [Server thread/INFO]:,14[11S10erver 11E10vent14], $&
     was blown up by Lvl %moblevel $chr(124) Creeper, 5[10Wurde von LvL:7 %moblevel 4Creeper 10 in die Luft gesprengt5], $&
-    using, mit, $&
     was fireballed by Lvl %moblevel $chr(124) Blaze,5[10Wurde von LvL:7 %moblevel 4Lohe10 flambiert5], $&
     was burnt to a crisp whilst fighting Blaze, Wurde währen des Kampfes mit  LvL:7 %moblevel 5Lohe 10 geröstet, $&
     was fireballed by Lvl %moblevel $chr(124) Ghast, 5[10Wurde von LvL:7 %moblevel 4Ghast10 flambiert5], $&
     was slain by Lvl %moblevel $chr(124) Cave Spider, 5[10Wurde von LvL:7 %moblevel 4Höhlenspinne10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Spider, 5[10Wurde von LvL:7 %moblevel 4Spinne10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Wither Skeleton, 5[10Wurde von LvL:7 %moblevel 4Wither Skelett10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Warden, 5[10Wurde von LvL:7 %moblevel 4Wächter10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Zombiefied Piglin, 5[10Wurde von LvL:7 %moblevel 4Zombiefizierter Piglin10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Piglin, 5[10Wurde von LvL:7 %moblevel 4Piglin10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Husk, 5[10Wurde von LvL:7 %moblevel 4Wüstenzombie10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Panda, 5[10Wurde von LvL:7 %moblevel 4Panda10 erschlagen5], $&    
+    was impaled by Lvl %moblevel $chr(124) Drowned, 5[10Wurde von LvL:7 %moblevel 4Ertrunkener10 aufgespießt5], $&
     was slain by Lvl %moblevel $chr(124) Zoglin, 5[10Wurde von LvL:7 %moblevel 4Zoglin10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Wolf, 5[10Wurde von LvL:7 %moblevel 4Wolf10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Magma Cube, 5[10Wurde von LvL:7 %moblevel 4Magma Würfel10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Zombie Villager, 5[10Wurde von LvL:7 %moblevel 4Zombiedorfbewohner10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Zombie, 5[10Wurde von LvL:7 %moblevel 4Zombie10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Elder Guardian, 5[10Wurde von LvL:7 %moblevel 4Großer Wächter10 erschlagen5], $&
     was shot by Lvl %moblevel $chr(124) Pillager, 5[10Wurde von LvL:7 %moblevel 4Plünderer10 erschossen5], $&
+    was shot by Lvl %moblevel $chr(124) Stray, 5[10Wurde von LvL:7 %moblevel 4Eiswanderer10 erschossen5], $&
+    was killed trying to hurt %moblevel $chr(124) Elder Guardian, 5[10Wurde beim Versuch LvL:7 %moblevel 4Großer Wächter10 zu verletzen getötet5], $&
+    was killed by Lvl  %moblevel $chr(124) Elder Guardian using magic, 5[10Wurde von LvL:7 %moblevel 4Großer Wächter10 mit Magie getötet5], $&
+    was killed by Lvl %moblevel $chr(124) Witch using magic, 5[10Wurde von LvL:7 %moblevel 4Hexe10 mit Magie getötet5], $&
+    was slain by Lvl %moblevel $chr(124) Enderman,5[10Wurde von LvL:7 %moblevel 4Enderman10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Shulker,5[10Wurde von LvL:7 %moblevel 4Shulker10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Endermite,5[10Wurde von LvL:7 %moblevel 4Endermite10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Vex, 5[10Wurde von LvL:7 %moblevel 4Plagegeist10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Polar Bear, 5[10Wurde von LvL:7 %moblevel 4Polar Bär10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Vindicator, 5[10Wurde von LvL:7 %moblevel 4Diener10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Ravager, 5[10Wurde von LvL:7 %moblevel 4Verwüster10 erschlagen5], $&
+    was slain by Lvl %moblevel $chr(124) Drowned, 5[10Wurde von LvL:7 %moblevel 4Ertrunkener10 erschlagen5], $&
     was slain by Lvl %moblevel $chr(124) Hoglin, 5[10Wurde von LvL:7 %moblevel 4Hoglin10 erschlagen5])
+  if (using isin %lvl-log.rv) && (%item != $null) { set %lvl-log.rv $replace(%lvl-log.rv,using,mit) | /unset %item }
   msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32) 0,1 %lvl-log.rv
 }
 
