@@ -11,6 +11,12 @@ on 100:text:!server settings:%m-channel: {
   serverresult
 }
 
+on 1:text:!todo:#: {
+  !  msg %m-channel  7,1[9▒7] 4->11M14inecraftBot4<- 7[9Derzeitige Aufgaben7]:9 $2- $+ 4.
+  /play %m-channel todo.txt
+
+}
+
 ;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
 on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
 
@@ -130,6 +136,7 @@ on *:text:!help*:%m-channel: {
     msg %m-channel BotBefehle: 
     msg %m-channel 8!help bot-3Zeigt diese Hilfe an.
     msg %m-channel 8!help-3Zeigt die Allgemeine Hilfe an.
+    msg %m-channel 8!Todo-3Todo Liste Angzeigen.
     msg %m-channel 8!Server Settings-3Zeigt Servereinstellungen an.
     msg %m-channel 8!yt-3Youtube Channel von IgameRPG
     msg %m-channel 8!set <params>-3Servereinstellungen ändern.
