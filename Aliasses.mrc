@@ -148,7 +148,7 @@ alias system_defaults_check {
   set %flaglist3 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup
   set %flaglist4 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered
   set %flaglist5 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage
-
+  set %moblists piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog.hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart.vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman.zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite.tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.pufferfish.wanderingtrader.amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
 
 
 
@@ -156,6 +156,13 @@ alias system_defaults_check {
   load -rs Mcraft-Commands.mrc
   /save -rv vars.ini
 }
+
+alias flagcheck {
+
+  if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true)  { return on }
+  if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false)  { return off }
+}
+
 //echo -a $gettok(%lvl-tok,13-,46)
 
 alias checklog-lvl {
@@ -331,6 +338,8 @@ Alias checklog {
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
       /halt
     }
+    if (%flagset = on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%regselect = on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%login isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
