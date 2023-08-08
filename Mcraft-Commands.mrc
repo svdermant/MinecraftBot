@@ -19,6 +19,8 @@ on 1:text:!todo:#: {
 
 ;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
 on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
+on *:text:!github:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
+on *:text:!gh:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
 
 ;;;;;;;;;;;;;; Stream + Topic ;;;;;;;;;;;;;;;
 on *:text:!stream*:%m-channel: {
@@ -86,8 +88,9 @@ on 100:text:!recreate*:%m-channel: {
 ;;;;;; Say ;;;;;;;;;;;;;;;;;;
 
 on *:text:!say*:%m-channel: {
-  /set -u15 %say [Not Secure] [Rcon] ◄[ IRC-CHAT ]►
-  /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 11(3Abgeschickt11)
+  ;;/set -u15 %say 7[11N14ot 11S14ecure7] 0[11r14Con0] 9◄7[11 I14RC4-11C14HAT7 ]9►......
+  /set -u15 %say [Not Secure] [Rcon]
+  /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 7(3Abgeschickt7)
   ::  /run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
   /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄[ IRC-CHAT ]►  $nick  ◄► $2- "
 }
@@ -112,50 +115,50 @@ on *:text:!lines:%m-channel: {
 
 on *:text:!help*:%m-channel: {
   if ($left($1,5) == !help) && ($2 == $null) { 
-    msg %m-channel 8-----7 Help 8------ 7Seite 021 7/ 02448--------
-    msg %m-channel 04Vault: Vault Befehle: !help vault
-    msg %m-channel 04WorldGuard: WorldGuard Befehle: !help WorldGuard
-    msg %m-channel 04Protocollib: Protocollib Befehle: !help ProtocollIb
-    msg %m-channel 04MythicLib: MythicLibe Befehle: !help MythicLib
-    msg %m-channel 04Citizens: Citizens Befehle: !help Citizens
-    msg %m-channel 04MMoCore: MMOCore Befehle: !help mmocore
-    msg %m-channel 04Multiverse-Core: Multiverse-Core Befehle: !help Multiverse-Core
-    msg %m-channel 04Essentials: Essentials Befehle: !help Essentials
-    msg %m-channel 08Achtung: 7Die Obenstehenden Befehle dienen zum Steuern und verwalten des Minecraft Servers
-    msg %m-channel 8 Um die 2. Hilfseite einzublenden schreibe 7!help 2
-    msg %m-channel 7Der Bot hat ansich noch andere Befehle die unter:!help bot7 zu finden sind.
+    msg %m-channel %head2 8----- 11H14elp 8------ 11S14eite 091 4/ 0944 8-------- %head2
+    msg %m-channel %head2 04Vault7: 11V14ault 11B14efehle7:  %Head-2 $+ help vault %head2
+    msg %m-channel %head2 04WorldGuard7: 11W14orldGuard 11B14efehle7:  %Head-2 $+ help WorldGuard %head2
+    msg %m-channel %head2 04Protocollib7: 11P14rotocollib 11B14efehle7:  %Head-2 $+ help ProtocollIb %head2
+    msg %m-channel %head2 04MythicLib7: 11M14ythicLibe 11B14efehle7:  %Head-2 $+ help MythicLib %head2
+    msg %m-channel %head2 04Citizens7: 11C14itizens 11B14efehle7:  %Head-2 $+ help Citizens %head2
+    msg %m-channel %head2 04MMoCore7: 11M14MOCore 11B14efehle7:  %Head-2 $+ help mmocore %head2
+    msg %m-channel %head2 04Multiverse-Core7: 11M14ultiverse4-11C14ore 11B14efehle7:  %Head-2 $+ help Multiverse-Core %head2
+    msg %m-channel %head2 04Essentials7: 11E14ssentials 11B14efehle7:  %Head-2 $+ help Essentials %head2
+    msg %m-channel %head2 11A14chtung %head2 11D14ie 11O14benstehenden 11B14efehle 11d14ienen 11z14um 11S14teuern 11u14nd 11v14erwalten 11d14es 11M14inecraft 11S14ervers %head2
+    msg %m-channel %head2 11U14m 11d14ie 0024. 11H14ilfseite 11e14inzublenden 11s14chreibe %Head-2 $+ help 2 %head2
+    msg %m-channel %head2 11D14er 11B14ot 11h14at 11a14nsich 11n14och 11a14ndere 11B14efehle 11d14ie 11u14nter7:  %Head-2 $+ help bot 11z14u 11f14inden 11s14ind4. %head2
     halt
   }
   if ($left($1,5) == !help) && ($2 == vault) {
-    msg %m-channel 8-----7 Help 8------ 7Seite 021 7/ 0218--------
-    msg %m-channel 7!vault info: Zeige Informationen über Vaul
-    msg %m-channel 7!vault convert: Convertiert alle Daten von Economy1 und Speichert sie in Economy2
+    msg %m-channel %head2 8----- 11H14elp 8------ 11S14eite 091 4/ 091 8--------  %head2 
+    msg %m-channel %head2 %head-2 $+ vault info7: 11Z14eige 11I14nformationen 11ü14ber 11V14aul %head2 
+    msg %m-channel %head2 %head-2 $+ vault convert7: 11C14onvertiert 11a14lle 11D14aten 11v14on 11E14conomy1 11u14nd 11S14peichert 11s14ie 11i14n 11E14conomy2 %head2 
     halt
   }
   if ($left($1,5) == !help) && ($2 == Bot) {
-    msg %m-channel BotBefehle: 
-    msg %m-channel 8!help bot-3Zeigt diese Hilfe an.
-    msg %m-channel 8!help-3Zeigt die Allgemeine Hilfe an.
-    msg %m-channel 8!Todo-3Todo Liste Angzeigen.
-    msg %m-channel 8!Server Settings-3Zeigt Servereinstellungen an.
-    msg %m-channel 8!yt-3Youtube Channel von IgameRPG
-    msg %m-channel 8!set <params>-3Servereinstellungen ändern.
-    msg %m-channel 8!recreate <name>-3Löscht die Angegeben Minecraft Welt
-    msg %m-channel 8!say <text>-3Eine Nachricht an den MinecraftServer Senden.
-    msg %m-channel 8!give-3Gegenstand Geben.
-    msg %m-channel 8!Spawnentity-3Monster Erzeugen
-    msg %m-channel 8!Stop-3Server Stoppen
-    msg %m-channel 8!start-3Server Starten
-    msg %m-channel 8!slay <player>-3Einen Spieler Schlagen
-    msg %m-channel 8!heal <player>-3Einen spieler Heilen
-    msg %m-channel 8!god <player>-3Unsterblichkeit bei spieler Aktivieren
-    msg %m-channel 8!ungod <player>-3Unsterblichkeit bei Spieler deaktivieren
-    msg %m-channel 8!startlog <zeit>-3Chatlog aktivieren (Bei zeit eine zeit in sec angeben bis maximal 60)
-    msg %m-channel 8!stoplog <zeit>-3Chatlog abschalten
-    msg %m-channel 8!playerlist-3Zeigt Die Spielerliste an.
-    msg %m-channel 8!Zeitsteuerung-3Syncronisiert Spielzeit mit Realzeit
-    msg %m-channel 8!TPS-3Zeigt die Ticks Per Sekunde an.
-    msg %m-channel 8!lag-3Zeigt die Auslastung des Servers an.
+    msg %m-channel %head2 11B14ot11B14efehle4:  %head2 
+    msg %m-channel %head2 %head-2 $+ help bot %head2.2 $+ %head.Z $+ eigt 11d14iese 11H14ilfe 11a14n4. %head2 
+    msg %m-channel %head2 %head-2 $+ help %head2.2 $+ %head.Z $+ eigt 11d14ie 11A14llgemeine 11H14ilfe an4. %head2 
+    msg %m-channel %head2 %head-2 $+ Todo %head2.2 $+ %head.T $+ odo 11L14iste 11A14ngzeigen4. %head2 
+    msg %m-channel %head2 %head-2 $+ Server Settings %head2.2 $+ %head.z $+ eigt 11S14ervereinstellungen 11a14n4. %head2 
+    msg %m-channel %head2 %head-2 $+ yt %head2.2 $+ %head.y $+ outube 11C14hannel 11v14on 11I14game11RPG %head2 
+    msg %m-channel %head2 %head-2 $+ set <params> %head2.2 $+ %head.s $+ ervereinstellungen 11ä14ndern4. %head2 
+    msg %m-channel %head2 %head-2 $+ recreate <name> %head2.2 $+ %head.L $+ öscht 11d14ie 11A14ngegeben 11M14inecraft 11W14elt %head2 
+    msg %m-channel %head2 %head-2 $+ say <text> %head2.2 $+ %head.E $+ ine 11N14achricht 11a14n 11d14en 11M14inecraftServer 11S14enden4. %head2 
+    msg %m-channel %head2 %head-2 $+ give %head2.2 $+ %head.G $+ egenstand 11G14eben4. %head2 
+    msg %m-channel %head2 %head-2 $+ Spawnentity %head2.2 $+ %head.M $+ 11M14onster %head.E $+ rzeugen %head2 
+    msg %m-channel %head2 %head-2 $+ Stop %head2.2 $+ %head.S $+ erver %head.S $+ toppen %head2 
+    msg %m-channel %head2 %head-2 $+ start %head2.2 $+ %head.S $+ erver %head.S $+ tarten %head2 
+    msg %m-channel %head2 %head-2 $+ slay <player> %head2.2 $+ %head.E $+ inen %head.S $+ pieler %head.S $+ chlagen %head2 
+    msg %m-channel %head2 %head-2 $+ heal <player> %head2.2 $+ %head.E $+ inen 11s14pieler 11H14eilen %head2 
+    msg %m-channel %head2 %head-2 $+ god <player> %head2.2 $+ %head.U $+ nsterblichkeit 11b14ei 11s14pieler 11A14ktivieren %head2 
+    msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %head.E $+ nsterblichkeit 11b14ei %head.S $+ pieler 11d14eaktivieren %head2 
+    msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+  %head.C $+ hatlog 11a14ktivieren 7(11B14ei 11z14eit 11e14ine 11z14eit 11i14n 4sec 11a14ngeben 11b14is 11m14aximal 09607) %head2 
+    msg %m-channel %head2 %head-2 $+ stoplog <zeit> %head2.2 $+  %head.C $+ hatlog 11a14bschalten %head2 
+    msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+  %head.Z $+ eigt 11D14ie %head.S $+ pielerliste 11a14n4. %head2 
+    msg %m-channel %head2 %head-2 $+ Zeitsteuerung %head2.2 $+  %head.S $+ yncronisiert %head.S $+ pielzeit 11m14it 11R14ealzeit %head2 
+    msg %m-channel %head2 %head-2 $+ TPS %head2.2 $+ %head.Z $+ eigt 11d14ie 11T14icks 11P14er %head.S $+ ekunde 11a14n4. %head2 
+    msg %m-channel %head2 %head-2 $+ lag %head2.2 $+ %head.Z $+ eigt 11d14ie 11A14uslastung 11d14es %head.S $+ ervers 11a14n4. %head2 
   }
   if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
     msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------

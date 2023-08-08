@@ -345,7 +345,7 @@ Alias checklog {
     if (%login isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
     if (%left isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
     if (%scom isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt }
-    if (%say isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
+    if (%say isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem,%say) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /unset %laglag | /halt }
     if (Closing Server isin %temp.rv4) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%te1.rem) | /halt }
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
@@ -359,16 +359,17 @@ alias lagausgabe {
     var %text $read -l $+ %i %pfad $+ lag.txt
     var %text.result $replace(%text, $&
       Laufzeit:,7L14aufzeit4:9, $&
-      Stunden,11S14tunden9, $&
-      Minuten,11M14inuten9, $&
-      Sekunden,11S14ekunden9, $&
+      Tage,11T14ag0'14e9, $&
+      Stunden,11S14tunde0'14n9, $&
+      Minuten,11M14inute0'14n9, $&
+      Sekunden,11S14ekunde0'14n9, $&
       Aktuelle TPS , 7A14ktuelle TPS, $&
       Maximaler Speicher: , 7M14aximaler 7S14peicher4:9, $& 
       Reservierter Speicher: , 7R14eservierter 7S14peicher4:9, $& 
       Freier Speicher: , 7F14reier 7S14peicher4:9, $& 
-      World ",7W14orld4:9, $&
-      Nether ",7N14ether4:9, $&
-      The End ",7T14he 7E14nd4:9, $&
+      World ",7W14orld4:12, $&
+      Nether ",7N14ether4:12, $&
+      The End ",7T14he 7E14nd4:12, $&
       ": ,4//, $&
       chunks,11C14hunks, $&
       einheiten,11E14inheiten, $&
