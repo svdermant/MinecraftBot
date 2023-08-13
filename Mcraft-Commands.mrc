@@ -91,7 +91,7 @@ on *:text:!say*:%m-channel: {
   ;;/set -u15 %say 7[11N14ot 11S14ecure7] 0[11r14Con0] 9◄7[11 I14RC4-11C14HAT7 ]9►......
   /set -u15 %say [Not Secure] [Rcon]
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 7(3Abgeschickt7)
-  /run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
+  ;;;/run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
   /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄[ IRC-CHAT ]►  $nick  ◄► $2- "
 }
 on *:text:!bday:%m-channel: {
