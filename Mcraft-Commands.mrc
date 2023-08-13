@@ -142,6 +142,7 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ Todo %head2.2 $+ %head.T $+ odo 11L14iste 11A14ngzeigen4. %head2 
     msg %m-channel %head2 %head-2 $+ Server Settings %head2.2 $+ %head.z $+ eigt 11S14ervereinstellungen 11a14n4. %head2 
     msg %m-channel %head2 %head-2 $+ yt %head2.2 $+ %head.y $+ outube 11C14hannel 11v14on 11I14game11RPG %head2 
+    msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %head.Z $+ eigt 11S14pielerliste 11i14m 11C14hannel 11a14n %head2 
     msg %m-channel %head2 %head-2 $+ set <params> %head2.2 $+ %head.s $+ ervereinstellungen 11ä14ndern4. %head2 
     msg %m-channel %head2 %head-2 $+ recreate <name> %head2.2 $+ %head.L $+ öscht 11d14ie 11A14ngegeben 11M14inecraft 11W14elt %head2 
     msg %m-channel %head2 %head-2 $+ say <text> %head2.2 $+ %head.E $+ ine 11N14achricht 11a14n 11d14en 11M14inecraftServer 11S14enden4. %head2 
@@ -1823,18 +1824,11 @@ on 100:text:!start:%m-channel:{
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;
 
 on *:text:!playerlist:%m-channel: { 
+  set -u10 %plisten on
+  set -u5 %tps3 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
   //run -ap %pfad $+ players.bat
-  /timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
-  var %plist $read(%pfad $+ help2.txt,l,1)
-  var %players $read(%pfad $+ help2.txt,l,2)
-  var %c1 $chr(3)
-  var %plist2 $replace(%plist, There are, Es sind 4, of a max of, von, players online, Spieler im Spiel)
-  var %plist3 $replace(%plist, @6, %c1 $+ 7, @4, %c1 $+ 5, @c, %c1 $+ 41, @f, %c1 $+ 0, @r, $chr(3))
-  var %players1 $replace(%players, @6default@r:, 4(7Standard4), @6@7[@6Owner@7]@r@r:, 14[7Owner14])
-  var %playerlist1 3Gruppe: $replace(%players1, @6, %c1 $+ 7, @4, %c1 $+ 5, @c, %c1 $+ 41, @f, %c1 $+ 0, @r, $chr(3))
-  timersend1 1 4 /msg %m-channel %plist3
-  if (%players1 != $null) { /timersend2 1 5 /msg %m-channel %playerlist1 }
-  timerwait2 1 8 /remove %pfad $+ help2.txt
+  ;;;/timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
+  /timer.list1 1 5 /plist
 }
 
 ;;;;;;;;;;;;;;; Zeitsteuerung ;;;;;;;;;;;;;;;;;;;;;;;;;

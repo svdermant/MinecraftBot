@@ -338,8 +338,9 @@ Alias checklog {
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
       /halt
     }
-    if (%flagset = on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
-    if (%regselect = on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%login isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
@@ -350,6 +351,18 @@ Alias checklog {
     if (Closing Server isin %temp.rv4) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%te1.rem) | /halt }
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,%temp.rv3,$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
   }
+}
+
+alias plist {
+  set %plist $read(%pfad $+ help2.txt,l,1)
+  set %players $read(%pfad $+ help2.txt,l,2)
+  set %c1 $chr(3)
+  set %plist2 $replace(%plist, There are, Es sind 4, of a max of, von, players online, Spieler im Spiel)
+  set %plist3 $replace(%plist, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
+  set %players1 $replace(%players, §6default@r:, 4(7Standard4), §6§7[§6Owner§7]§r§r:, 14[7Owner14])
+  set %playerlist1 3Gruppe: $replace(%players1, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
+  timersend1 1 4 /msg %m-channel %plist3
+  if (%players1 != $null) { /timersend2 1 5 /msg %m-channel %playerlist1 }
 }
 
 alias lagausgabe {
