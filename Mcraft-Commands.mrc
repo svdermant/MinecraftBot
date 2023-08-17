@@ -2,7 +2,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;; ServerSettings Auslesen ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 on 100:text:!server settings:%m-channel: {
-  msg %m-channel  7,1[9▒7]  4→11M14inecraft4← 9,1▬ 11S14erver 11E14instellungen 7[9▒7,1]
+  msg %m-channel  7,1[9▒7]  4→ $+ %f1 $+ M $+ %f2 $+ inecraft4← 9,1▬ %f1 $+ S $+ %f2 $+ erver %f1  $+ E $+ %f2 $+ instellungen 7[9▒7,1]
   var %s 2
   while (%s <= 59) {
     inc %s
@@ -152,7 +152,7 @@ on *:text:!help*:%m-channel: {
   if ($left($1,5) == !help) && ($2 == vault) {
     msg %m-channel %head2 8----- 11H14elp 8------ 11S14eite 091 4/ 091 8--------  %head2 
     msg %m-channel %head2 %head-2 $+ vault info7: 11Z14eige 11I14nformationen 11ü14ber 11V14aul %head2 
-    msg %m-channel %head2 %head-2 $+ vault convert7: 11C14onvertiert 11a14lle 11D14aten 11v14on 11E14conomy1 11u14nd 11S14peichert 11s14ie 11i14n 11E14conomy2 %head2 
+    msg %m-channel %head2 %head-2 $+ vault-convert7: 11C14onvertiert 11a14lle 11D14aten 11v14on 11E14conomy1 11u14nd 11S14peichert 11s14ie 11i14n 11E14conomy2 %head2 
     halt
   }
   if ($left($1,5) == !help) && ($2 == Bot) {
@@ -2566,6 +2566,7 @@ on 100:text:!mapupdate:%m-channel: {
 on 100:text:!batchpfad*:%m-channel: {
   if ($2 == $null) { msg %m-channel Bitte gebe den Pfad zu allen Batchdateien an diese sollten sich im MinecraftSerververzeichniss befinden }
   set %pfad $2-
+  msg %m-channel Der Batchpfad wurde zu %pfad gesetzt.
 }
 
 
