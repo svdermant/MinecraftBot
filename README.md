@@ -77,7 +77,7 @@ A Thanks to the following people that helped me to get any features..
 2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
 # Information für Fragen und Probleme
-Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet.<br>
+Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet und entwickelt.<br>
 Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
 Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
 Aber Probleme die beim Betrieb des Bots auftreten sind bitte über Github zu melden.<br>
