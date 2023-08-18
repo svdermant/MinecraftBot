@@ -111,6 +111,8 @@ on 1:START: {
 
   if (($version > 6.3) && ($version < 7.41)) { echo 04*** Deine Version ist älter als die empfohlene Version für diesen Bot. Einige Dinge funktionieren möglicherweise nicht richtig. Es wird empfohlen, ein Update durchzuführen. 12*** }
   if ($version > 7.41) { echo 04*** Deine Version ist neuer als die empfohlene Version für diesen Bot. Obwohl er funktionieren sollte, ist es derzeit ungetestet und kann Macken oder Fehler aufweisen. Bei Problemen wird ein Downgrade auf 7.41 empfohlen. 12 *** }
+
+
 }
 
 on 1:EXIT: {
@@ -120,6 +122,7 @@ on 1:EXIT: {
 on 1:CONNECT: {
   if ($me == $readini(system.dat, botinfo, botname)) {
     /ns identify $readini(system.dat, botinfo, botpass)
+    /timer.join1 1 3 /join %m-channel
   }
   if ($me != $readini(system.dat, botinfo, botname)) {
     /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)

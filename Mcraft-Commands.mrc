@@ -18,7 +18,7 @@ on 1:text:!todo:#: {
 }
 
 ;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
-on *:text:!yt:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
+on *:text:!yt:%m-channel: {  msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
 on *:text:!github:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
 on *:text:!gh:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
 
