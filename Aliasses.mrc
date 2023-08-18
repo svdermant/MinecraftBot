@@ -262,9 +262,9 @@ Alias checklog {
   var %scom issued server command
   var %login [<ip address withheld>] logged in 
   var %left left the game
-  var %sec [Not Secure] [Server]
-  var %cp Craft-Planer-Thread
-  var %cp2 [Craft-Planer-Thread]
+  set %sec [Not Secure] [Server]
+  set %cp Craft-Planer-Thread
+  set %cp2 [Craft-Planer-Thread]
   if (%temp.r != $read(%mlog, %i)) {
     set %temp.r $read(%mlog, %i)
     if (Lvl isin %temp.r) { /checklog-lvl | /halt }
@@ -341,7 +341,7 @@ Alias checklog {
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
       /halt
     }
-    if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
@@ -349,10 +349,22 @@ Alias checklog {
     if (%login isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
     if (%left isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt } 
     if (%scom isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt }
-    if (%say isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem,%say) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
+    if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
-    if (Closing Server isin %temp.rv4) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%te1.rem) | /halt }
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%sev !isin %te.2rem || %cp !isin %te2.rem || %cp2 !isin %te2.rem,$remove(%temp.rv3,%te.2rem,%te.1rem),$remove(%temp.rv3,%te.2rem)) $iif(%command != $null, -, %command) %tps3
+    if (Closing Server isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
+    if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv3,%cls) | /halt }
+    if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
+    set %cls $gettok(%te.1,2,46)
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv3,%cls,$chr(91) $+ $chr(93))) $iif(%command != $null, -, %command) %tps3
+  }
+}
+
+alias checkstarted {
+  var %done $read(%mLog, w, *[Server thread/INFO]: Done*)
+  if (done isin %done)  { 
+    msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wurde erfolgreich 9 ◄> Gestartet! <► 7[9!7]
+    msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 Laden der Restconfiguration 9 ◄> Beitritt zum Server möglich<► 7[9!7]
+    /timer.checkstarted1 off
   }
 }
 
@@ -396,7 +408,7 @@ alias lagausgabe {
     ;;; msg %m-channel 
   } 
   if (20 isin $read(lagres.txt,l,2)) { var %input $read(lagres.txt,l,2) | var %inputrep $replace(%input,20, 20 10[11A14usgezeichnet9!10])  | write -l2 lagres.txt %inputrep }
-  /timer.ausgabe2 1 10 /lagausgabe2
+  /timer.ausgabe2 1 2 /lagausgabe2
 }
 
 alias lagausgabe2 {

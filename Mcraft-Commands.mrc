@@ -2518,11 +2518,14 @@ on 100:text:!stoplog:%m-channel: {
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
   //run -ap %pfad $+ stop.bat
+  set -u15 %stop
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
+  set -u15 %start on
   //run -ap %pfad $+ start.bat
+  /timer.checkstarted1 0 3 /checkstarted
 }
 
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;
@@ -2532,7 +2535,7 @@ on *:text:!playerlist:%m-channel: {
   set -u5 %tps3 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
   //run -ap %pfad $+ players.bat
   ;;;/timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
-  /timer.list1 1 5 /plist
+  /timer.list1 1 1 /plist
 }
 
 ;;;;;;;;;;;;;;; Zeitsteuerung ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2573,6 +2576,7 @@ on 100:text:!batchpfad*:%m-channel: {
 ;;; TPS Befehl ;;;;;
 
 on *:text:!tps:%m-channel: { 
+  set -u15 %tps on
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   timersay1 1 8 /tpsausgabe
@@ -2588,5 +2592,5 @@ on *:text:!lag:%m-channel: {
   set %newlag $replace(%tps1,§6,$chr(3) $+ 7,§a,$chr(3) $+ 9 $+ $chr(32))
   $tps
   set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
-  /timer.lagausgabe1 1 5 /lagausgabe
+  /timer.lagausgabe1 1 2 /lagausgabe
 }
