@@ -259,7 +259,8 @@ alias checklog-lvl {
 Alias checklog {
   var %i $lines(%mlog)
   var %sev 11S10erver
-  var %scom issued server command
+  var %named Named entity
+  set %scom issued server command
   set %login [<ip address withheld>] logged in 
   var %left left the game
   set %sec [Not Secure] [Server]
@@ -321,7 +322,9 @@ Alias checklog {
       was doomed to fall, 5[10Wurde zum absturz verdammt!5], $&
       burned to death, 5[10zu tode verbrannt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
-      drowned, :5[10Ertrank im Wasser5]) 
+      drowned, :5[10Ertrank im Wasser5])
+    set %temp.rv2.1 $replace(%temp.rv2,suffocated in a wall, 5[10In der 4Wand5 10erstickt!!5])
+    var %temp.rv2 %temp.rv2.1
     set %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
     set %te.1 $replace(%temp.rv4,$chr(32),.)
     set %te.1rem $gettok(%te.1,1,46)
@@ -341,14 +344,24 @@ Alias checklog {
       var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
       /halt
     }
+    if (%named isin %temp.r) { 
+      ;;;msg %m-channel Namenloses Entity $gettok(%te.1,7-8,46)
+      var %entity $gettok(%te.1,7-8,46)
+      var %entity.token $addtok(%entity.token,$remove($replace($gettok(%te.1,7-9,46),.,$chr(32),[,$chr(32),/,$chr(32)),',$chr(44)),32)
+      ;;;msg %m-channel entity Tokens (32Bit): %entity.token 
+      var %mob $gettok(%entity.token,2-3,32)
+      var %deathmsg 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 ◄► $+ %mob $+ ◄► 5[10Starb!!5] 14,1 Grund: 5 [10 $+ $remove($replace($gettok(%te.1,24-,46),.,$chr(32)),$chr(91),$chr(93)) $+ 5]
+      msg %m-channel %deathmsg
+      /halt 
+    }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
-    if (%login isin %temp.r) { var %log 9meldet sich an mit| var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $replace(%temp.rv4, logged in with entity, 9meldet sich an mit $+ %cl) | /halt } 
+    if (%login isin %temp.r) { var %log 9meldet sich an mit| var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $+ $remove($replace(%temp.rv4, logged in with entity, 9meldet sich an mit $+ %cl),%cls) | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
-    if (%scom isin %temp.r) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1  $replace(%te.2,.,$chr(32)) | /halt }
+    if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
     if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
     if (Closing Server isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
