@@ -1,0 +1,10 @@
+﻿7,1[3√7]11 Fehler behoben der bei !region info auftrat
+7,1[3√7]11 Fehler behoben bei !lag
+7,1[3√7]11 Fehler behoben bei !tps
+7,1[3√7]11 Weitere Worldguard Flags hinzugefügt 7(11damage4-11animals4, 11chestaccess4, 11ride7)
+7,1[3√7]11 Weitere Worldguard Flags hinzugefügt 7(11pvp4, 11sleep4, 11respawn4-11anchors4, 11respawn4-11anchor4-11explode4, 11tnt4, 11vehicle4-11destroy4, 11vehicle4-11place4, 11lighter7)
+7,1[3√7]11 Weitere Worldguard Flags hinzugefügt 7(11block4-11trampling4, 11frosted4-11ice4-11form4, 11item4-11frame4-11rotation4, 11firework4-11damage4, 11use4-11anvil4, 11use4-11dripleaf4, 11creeper4-11explosion4, 11enderdragon4-11block4-11damage4, 11other4-11explosion4, 11ghast4-11fireball7)
+7,1[3√7]11 Weitere Worldguard Flags hinzugefügt 7(11enderman4-11grief4, 11snowman4-11trails4, 11ravager4-11grief4, 11mob4-11damage4, 11mob4-11spawning4, 11deny4-11spawn4, 11entity4-11painting4-11destroy4, 11entity4-11item4-11frame4-11destroy4, 11wither4-11damager7)
+7,1[3√7]11 Kleine Optiomierungen am !region select und am !region flag befehl
+7,1[3√7]11 LogUpdate für Gelevelte Mobs
+7,1[4¤7]11 Komplettes Styleumstellung Anpassung an das Style vom 11G14TA7-11B14ot 7(11Nicht bei github verfügbar7) (11weil 11S14o11CI14d 11wenig zeit hat7)
