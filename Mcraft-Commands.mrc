@@ -2594,3 +2594,7 @@ on *:text:!lag:%m-channel: {
   set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   /timer.lagausgabe1 1 2 /lagausgabe
 }
+
+on 100:text:!ver:%m-channel: {
+  /msg %m-channel  7,1[9▒7] 4→11M14inecraft4 11B14ot4 11V14ersion14,110 $ver 11,1C14odet 11b14y 11S14erkons4← 7[9▒7,1]
+}

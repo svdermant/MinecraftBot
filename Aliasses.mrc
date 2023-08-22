@@ -112,6 +112,7 @@ on 1:START: {
   if (($version > 6.3) && ($version < 7.41)) { echo 04*** Deine Version ist älter als die empfohlene Version für diesen Bot. Einige Dinge funktionieren möglicherweise nicht richtig. Es wird empfohlen, ein Update durchzuführen. 12*** }
   if ($version > 7.41) { echo 04*** Deine Version ist neuer als die empfohlene Version für diesen Bot. Obwohl er funktionieren sollte, ist es derzeit ungetestet und kann Macken oder Fehler aufweisen. Bei Problemen wird ein Downgrade auf 7.41 empfohlen. 12 *** }
 
+  if ($sha1($read(version,l,2)) != 84d6ca7a78e14a4bfe036cdbad9153ef4e92d9d6) || ($exists(version) == $false) { echo -a  Funktionsweise Stark eingeschränkt }
 
 }
 
@@ -126,6 +127,13 @@ on 1:CONNECT: {
   }
   if ($me != $readini(system.dat, botinfo, botname)) {
     /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)
+  }
+}
+
+on 1:JOIN:#:{
+  if ($sha1($read(version,l,2)) != 84d6ca7a78e14a4bfe036cdbad9153ef4e92d9d6) || ($exists(version) == $false) {
+    msg $chan Das Copyright wurde Beschädigt.
+    /quit 4Warnung Coprigth fehlt oder Key ist Incorrect.
   }
 }
 
@@ -660,4 +668,9 @@ alias convert@tospace {
 alias regcheck {
   var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ $1 $+ \regions.yml
   return $istok($getallyml(%file,regions),$2,32)
+}
+
+Alias ver {
+  var %version $read(version,l,1)
+  return %version 
 }
