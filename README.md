@@ -4,6 +4,16 @@ Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 
 # Derzeigtige Aufgaben.
 Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
+- [x] Fehler behoben der bei !region info auftrat
+- [x] Fehler behoben bei !lag
+- [x] Fehler behoben bei !tps
+- [x] Weitere Worldguard Flags hinzugefügt (damage-animals, chestaccess, ride)
+- [x] Weitere Worldguard Flags hinzugegifügt (pvp, sleep, respawn-anchors, respawn-anchor-explode, tnt, vehicle-destroy, vehicle-place, lighter)
+- [x] Weitere Worldguard Flags hinzugefügt (block-trampling, frosted-ice-form, item-frame-rotation, firework-damage, use-anvil, use-dripleaf, creeper-explosion, enderdragon-block-damage, other-explosion, ghast-fireball)
+- [x] Weitere Worldguard Flags hinzugefügt (enderman-grief, snowman-trails, ravager-grief, mob-damage, mob-spawning, deny-spawn, entity-painting-destroy, entity-item-frame-destroy, wither-damager)
+- [x] Kleine Optiomierungen am !region select und am !region flag befehl
+- [x] LogUpdate für Gelevelte Mobs
+- [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
 # Installation
 1. Lade dir Zuerst die Software von www.mirc.com herunter und installiere es.
@@ -67,7 +77,7 @@ A Thanks to the following people that helped me to get any features..
 2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
 # Information für Fragen und Probleme
-Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet.<br>
+Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet und Entwickelt.<br>
 Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
 Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
 Aber Probleme die beim Betrieb des Bots auftreten sind bitte über Github zu melden.<br>
