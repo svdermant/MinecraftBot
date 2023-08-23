@@ -174,6 +174,13 @@ alias flagcheck {
   if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false)  { return off }
 }
 
+alias checktimers {
+  var %timers $timer(0)
+  set %checktimer.warn.counter $timer(2)name
+  if (%warn <= 0) && (%checktimer.warn.counter != $null) {  | / halt }
+}
+
+
 //echo -a $gettok(%lvl-tok,13-,46)
 
 alias checklog-lvl {
@@ -267,6 +274,8 @@ alias checklog-lvl {
 Alias checklog {
   var %i $lines(%mlog)
   var %sev 11S10erver
+  var %Loading Loading
+  var %Enabling Enabling
   var %named Named entity
   set %scom issued server command
   set %login [<ip address withheld>] logged in 
@@ -331,15 +340,17 @@ Alias checklog {
       burned to death, 5[10zu tode verbrannt!5], $&
       tried to swim in lava, 5[10Versuchte in 4Lava5 10zu schwimmen5], $&
       drowned, :5[10Ertrank im Wasser5])
-    set %temp.rv2.1 $replace(%temp.rv2,suffocated in a wall, 5[10In der 4Wand5 10erstickt!!5])
+    set %temp.rv2.1 $replace(%temp.rv2,suffocated in a wall, 5[10In der 4Wand5 10erstickt!!5], $&
+      /WARN,-4Warnung14,[ServerMain,14[11H10aupt 11S10erver14] ,Loaded recipes, 7Rezepte Geladen)
     var %temp.rv2 %temp.rv2.1
     set %temp.rv4 $remove(%temp.rv2, %rcon, %rcon2, %time, %rcon3)
     set %te.1 $replace(%temp.rv4,$chr(32),.)
     set %te.1rem $gettok(%te.1,1,46)
     set %te.2rem $gettok(%te.1,4,46)
+    set %te.2rem.a $gettok (%te.1,5,46)
     set %te.2 $remtok(%te.1,%te.1rem,1,46)
     set %temp.rv3a $replace(%te.2,.,$chr(32))
-    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem)
+    set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem,%te.2rem.a)
     set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32))
     set %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
     set %temp.rv3a $remove(%temp.rv4,%te.2rem, - $+ $chr(32) - $+ $chr(32),%te.1rem)
@@ -362,6 +373,8 @@ Alias checklog {
       msg %m-channel %deathmsg
       /halt 
     }
+    if (/WARN isin %temp.r) { inc %warn }
+    if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
@@ -372,19 +385,25 @@ Alias checklog {
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
     if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
-    if (Closing Server isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
-    if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv3,%cls) | /halt }
+    if (Closing Server isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
+    if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -)  | /halt }
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
+    if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
     set %cls $gettok(%te.1,2,46)
     msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv3,%cls,$chr(91) $+ $chr(93))) $iif(%command != $null, -, %command) %tps3
   }
 }
 
+
+
+
 alias checkstarted {
   var %done $read(%mLog, w, *[Server thread/INFO]: Done*)
-  if (done isin %done)  { 
-    msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wurde erfolgreich 9 ◄> Gestartet! <► 7[9!7]
+  if (done isin %done) && (%warn != $null)  { 
+    set %co $iif(%warn >= 0,%head2 7Incl:11 %warn 13Warnungen %head2, %head2 7Keine 13Warnungen %head2)
+    msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wurde erfolgreich 9 ◄> Gestartet! <► 7[9!7]  %co
     msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 Laden der Restconfiguration 9 ◄> Beitritt zum Server möglich<► 7[9!7]
+    if (%warn >= 1) { msg %m-channel %head2 4ACHTUNG11 Es gab einige Warnungen. Überprüfe die Console für Details  %head2 }
     /timer.checkstarted1 off
   }
 }
