@@ -2495,7 +2495,6 @@ on 100:text:!startlog*:%m-channel: {
   if ($2 !isnum) { msg %m-channel Eingabefehler um das Logging zu aktivieren Schreibe bitte: !startlog <zeit> hierbei | /msg %m-channel Hierbei darf <zeit> eine Zahl von 1s bis 60s betragen und nicht darüber | /halt }
   if ($2 isnum) && ($2 >= 1) && ($2 <= 60) { 
     /timer.checklog1 0 $2 /checklog
-    /set %warn 0
     /msg %m-channel Chatlog wird gestartet.
     /halt
   }
@@ -2519,14 +2518,12 @@ on 100:text:!stoplog:%m-channel: {
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
   //run -ap %pfad $+ stop.bat
-  set -u15 %stop on
-  set %warn 0
+  set -u15 %stop
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
   set -u15 %start on
-  set %warn 0
   //run -ap %pfad $+ start.bat
   /timer.checkstarted1 0 3 /checkstarted
 }
