@@ -12,7 +12,8 @@ on 100:text:!server settings:%m-channel: {
 }
 
 on 1:text:!todo:#: {
-  !  msg %m-channel  7,1[9▒7] 4->11M14inecraftBot4<- 7[9Derzeitige Aufgaben7]:9 $2- $+ 4.
+  msg %m-channel %head003 4→11M14inecraftBot4←  %head003 0,1 Serkons/tOuly/Socid $+ 's 7[9Derzeitige Aufgaben7] %head003 
+  ! msg %m-channel  7,1[9▒7] 4->11M14inecraftBot4<- 7[9Derzeitige Aufgaben7]:9 $2- $+ 4.
   /play %m-channel todo.txt
 
 }
