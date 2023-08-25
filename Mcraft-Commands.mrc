@@ -303,7 +303,7 @@ on 100:text:!region*:%m-channel: {
   ;;;; Region Info;;;;;;;;
   if ($2 == info) && ($3 == $null) { msg %m-channel Bitte gib eine Region an. | halt }
   if ($2 == info) && ($3 != $null) && ($4 == -w) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 !isin $finddir(%pfad, $+ $5 $+ *,1)) { msg %m-channel Welt $5 existiert nicht und somit konnte $3 nicht gefunden werden. | /halt }
-  if ($2 == info) && ($3 != $null) && ($4 == -w) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 isin $finddir(%pfad, $+ $5 $+ *,1)) {
+  if ($2 == info) && ($3 != $null) && ($4 == -w) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 isin $finddir(%pfad, $+ $5 $+ *,1)) && (%serverstarted != $null) {
     set %world $5
     set %region $3
     set %regcheck $regcheck(%world,%region) 
@@ -330,6 +330,7 @@ on 100:text:!region*:%m-channel: {
   if ($2 == select) && ($3 == -w) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { /msg %m-channel Die Welt fehlt konnte keine regionen finden. | /halt }
   if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 == $null) { /msg %m-channel Es wurde keine Region angegeben | / halt }
   if ($2 == select) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($5 != $null) { 
+    if (%serverstarted == no) { /msg %m-channel  4FEHLER: Server ist nicht Online | /halt }
     var %world $4
     var %region $5
 
@@ -357,8 +358,68 @@ on 100:text:!region*:%m-channel: {
       /halt
     }
     if ($flagcheck(%flag) == on) { set %currentflag %flag 
-      if (!%regionsid) { /msg %m-channel 4FEHLER:  Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
+      if (!%regionsid) && (%serverstarted == yes) { /msg %m-channel 4FEHLER:  Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
+      if (%serverstarted == no) { /msg %m-channel  4FEHLER:  Server ist nicht Online | /halt }
       set -u5 %flagset on
+      ;;; Entry Flag
+      if (%currentflag == entry) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag existiert
+        set -u5 %tps3 3[7 Worldguard 3]12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ao rcon.exe -a localhost:25575 -p %rcon_password " wg reload "
+        /halt
+      }
+      if (%currentflag == entry) && ($6- != $null)  {
+        if ($6 == allow) {
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set -u5 %text $6
+          set -u5 %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set -u5 %text $6
+          set -u5 %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channl 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder Deny an. | /halt }
+      }
+      ;;; entry-deny-message Flag
+      if (%currentflag == entry-deny-message) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag   wurde zurückgesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
+      if (%currentflag == entry-deny-message) && ($6- != $null)  {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        var %command $1- 
+        if (-w isin $left(%command, 15)) { set %text $6- }
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag   wurde auf ( $+ %text $+ ) gesetzt.
+        /unset %regionsid
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /halt
+      }
       ;;; Greeting Flag
       if (%currentflag == greeting) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
@@ -2519,6 +2580,7 @@ on 100:text:!stoplog:%m-channel: {
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
   //run -ap %pfad $+ stop.bat
+  set %serverstarted no
   set -u15 %stop on
   set %warn 0
 }
@@ -2526,6 +2588,7 @@ on 100:text:!stop:%m-channel:{
 on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
   set -u15 %start on
+  set %serverstarted yes
   set %warn 0
   //run -ap %pfad $+ start.bat
   /timer.checkstarted1 0 3 /checkstarted
@@ -2598,6 +2661,10 @@ on *:text:!lag:%m-channel: {
   /timer.lagausgabe1 1 2 /lagausgabe
 }
 
-on 100:text:!ver:%m-channel: {
+on 100:text:!version:%m-channel: {
   /msg %m-channel  7,1[9▒7] 4→11M14inecraft4 11B14ot4 11V14ersion14,110 $ver 11,1C14odet 11b14y 11S14erkons4← 7[9▒7,1]
+}
+
+on 1:text:!ver:#Bot-Lounge: {
+  /msg $chan  7,1[9▒7] 4→11M14inecraft4 11B14ot4 11V14ersion14,110 $ver 11,1C14odet 11b14y 11S14erkons4← 7[9▒7,1]
 }

@@ -169,9 +169,8 @@ alias system_defaults_check {
 }
 
 alias flagcheck {
-
-  if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist1,$1,46) == $true)  { return on }
-  if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist1,$1,46) == $false)  { return off }
+  if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true)  { return on }
+  if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist2,$1,46) == $false) || ($istok(%flaglist3,$1,46) == $false) || ($istok(%flaglist4,$1,46) == $false) || ($istok(%flaglist5,$1,46) == $false)  { return off }
 }
 
 alias checktimers {
@@ -376,8 +375,8 @@ Alias checklog {
     if (/WARN isin %temp.r) { inc %warn }
     if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
-    if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
-    if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %temp.rv3lag %tps3 | /halt }
+    if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
+    if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%login isin %temp.r) { var %log 9meldet sich an mit| var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $+ $remove($replace(%temp.rv4, logged in with entity, 9meldet sich an mit $+ %cl),%cls) | /halt } 
