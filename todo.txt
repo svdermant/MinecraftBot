@@ -7,4 +7,6 @@
 7,1[3√7]11 Weitere Worldguard Flags hinzugefügt 7(11enderman4-11grief4, 11snowman4-11trails4, 11ravager4-11grief4, 11mob4-11damage4, 11mob4-11spawning4, 11deny4-11spawn4, 11entity4-11painting4-11destroy4, 11entity4-11item4-11frame4-11destroy4, 11wither4-11damager7)
 7,1[3√7]11 Kleine Optiomierungen am !region select und am !region flag befehl
 7,1[3√7]11 LogUpdate für Gelevelte Mobs
+7,1[3√7]11 Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
+7,1[4¤7]11 Movementflags für Worldguard Hinzufügen
 7,1[4¤7]11 Komplettes Styleumstellung Anpassung an das Style vom 11G14TA7-11B14ot 7(11Nicht bei github verfügbar7) (11weil 11S14o11CI14d 11wenig zeit hat7)
