@@ -13,6 +13,8 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Weitere Worldguard Flags hinzugefügt (enderman-grief, snowman-trails, ravager-grief, mob-damage, mob-spawning, deny-spawn, entity-painting-destroy, entity-item-frame-destroy, wither-damager)
 - [x] Kleine Optiomierungen am !region select und am !region flag befehl
 - [x] LogUpdate für Gelevelte Mobs
+- [x] Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
+- [ ] Movementflags für Worldguard Hinzufügen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
 # Installation
