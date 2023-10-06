@@ -32,13 +32,14 @@ und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
 2. Die Lag.bat // Liest die Auslastung des Server und Postet sie. (Benötigt EssentialsX)
 3. Die Players.bat // Die Players.bat Zeigt die Spielerliste an
 4. Die Stop.bat // Stoppt den Server
-5. Die Task.bat // Uberprüft ob der Server Läuft
+5. Die Process.bat // Dient zur Ermittlung der PID
 6. Die Tps.bat // Zeigt die TPS an
 7. Die Vault-info.bat //Zeigt Vaul Infos an. (Wird vom Bot erstellt)
 
+
 # Kommen wir zum Inhalt der Dateien
 Die Start.bat sollte folgenden befehl beinhalten:
-> java.exe -Xmx14G -Xms1G -jar paper.jar -nogui
+> java.exe -Xmx14G -Xms1G -Xms24576M -Xmx24576M -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:InitiatingHeapOccupancyPercent=15 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar -nogui
 Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
 ## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
@@ -46,7 +47,7 @@ Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 In der Lag bat ist bitte folgendes einzutragen:
 > rcon.exe -a localhost:25575 -p rconpass "lag" > lag.txt
 
-Ersetze bitte rconpass mit dem Passwort was in deiner Server.properties steht. Dies sollte mit dem rconpass im Bot übereinstimmen.
+Ersetze bitte rconpass und port mit dem Passwort und port welcher in deiner Server.properties steht. Das rconpass sollte mit dem im Bot angegebenen übereinstimmen.
 
 Der Inhalt der Players.bat sieht so aus:
 > rcon.exe -a localhost:25575 -p rconpass "list" > help2.txt
@@ -54,13 +55,22 @@ Der Inhalt der Players.bat sieht so aus:
 Der Inhalt der Stop.bat:
 > rcon.exe -a localhost:25575 -p rconpass "stop"
 
-Der Inhalt der Task.bat
-> tasklist > task.txt
+Der Inhalt der Process.bat
+> @echo on
+for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a)
+echo %pid% > server.pid
 
 Der Inhalt der Tps.bat
 > rcon.exe -a localhost:25575 -p rconpass "tps" > tps.txt
 
 Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pfad> den Pfad zum Serverordner angeben.
+
+# Wichtige Anmerkung zur SystemPID und Process.bat
+Diese Batchdatei ermittelt die PID des Laufenden MinecraftServers.
+Hierbei ist zu beachten das keine weiteren Javaanwendungen laufen sollten da sonst eine Andere PID angezeigt wird.
+
+Ich habe diese Möglickeit eingebaut falls man den Bot mal über /taskkill /PID nummer stoppen will.
+Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via /stop zu beenden.
   
 # Wichtige Anmerkung für Leute die den Respawn Anchor auch in der Oberwelt nutzbar haben wollen.
 1. Gehe auf https://gitlab.com/schoentoon/respawn-anchors-worldguard und lade dir das Datapack und das Plugin runter
