@@ -406,6 +406,9 @@ Alias checklog {
   }
 }
 
+alias clearedlogs {
+  if (!%clearlog) { msg %m-channel Zeit Abgelaufen }
+}
 
 
 

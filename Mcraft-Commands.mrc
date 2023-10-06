@@ -183,16 +183,19 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ Zeitsteuerung %head2.2 $+  %head.S $+ yncronisiert %head.S $+ pielzeit 11m14it 11R14ealzeit %head2 
     msg %m-channel %head2 %head-2 $+ TPS %head2.2 $+ %head.Z $+ eigt 11d14ie 11T14icks 11P14er %head.S $+ ekunde 11a14n4. %head2 
     msg %m-channel %head2 %head-2 $+ lag %head2.2 $+ %head.Z $+ eigt 11d14ie 11A14uslastung 11d14es %head.S $+ ervers 11a14n4. %head2 
+    msg %m-channel %head2 %head-2 $+ status %head2.2 $+ %head.Z $+ eigt 11d14en 11S14tatus 11d14es %head.S $+ ervers 11a14n4. %head2
+    msg %m-channel %head2 %head-2 $+ clearlogs %head2.2 $+ %head.L $+ öscht 11d14en 11I14nhalt 11d14es %head.L $+ ogverzeichnisses 4. %head2 
+
   }
   if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
     msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
     msg %m-channel 8Unterhalb sind die Worldguard Befehle:
     msg %m-channel 7 !allowfire [<world>] - Erlaubt die Feuerausbreitung Temporär
+    msg %m-channel 7 !god <player> - Gottmode für Spieler ein/Auschalten.
     msg %m-channel 7 !halt-activity - Stoppt jegliche Bewegung auf den Server und Friert sie ein.
     msg %m-channel 7 !stopfire [<world>] - Feuerausbreitung deaktivieren
     msg %m-channel 7 !slay <player> - Einen Spieler Schlagen
     msg %m-channel 7 !heal <player> - Einen Spieler Heilen
-    msg %m-channel 7 !god <player> - Gottmode für Spieler ein/Auschalten.
     msg %m-channel 8 Um die 2. Hilfseite einzublenden schreibe 7!help Worldguard 2
     haltdef
   }
@@ -203,7 +206,6 @@ on *:text:!help*:%m-channel: {
     msg %m-channel 7 !Worldguard - Weitere Befehle zu Worldguard
   }
 }
-
 
 ;;;; Worldguard Befehle ;;;;;;
 
@@ -2557,13 +2559,28 @@ on 100:text:!vault-convert*:%m-channel:  {
 
 on 100:text:!startlog*:%m-channel: {
   if ($2 !isnum) { msg %m-channel Eingabefehler um das Logging zu aktivieren Schreibe bitte: !startlog <zeit> hierbei | /msg %m-channel Hierbei darf <zeit> eine Zahl von 1s bis 60s betragen und nicht darüber | /halt }
-  if ($2 isnum) && ($2 >= 1) && ($2 <= 60) { 
+  if ($2 isnum) && ($2 >= 1) && ($2 <= 60) && ($findfile(%pfad $+ logs\, *.*, 0) == 0) { msg %m-channel Das Verzeichnis %pfad $+ logs\ enthält keine latest.log 4LOGGING ABGEBROCHEN! | /msg %m-channel Prüfe ob die Latest.log im Verezeichnis existiert. | msg %m-channel Falls nicht Starte den Server über !start und führe !startlog <zeit>  erneut aus! | /halt } 
+  if ($2 isnum) && ($2 >= 1) && ($2 <= 60) && ($findfile(%pfad $+ logs\, *.*, 0) > 0) { 
     /timer.checklog1 0 $2 /checklog
     /set %warn 0
     /msg %m-channel Chatlog wird gestartet.
     /halt
   }
   else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
+}
+
+on 100:text:!clearlogs:%m-channel: {
+  set %logfiles $findfile(%pfad $+ logs\, *.*, 0)
+  set -u5 %clearlog on
+  set -u5 %clearchan $chan
+  if (%logfiles == 0) { msg %m-channel Keine Serverlogs gefunden die ich Löschen kann! | /halt }
+  msg %m-channel %logfiles Serverlogs wirklich löschen? [ja) / [nein) (5 Sekunden Eingabezeit)
+  timerclearlogs1 1 5 /clearedlogs
+}
+
+on 100:text:*:%clearchan: {
+  if (%clearlog == on) && ($1 == ja) { /run cmd.exe /c DEL %pfad $+ logs\*.* /Q | /msg %m-channel Es wurden soeben %logfiles Logdateien Gelöscht! | /timerclearlogs1 off }
+  if (%clearlog == on) && ($1 == nein) { /msg %m-channel Löschvorgang Abbgebrochen | /timerclearlogs1 off }
 }
 
 on 100:text:!stoplog:%m-channel: {
