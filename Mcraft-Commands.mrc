@@ -129,9 +129,9 @@ on *:text:!bday:%m-channel: {
 }
 
 
-on *:text:!lines:%m-channel: {
+on 1:text:!lines:#: {
   /scriptlines
-  msg %m-channel Aktuell besteht $me aus %scriptlines Scriptzeilen!
+  msg $chan Aktuell besteht $me aus %scriptlines Scriptzeilen!
 }
 
 ;;;; Hilfe für den Bot ;;;;;;;
@@ -2459,6 +2459,7 @@ on 100:text:!region*:%m-channel: {
     if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag -w weltname flag werte.  Bitte Selectiere die region zuvor | /halt }
   }
 }
+
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
 
 on 100:text:!give*:%m-channel: {
@@ -2563,6 +2564,7 @@ on 100:text:!startlog*:%m-channel: {
   if ($2 isnum) && ($2 >= 1) && ($2 <= 60) && ($findfile(%pfad $+ logs\, *.*, 0) > 0) { 
     /timer.checklog1 0 $2 /checklog
     /set %warn 0
+    /set %err 0
     /msg %m-channel Chatlog wird gestartet.
     /halt
   }
@@ -2603,6 +2605,7 @@ on 100:text:!stop:%m-channel:{
   set %serverstarted no
   set -u15 %stop on
   set %warn 0
+  set %err 0
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
@@ -2610,7 +2613,8 @@ on 100:text:!start:%m-channel:{
   msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7] 7,1[9PID: 08 $+ %pid $+ 07] 
   set -u15 %start on
   set %serverstarted yes
-  set %warn 0
+  /set %warn 0
+  /set %err 0
   //run -ap %pfad $+ start.bat
   /timer.checkstarted1 0 3 /checkstarted
 }
