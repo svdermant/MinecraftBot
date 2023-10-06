@@ -78,7 +78,16 @@ A Thanks to the following people that helped me to get any features..
 1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
 2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
-# Information für Fragen und Probleme
+# Derzeitige Einschränkungen des Bots:
+Aufgrung der Funktionsweise des Clienten Mircs ist es mir nicht möglich gewisse Daten aus einer yml Datei zu lesen.
+Der Grund daran ist das Mirc generell leerzeichen u.o einrückungen ignoriert und somit das Auslesen von gewissen Sectionen erschwert.
+Ich habe hier auf https://forums.mirc.com/ubbthreads.php/topics/272085/feature-to-read-and-edit-yml-files#Post272085 <- Einen Vorschlag einer oder Mehrere funktionen gegeben bis heute keine
+reaktion darauf erhalten.
+
+Die Funktionsweise des Bots sollte aber dennoch gestattet sein sofern die yml datei keinen Einrückung oder Tabulatoren beinhalten.
+Bitte respektiert die bisher investierte Zeit in die Programmierung des Bots.
+
+# Information für Fragen und Probleme.
 Der Bot wird derzeit auf dem Irc Netzwerk **irc.igamerpg.de** im Raum #Aygon-minecraft getestet und Entwickelt.<br>
 Für diejenigen denen IRC unbekannt ist können uns auch über den [WebChat](https://igamerpg.de:4444/) erreichen.
 Ebenfalls können dort auch Fragen Wünschen und Änderungen Vorgeschlagen werden.<br>
