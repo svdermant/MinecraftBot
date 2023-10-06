@@ -109,11 +109,13 @@ alias ct {
 ;;;;;; Say ;;;;;;;;;;;;;;;;;;
 
 on *:text:!say*:%m-channel: {
+  if (%serverstarted == no) { msg $chan 4Fehler: 12!say4 Funktioniert nicht im Offline Mode! | /halt }
   ;;/set -u15 %say 7[11N14ot 11S14ecure7] 0[11r14Con0] 9◄7[11 I14RC4-11C14HAT7 ]9►......
   /set -u15 %say [Not Secure] [Rcon]
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 7(3Abgeschickt7)
   ;;;/run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
-  /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄[ IRC-CHAT ]►  $nick  ◄► $2- "
+  /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2- "
+  /timersays3 1 3 /msg $chan 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 0,1 14[11S10erver 11E10vent14] ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2-
 }
 on *:text:!bday:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9  11(3Abgeschickt11)
@@ -2587,12 +2589,18 @@ on 100:text:!stop:%m-channel:{
 }
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
-  msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7]
+  set %pid $rand(10000,99999) 
+  msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7] 7,1[9PID: 08 $+ %pid $+ 07] 
   set -u15 %start on
   set %serverstarted yes
   set %warn 0
   //run -ap %pfad $+ start.bat
   /timer.checkstarted1 0 3 /checkstarted
+}
+
+on 100:text:!status:%m-channel: { 
+  if (%serverstarted == yes) && (%pid isnum) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄> 14ist 9ONLINE }
+  if (%serverstarted == no) && (!%pid) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄>14 ist 4OFFLINE }
 }
 
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;

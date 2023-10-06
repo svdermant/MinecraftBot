@@ -25,6 +25,12 @@ on 1:START: {
     if (%mlog = $null) { echo 4*** WARNUNG Es wurde kein Logpfad des MinecraftServers angegeben. Bitte behebe das Problem ...
       set %mlog $?="Bitte gib den Pfad an wo die MineCraft Serverlog liegt. (zb C:\MeinServer\Logs\latest.log)" | writeini system.dat MineCraftServer LogPfad %mlog
     }
+
+    set %pfad $readinin(system.dat, MineCrafzServer, ServerPfad)
+    if (%pfad = $null) { echo 4*** WARNUNG Es wurde kein Serverpfad angegeben. Bitte behbe das Problem...
+      set %pfad $?="Bitte gib den Pfad an wo die Serverfiles liegen also auch die Startbat etc)" | writeine system.dat MineCraftServer ServerPfad %pfad
+    }
+
     set %mProp $readini(system.dat, MineCraftServer, ServerPropPfad)
     if (%mProp = $null) { echo echo 4*** WARNUNG Es wurde keine Einstellungsdatei des MinecraftServers angegeben. Bitte behebe das Problem ...
       set %mProp $?="Bitte gib den Pfad zur Serverproperties datei an (zb C:\MeinServer\server.properties)" | writeini system.dat MineCraftServer ServerPropPfad %mProp
@@ -68,6 +74,11 @@ on 1:START: {
     if (%botpass = $null) { var %bosspass none }
     writeini system.dat botinfo botpass %botpass
     echo 12*** OK. Das Passwort wurde auf 4 %botpass  gesetzt – Vergesse nicht, den Bot bei nickserv zu registrieren.
+
+    echo 12*** Gib bitte an wo deine Serverdateien sich befinden!
+    set %pfad $?="Gib hier bitte den Pfad zu deinem Server an. in diesem pfad sollte sich ebenfalls alle anderen daten befinden (start.bat etc)
+    if ($exists(%pfad) == $false) { echo 4 Der Pfad der Serverdaten darf nicht leer sein. Startvorgang Abgebrochen | /exit | halt }
+    writeini system.dat MineCraftServer ServerPfad %pfad
 
     echo 12*** Gib nun den Korrekten Pfad inclusive dateiname zu den Serverlogs des Minecraft Servers an.
     set %mlog $?="Gib jetzt den Pfad an. z.B: C:\MeinServer\Logs\latest.log"
@@ -382,9 +393,11 @@ Alias checklog {
     if (%login isin %temp.r) { var %log 9meldet sich an mit| var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $+ $remove($replace(%temp.rv4, logged in with entity, 9meldet sich an mit $+ %cl),%cls) | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
-    if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
+    ;;;if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
+    if (%say isin %temp.r) {  return | /halt }
+    if (Timings isin %temp.rv4) || (Flushing isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,2,46),$chr(32) $+ -)  | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
-    if (Closing Server isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
+    if (Closing Server isin %temp.rv4) { unset %pid | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
     if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -)  | /halt }
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
@@ -538,6 +551,8 @@ alias ausgabe {
     /remove %pfad $+ task.txt
   }
 }
+
+
 
 alias vault-ausgabe {
   var %Ecos $read(%pfad $+ vault-info.txt,l,2)
