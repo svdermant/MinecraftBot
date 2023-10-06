@@ -179,6 +179,12 @@ alias system_defaults_check {
   /save -rv vars.ini
 }
 
+alias spid {
+  /run -ap %pfad $+ process.bat
+  /set %spid $read(%pfad $+ server.pid, 1)
+  return %spid
+}
+
 alias flagcheck {
   if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true)  { return on }
   if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist2,$1,46) == $false) || ($istok(%flaglist3,$1,46) == $false) || ($istok(%flaglist4,$1,46) == $false) || ($istok(%flaglist5,$1,46) == $false)  { return off }
@@ -395,7 +401,8 @@ Alias checklog {
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
     set %cls $gettok(%te.1,2,46)
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv3,%cls,$chr(91) $+ $chr(93), $chr(32) $+ -,$gettok(%te.1,5-,46)) $iif(%command != $null, -, %command) %tps3
+    if (SlimeFun isin %temp.rv4) || (Postal isin %temp.rv4) || (BlueMap isin %temp.rv4) || (BlockRegen isin %temp.rv4) || (Essentials isin %temp.rv4) || (Vault isin %temp.rv4)  { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$chr(91) $+ $chr(93), $chr(32) $+ -,$gettok(%te.1,5,46)) $iif(%command != $null, -, %command) %tps3 | /halt }
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$chr(91) $+ $chr(93), $chr(32) $+ -,$gettok(%te.1,5-,46)) $iif(%command != $null, -, %command) %tps3
   }
 }
 

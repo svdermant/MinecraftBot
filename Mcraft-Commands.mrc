@@ -2610,12 +2610,12 @@ on 100:text:!stop:%m-channel:{
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   set %pid $rand(10000,99999) 
-  msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7] 7,1[9PID: 08 $+ %pid $+ 07] 
   set -u15 %start on
   set %serverstarted yes
   /set %warn 0
   /set %err 0
   //run -ap %pfad $+ start.bat
+  /msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ $spid $+ 07] 
   /timer.checkstarted1 0 3 /checkstarted
 }
 
