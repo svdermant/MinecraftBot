@@ -70,7 +70,8 @@ Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pf
 Diese Batchdatei ermittelt die PID des Laufenden MinecraftServers.
 Hierbei ist zu beachten das keine weiteren Javaanwendungen laufen sollten da sonst eine Andere PID angezeigt wird.
 
-Ich habe diese Möglickeit eingebaut falls man den Bot mal über /taskkill /PID nummer stoppen will.
+Ich habe diese Möglickeit eingebaut falls man den Server mal über /taskkill /PID nummer stoppen muss wenn er über den /stop command nicht reagiert!
+Dies bitte nur im Extremfall benutzen.
 Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via /stop zu beenden.
   
 # Wichtige Anmerkung für Leute die den Respawn Anchor auch in der Oberwelt nutzbar haben wollen.
