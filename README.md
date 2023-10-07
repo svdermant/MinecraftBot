@@ -40,6 +40,7 @@ und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
 # Kommen wir zum Inhalt der Dateien
 Die Start.bat sollte folgenden befehl beinhalten:
 > java.exe -Xmx14G -Xms1G -Xms24576M -Xmx24576M -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:InitiatingHeapOccupancyPercent=15 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar -nogui
+
 Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
 ## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
@@ -56,9 +57,9 @@ Der Inhalt der Stop.bat:
 > rcon.exe -a localhost:25575 -p rconpass "stop"
 
 Der Inhalt der Process.bat
-> @echo on
-for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a)
-echo %pid% > server.pid
+> @echo on </br>
+for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a) </br>
+echo %pid% > server.pid </br>
 
 Der Inhalt der Tps.bat
 > rcon.exe -a localhost:25575 -p rconpass "tps" > tps.txt
