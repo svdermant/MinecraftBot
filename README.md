@@ -26,7 +26,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 # Weitere Setups für die Verwaltung des Minecraft Servers:
 
 Damit der Bot auch richtig funktioniert sollten im Serverordner noch folgende Batchdateien erstellt werden.
-und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
+und der Pfad zu diese sollte beim erststart gesetzt werden. (Sie Sollten im Serverordner sein z.B: C:\MeinServer\)
 
 1. Die Start.bat // Startet den Spigot/PaperMC Server
 2. Die Lag.bat // Liest die Auslastung des Server und Postet sie. (Benötigt EssentialsX)
@@ -34,7 +34,7 @@ und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
 4. Die Stop.bat // Stoppt den Server
 5. Die Process.bat // Dient zur Ermittlung der PID
 6. Die Tps.bat // Zeigt die TPS an
-7. Die Vault-info.bat //Zeigt Vaul Infos an. (Wird vom Bot erstellt)
+7. Die Vault-info.bat //Zeigt Vault Infos an. (Wird vom Bot erstellt)
 
 
 # Kommen wir zum Inhalt der Dateien
