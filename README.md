@@ -87,7 +87,7 @@ Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via
 # Ein dank geht an Folgende leute:
 A Thanks to the following people that helped me to get any features..
 
-1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+1. Quims of (irc.swiftirc.net) he helps me to get data from the regions.yml of worldguard.
 2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
 # Derzeitige Einschränkungen des Bots:
