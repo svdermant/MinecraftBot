@@ -26,7 +26,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 # Weitere Setups für die Verwaltung des Minecraft Servers:
 
 Damit der Bot auch richtig funktioniert sollten im Serverordner noch folgende Batchdateien erstellt werden.
-und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
+und der Pfad zu diese sollte beim erststart gesetzt werden. (Sie Sollten im Serverordner sein z.B: C:\MeinServer\)
 
 1. Die Start.bat // Startet den Spigot/PaperMC Server
 2. Die Lag.bat // Liest die Auslastung des Server und Postet sie. (Benötigt EssentialsX)
@@ -34,12 +34,13 @@ und der Pfad zu diese sollte mittels !batchpfad befehl gesetzt werden.
 4. Die Stop.bat // Stoppt den Server
 5. Die Process.bat // Dient zur Ermittlung der PID
 6. Die Tps.bat // Zeigt die TPS an
-7. Die Vault-info.bat //Zeigt Vaul Infos an. (Wird vom Bot erstellt)
+7. Die Vault-info.bat //Zeigt Vault Infos an. (Wird vom Bot erstellt)
 
 
 # Kommen wir zum Inhalt der Dateien
 Die Start.bat sollte folgenden befehl beinhalten:
 > java.exe -Xmx14G -Xms1G -Xms24576M -Xmx24576M -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:InitiatingHeapOccupancyPercent=15 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar -nogui
+
 Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
 ## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
@@ -56,9 +57,9 @@ Der Inhalt der Stop.bat:
 > rcon.exe -a localhost:25575 -p rconpass "stop"
 
 Der Inhalt der Process.bat
-> @echo on
-for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a)
-echo %pid% > server.pid
+> @echo on </br>
+for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a) </br>
+echo %pid% > server.pid </br>
 
 Der Inhalt der Tps.bat
 > rcon.exe -a localhost:25575 -p rconpass "tps" > tps.txt
@@ -69,7 +70,8 @@ Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pf
 Diese Batchdatei ermittelt die PID des Laufenden MinecraftServers.
 Hierbei ist zu beachten das keine weiteren Javaanwendungen laufen sollten da sonst eine Andere PID angezeigt wird.
 
-Ich habe diese Möglickeit eingebaut falls man den Bot mal über /taskkill /PID nummer stoppen will.
+Ich habe diese Möglickeit eingebaut falls man den Server mal über /taskkill /PID nummer stoppen muss wenn er über den /stop command nicht reagiert!
+Dies bitte nur im Extremfall benutzen.
 Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via /stop zu beenden.
   
 # Wichtige Anmerkung für Leute die den Respawn Anchor auch in der Oberwelt nutzbar haben wollen.
@@ -85,7 +87,7 @@ Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via
 # Ein dank geht an Folgende leute:
 A Thanks to the following people that helped me to get any features..
 
-1. Quims of (irc.swiftirc.net) he helps me to get & write data to a yml file.
+1. Quims of (irc.swiftirc.net) he helps me to get data from the regions.yml of worldguard.
 2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
 # Derzeitige Einschränkungen des Bots:
