@@ -26,7 +26,7 @@ on 1:START: {
       set %mlog $?="Bitte gib den Pfad an wo die MineCraft Serverlog liegt. (zb C:\MeinServer\Logs\latest.log)" | writeini system.dat MineCraftServer LogPfad %mlog
     }
 
-    set %pfad $readinin(system.dat, MineCrafzServer, ServerPfad)
+    set %pfad $readinin(system.dat, MineCraftServer, ServerPfad)
     if (%pfad = $null) { echo 4*** WARNUNG Es wurde kein Serverpfad angegeben. Bitte behbe das Problem...
       set %pfad $?="Bitte gib den Pfad an wo die Serverfiles liegen also auch die Startbat etc)" | writeine system.dat MineCraftServer ServerPfad %pfad
     }

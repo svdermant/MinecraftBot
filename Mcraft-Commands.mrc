@@ -2607,6 +2607,7 @@ on 100:text:!stop:%m-channel:{
   set %warn 0
   set %err 0
 }
+
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
 on 100:text:!start:%m-channel:{
   set %pid $rand(10000,99999) 
