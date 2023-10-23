@@ -18,7 +18,7 @@ on 1:START: {
 
     set %bot.name $readini(system.dat, botinfo, botname)
     if (%bot.name = $null) { echo 4*** WARNUNG: Der Nickname des Bots ist nicht in der Systemdatei festgelegt. Bitte behebe das Problem jetzt.
-    set %bot.name $?="Bitte gebe den Nicknamen des Bots ein, den der Bot verwenden soll" | writeini system.dat botinfo botname %bot.name }
+    set %bot.name $?="Bitte gebe den Nicknamen des Bots ein, den der Bot verwenden soll" | writeini system.dat botinfo botname %bot.name | /nick %bot.name }
     else { /nick %bot.name } 
 
     set %mlog $readini(system.dat, MineCraftServer, Logpfad)
