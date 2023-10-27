@@ -1,3 +1,13 @@
+
+alias wer_bist_du {
+  return ich bin ein bot
+}
+
+alias msg.out {
+  msg #Aygon-Minecraft $wer_bist_du
+}
+
+
 ;;;;;; Mcraft Bot ;;;;;;;; V1.0
 
 on 1:START: {
@@ -482,65 +492,13 @@ alias lagausgabe2 {
 ;;;; Ausgabe Serverresult vom !server settings Befehl ;;;;;;
 
 alias serverresult {
-  var %settings.4.r $remove(%settings.4,allow-nether=)
-  var %settings.4.result $replace(%settings.4.r, true, 9ja, false, 4nein)
-  var %settings.3.r $remove(%settings.3,allow-flight=)
-  var %settings.3.result $replace(%settings.3.r, true, 9ja, false, 4nein)
-  var %settings.5.r $remove(%settings.5,broadcast-console-to-ops=)
-  var %settings.5.result $replace(%settings.5.r, true, 9ja, false, 4nein)
-  var %settings.6.r $remove(%settings.6,broadcast-rcon-to-ops=)
-  var %settings.6.result $replace(%settings.6.r, true, 9ja, false, 4nein)
-  var %settings.7.r $remove(%settings.7,debug=)
-  var %settings.7.result $replace(%settings.7.r, true, 9Aktiv, false, 4Inaktiv)
-  var %settings.8.r $remove(%settings.8,difficulty=)
-  var %settings.8.result $replace(%settings.8.r, easy, leicht, peaceful, friedlich, normal, normal, hard, schwer)
-  var %settings.9.r $remove(%settings.9, enable-command-block=)
-  var %settings.9.result $replace(%settings.9.r, true, 9ja, false, 4nein)
-  var %settings.12.r $remove(%settings.12, enable-rcon=)
-  var %settings.12.result $replace(%settings.12.r, true, 9ja, false, 4nein)
-  var %settings.13.r $remove(%settings.13, enable-status=)
-  var %settings.13.result $replace(%settings.13.r, true, 9ja, false, 4nein)
-  var %settings.14.r $remove(%settings.14, enforce-secure-profile=)
-  var %settings.14.result $replace(%settings.14.r, true, 9ja, false, 4nein)
-  var %settings.15.r $remove(%settings.15,enforce-whitelist=)
-  var %settings.15.result $replace(%settings.15.r, true, 9ja, false, 4nein)
-  var %settings.17.r $remove(%settings.17,force-gamemode=)
-  var %settings.17.result $replace(%settings.17.r, true, 9ja, false, 4nein)
-  var %settings.18.r $remove(%settings.18,function-permission-level=)
-  var %settings.18.result $replace(%settings.18.r, 1, Moderator, 2, GameMaster, 3, Admin, 4, Owner)
-  var %settings.19.r $remove(%settings.19,gamemode=)
-  var %settings.19.result $replace(%settings.19.r, survival, Überleben, creative, Kreativ)
-  var %settings.20.r $remove(%settings.20,generate-structures=)
-  var %settings.20.result $replace(%settings.20.r, true, 9ja, false, 4nein)
-  var %settings.23.r $remove(%settings.23, hide-online-players=)
-  var %settings.23.result $replace(%settings.23.r, false, 4nein, true, 9ja)
-  var %settings.26.r $remove(%settings.26, level-name=)
-  var %settings.27.r $remove(%settings.27, level-seed=)
-  var %settings.30.r $remove(%settings.30, max-players=)
-  var %settings.32.r $remove(%settings.32, max-world-size=)
-  var %settings.33.r $remove(%settings.33, motd=)
-  var %settings.39.r $remove(%settings.39, pvp=)
-  var %settings.39.result $replace(%settings.39.r, true, 9ja, false, 4nein)
-  var %settings.49.r $remove(%settings.49, server-port=)
-  var %settings.50.r $remove(%settings.50, simulation-distance=)
-  var %settings.51.r $remove(%settings.51, spawn-animals=)
-  var %settings.51.result $replace(%settings.51.r, true, 9ja, false, 4nein)
-  var %settings.52.r $remove(%settings.52, spawn-monsters=)
-  var %settings.52.result $replace(%settings.52.r, true, 9ja, false, 4nein)
-  var %settings.53.r $remove(%settings.53, spawn-npcs=)
-  var %settings.53.result $replace(%settings.53.r, true, 9ja, false, 4nein)
-  var %settings.54.r $remove(%settings.54, spawn-protection=)
-  var %settings.59.r $remove(%settings.59, white-list=)
-  var %settings.59.result $replace(%settings.59.r, true, 9ja, false, 4nein)
-  var %settings.28.r $remove(%settings.28, level-type=)
-  var %settings.28.result $replace(%settings.28.r, minecraft\:normal, Normal, minecraft\:flat, Flachland)
-  msg %m-channel 10,1 $+ %head003 7 Nether Erlauben: 4 $+ %settings.4.result  %head002 7 Flugmodus Aktiv: 4 $+ %settings.3.result %head002 7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result %head002 7 RCON Befehle an OPS senden: 4 $+ %settings.6.result %head003 
-  msg %m-channel 10,1 $+ %head003 7 Debug Modus: 8 $+ %settings.7.result %head002 7 Schwierigkeitsgrad: 8 $+ %settings.8.result %head002 7 Befehlsblöcke erlauben: 4 $+ %settings.9.result %head002 7 Remotezugriff: 4 $+ %settings.12.result %head002 7 Server in der Serverliste anzeigen: 4 $+ %settings.13.result %head003
-  msg %m-channel 10,1 $+ %head003 7Nur Mojang Accounts: 4 $+ %settings.14.result %head002 7 Privater Zugang: 4 $+ %settings.15.result %head002 7 Erzwungener Spielmodus: 8 $+ %settings.17.result %head002 7 Funktionslevel: 8 $+ %settings.18.result %head003 
-  msg %m-channel 10,1 $+ %head003 7Spielmodus: 8 $+ %settings.19.result %head002 7 Strukturen erzeugen: 4 $+ %settings.20.result %head002 7 Online Spieler verstecken: 4 $+ %settings.23.result %head002 7 Hauptwelt: 8 $+ %settings.26.r %head003 
-  msg %m-channel 10,1 $+ %head003 7 Seed: 4 $iif(%settings.27.r == $null, 4 Zufällig  , $+ %settings.27.r) %head002 7 Welttyp: 8 $+ %settings.28.result %head002 7 Max Spieler: 12 $+ %settings.30.r %head002 7 Weltgrenze liegt bei: 12 $+ %settings.32.r 7Blöcken %head002 7 MOTD: 8 $+ %settings.33.r %head002 7 PVP: 4 $+ %settings.39.result %head003
-  msg %m-channel 10,1 $+ %head003 7Serverport: 12 $+ %settings.49.r %head002 7 Simulationsentfernung: 12 %settings.50.r %head002 7 Tiere erzeugen: 04 $+ %settings.51.result %head002 7 Monster erzeugen: 04 $+ %settings.52.result %head003
-  msg %m-channel 10,1 $+ %head003 7 NPC's erzeugen: 04 $+ %settings.53.result %head002 7 Spawn Schutz: 12 $+ %settings.54.r 7Blöcke %head002 7 Privater Server: 04 $+ %settings.59.result %head003
+  msg %m-channel 10,1 $+ %head003 7 Nether Erlauben: 4 $+ %allow-nether  %head002 7 Flugmodus Aktiv: 4 $+ %allow-flight %head002 7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result %head002 7 RCON Befehle an OPS senden: 4 %broadcast-rcon-to-ops %head003 
+  msg %m-channel 10,1 $+ %head003 7 Debug Modus: 8 $+ %debug %head002 7 Schwierigkeitsgrad: 8 $+ %difficulty %head002 7 Befehlsblöcke erlauben: 4 $+ %enable-command-block %head002 7 Remotezugriff: 4 $+ %enable-rcon %head002 7 Server in der Serverliste anzeigen: 4 $+ %enable-status %head003
+  msg %m-channel 10,1 $+ %head003 7Nur Mojang Accounts: 4 $+ %enforce-secure-profile %head002 7 Privater Zugang: 4 $+ %enforce-whitelist %head002 7 Erzwungener Spielmodus: 8 $+ %force-gamemode %head002 7 Funktionslevel: 8 $+ %function-permission-level %head003 
+  msg %m-channel 10,1 $+ %head003 7Spielmodus: 8 $+ %gamemode %head002 7 Strukturen erzeugen: 4 $+ %generate-structures %head002 7 Online Spieler verstecken: 4 $+ %hide-online-players %head002 7 Hauptwelt: 8 $+ %level %head003 
+  msg %m-channel 10,1 $+ %head003 7 Seed: 4 $iif(%level-seed == $null, 4 Zufällig  , $+ %level-seed) %head002 7 Welttyp: 8 $+ $remove(%level-type,minecraft\:) %head002 7 Max Spieler: 12 $+ %max-players %head002 7 Weltgrenze liegt bei: 12 $+ %max-world-size 7Blöcken %head002 7 MOTD: 8 $+ %motd %head002 7 PVP: 4 $+ %pvp %head003
+  msg %m-channel 10,1 $+ %head003 7Serverport: 12 $+ %server-port %head002 7 Simulationsentfernung: 12 %simulation-distance %head002 7 Tiere erzeugen: 04 $+ %spawn-animals %head002 7 Monster erzeugen: 04 $+ %spawn-monsters %head003
+  msg %m-channel 10,1 $+ %head003 7 NPC's erzeugen: 04 $+ %spawn-npcs %head002 7 Spawn Schutz: 12 $+ %spawn-protection 7Blöcke %head002 7 Privater Server: 04 $+ %white-list %head003
 }
 
 alias ausgabe {
