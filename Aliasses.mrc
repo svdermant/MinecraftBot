@@ -290,6 +290,7 @@ alias checklog-lvl {
 }
 
 Alias checklog {
+  if ($exists(%mlog) == $false) { return }
   var %i $lines(%mlog)
   var %sev 11S10erver
   var %Loading Loading
@@ -406,7 +407,7 @@ Alias checklog {
     if (%say isin %temp.r) {  return | /halt }
     if (Timings isin %temp.rv4) || (Flushing isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,2,46),$chr(32) $+ -)  | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
-    if (Closing Server isin %temp.rv4) { unset %pid | set %serverstarted no | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /halt }
+    if (Closing Server isin %temp.rv4) { unset %pid | set %serverstarted no | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /timer.dellogs1 1 3 /run -ap cmd.exe /c DEL %pfad $+ logs\*.* /Q /F | /halt }
     if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -)  | /halt }
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
@@ -425,7 +426,7 @@ alias clearedlogs {
 
 alias checkstarted {
   var %done $read(%mLog, w, *[Server thread/INFO]: Done*)
-  if (done isin %done) && (%warn != $null) && (%err != $null)  { 
+  if (%done != $null)  { 
     set %co $iif(%warn > 0,%head2 7Incl:11 %warn 13Warnungen %head2, %head2 7Keine 13Warnungen %head2)
     set %error $iif(%err > 0,%head2 7Incl:11 %err 12Fehler %head2, %head2 7Keine 12Fehler %head2)
     msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wurde erfolgreich 9 ◄> Gestartet! <► 7[9!7]  %co %error
@@ -434,6 +435,7 @@ alias checkstarted {
     /timer.checkstarted1 off
   }
 }
+
 
 alias plist {
   set %plist $read(%pfad $+ help2.txt,l,1)
