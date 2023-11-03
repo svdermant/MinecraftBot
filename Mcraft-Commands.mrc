@@ -345,7 +345,7 @@ on 100:text:!region*:%m-channel: {
       set -u5 %regselect on
       set -u5 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
       /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 $5"
-      /msg %m-channel Region wurde Selectiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
+      /msg %m-channel Region wurde Selektiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
       /msg %m-channel Für mehrere Optionen muss die Region erneut selectiert werden.
       set %regionsid $5
       /halt

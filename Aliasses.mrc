@@ -589,6 +589,93 @@ alias tpsausgabe {
 ;;; Some Stuff from Quims
 
 alias getallyml { 
+  echo -sg >>
+  ;this is old code i had fixed it
+  var %n,%t $2,%a 2,%s 0 
+  while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { 
+    inc %s 4 
+    inc %a
+    var %t $($ $+ %a,2) 
+  } 
+  var %l $readn + 1 
+  while (1) { 
+    var -p %v $read($1,tnr,/(.*),%l) 
+    var -p %v $regml(1) 
+    echo -sg >>> $prop
+    if ($prop) {
+      if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ :(.*)/)) {
+        var %rm $regml(1)
+        if ($regml(1) == $null) {
+          var %rn $readn
+          while (1) {
+            echo -sg main %s $read($1,nt,$calc(%rn + 1))
+            if ($read($1,tnr,/^\x20{ $+ $calc(%s + 4) $+ $chr(125) $+ ([^ ]+.*)/,$calc(%rn + 1))) {
+              echo -sg ?a
+              if ($readn == $calc(%rn + 1)) {
+                echo -sg ????
+                var %rm1 $regml(1)
+                if ($regex(%rm1,/^([^:]+):\x20*(.*)/F)) var %n %n $+ , $regml(1) $+ : $regml(2)
+              }
+              elseif ($read($1,tnr,/^\x20{ $+ $calc(%s + 5) $+ $chr(125) $+ (.*)/,$calc(%rn + 1))) {
+                var %l $v1
+                if ($readn == $calc(%rn + 1)) {
+                  var %n %n %l
+                }
+                else break
+              }
+              else {
+                echo -sg ??????????????
+                break
+
+              }
+            }
+            else {
+              echo -sg here?
+              break
+            }
+            inc %rn
+          }
+          return $+($chr(123),$mid(%n,3),$chr(125))
+        }
+        if ($regex($mid($regml(1),2),^(\{.*\}|\[.*\]|[^{}\[\]]+)$)) return %rm
+        var %r %rm
+        while (1) {
+          var %t $read($1,tn,$calc($readn + 1))
+          var %r %r $+ %t
+          if ($right(%t,1) isin }]) break
+        }
+        return %r
+        echo -ag %r
+      } 
+    } 
+    elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { 
+      var %n %n $regml(1) 
+    } 
+    if ($readn > $lines($1)) || ($regex(%v,^\x20{ $+ $calc(%s - 4) $+ }[^ ])) { 
+      break 
+    }
+    var %l $readn + 1
+  }
+  return %n
+  echo -ag %n 
+}
+
+/*            if ($regml(3) isin {[) {
+  var %r2 $v1
+  inc %rn 2
+  while (1) {
+    var %l $read($1,tnr,/ $+ $iif(%r2 == [,\],\}) $+ $/,%rn)
+    if ($readn) && ($v1 == %rn) { var %n %n $+ %l | dec %rn | break }
+    else {
+      var %n %n $+ $read($1,tn,%rn)
+      inc %rn
+    }
+  }
+}
+*/
+
+
+alias getallyml-oldcode { 
   ;this is old code i had fixed it
   var %n,%t $2,%a 2,%s 0 
   while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { 
