@@ -396,7 +396,8 @@ Alias checklog {
     if (/ERROR isin %temp.r) { inc %err }
     if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
-    if (%flagset == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
+    if (%flagset == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
+    if (%flagset == on) && (!%tps3) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
@@ -589,7 +590,7 @@ alias tpsausgabe {
 ;;; Some Stuff from Quims
 
 alias getallyml { 
-  echo -sg >>
+  ;;echo -sg >>
   ;this is old code i had fixed it
   var %n,%t $2,%a 2,%s 0 
   while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) { 
@@ -601,18 +602,18 @@ alias getallyml {
   while (1) { 
     var -p %v $read($1,tnr,/(.*),%l) 
     var -p %v $regml(1) 
-    echo -sg >>> $prop
+    ;;echo -sg >>> $prop
     if ($prop) {
       if ($regex(%v,/^\x20{ $+ %s $+ $chr(125) $+ $prop $+ :(.*)/)) {
         var %rm $regml(1)
         if ($regml(1) == $null) {
           var %rn $readn
           while (1) {
-            echo -sg main %s $read($1,nt,$calc(%rn + 1))
+            ;;echo -sg main %s $read($1,nt,$calc(%rn + 1))
             if ($read($1,tnr,/^\x20{ $+ $calc(%s + 4) $+ $chr(125) $+ ([^ ]+.*)/,$calc(%rn + 1))) {
-              echo -sg ?a
+              ;;echo -sg ?a
               if ($readn == $calc(%rn + 1)) {
-                echo -sg ????
+                ;;echo -sg ????
                 var %rm1 $regml(1)
                 if ($regex(%rm1,/^([^:]+):\x20*(.*)/F)) var %n %n $+ , $regml(1) $+ : $regml(2)
               }
@@ -624,13 +625,13 @@ alias getallyml {
                 else break
               }
               else {
-                echo -sg ??????????????
+                ;;;echo -sg ??????????????
                 break
 
               }
             }
             else {
-              echo -sg here?
+              ;;echo -sg here?
               break
             }
             inc %rn
@@ -645,7 +646,7 @@ alias getallyml {
           if ($right(%t,1) isin }]) break
         }
         return %r
-        echo -ag %r
+        ;;echo -ag %r
       } 
     } 
     elseif ($regex(%v,/^\x20{ $+ %s $+ }([^\x20:]+):/)) { 
@@ -657,7 +658,7 @@ alias getallyml {
     var %l $readn + 1
   }
   return %n
-  echo -ag %n 
+  ;;echo -ag %n 
 }
 
 /*            if ($regml(3) isin {[) {
