@@ -642,7 +642,7 @@ alias getallyml {
         var %r %rm
         while (1) {
           var %t $read($1,tn,$calc($readn + 1))
-          var %r %r $+ %t
+          var %r %r %t
           if ($right(%t,1) isin }]) break
         }
         return %r
