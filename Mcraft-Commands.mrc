@@ -3091,7 +3091,7 @@ on 100:text:!rconpassgen*:#: {
     var %passletterLow $gettok(%passcharsLow,%randnumletterLow,46)
     var %randnumSpec $rand(1,%numSpec)
     var %passSpec $gettok(%specialchars,%randnumSpec,46)
-    set %rcongen_password $instok(%rcongen_password, %passletterHigh,$calc(%minlen + 1),32)
+    set %rcongen_password $instok(%rcongen_password, %passletterHigh $+ %passletterLow $+ %number $+ $rand(1,9) $+ %passletterHigh $+ %passletterHigh $+ $rand(1,9), $calc(%minlen + 1),32)
     ;; Orginal set %rcongen_password $instok(%rcongen_password, %passletterHigh $+ %passletterLow $+ %number $+ %passSpec $+ %number $+ %passletterHigh,$calc(%minlen + 1),32)
     ;;set %rcongen_password $instok(%rcongen_password,%number,$calc(%minlen + 1),32)
     ;;set %rcongen_password %rcongen_password %passletterHigh %number %passSpec %passletterLow
@@ -3104,28 +3104,35 @@ on 100:text:!rconpassgen*:#: {
     var %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
     echo -ag ---> generate word %rpassword
     var %oldrconpass $read(%mProp, w, *rcon.password*) Zeile $readn
-    var %oldrconpass $remove(%oldrconpass,rcon.password=)
+    set %oldrconpass $remove(%oldrconpass,rcon.password=)
     var %passline $remove($remtok(%oldrconpass,$gettok(%oldrconpass,1,32),32),Zeile)
     var %newrconpass rcon.password= $+ %rpassword
     write -l $+ %passline %mProp %newrconpass
     set %rcon_password %rpassword
     writeini system.dat MineCraftServer rconpass %rpassword
-    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!. Bitte 4Server14 neustarten!!
+    set %restarttime 30
+    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!.  4Server14 wird in %restarttime $+ sec gestoppt. Bitte alle Disconnecten.
+    /timer.saykonsole1 1 20 //run rcon.exe -a localhost:25575 -p %oldrconpass "say RconPassword neu gesetzt!. Server wird in 10 $+ sec gestoppt. Bitte alle Disconnecten."
+    /timer.restart1 1 %restarttime //run rcon.exe -a localhost:25575 -p %oldrconpass "stop"
     /unset %rcongen_password
+    /unset %oldrconpass
     /halt
   }
   if ($len(%rpassword) == %passlen) {
     var %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
-    /timer.pasmsg1 1 5 /msg $chan Das Passwort lautet: 7 %rpassword
-    /unset %rcongen_password
+    ;;;/timer.pasmsg1 1 5 /msg $chan Das Passwort lautet: 7 %rpassword
     var %oldrconpass $read(%mProp, w, *rcon.password*) Zeile $readn
-    var %oldrconpass $remove(%oldrconpass,rcon.password=)
+    set %oldrconpass $remove(%oldrconpass,rcon.password=)
     var %passline $remove($remtok(%oldrconpass,$gettok(%oldrconpass,1,32),32),Zeile)
     var %newrconpass rcon.password= $+ %rpassword
     write -l $+ %passline %mProp %newrconpass
     set %rcon_password %rpassword
     writeini system.dat MineCraftServer rconpass %rpassword
-    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!. Bitte 4Server14 neustarten!!
+    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!.  4Server14 wird in %restarttime $+ sec gestoppt. Bitte alle Disconnecten.
+    /timer.saykonsole1 1 20 //run rcon.exe -a localhost:25575 -p %oldrconpass "say RconPassword neu gesetzt!. Server wird in 10 $+ sec gestoppt. Bitte alle Disconnecten."
+    /timer.restart1 1 %restarttime //run rcon.exe -a localhost:25575 -p %oldrconpass "stop"
+    /unset %rcongen_password
+    /unset %oldrconpass
     /halt
   }
 }
