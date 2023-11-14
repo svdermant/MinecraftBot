@@ -2892,6 +2892,29 @@ on 100:text:!region*:%m-channel: {
         set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen 3]
         /halt
       }
+      ;;; Farewell-title flag    
+      if (%currentflag == farewell-title) && ($6- == $null) {
+        ;;; Command hin
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag 3 wurde zurückgesetzt
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        set -u5 %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsif
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u7 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+        /halt
+      }
+      if (%currentflag == farewell-title) && ($6- != $null) {
+        var %farwelltmsg $6-
+        /msg %m-channel 3[7Worlguard3] 7 $+ %flag  $+ für die Welt (4 $+ %welt $+  $+ ) wurde auf ( 7 $+ %farwelltmsg  ) gesetz.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        set %com rg f %regionsid -w %welt %currentflag %farwelltmsg
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen 3]
+        /halt
+      }
     }
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
       msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3
@@ -3039,10 +3062,64 @@ on 100:text:!stoplog:%m-channel: {
   }
 }
 
+;;; Rcon Password Generator
+
+on 100:text:!rconpassgen*:#: {
+  if ($2 == $null) {
+    set %passlen $rand(8,16)
+  }
+  if ($2 != $null) && ($2 >= 4) && ($2 <= 32) {
+    set %passlen $2
+  }
+  if ($2 != $null) && ($2 <= 3) || ($2 > 32) {
+    msg $chan 4Fehler: 7Passwortlänge darf nicht weniger als 4 und nicht größer als 32 sein!
+    /halt
+  }
+  set %passcharsHigh A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.Z
+  set %passcharsLow a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z
+  set %specialchars !.§.$.&.-.=.?.'.`./.(.).^.<.>._.,.+.#
+  set %numSpec $numtok(%specialchars,46)
+  set %numLowLetters $numtok(%passcharsLow,46)
+  set %numHighLetters $numtok(%passcharsHigh,46)
+  echo -ag the passwordlen is %passlen
+  set %minlen 1
+  while (%minlen <= %passlen) {
+    set %randnumletterHigh $rand(1,%numHighletters)
+    set %number $rand(1,9)
+    set %passletterHigh $gettok(%passcharsHigh,%randnumletterHigh,46)
+    set %randnumletterLow $rand(1,%numLowLetters)
+    set %passletterLow $gettok(%passcharsLow,%randnumletterLow,46)
+    set %randnumSpec $rand(1,%numSpec)
+    set %passSpec $gettok(%specialchars,%randnumSpec,46)
+    set %rcongen_password $instok(%rcongen_password, %passletterHigh $+ %passletterLow $+ %number $+ %passSpec $+ %number $+ %passletterHigh,$calc(%minlen + 1),32)
+    ;;set %rcongen_password $instok(%rcongen_password,%number,$calc(%minlen + 1),32)
+    ;;set %rcongen_password %rcongen_password %passletterHigh %number %passSpec %passletterLow
+    set %rpassword $remove(%rcongen_password,$chr(32))
+    echo -ag --> Letters %minlen - %rcongen_password - the letter was %passletterHigh num: %number
+    inc %minlen
+  }
+  msg $chan Generiere Passwort aus folgender Länge: 4 %passlen
+  if ($len(%rpassword) <= %passlen) || ($len(%rpassword) >= %passlen) {
+    set %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
+    /msg $chan Das Passwort lautet: 7 %rpassword  
+    echo -ag ---> generate word %rpassword
+    /unset %rcongen_password
+    /halt
+  }
+  if ($len(%rpassword) == %passlen) {
+    set %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
+    /msg $chan Das Passwort lautet: 7 %rpassword  
+    /timer.pasmsg1 1 5 /msg $chan Das Passwort lautet: 7 %rpassword
+    /unset %rcongen_password
+    /halt
+  }
+}
+
+
 ;;;;;;;;; Server Stoppen ;;;;;;;;;;;;;
 on 100:text:!stop:%m-channel:{
   msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wird 4Gestopt <►  7[4!7]
-  //run -ap %pfad $+ stop.bat
+  //run -ap rcon.exe -a localhost:25575 -p %rcon_password "stop"
   set %serverstarted no
   set -u15 %stop on
   set %warn 0

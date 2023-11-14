@@ -1,13 +1,3 @@
-
-alias wer_bist_du {
-  return ich bin ein bot
-}
-
-alias msg.out {
-  msg #Aygon-Minecraft $wer_bist_du
-}
-
-
 ;;;;;; Mcraft Bot ;;;;;;;; V1.0
 
 on 1:START: {
