@@ -14,6 +14,8 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Kleine Optiomierungen am !region select und am !region flag befehl
 - [x] LogUpdate für Gelevelte Mobs
 - [x] Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
+- [x] lag.bat, players.bat, tps.bat etc. Wird vom bot erstellt.
+- [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Serverneustart Erforderlich!)
 - [ ] Movementflags für Worldguard Hinzufügen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
@@ -29,12 +31,11 @@ Damit der Bot auch richtig funktioniert sollten im Serverordner noch folgende Ba
 und der Pfad zu diese sollte beim erststart gesetzt werden. (Sie Sollten im Serverordner sein z.B: C:\MeinServer\)
 
 1. Die Start.bat // Startet den Spigot/PaperMC Server
-2. Die Lag.bat // Liest die Auslastung des Server und Postet sie. (Benötigt EssentialsX)
-3. Die Players.bat // Die Players.bat Zeigt die Spielerliste an
-4. Die Stop.bat // Stoppt den Server
-5. Die Process.bat // Dient zur Ermittlung der PID
-6. Die Tps.bat // Zeigt die TPS an
-7. Die Vault-info.bat //Zeigt Vault Infos an. (Wird vom Bot erstellt)
+2. Die Lag.bat // Liest die Auslastung des Server und Postet sie. (Benötigt EssentialsX) (Wird vom Bot Erstellt)
+3. Die Players.bat // Die Players.bat Zeigt die Spielerliste an (wird vom Bot erstellt)
+4. Die Process.bat // Dient zur Ermittlung der PID
+5. Die Tps.bat // Zeigt die TPS an
+6. Die Vault-info.bat //Zeigt Vault Infos an. (Wird vom Bot erstellt)
 
 
 # Kommen wir zum Inhalt der Dateien
@@ -45,24 +46,10 @@ Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
 ## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
 
-In der Lag bat ist bitte folgendes einzutragen:
-> rcon.exe -a localhost:25575 -p rconpass "lag" > lag.txt
-
-Ersetze bitte rconpass und port mit dem Passwort und port welcher in deiner Server.properties steht. Das rconpass sollte mit dem im Bot angegebenen übereinstimmen.
-
-Der Inhalt der Players.bat sieht so aus:
-> rcon.exe -a localhost:25575 -p rconpass "list" > help2.txt
-
-Der Inhalt der Stop.bat:
-> rcon.exe -a localhost:25575 -p rconpass "stop"
-
 Der Inhalt der Process.bat
 > @echo on </br>
 for /f "tokens=2" %%a in ('tasklist^|find /i "java.exe"') do (set pid=%%a) </br>
 echo %pid% > server.pid </br>
-
-Der Inhalt der Tps.bat
-> rcon.exe -a localhost:25575 -p rconpass "tps" > tps.txt
 
 Alle genannten Batchdatein in den Serverordner packen und mittels !batchpfad <pfad> den Pfad zum Serverordner angeben.
 

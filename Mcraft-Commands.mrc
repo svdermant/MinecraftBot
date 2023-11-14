@@ -178,7 +178,7 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ slay <player> %head2.2 $+ %head.E $+ inen %head.S $+ pieler %head.S $+ chlagen %head2 
     msg %m-channel %head2 %head-2 $+ heal <player> %head2.2 $+ %head.E $+ inen 11s14pieler 11H14eilen %head2 
     msg %m-channel %head2 %head-2 $+ god <player> %head2.2 $+ %head.U $+ nsterblichkeit 11b14ei 11s14pieler 11A14ktivieren %head2 
-    msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %head.E $+ nsterblichkeit 11b14ei %head.S $+ pieler 11d14eaktivieren %head2 
+    msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %head.U $+ nsterblichkeit 11b14ei %head.S $+ pieler 11d14eaktivieren %head2 
     msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+  %head.C $+ hatlog 11a14ktivieren 7(11B14ei 11z14eit 11e14ine 11z14eit 11i14n 4sec 11a14ngeben 11b14is 11m14aximal 09607) %head2 
     msg %m-channel %head2 %head-2 $+ stoplog <zeit> %head2.2 $+  %head.C $+ hatlog 11a14bschalten %head2 
     msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+  %head.Z $+ eigt 11D14ie %head.S $+ pielerliste 11a14n4. %head2 
@@ -187,7 +187,7 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ lag %head2.2 $+ %head.Z $+ eigt 11d14ie 11A14uslastung 11d14es %head.S $+ ervers 11a14n4. %head2 
     msg %m-channel %head2 %head-2 $+ status %head2.2 $+ %head.Z $+ eigt 11d14en 11S14tatus 11d14es %head.S $+ ervers 11a14n4. %head2
     msg %m-channel %head2 %head-2 $+ clearlogs %head2.2 $+ %head.L $+ öscht 11d14en 11I14nhalt 11d14es %head.L $+ ogverzeichnisses 4. %head2 
-
+    msg %m-channel %head2 %head-2 $+ rconpassgen %head2.2 $+ %head.G $+ eneriert 11e14in 11n14eues 11R14con11P14assword. (11S14erverneustart 11e14rforderlich)
   }
   if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
     msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
@@ -3066,51 +3066,66 @@ on 100:text:!stoplog:%m-channel: {
 
 on 100:text:!rconpassgen*:#: {
   if ($2 == $null) {
-    set %passlen $rand(8,16)
+    var %passlen $rand(8,16)
   }
-  if ($2 != $null) && ($2 >= 4) && ($2 <= 32) {
-    set %passlen $2
+  if ($2 != $null) && ($2 >= 4) && ($2 <= 32) && ($2 isnum) {
+    var %passlen $2
   }
-  if ($2 != $null) && ($2 <= 3) || ($2 > 32) {
+  if ($2 != $null) && ($2 <= 3) || ($2 > 32) && ($2 isnum) {
     msg $chan 4Fehler: 7Passwortlänge darf nicht weniger als 4 und nicht größer als 32 sein!
     /halt
   }
-  set %passcharsHigh A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.Z
-  set %passcharsLow a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z
-  set %specialchars !.§.$.&.-.=.?.'.`./.(.).^.<.>._.,.+.#
-  set %numSpec $numtok(%specialchars,46)
-  set %numLowLetters $numtok(%passcharsLow,46)
-  set %numHighLetters $numtok(%passcharsHigh,46)
+  var %passcharsHigh A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.Z
+  var %passcharsLow a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z
+  var %specialchars !.§.$.&.-.=.?.'.`./.(.).^.<.>._.,.+.#
+  var %numSpec $numtok(%specialchars,46)
+  var %numLowLetters $numtok(%passcharsLow,46)
+  var %numHighLetters $numtok(%passcharsHigh,46)
   echo -ag the passwordlen is %passlen
-  set %minlen 1
+  var %minlen = 1
   while (%minlen <= %passlen) {
-    set %randnumletterHigh $rand(1,%numHighletters)
-    set %number $rand(1,9)
-    set %passletterHigh $gettok(%passcharsHigh,%randnumletterHigh,46)
-    set %randnumletterLow $rand(1,%numLowLetters)
-    set %passletterLow $gettok(%passcharsLow,%randnumletterLow,46)
-    set %randnumSpec $rand(1,%numSpec)
-    set %passSpec $gettok(%specialchars,%randnumSpec,46)
-    set %rcongen_password $instok(%rcongen_password, %passletterHigh $+ %passletterLow $+ %number $+ %passSpec $+ %number $+ %passletterHigh,$calc(%minlen + 1),32)
+    var %randnumletterHigh $rand(1,%numHighletters)
+    var %number $rand(1,9)
+    var %passletterHigh $gettok(%passcharsHigh,%randnumletterHigh,46)
+    var %randnumletterLow $rand(1,%numLowLetters)
+    var %passletterLow $gettok(%passcharsLow,%randnumletterLow,46)
+    var %randnumSpec $rand(1,%numSpec)
+    var %passSpec $gettok(%specialchars,%randnumSpec,46)
+    set %rcongen_password $instok(%rcongen_password, %passletterHigh,$calc(%minlen + 1),32)
+    ;; Orginal set %rcongen_password $instok(%rcongen_password, %passletterHigh $+ %passletterLow $+ %number $+ %passSpec $+ %number $+ %passletterHigh,$calc(%minlen + 1),32)
     ;;set %rcongen_password $instok(%rcongen_password,%number,$calc(%minlen + 1),32)
     ;;set %rcongen_password %rcongen_password %passletterHigh %number %passSpec %passletterLow
-    set %rpassword $remove(%rcongen_password,$chr(32))
+    var %rpassword $remove(%rcongen_password,$chr(32))
     echo -ag --> Letters %minlen - %rcongen_password - the letter was %passletterHigh num: %number
     inc %minlen
   }
-  msg $chan Generiere Passwort aus folgender Länge: 4 %passlen
+  msg $chan Generiere Neues RconPasswort aus folgender Länge: 4 %passlen
   if ($len(%rpassword) <= %passlen) || ($len(%rpassword) >= %passlen) {
-    set %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
-    /msg $chan Das Passwort lautet: 7 %rpassword  
+    var %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
     echo -ag ---> generate word %rpassword
+    var %oldrconpass $read(%mProp, w, *rcon.password*) Zeile $readn
+    var %oldrconpass $remove(%oldrconpass,rcon.password=)
+    var %passline $remove($remtok(%oldrconpass,$gettok(%oldrconpass,1,32),32),Zeile)
+    var %newrconpass rcon.password= $+ %rpassword
+    write -l $+ %passline %mProp %newrconpass
+    set %rcon_password %rpassword
+    writeini system.dat MineCraftServer rconpass %rpassword
+    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!. Bitte 4Server14 neustarten!!
     /unset %rcongen_password
     /halt
   }
   if ($len(%rpassword) == %passlen) {
-    set %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
-    /msg $chan Das Passwort lautet: 7 %rpassword  
+    var %rpassword $mid(%rpassword,$rand(1,$len(%rpassword)),%passlen)
     /timer.pasmsg1 1 5 /msg $chan Das Passwort lautet: 7 %rpassword
     /unset %rcongen_password
+    var %oldrconpass $read(%mProp, w, *rcon.password*) Zeile $readn
+    var %oldrconpass $remove(%oldrconpass,rcon.password=)
+    var %passline $remove($remtok(%oldrconpass,$gettok(%oldrconpass,1,32),32),Zeile)
+    var %newrconpass rcon.password= $+ %rpassword
+    write -l $+ %passline %mProp %newrconpass
+    set %rcon_password %rpassword
+    writeini system.dat MineCraftServer rconpass %rpassword
+    /timer.saymes1 1 5 /msg $chan 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 RconPassword neu gesetzt!. Bitte 4Server14 neustarten!!
     /halt
   }
 }
@@ -3148,6 +3163,7 @@ on 100:text:!status:%m-channel: {
 on *:text:!playerlist:%m-channel: { 
   set -u10 %plisten on
   set -u5 %tps3 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
+  /write -l1 %pfad $+ players.bat rcon.exe -a localhost:25575 -p %rcon_password "list" > help2.txt
   //run -ap %pfad $+ players.bat
   ;;;/timersenda1 1 2 /msg %m-channel 7,1[4-7] 11S14pieler 11L14iste 7[4-7]
   /timer.list1 1 1 /plist
@@ -3192,6 +3208,7 @@ on 100:text:!batchpfad*:%m-channel: {
 
 on *:text:!tps:%m-channel: { 
   set -u15 %tps on
+  /write -l1 %pfad $+ TPS.bat rcon.exe -a localhost:25575 -p %rcon_password "tps" > tps.txt
   //run -ap %pfad $+ TPS.bat
   set -u5 %tps3 7,1[4-7] 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   timersay1 1 8 /tpsausgabe
@@ -3201,6 +3218,7 @@ on *:text:!tps:%m-channel: {
 
 on *:text:!lag:%m-channel: {
   set %laglag on
+  /write -l1 %pfad $+ lag.bat rcon.exe -a localhost:25575 -p %rcon_password "lag" > lag.txt
   //run -ap %pfad $+ lag.bat
   set %lag $read(%pfad $+ lag.txt,l,2)
   set %lag1 $remove(%lag,§r)
