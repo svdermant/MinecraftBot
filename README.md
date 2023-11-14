@@ -16,6 +16,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
 - [x] lag.bat, players.bat, tps.bat etc. Wird vom bot erstellt.
 - [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Serverneustart Erforderlich!)
+- [x] Alias getAllyml (optimiert) (Danke an Oiums von Swiftirc.net für die Hilfe über Teamviewer)
 - [ ] Movementflags für Worldguard Hinzufügen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
