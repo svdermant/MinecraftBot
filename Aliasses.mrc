@@ -26,7 +26,7 @@ on 1:START: {
       set %mlog $?="Bitte gib den Pfad an wo die MineCraft Serverlog liegt. (zb C:\MeinServer\Logs\latest.log)" | writeini system.dat MineCraftServer LogPfad %mlog
     }
 
-    set %pfad $readinin(system.dat, MineCraftServer, ServerPfad)
+    set %pfad $readini(system.dat, MineCraftServer, ServerPfad)
     if (%pfad = $null) { echo 4*** WARNUNG Es wurde kein Serverpfad angegeben. Bitte behbe das Problem...
       set %pfad $?="Bitte gib den Pfad an wo die Serverfiles liegen also auch die Startbat etc)" | writeini system.dat MineCraftServer ServerPfad %pfad
     }
@@ -56,7 +56,8 @@ on 1:START: {
     echo 12*** Bitte lege jetzt den Spitznamen/Namen des Bots fest. Es gelten die normalen IRC-Nick-Regeln (z. B. keine Leerzeichen).
     set %bot.name $?="Bitte gib den Namen an welchen du Verwenden möchtest"
     if (%bot.name == $null) { echo 12**** Der Botname fehlt **** Programm wird geschlossen. | /exit }
-    writeini system.dat botinfo botname %bot.name | /nick %bot.name
+    writeini system.dat botinfo botname %bot.name 
+    /nick %bot.name
     echo 12*** Großartig. Der Nickname des Bots ist nun auf 4 %bot.name  eingestellt
 
     echo 12*** Gib nun den Botbesitzer an  
@@ -137,6 +138,7 @@ on 1:CONNECT: {
     /timer.join1 1 3 /join %m-channel
   }
   if ($me != $readini(system.dat, botinfo, botname)) {
+    /nick $readini(system.dat, botinfo, botname)
     /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)
   }
 }
