@@ -389,7 +389,7 @@ Alias checklog {
     if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
-    if (%flagset == on) && (!%tps3) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /halt }
+    if (%flagset == on) && (%tps4 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
