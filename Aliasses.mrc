@@ -410,6 +410,38 @@ Alias checklog {
   }
 }
 
+;;; Alias zum Betriebsystem Abfrage:
+;;; Ob es bei Linux auch geht keine Ahnung
+;;; Quelle: https://forums.mirc.com/ubbthreads.php/topics/230837/Re:_Some_$os...._extra_identif
+
+on 1:text:!os:#: { msg $chan Mein Ich laufe auf einem $osVersion }
+
+alias osVersion { return $gettok($OSGET(Name),1,124) }
+alias osBuild { return $OSGet(Version) }
+alias osSP { return SP $+ $OSGet(ServicePackMajorVersion) }
+alias osReg { return $OSGet(RegisteredUser) }
+
+
+alias -l OSGet {
+  var %r
+  if ($com(osLoc)) { .comclose osLoc }
+  if ($com(osSrv)) { .comclose osSrv }
+  if ($com(osOS)) { .comclose osOS }
+
+
+  .comopen osLoc WbemScripting.SWbemLocator
+  if ($comerr) { goto error }
+  elseif (!$com(osLoc,ConnectServer,3,dispatch* osSrv)) { goto error }
+  elseif (!$com(osSrv,ExecQuery,3,bstr*,select $1 from Win32_OperatingSystem,dispatch* osOS)) { goto error }
+  %r = $comval(osOS,1,$1)
+
+  :error
+  if ($com(osLoc)) { .comclose osLoc }
+  if ($com(osSrv)) { .comclose osSrv }
+  if ($com(osOS)) { .comclose osOS }
+  return %r
+}
+
 
 alias clearedlogs {
   if (!%clearlog) { msg %m-channel Zeit Abgelaufen }
