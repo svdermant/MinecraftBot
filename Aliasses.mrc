@@ -414,7 +414,7 @@ Alias checklog {
 ;;; Ob es bei Linux auch geht keine Ahnung
 ;;; Quelle: https://forums.mirc.com/ubbthreads.php/topics/230837/Re:_Some_$os...._extra_identif
 
-on 1:text:!os:#: { msg $chan Mein Ich laufe auf einem $osVersion }
+on 1:text:!os:#: { msg $chan Ich laufe auf einem 4 $+ $osVersion $+   Buildnummer:  $+ $osBuild }
 
 alias osVersion { return $gettok($OSGET(Name),1,124) }
 alias osBuild { return $OSGet(Version) }
