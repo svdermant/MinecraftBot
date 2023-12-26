@@ -386,6 +386,7 @@ Alias checklog {
     }
     if (/WARN isin %temp.r) { inc %warn }
     if (/ERROR isin %temp.r) { inc %err }
+    if (%mcwhois == on) { /halt }
     if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %tps3 | /halt }
@@ -470,8 +471,8 @@ alias plist {
   set %plist3 $replace(%plist, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
   set %players1 $replace(%players, §6default@r:, 4(7Standard4), §6§7[§6Owner§7]§r§r:, 14[7Owner14])
   set %playerlist1 3Gruppe: $replace(%players1, §6, %c1 $+ 7, §4, %c1 $+ 5, §c, %c1 $+ 41, §f, %c1 $+ 0, §r, $chr(3))
-  timersend1 1 4 /msg %m-channel %plist3
-  if (%players1 != $null) { /timersend2 1 5 /msg %m-channel %playerlist1 }
+  if (!%mcwhois) { timersend1 1 4 /msg %m-channel %plist3 }
+  if (%players1 != $null) && (!%mcwhois) { /timersend2 1 5 /msg %m-channel %playerlist1 }
 }
 
 alias lagausgabe {
@@ -783,4 +784,37 @@ alias regcheck {
 Alias ver {
   var %version $read(version,l,1)
   return %version 
+}
+
+alias mcwhois {
+  set -u4 %mcwhois on 
+  write %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password "whois $1" > whois- $+ $1 $+ .txt
+  //run -ap %pfad $+ mcwhois.bat
+  /timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
+  echo ag -> whois $1
+  /timerout1 1 2 /mcwout $1
+}
+
+Alias mcwout {
+  set %mcplayerpos $remove($read(%pfad $+ whois- $+ $1 $+ .txt, ntw, *Position*),§6,§r,$chr(44))
+  var %mctokens $replace(%mcplayerpos,$chr(32),.)
+  set %playersworld $remove($gettok(%mctokens,3,46),$chr(40))
+  set %playerposx $gettok(%mctokens,4,46)
+  set %playerposy $gettok(%mctokens,5,46)
+  set %playerposz $remove($gettok(%mctokens,6,46),$chr(41))
+  //echo -ag Spielerwelt = %playersworld
+  //echo -ag Pos x = %playerposx
+  //echo -ag Pos y = %playerposy
+  //echo -ag Pos z = %playerposz
+  set %wout $addtok(%wout, 3S10pielerwelt: 14 $+ %playersworld, 32)
+  set %wout $addtok(%wout, 3Pos 10x = 07 $+ %playerposx, 32)
+  set %wout $addtok(%wout, 3Pos 10y = 07 $+ %playerposy, 32)
+  set %wout $addtok(%wout, 3Pos 10z = 07 $+ %playerposz, 32)
+}
+
+alias mcwhoisout {
+  if (%mcwhois == on) { 
+    //msg %m-channel %wout
+    unset %wout
+  }
 }

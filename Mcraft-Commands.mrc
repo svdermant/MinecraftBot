@@ -2925,7 +2925,7 @@ on 100:text:!region*:%m-channel: {
       //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
       /unset %regionsid
       /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-      /set -u4 %tps3 3[7Worldguardconfiguration wurden neu geladen3]
+      /set -u6 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
       /halt
     }
     if (%currentflag == enderpearl) && ($6 != $null) {
@@ -2939,14 +2939,48 @@ on 100:text:!region*:%m-channel: {
         /msg %m-channel 3[7Worldguard3]  Die Flag 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf ( 7 $+ %v1  ) gesetzt
         /unset %regionsid
         /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
-        set -u6 %tps4 3[7Worldguardconfiguration wurden geladen3]
+        set -u7 %tps4 3[7Worldguardconfiguration wurden geladen3]
         /halt
       }
       if ($istok(%values,$6-,32) == $false)  { 
         msg %m-channel Falscher Wert für %currentflag. Gib bitte Allow oder  deny an.
         /halt
       }
-    } 
+    }
+    ;;; Chroruis-fruit-Teleport
+    if (%currentflag == chorus-fruit-teleport) && ($6 == $null) {
+      ;; Command ausführen
+      ;;; Flag Zurücksetzen
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == chorus-fruit-teleport) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        ;;; Werte Setzen
+        var %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3]  Die Flag 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf ( 7 $+ %v1  ) gesetzt
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u7 %tps4 3[7Worldguardconfiguration wurden geladen3]
+        /halt
+
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel Falscher Wert für %currentflag. Gib bitte Allow oder  deny an.
+        /halt
+      }
+    }
+
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
       msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3
@@ -2955,6 +2989,26 @@ on 100:text:!region*:%m-channel: {
     if ($2 == flag) && (%regionsid == $null) { msg %m-channel Falsche Eingabe folgende Parameter müssen angebeben werden. Beispiel: !region flag -w weltname flag werte.  Bitte Selectiere die region zuvor | /halt }
   }
 }
+
+;;;; Whois Command ;;;;
+
+on *:text:!mcwhois*:#: {
+  set -u4 %mcwhois on
+  //run -ap %pfad $+ players.bat
+  /timercheck.plist1 1 2 /plist
+  if ($2 isin %playerlist1) { 
+    msg %m-channel 11,1===3,1[7,1Whois von Spieler 4,1 $+ $2 $+ 3,1]11,1===
+    $mcwhois($2)
+    /timer1 1 3 /mcwhoisout
+    /halt
+  }
+  else {
+    msg %m-channel Sorry aber der Spieler $2 ist nicht im Spiel eingeloggt oder exisiert nicht.
+    /halt
+  }
+}
+
+
 
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
 
