@@ -29,8 +29,9 @@ on *:text:!gh:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG
 on *:text:!stream*:%m-channel: {
   if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://www.youtube.com/@igamerpg 7[9▒7,1] |  /halt }
   if ($2 != $null) {
-    set %topic-m-channel  7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]9 $2- $+ 4.0 Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Actualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot
+    set %topic-m-channel  7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]9 $2- $+ 4.0 Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot
     topic %m-channel %topic-m-channel
+    msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews 8[>]9 $2- 8[<]
     /halt
   }
 }
@@ -3232,6 +3233,8 @@ on 100:text:!stop:%m-channel:{
   set -u15 %stop on
   set %warn 0
   set %err 0
+  unset %syspid
+  remove %pfad $+ server.pid
 }
 
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
@@ -3242,8 +3245,16 @@ on 100:text:!start:%m-channel:{
   /set %warn 0
   /set %err 0
   //run -ap %pfad $+ start.bat
-  /msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <►  7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ $spid $+ 07] 
+  //run -ap %pfad $+ process.bat
+  //set %syspid $read(%pfad $+ server.pid, 1)
+  /msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wird 9Gestartet <► 
+  /timersyspid1 1 3 /systempid
   /timer.checkstarted1 0 3 /checkstarted
+}
+
+Alias systempid {
+  if (%syspid == $null) || (!%syspid) { /set %syspid $read(%pfad $+ server.pid,1) }
+  /msg %m-channel   7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ %syspid $+ 07]
 }
 
 on 100:text:!status:%m-channel: { 

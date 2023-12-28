@@ -183,8 +183,6 @@ alias system_defaults_check {
 
 alias spid {
   /run -ap %pfad $+ process.bat
-  /set %spid $read(%pfad $+ server.pid, 1)
-  return %spid
 }
 
 alias flagcheck {
@@ -449,7 +447,6 @@ alias clearedlogs {
 }
 
 
-
 alias checkstarted {
   var %done $read(%mLog, w, *[Server thread/INFO]: Done*)
   if (%done != $null)  { 
@@ -457,6 +454,7 @@ alias checkstarted {
     set %error $iif(%err > 0,%head2 7Incl:11 %err 12Fehler %head2, %head2 7Keine 12Fehler %head2)
     msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 wurde erfolgreich 9 ◄> Gestartet! <► 7[9!7]  %co %error
     msg %m-channel 7,1[9!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 9◄>14 Laden der Restconfiguration 9 ◄> Beitritt zum Server möglich<► 7[9!7]
+    ;;/timerspid1 1 2 /spid
     if (%warn >= 1) || (%err >= 1) { msg %m-channel %head2 4ACHTUNG11 Es gab einige Warnungen/Fehler. Überprüfe die Console für Details  %head2 }
     /timer.checkstarted1 off
   }
@@ -789,7 +787,7 @@ Alias ver {
 alias mcwhois {
   set -u4 %mcwhois on 
   write %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password "whois $1" > whois- $+ $1 $+ .txt
-  //run -ap %pfad $+ mcwhois.bat
+  //run -ap %pfad $+ mcwhois.bat 
   /timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
   echo ag -> whois $1
   /timerout1 1 2 /mcwout $1
