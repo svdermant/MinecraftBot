@@ -17,8 +17,12 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] lag.bat, players.bat, tps.bat etc. Wird vom bot erstellt.
 - [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Serverneustart Erforderlich!)
 - [x] Alias getAllyml (optimiert) (Danke an Oiums von Swiftirc.net für die Hilfe über Teamviewer)
-- [ ] Movementflags für Worldguard Hinzufügen
+- [x] Movementflags für Worldguard hinzugefügt (entry, exit, exit-via-teleport, exit-override, entry-deny-message, exit-deny-message,
+      notify-enter, notify-leave, greeting, farewell, farewell-title, greeting-title, enderpearl, chorus-fuit-teleport, teleport-message)  
+   ** (Anmerkung: Teleport & spawn Flag kann nicht Gesetzt werden Spieleraccount wird benötigt)
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
+
+
 
 # Installation
 1. Lade dir Zuerst die Software von www.mirc.com herunter und installiere es.

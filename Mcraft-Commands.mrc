@@ -2981,7 +2981,61 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
     }
-
+    ;;; Teleport message Flag
+    if (%currentflag == teleport-message) && ($6 == $null) {
+      ;;; Flag Zurücksetzen
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == teleport-message) && ($6 != $null) {
+      ;;; Message Setzen
+      var %message $6-
+      set -u3 %com rg f %regionsid -w %welt %currentflag %message
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %message $+ 3] gesetzt.
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    ;; Map Making Flags
+    ;; Item Pickup Flag
+    if (%currentflag == item-pickup) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == item-pickup) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
       msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3
