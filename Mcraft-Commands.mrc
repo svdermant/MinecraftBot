@@ -3036,6 +3036,407 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
     }
+    ;;; Item-Drop flag
+    if (%currentflag == item-drop) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == item-drop) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; Exp-Drops flag
+
+    if (%currentflag == exp-drops) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == exp-drops) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; String Flag -> deny-message
+    if (%currentflag == deny-message) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == deny-message) && ($6 != $null) {
+      var %text $6-
+      set -u3 %com rg f %regionsid -w %welt %currentflag %text
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf die Nachricht 3[7 $+ %text $+ 3] gesetzt.
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+
+    ;;; Invincible Flag
+    if (%currentflag == invincible) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == invincible) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; Flag fall-damage
+    if (%currentflag == fall-damage) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == fall-damage) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; flag game-mode
+    if (%currentflag == game-mode) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == game-mode) && ($6 != $null) {
+      var %values survival creative adventure spectator
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein Spielmodus an:  7survival12, 7creative 12, 7adventure12, 7spectator12.!
+        /halt
+      }
+    }
+
+    ;;; String flag time-lock
+    if (%currentflag == time-lock) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == time-lock) && ($6 != $null) {
+      var %values $6-
+      if (%values isnum) && (%values >= 1) && (%values <= 24000) {
+        set -u3 %com rg f %regionsid -w %welt %currentflag %values
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if (%values isnum) && (- isin $left(%values,1)) {
+        msg %m-channel 4FEHLER: 12 Gib bitte keine Negativen werte an. Sondern nutze eine Zahl von 7 1-24000 
+        /halt
+      }
+      if (%values !isnum) {
+        msg %m-channel 4FEHLER:12 Gib bitte eine Zahl an im Bereich 7 1-24000 .
+        /halt
+      }
+    }
+
+    ;;; Weather Lock Flag
+    if (%currentflag == weather-lock) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == weather-lock) && ($6 != $null) {
+      var %values rain clear
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte 7rain12 oder 7clear 12 an!
+        /halt
+      }
+    }
+
+    ;;; natural-health-regen flag
+    if (%currentflag == natural-health-regen) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == natural-health-regen) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; Natural-hunger-drain flag
+    if (%currentflag == natural-hunger-drain) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == natural-hunger-drain) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
+
+    ;;; heal-delay flag
+    if (%currentflag == heal-delay) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == heal-delay) && ($6 != $null) {
+      var %values $6-
+      if (%values isnum) {
+        set -u3 %com rg f %regionsid -w %welt %currentflag %values
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if (%values !isnum) {
+        msg %m-channel 4FEHLER: 12 Gib hier bitte eine Zahl in secunden an die die Zeitspannen zwischen der Lebensregeneration definiert. 
+        msg %m-channel 12 (z.B: 25s = Nach 25s wird das Leben anfangen sich zu regenerieren) 
+      }
+    }
+
+    ;;; heal-amount
+    if (%currentflag == heal-amount) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == heal-amount) && ($6 != $null) {
+      var %values $6
+      if (%values isnum) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if (%values !isnum) {
+        msg %m-channel 4FEHLER:12 Gib hier bitte den Wert der Herzen an die nach dem Heal-delay wiederhergestellt werden sollen.
+        msg %m-channel 12 Die Anzahl der Herzen definiert das Leben 10 Volle Herzen sind 20 Leben. (Standard Werte) 
+        msg %m-channel 12 Beispiel: Ein halbes Herz wären dann 1 Lebenspunkt. Will man nun immer nach 5 sec 2 Volle Herzen regeneriert haben so muss der 7heal-amount12 wert 4 4 betragen.
+        /halt
+      }
+    }
+
+    ;;; heal-min-health ----
+    ;;; Wird demnächst fortgesetzt.
+    if (%currentflag == heal-min-health) && ($6 == $null) {
+      ;; FLag Reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == heal-min-health) && ($6 != $null) {
+      var %values allow deny
+      if ($istok(%values,$6,32) == $true) {
+        set %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf 3[7 $+ %v1 $+ 3] gesetzt.
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        /set -u7 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+        /halt
+      }
+      if ($istok(%values,$6,32) == $false) {
+        msg %m-channel 4FEHLER:12 Gibt bitte ein 7allow12 oder 7deny 12 Wert an!
+        /halt
+      }
+    }
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
       msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3
