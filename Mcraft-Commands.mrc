@@ -3714,7 +3714,13 @@ Alias systempid {
 
 on 100:text:!status:%m-channel: { 
   if (%serverstarted == yes) && (%pid isnum) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄> 14ist 9ONLINE }
-  if (%serverstarted == no) && (!%pid) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄>14 ist 4OFFLINE }
+  if (%serverstarted == no) || (!%pid) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄>14 ist 4OFFLINE }
+}
+
+on 1:EXIT: {
+  /unset %serverstarted
+  /unset %pid
+  /unset %spid
 }
 
 ;;;;;;;;;;;;;; Spielerliste ;;;;;;;;;;;;;;;;;
