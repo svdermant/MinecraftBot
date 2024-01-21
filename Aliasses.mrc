@@ -363,13 +363,13 @@ Alias checklog {
     set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32)) 
     set %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
     set %temp.rv3a $remove(%temp.rv4,%te.2rem, - $+ $chr(32) - $+ $chr(32),%te.1rem)
-    if (MC-Chat isin %temp.r) { 
-      msg %m-channel Irgendwas
+    if (Chat isin %temp.r) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
       var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,%te.3rem)
       var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
-      var %temp.rv3 $replace(%temp.rv3b,.,$chr(32))
+      set %temp.rv3mchat $replace(%temp.rv3b,.,$chr(32))
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%temp.rv3mchat, $gettok(%temp.rv3mchat,1,32), 32) 7,1[9▒7] 
       /halt
     }
     if (%named isin %temp.r) { 
