@@ -831,9 +831,13 @@ alias mcwhoisout {
     var %x 2
     while (%x <= %maxlines) {
       set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x)
+      if (UUID isin %m) { inc %x | set %uid $read(%pfad $+ whois- $+ %whoisnick $+ .txt, w, **UUID**) | set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) | set %mout $remove(%mout, $gettok(%mout,2,32)) | set %mount $gettok(%uid,4,32) | msg %m-channel 9 ► 7 UUID: %mount }
+      if (IP-Adresse isin %m) { inc %x | set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) | set %mout $remove(%mout, $gettok(%mout,2,32)) }
+      if (Position isin %m) { inc %x | set %pos $read(%pfad $+ whois- $+ %whoisnick $+ .txt, w, **Position**)  | set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) | set %mout $remove(%mout, $gettok(%mout,2,32)) | set %position $gettok(%pos,4-,32) | msg %m-channel 9 ► 7 Position: %position  }
+      if (Spielzeit isin %m) { set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) | set %mout $remove(%mout, $gettok(%mout,2,32)) }
       set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9)
-      if (IP-Adresse isin %m) { inc %x | set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) }
-      msg %m-channel %mout
+      set %mout $remove(%mout, $gettok(%mout,2,32))
+      msg %m-channel 9 ►  %mout 
       inc %x
     }
   }
