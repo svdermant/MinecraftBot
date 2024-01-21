@@ -287,7 +287,8 @@ Alias checklog {
   var %Enabling Enabling
   var %named Named entity
   set %scom issued server command
-  set %login [<ip address withheld>] logged in 
+  set %login [<ip address withheld>] logged in
+  set %loginip logged in 
   var %left left the game
   set %sec [Not Secure] [Server]
   set %cp Craft-Planer-Thread
@@ -296,7 +297,7 @@ Alias checklog {
     set %temp.r $read(%mlog, %i)
     if (Lvl isin %temp.r) { /checklog-lvl | /halt }
     var %temp.rv $remove(%temp.r, [<ip address withheld>], $time)
-    var %temp.rv2 %Head-3 $replace( $+ %temp.rv, left the game, 14Verlies den Server, $&
+    var %temp.rv2 %Head-3 $replace( $+ %temp.rv, left the game, 4Verlies den Server, $&
       /INFO]:, /INFO]:, [Async Chat Thread, 14[11M10C-11C11hat14], $&
       [Server Thread,  14[11S10erver 11E10vent14],Owner,4O8w7n3e12r14, $&
       issued Server command:, Server Befehl4:7, $&
@@ -392,7 +393,7 @@ Alias checklog {
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
-    if (%login isin %temp.r) { var %log 9meldet sich an mit| var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $+ $remove($replace(%temp.rv4, logged in with entity, 9meldet sich an mit $+ %cl),%cls) | /halt } 
+    if (%login isin %temp.r) || (%loginip isin %temp.r) { var %log 9meldet sich an mit | var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | var %logtext $replace($gettok(%temp.r,4,32),[,$chr(32),],$chr(32),:,$chr(32)) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $gettok(%logtext, 1, 32) 9hat sich eingeloggt. | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
     ;;;if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
