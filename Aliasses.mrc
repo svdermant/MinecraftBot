@@ -785,16 +785,27 @@ Alias ver {
 }
 
 alias mcwhois {
-  set -u4 %mcwhois on 
-  write %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password "whois $1" > whois- $+ $1 $+ .txt
-  //run -ap %pfad $+ mcwhois.bat 
-  /timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
-  echo ag -> whois $1
-  /timerout1 1 2 /mcwout $1
+  if (%whoisnick isin %playerlist1) { 
+    msg %m-channel 11,1===3,1[7,1Whois von Spieler 4,1 $+ %whoisnick $+ 3,1]11,1===
+    ;;;$mcwhois($2)
+    ;;;/timer1 1 3 /mcwhoisout
+    ;;;/halt
+    set -u6 %mcwhois on 
+    write %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password " $+ whois %whoisnick $+ " > whois- $+ %whoisnick $+ .txt
+    //run -ap %pfad $+ mcwhois.bat 
+    ;;/timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
+    echo ag -> whois %whoisnick
+    /timerout1 1 2 /mcwout %whoisnick
+    /timerwhoissend1 1 4 /mcwhoisout
+  }
+  else {
+    msg %m-channel Sorry aber der Spieler $2 ist nicht im Spiel eingeloggt oder exisiert nicht.
+    ;;;/halt
+  }
 }
 
 Alias mcwout {
-  set %mcplayerpos $remove($read(%pfad $+ whois- $+ $1 $+ .txt, ntw, *Position*),§6,§r,$chr(44))
+  set %mcplayerpos $remove($read(%pfad $+ whois- $+ %whoisnick $+ .txt, ntw, *Position*),§6,§r,$chr(44))
   var %mctokens $replace(%mcplayerpos,$chr(32),.)
   set %playersworld $remove($gettok(%mctokens,3,46),$chr(40))
   set %playerposx $gettok(%mctokens,4,46)

@@ -3452,16 +3452,8 @@ on *:text:!mcwhois*:#: {
   set -u4 %mcwhois on
   //run -ap %pfad $+ players.bat
   /timercheck.plist1 1 2 /plist
-  if ($2 isin %playerlist1) { 
-    msg %m-channel 11,1===3,1[7,1Whois von Spieler 4,1 $+ $2 $+ 3,1]11,1===
-    $mcwhois($2)
-    /timer1 1 3 /mcwhoisout
-    /halt
-  }
-  else {
-    msg %m-channel Sorry aber der Spieler $2 ist nicht im Spiel eingeloggt oder exisiert nicht.
-    /halt
-  }
+  set %whoisnick $2
+  /timercheck.mcwhois1 1 4 /mcwhois %whoisnick
 }
 
 
