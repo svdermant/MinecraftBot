@@ -825,7 +825,16 @@ Alias mcwout {
 
 alias mcwhoisout {
   if (%mcwhois == on) { 
-    //msg %m-channel %wout
+    ;;;//msg %m-channel %wout
     unset %wout
+    var %maxlines $lines(%pfad $+ whois- $+ %whoisnick $+ .txt)
+    var %x 2
+    while (%x <= %maxlines) {
+      set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x)
+      set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9)
+      if (IP-Adresse isin %m) { inc %x | set %m $read(%pfad $+ whois- $+ %whoisnick $+ .txt, tn, %x) | set %mout $replace(%m,§6,7,§4,4,§r,,§f,0,§a,9) }
+      msg %m-channel %mout
+      inc %x
+    }
   }
 }
