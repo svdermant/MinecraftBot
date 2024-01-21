@@ -284,6 +284,7 @@ Alias checklog {
   var %i $lines(%mlog)
   var %sev 11S10erver
   var %Loading Loading
+  var %igchat Async Chat Thread
   var %Enabling Enabling
   var %named Named entity
   set %scom issued server command
@@ -364,7 +365,7 @@ Alias checklog {
     set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32)) 
     set %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
     set %temp.rv3a $remove(%temp.rv4,%te.2rem, - $+ $chr(32) - $+ $chr(32),%te.1rem)
-    if (Chat isin %temp.r) { 
+    if (MC $+ $chr(45) $+ CHAT isin %temp.r) || (%igchat isin %temp.r) { 
       var %te.3rem $gettok(%te.1,5,46)
       var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
       var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,%te.3rem)
