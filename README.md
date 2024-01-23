@@ -15,7 +15,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] LogUpdate für Gelevelte Mobs
 - [x] Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
 - [x] lag.bat, players.bat, tps.bat etc. Wird vom bot erstellt.
-- [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Servegit statusrneustart Erforderlich!)
+- [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Serverneustart Erforderlich!)
 - [x] Alias getAllyml (optimiert) (Danke an Oiums von Swiftirc.net für die Hilfe über Teamviewer)
 - [x] Movementflags für Worldguard hinzugefügt (entry, exit, exit-via-teleport, exit-override, entry-deny-message, exit-deny-message,
       notify-enter, notify-leave, greeting, farewell, farewell-title, greeting-title, enderpearl, chorus-fuit-teleport, teleport-message)  
