@@ -793,7 +793,7 @@ alias mcwhois {
     ;;;/timer1 1 3 /mcwhoisout
     ;;;/halt
     set -u6 %mcwhois on 
-    write %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password " $+ whois %whoisnick $+ " > whois- $+ %whoisnick $+ .txt
+    write -l1 %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password " $+ whois %whoisnick $+ " > whois- $+ %whoisnick $+ .txt
     //run -ap %pfad $+ mcwhois.bat 
     ;;/timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
     echo ag -> whois %whoisnick
