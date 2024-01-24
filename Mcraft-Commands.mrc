@@ -359,15 +359,21 @@ on 100:text:!region*:%m-channel: {
     msg %m-channel 4FEHLER:12 Damit eine Flag gesetzt werden kann muss zuvor die Region selektiert werden.
     msg %m-channel 12Dies geschieht durch folgenden Befehl: !region select -w weltname regionsname
     msg %m-channel 12Nach erfolgreicher Selektierung kann die Entsprechende Flag aus der Liste hier gesetzt werden:
+    msg %m-channel 9,1===3,1[7,1 WorldGuard Flags 3,1]9,1===
     msg %m-channel %flaglist1
     msg %m-channel %flaglist2
     msg %m-channel %flaglist3
     msg %m-channel %flaglist4
     msg %m-channel %flaglist5
+    msg %m-channel 9,1===3,1[13,1 Third Party Flags 3,1]9,1===
+    msg %m-channel %thirdflags1
+    msg %m-channel %thirdflags2
+    msg %m-channel %thirdflags3
+    msg %m-channel %thirdflags4
+    msg %m-channel %thirdflags5 
+
     msg %m-channel 12Um diese dann zu setzen muss folgende eingabe geschehen: !region flag -w weltname flag <value>
     msg %m-channel 12Wird keine value angegeben so wird die Flag zurückgesetzt.
-
-
     /halt
   }  
   if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
@@ -375,11 +381,18 @@ on 100:text:!region*:%m-channel: {
     set %welt $4
     if ($flagcheck(%flag) == off) { 
       /msg %m-channel Flag %flag existiert nicht. Bitte verwende eine der Folgenden FLags:
+      msg %m-channel 9,1===3,1[7,1 WorldGuard Flags 3,1]9,1===
       msg %m-channel %flaglist1
       msg %m-channel %flaglist2
       msg %m-channel %flaglist3
       msg %m-channel %flaglist4
       msg %m-channel %flaglist5
+      msg %m-channel 9,1===3,1[13,1 Third Party Flags 3,1]9,1===
+      msg %m-channel %thirdflags1
+      msg %m-channel %thirdflags2
+      msg %m-channel %thirdflags3
+      msg %m-channel %thirdflags4
+      msg %m-channel %thirdflags5 
       /halt
     }
     if ($flagcheck(%flag) == on) { set %currentflag %flag 
@@ -476,6 +489,32 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
+      ;;; nonplayer-protection-flag
+      if (%currentflag == nonplayer-protection-flag) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u3 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag   wurde zurückgesetzt.
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+        /halt
+      }
+      if (%currentflag == nonplayer-protection-flag) && ($6- != $null)  {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        var %command $1- 
+        ;;if (-w isin $left(%command, 15)) { set %text $6- }
+        set %text $6-
+        set %com rg f %regionsid %currentflag -w %welt %text
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag   wurde auf ( $+ %text $+ ) gesetzt.
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+        /halt
+      }
       ;;; Passthrough Flag
       if (%currentflag == passthrough) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
@@ -555,8 +594,8 @@ on 100:text:!region*:%m-channel: {
         }
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
-      ;;; Inteact Flag
-      if (%currentflag == Interact) && ($6- == $null) {
+      ;;; Interact Flag
+      if (%currentflag == interact) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -565,7 +604,7 @@ on 100:text:!region*:%m-channel: {
         /unset %regionsid
         /halt
       }
-      if (%currentflag == Interact) && ($6- != $null)  {
+      if (%currentflag == interact) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -788,7 +827,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;: ride flag
-      if (%currentflag == ride ) && ($6- == $null) {
+      if (%currentflag == ride) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1647,7 +1686,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Mob-Damage Flag
-      if (%currentflag == Mob-Damage) && ($6- == $null) {
+      if (%currentflag == mob-damage) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1658,7 +1697,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Mob-Damage) && ($6- != $null)  {
+      if (%currentflag == mob-damage) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1686,7 +1725,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Mob-Spawning FLag
-      if (%currentflag == Mob-Spawning) && ($6- == $null) {
+      if (%currentflag == mob-sawning) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1697,7 +1736,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Mob-Spawning) && ($6- != $null)  {
+      if (%currentflag == mob-spawning) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1782,7 +1821,7 @@ on 100:text:!region*:%m-channel: {
         ;;; Muss Bleiben
       }
       ;;; Entity-painting-destroy Flag
-      if (%currentflag == Entity-painting-destroy) && ($6- == $null) {
+      if (%currentflag == entity-painting-destroy) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1793,7 +1832,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Entity-painting-destroy) && ($6- != $null)  {
+      if (%currentflag == entity-painting-destroy) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1821,7 +1860,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Entity-Item-Frame-Destroy Flag
-      if (%currentflag == Entity-Item-Frame-Destroy) && ($6- == $null) {
+      if (%currentflag == entity-item-frame-destroy) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1832,7 +1871,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Entity-Item-Frame-Destroy) && ($6- != $null)  {
+      if (%currentflag == entity-item-frame-destroy) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1860,7 +1899,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; WIther-Damage flag
-      if (%currentflag == WIther-Damage) && ($6- == $null) {
+      if (%currentflag == wither-damage) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1871,7 +1910,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == WIther-Damage) && ($6- != $null)  {
+      if (%currentflag == wither-damage) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1901,7 +1940,7 @@ on 100:text:!region*:%m-channel: {
       ;;;;;;;;;;;;;;; Neue Flags ;;;;;;;;;;;;;;;;;;;;;;;
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       ;;; Lava-Fire Flag
-      if (%currentflag == Lava-Fire) && ($6- == $null) {
+      if (%currentflag == lava-fire) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1912,7 +1951,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Lava-Fire) && ($6- != $null)  {
+      if (%currentflag == lava-fire) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -1940,7 +1979,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Lightning Flag
-      if (%currentflag == Lightning) && ($6- == $null) {
+      if (%currentflag == lightning) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -1951,7 +1990,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Lightning) && ($6- != $null)  {
+      if (%currentflag == lightning) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -2407,6 +2446,84 @@ on 100:text:!region*:%m-channel: {
         }
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
+      ;;; fire-spread flag
+      if (%currentflag == fire-spread) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde zurückgesetzt.
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+        /halt
+      }
+      if (%currentflag == fire-spread) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
+      ;;; Copper-Fade
+      if (%currentflag == copper-fade) && ($6- == $null) {
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+        set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+        set %com rg f %regionsid %currentflag -w %welt
+        //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde zurückgesetzt.
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+        /halt
+      }
+      if (%currentflag == copper-fade) && ($6- != $null)  {
+        if ($6 == allow) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+          /halt
+        }
+        if ($6 == deny) { 
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
+          set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+          set %text $6 
+          set %com rg f %regionsid %currentflag -w %welt %text
+          //run -ap rcon.exe -a localhost:25575 -p %rcon_password " %com "
+          /msg %m-channel 3[7Worldguard3] Flag 7 $+ %currentflag   wurde auf ( $+ %text $+ ) gesetzt.
+          /unset %regionsid
+          /timerwg.reload1 1 3 //run -ap rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+          set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
+          /halt
+        }
+        if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
+      }
       ;;; Vine-Growth Flag
       if (%currentflag == vine-growth) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
@@ -2603,7 +2720,7 @@ on 100:text:!region*:%m-channel: {
         if ($6 != deny) || ($6 != allow) { msg %m-channel 3[7WorldGuard3]: 4FEHLER12 Falscher wert. Bitte gib ein Allow oder deny an.  | /halt }
       }
       ;;; Coral-Fade Flag
-      if (%currentflag == Coral-Fade) && ($6- == $null) {
+      if (%currentflag == coral-fade) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
         set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
         set %com rg f %regionsid %currentflag -w %welt
@@ -2614,7 +2731,7 @@ on 100:text:!region*:%m-channel: {
         set -u6 %tps4 3[7WorldGuardconfigurationen wurden neu geladen3]
         /halt
       }
-      if (%currentflag == Coral-Fade) && ($6- != $null)  {
+      if (%currentflag == coral-fade) && ($6- != $null)  {
         if ($6 == allow) { 
           /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag  existiert.
           set -u4 %tps3 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
@@ -3662,8 +3779,8 @@ on 100:text:!region*:%m-channel: {
     }
 
     ;; Misc Flags
-    ;;; Piston Flag
-    if (%currentflag == piston) && ($6- == $null) {
+    ;;; Pistons Flag
+    if (%currentflag == pistons) && ($6- == $null) {
       ;;; Flag Zurücksetzen
       set -u3 %com rg f %regionsid -w %welt %currentflag
       /msg %m-channel 3[7Worldguard3] 7 $+ %flag für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
@@ -3674,7 +3791,7 @@ on 100:text:!region*:%m-channel: {
       /set -u6 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
       /halt
     }
-    if (%currentflag == piston) && ($6 != $null) {
+    if (%currentflag == pistons) && ($6 != $null) {
       var %values allow deny
       if ($istok(%values,$6-,32) == $true)  {
         ;;; Werte Setzen
@@ -3787,6 +3904,9 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
     }
+
+    ;;; Drittanbieter Flags 
+
 
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {

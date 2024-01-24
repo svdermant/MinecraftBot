@@ -171,7 +171,12 @@ alias system_defaults_check {
   set %flaglist2 entity-painting-destroy.entry.entry-deny-message.exit.exit-deny-message.exit-override.lava-fire.lava-flow.leaf-decay.lighter.lightning.mythic-drops-unidentified-item.natural-health-regen.natural-hunger-drain.nonplayer-protection-domains.notify-enter
   set %flaglist3 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup
   set %flaglist4 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered
-  set %flaglist5 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage
+  set %flaglist5 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage.copper-fade
+  set %thirdflags1 ability-pvp.allow-block-place.allow-block-break.allow-entity-damage.allow-entity-destroy.allow-entity-place.blocked-effects.chat-prefix
+  set %thirdflags2 chat-suffix.command-on-entry.command-on-exit.console-command-on-entry.console-command-on-exit.deny-block-break.deny-block-place.deny-entity-damage.deny-entity-destroy.deny-entity-place.disable-collision
+  set %thirdflags3 ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.fly
+  set %thirdflags4 fly-speed.frostwalker.give-effects.glide.godmode.item-durability.keep-exp.keep-inventory.mi-commands.mi-consumables.mi-tools.mi-weapons.min-class-level.mmo-abilities.mypet-damage.mypet-deny.mypet-fly.mypet-leash
+  set %thirdflags5 mythic-drops.mythic-drops-custom.mythic-drops-itentity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered.mythic-drops-unidentified-item.nether-portals.pvp-mode.respawn-anchor-explode.teleport-on-entry.teleport-on-exit.villager-trade.walk-speed.weight-rpg
   set %moblists piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog.hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart.vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman.zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite.tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.pufferfish.wanderingtrader.amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
 
 
@@ -186,8 +191,9 @@ alias spid {
 }
 
 alias flagcheck {
-  if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true)  { return on }
-  if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist2,$1,46) == $false) || ($istok(%flaglist3,$1,46) == $false) || ($istok(%flaglist4,$1,46) == $false) || ($istok(%flaglist5,$1,46) == $false)  { return off }
+  if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true) || ($istok(%thirdflags1,$1,46) == $true) || ($istok(%thirdflags2,$1,46) == $true) || ($istok(%thirdflags3,$1,46) == $true) || ($istok(%thirdflags4,$1,46) == $true) || ($istok(%thirdflags5,$1,46) == $true)  { return on }
+  if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist2,$1,46) == $false) || ($istok(%flaglist3,$1,46) == $false) || ($istok(%flaglist4,$1,46) == $false) || ($istok(%flaglist5,$1,46) == $false) || ($istok(%thirdflags1,$1,46) == $false) || ($istok(%thirdflags2,$1,46) == $false) || ($istok(%thirdflags3,$1,46) == $false) || ($istok(%thirdflags4,$1,46) == $false) || ($istok(%thirdflags5,$1,46) == $false) { return off }
+
 }
 
 //echo -a $gettok(%lvl-tok,13-,46)
