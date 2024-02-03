@@ -1,4 +1,4 @@
-# MinecraftBot
+﻿# MinecraftBot
 Ein Mircbot zum Verwalten eines Minecraft Servers<br>
 Dieser läuft Aktuell mit der Spigot/PaperMC version 1.19.4
 
@@ -22,6 +22,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
    ** (Anmerkung: Teleport & spawn Flag kann nicht Gesetzt werden Spieleraccount wird benötigt)
 - [x] MapMaking & Misc Flags von Worldguard Hinzugefügt
 - [x] Kleiner Fix bei !rconpassgen behoben
+- [ ] Allowed-placed-blocks flag nicht abgeschlossen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
 
