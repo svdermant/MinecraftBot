@@ -186,6 +186,26 @@ alias system_defaults_check {
   /save -rv vars.ini
 }
 
+alias allowed-placed-blocks {
+  set -u7 %blocklist on
+  if (%invalidmats != $null)  {
+    msg %m-channel Folgende Werte konnten für die Flag 4allowed-block-place  nicht gesetzt werden:
+    msg %m-channel 7 $+ %invalidmats 
+    /unset %invalidmats
+  }
+  if (%materiallist != $null) {
+    set -u3 %com rg f %regionsid -w %welt %currentflag %materiallist
+    /msg %m-channel 3[7Worldguard3] 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf ( 4 $+ %materiallist  ) gestellt
+    set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+    //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+    /unset %regionsid
+    /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+    /set -u8 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+    /unset %materiallist
+    /halt
+  }
+}
+
 alias spid {
   /run -ap %pfad $+ process.bat
 }
@@ -397,6 +417,8 @@ Alias checklog {
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %tps3 | /halt }
     if (%flagset == on) && (%tps4 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /unset %tps4 | /halt }
+    if (%blocklist == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %tps3 | /halt }
+    if (%blocklist == on) && (%tps4 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /unset %tps4 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
     if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }

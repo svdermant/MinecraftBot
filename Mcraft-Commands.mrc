@@ -315,8 +315,8 @@ on 100:text:!region*:%m-channel: {
     set %world $5
     set %region $3
     set %regcheck $regcheck(%world,%region) 
-    if (%regcheck) && ($4 == -w) && (%world isin $finddir(%pfad, $+ %world $+ *,1)) { 
-      ;;;msg $chan region %region existiert
+    if (%regcheck) && ($4 == -w) && (%world isin $finddir(%pfad, * $+ %world $+ *, 1)) { 
+      msg $chan region %region existiert
       set %params $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region)
       msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Information über Region %region 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]
       set %maxparams $numtok(%params,32)
@@ -349,7 +349,7 @@ on 100:text:!region*:%m-channel: {
       /run rcon.exe -a localhost:25575 -p %rcon_password "region select -w $4 $5"
       /msg %m-channel Region wurde Selektiert. Worldguard fürt den Flag Befehl auf die Selectierte Region aus einmalig sofern vorhanden.
       /msg %m-channel Für mehrere Optionen muss die Region erneut selectiert werden.
-      msg %m-channel 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
+      ;;;msg %m-channel 3[7WorldGuard3] 12 Aufgabe Durchgeführt!
       set %regionsid $5
       /halt
     }
@@ -398,7 +398,7 @@ on 100:text:!region*:%m-channel: {
     if ($flagcheck(%flag) == on) { set %currentflag %flag 
       if (!%regionsid) && (%serverstarted == yes) { /msg %m-channel 4FEHLER:  Bitte selectiere zuerst eine Region mit: 8!region select -w weltname regionname | /halt }
       if (%serverstarted == no) { /msg %m-channel  4FEHLER:  Server ist nicht Online | /halt }
-      set -u6 %flagset on
+      set -u8 %flagset on
       ;;; Entry Flag
       if (%currentflag == entry) && ($6- == $null) {
         /msg %m-channel 3[7Worldguard3] Flag 7 $+ %flag existiert
@@ -3900,13 +3900,76 @@ on 100:text:!region*:%m-channel: {
         /halt
       }
       if ($istok(%values,$6-,32) == $false)  { 
-        msg %m-channel Falscher Wert für %currentflag. Gib bitte Allow oder  deny an.
+        msg %m-channel Falscher Wert für %currentflag. Gib bitte allow oder  deny an.
         /halt
       }
     }
 
     ;;; Drittanbieter Flags 
+    ;;; ability-pvp
+    if (%currentflag == ability-pvp) && ($6 == $null) {
+      ;;; Flag reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u6 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == ability-pvp) && ($6 != $null) {
+      var %values allow deny
+      ;;; werte Setzen:
+      if ($istok(%values,$6-,32) == $true)  {
+        ;;; Werte Setzen
+        var %v1 $6
+        set -u3 %com rg f %regionsid -w %welt %currentflag %v1
+        set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+        //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+        /msg %m-channel 3[7Worldguard3]  Die Flag 7 $+ %flag  für die Welt ( 4 $+ %welt $+  ) wurde auf ( 7 $+ %v1  ) gesetzt
+        /unset %regionsid
+        /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+        set -u7 %tps4 3[7Worldguardconfiguration wurden geladen3]
+        /halt
+      }
+      if ($istok(%values,$6-,32) == $false)  { 
+        msg %m-channel Falscher Wert für %currentflag. Gib bitte allow oder  deny an.
+        /halt
+      }
+    }
 
+    ;;; Allow-block-place    
+    if (%currentflag == allow-block-place) && ($6 == $null) {
+      ;;; Flag reset
+      set -u3 %com rg f %regionsid -w %welt %currentflag
+      /msg %m-channel 3[7Worldguard3] 7 $+ %flag für die Welt ( 4 $+ %welt $+  ) wurde zurückgesetzt
+      set -u4 %tps3 3[7Worldguard3] 12 Aufgabe durchgeführt
+      //run rcon.exe -a localhost:25575 -p %rcon_password " %com "
+      /unset %regionsid
+      /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
+      /set -u6 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
+      /halt
+    }
+    if (%currentflag == allow-block-place) && ($6- != $null) {
+      var %materialids $6-
+      var %maxmaterials $lines(material-id.txt)
+      var %x 0
+      while (%x <= %maxmaterials) {
+        var %matids $addtok(%matids, $remove($read(material-id.txt,%x),%x,=), 32)
+        inc %x
+      }
+      msg $chan Materialtokens sind: %matids
+      var %materialtokens $numtok(%materialids,32)
+      var %y 1
+      while (%y <= %materialtokens) {
+        if ($istok(%matids,$gettok(%materialids,%y,32),32) == $true) { set %materiallist $replace($addtok(%materiallist,$gettok(%materialids,%y,32),46),.,$chr(44)) }
+        if ($istok(%matids,$gettok(%materialids,%y,32),32) == $false) { set %invalidmats $replace($addtok(%invalidmats,$gettok(%materialids,%y,32),46),.,$chr(44)) }
+        inc %y
+      }
+      msg $chan Die Werte für die Flag %currentflag sind wie Folgt: 4 $+ %materiallist  und werden gesetzt.
+      /timer.allowed-block-place1 1 3 /allowed-placed-blocks
+    }
 
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
