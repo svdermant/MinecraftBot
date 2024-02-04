@@ -13,7 +13,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Weitere Worldguard Flags hinzugefügt (enderman-grief, snowman-trails, ravager-grief, mob-damage, mob-spawning, deny-spawn, entity-painting-destroy, entity-item-frame-destroy, wither-damager)
 - [x] Kleine Optiomierungen am !region select und am !region flag befehl
 - [x] LogUpdate für Gelevelte Mobs
-- [x] Startparameter (Prüft bei !region flag und !region select ob Server gestartet/offline)
+- [x] Startparameter (Prüft bei !region flag ugnd !region select ob Server gestartet/offline)
 - [x] lag.bat, players.bat, tps.bat etc. Wird vom bot erstellt.
 - [x] !rconpassgen <länge> - Generiert ein Neues Rconpassword. (Serverneustart Erforderlich!)
 - [x] Alias getAllyml (optimiert) (Danke an Oiums von Swiftirc.net für die Hilfe über Teamviewer)
@@ -52,7 +52,7 @@ Die Start.bat sollte folgenden befehl beinhalten:
 
 Die werte bei Xms und Xmx sind Ramangaben bitte an euren anpassen.
 
-## Anmerk sollte euer Server nicht Local gehostet sein muss dort die IP anstelle von Localhost hin!
+## Anmerk sollte euer Server nicht Local gehostet sein muss anstelle von Localhost dort die Server IP hin!
 
 Der Inhalt der Process.bat
 > @echo on </br>
