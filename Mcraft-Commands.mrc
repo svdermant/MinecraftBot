@@ -316,7 +316,7 @@ on 100:text:!region*:%m-channel: {
     set %region $3
     set %regcheck $regcheck(%world,%region) 
     if (%regcheck) && ($4 == -w) && (%world isin $finddir(%pfad, * $+ %world $+ *, 1)) { 
-      msg $chan region %region existiert
+      echo -ag region %region existiert
       set %params $getAllYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml,regions,%region)
       msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Information über Region %region 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]
       set %maxparams $numtok(%params,32)
@@ -3959,7 +3959,9 @@ on 100:text:!region*:%m-channel: {
         var %matids $addtok(%matids, $remove($read(material-id.txt,%x),%x,=), 32)
         inc %x
       }
-      msg $chan Materialtokens sind: %matids
+      echo -ag Materialtokens sind: %matids
+      echo -ag Anzahl der Mattokens: $numtok(%matids,32)
+      echo -ag Länge der Variable matid ist: $len(%matids)
       var %materialtokens $numtok(%materialids,32)
       var %y 1
       while (%y <= %materialtokens) {
@@ -3967,7 +3969,7 @@ on 100:text:!region*:%m-channel: {
         if ($istok(%matids,$gettok(%materialids,%y,32),32) == $false) { set %invalidmats $replace($addtok(%invalidmats,$gettok(%materialids,%y,32),46),.,$chr(44)) }
         inc %y
       }
-      msg $chan Die Werte für die Flag %currentflag sind wie Folgt: 4 $+ %materiallist  und werden gesetzt.
+      if (%materiallist != $null) { msg $chan Die Werte für die Flag %currentflag sind wie Folgt: 4 $+ %materiallist  und werden gesetzt. }
       /timer.allowed-block-place1 1 3 /allowed-placed-blocks
     }
 

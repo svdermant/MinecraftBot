@@ -870,3 +870,14 @@ alias mcwhoisout {
     }
   }
 }
+
+alias Zeilenentfernen {
+  var %maxlines $lines(material-id.txt)
+  var %x 1
+  while (%x <= %maxlines) {
+    var %value $read(material-id.txt,%x)
+    var %newvalue $remove(%value,%x,=)
+    write -l $+ %x newmats.txt %newvalue
+    inc %x
+  }
+}
