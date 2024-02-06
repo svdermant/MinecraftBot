@@ -3954,7 +3954,7 @@ on 100:text:!region*:%m-channel: {
     if (%currentflag == allow-block-place) && ($6- != $null) {
       var %materialids $6-
       var %maxmaterials $lines(material-id.txt)
-      var %x 0
+      var %x 1
       while (%x <= %maxmaterials) {
         var %matids $addtok(%matids, $remove($read(material-id.txt,%x),%x,=), 32)
         inc %x
