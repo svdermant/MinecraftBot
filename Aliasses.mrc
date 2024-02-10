@@ -132,7 +132,7 @@ on 1:EXIT: {
   /save -rv vars.ini
 }
 
-off 1:CONNECT: {
+on 1:CONNECT: {
   if ($me == $readini(system.dat, botinfo, botname)) {
     /ns identify $readini(system.dat, botinfo, botpass)
     /timer.join1 1 3 /join %m-channel
