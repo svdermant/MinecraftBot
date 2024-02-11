@@ -36,6 +36,16 @@ on 1:text:!neuer Spieler:#: {
   ;;;; Verschlüsseltes PW
   var %enpw $encode(%pw,a)
   writeini %botdir $+ %Spielerdatenordner $+ %Spieler $+ .db AccountInfo Passwort %enpw
+
+  ;;; Namen des Spielers Eintragen:
+  writeini %botdir $+ %Spielerdatenordner $+ %Spieler $+ .db AccountInfo Name %Spieler
+
+  ;;; Generierung der Der Ersten Position
+  /lastpos
+
+  ;;; Schreiben der Ersten Position
+  writeini %botdir $+ %Spielerdatenordner $+ %Spieler $+ .db AccountInfo LastPos %mcposition
+
   msg %Spieler Willkommen %Spieler beim Irc Minecraft.
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.
 }
