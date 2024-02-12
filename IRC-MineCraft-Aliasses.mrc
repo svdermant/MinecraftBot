@@ -24,3 +24,20 @@ Alias LastPos {
   set %mcposition %xpos %ypos %zpos
   echo -ag ->>>> %mcposition
 }
+
+Alias sortlist {
+  var %maxlines $lines(ircmc-todo.txt)
+  echo -ag Lines: %maxlines
+  var %x 1
+  while (%x <= %maxlines) {
+    var %id $read(ircmc-todo.txt,%x)
+    echo -ag Eintrag in Zeile: %x = %id
+    var %idtoken $gettok(%id,10-13,32)
+    echo -ag Idtoken in Zeile: %x = %idtoken
+    if (%x !isin %idtoken) || (%x isin %idtoken) { var %newidtoken 4→9 %x 15 4← }
+    echo -ag Neues Idtoken in Zeilen %x = %newidtoken
+    echo -ag Neuer Text mit richtiger ID: $replace(%id,%idtoken,%newidtoken)
+    /write -l $+ %x ircmc-todo.txt $replace(%id,%idtoken,%newidtoken)
+    inc %x
+  }
+}
