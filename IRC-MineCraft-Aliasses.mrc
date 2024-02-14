@@ -15,6 +15,22 @@ alias applecounter {
   echo Number of apples: %apples
 }
 
+;;;-----------
+;;; Alias DisplayTree
+;;; Zeigt denn gegebenen Baum im Raum an.
+;;; $1 = Baumname
+;;; $2 = Channel
+;;;-----------------
+
+Alias DisplayTree {
+  var %ImageLines $readini($GameData($1), TreeImage, Lines)
+  var %x 1
+  while (%x <= %ImageLines) {
+    msg %displaychan $readini($GameData($1), TreeImage, Line $+ %x)
+    inc %x
+  }
+}
+
 ;;;--------------
 ;;; Alias LastPos
 ;;; Generiert eine Zufällige Startposition
