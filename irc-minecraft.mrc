@@ -146,6 +146,18 @@ on 1:text:!neuer Spieler:#: {
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.
 }
 
-on 1:text:!tree:#: {
-  play $chan tree.txt 100
+on 1:text:!chop tree:#: {
+  var %mctrees oaktree darkoaktree sprucetree acaciatree birchtree cherrytree jungletree mangrovetree
+  var %maxtrees $numtok(%mctrees,32)
+  var %treename $gettok(%mctrees,$rand(1,%maxtrees),32)
+  var %blocksize $rand(5,$readini($GameData(%treename),TreeImage,MaxSize))
+  msg $chan  $+ $nick $+  ist dabei einen 7 $+ %treename  $+ mit einer Größe von12 %blocksize  $+ Blöcken zu fällen.
+  set -u5 %displaychan $chan
+  $displaytree(%treename,%displaychan)
+
+  ;;; Auslesen der Drops vom Jeweiligen Baum
+  var %drops $readini($GameData(%treename),Drops,Items)
+
+  /timerdropdisplay1 1 %blocksize /msg $chan Mögliche Drops nach fällen des %treename : 7 %drops
+  /halt
 }
