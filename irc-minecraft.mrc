@@ -124,7 +124,7 @@ on 1:text:!neuer Spieler:#: {
   ;;;; Orginal generiertes Passwort
   var %pw $remove(%pw,$chr(32))
   ;;;; Verschlüsseltes PW
-  var %enpw $encode(%pw,a)
+  var %enpw $sha1(%pw)
   writeini %botdir $+ %Spielerdatenordner $+ %Spieler $+ .db AccountInfo Passwort %enpw
 
   ;;; Namen des Spielers Eintragen:
@@ -144,4 +144,8 @@ on 1:text:!neuer Spieler:#: {
 
   msg %Spieler Willkommen %Spieler beim Irc Minecraft.
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.
+}
+
+on 1:text:!tree:#: {
+  play $chan tree.txt 100
 }

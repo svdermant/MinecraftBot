@@ -2,7 +2,18 @@
 
 alias botdir { return $mircdir }
 alias Spielerdb { return $botdir $+ Spielerdaten\ $+ $1 $+ .db }
+alias GameData { return $botdir $+ Irc-MC\data\ $+ $1 $+ .db }
 
+alias applecounter {
+  var %x 1
+  var %apples 0
+  var %maxlines $readini($GameData(oaktree), TreeImage, Lines)
+  while (%x <= %maxlines) {
+    inc %apples $count($readini($GameData(oaktree),Treeimage,Line $+ %x),o)
+    inc %x
+  }
+  echo Number of apples: %apples
+}
 
 ;;;--------------
 ;;; Alias LastPos
