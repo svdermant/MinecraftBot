@@ -25,12 +25,31 @@ on 100:text:!mctodo*:#: {
       msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Text: 14 $3-
     }
   }  
-  if ($istok(%befehle,$2,46) == $true) && ($2 == list) { 
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == $null) { 
     msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
     msg $chan 7,1[9√7]14 = Fertig - 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]14 = Optimiert / Fehlerbehoben
     play $chan ircmc-todo.txt
     /halt
   }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fixed) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-fix
+    /halt
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fertig) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste Fertige Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-fertig
+    /halt
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == neu) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-neu
+    /halt
+  }
+
   if ($istok(%befehle,$2,46) == $true) && ($2 == del) { 
     var %eintragid $3
     set %eintragstext $read(ircmc-todo.txt,%eintragid)
@@ -119,6 +138,9 @@ on 1:text:!neuer Spieler:#: {
 
   ;;; Generierung der Inventarslots
   $inventargen(%Spieler)
+
+  ;;; Erzeugung der Standard Items für den Start
+  $firstItems(%Spieler)
 
   msg %Spieler Willkommen %Spieler beim Irc Minecraft.
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.

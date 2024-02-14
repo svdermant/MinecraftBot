@@ -71,3 +71,82 @@ Alias inventargen {
     inc %x
   }  
 }
+
+;;; --------------
+;;; Alias firstitems
+;;; Erstellt die Ersten 5 Items 
+;;; $1 = Spielername
+;;; ---------------------------
+
+Alias firstitems {
+  var %firstitems 6
+  var %itemnames WOODEN_AXE.WOODEN_HOE.WOODEN_SHOVEL.WOODEN_PICKAXE.WOODEN_SWORD.APPLE
+  var %Anzahl 1
+  var %x 1
+  while (%x <= %firstitems) {
+    var %item $readini($Spielerdb($1),InventarSlot $+ %x,Name)
+    var %currentitem $gettok(%itemnames,%x,46)
+    if ($readini($Spielerdb($1),InventarSlot $+ %x,Name) == AIR) { var %firstitem $gettok(%itemnames,%x,46) }
+    if ($readini($Spielerdb($1),InventarSlot $+ %x,Name) == AIR) && (%currentitem == APPLE) { var %Anzahl 6 }
+
+    ;;;InventarSlot %x hat das Item %firstitem Anzahl %anzahl
+
+    writeini $Spielerdb($1) InventarSlot $+ %x Name %firstitem
+    writeini $Spielerdb($1) InventarSlot $+ %x Anzahl %Anzahl
+    inc %x
+  }
+}
+
+alias todo-fix {
+  var %todoliste $botdir $+ ircmc-todo.txt
+  var %maxlines $lines(%todoliste)
+  echo -ag Zeilenanzahl %maxlines
+  var %x 1
+  var %fixed 0
+  var %fixedlabel 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]
+  while (%x <= %maxlines) {
+    if (%fixedlabel !isin $read(%todoliste,%x)) { inc %x }
+    if (%fixedlabel isin $read(%todoliste,%x)) {
+      msg %chan $gettok($read(%todoliste,%x),1-,32)
+      inc %fixed
+      inc %x
+    }
+  }
+  msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4 %fixed  Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+}
+
+alias todo-fertig {
+  var %todoliste $botdir $+ ircmc-todo.txt
+  var %maxlines $lines(%todoliste)
+  echo -ag Zeilenanzahl %maxlines
+  var %x 1
+  var %fertig 0 
+  var %fertiglabel 7,1[9√7]
+  while (%x <= %maxlines) {
+    if (%fertiglabel !isin $read(%todoliste,%x)) { inc %x }
+    if (%fertiglabel isin $read(%todoliste,%x)) {
+      msg %chan $gettok($read(%todoliste,%x),1-,32)
+      inc %fertig
+      inc %x
+    }
+  }
+  msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4 %fertig  Fertige Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+}
+
+alias todo-neu {
+  var %todoliste $botdir $+ ircmc-todo.txt
+  var %maxlines $lines(%todoliste)
+  echo -ag Zeilenanzahl %maxlines
+  var %x 1
+  var %neu 0 
+  var %neulabel 7[8ↈ13NEU8ↈ7,1]
+  while (%x <= %maxlines) {
+    if (%neulabel !isin $read(%todoliste,%x)) { inc %x }
+    if (%neulabel isin $read(%todoliste,%x)) {
+      msg %chan $gettok($read(%todoliste,%x),1-,32)
+      inc %neu
+      inc %x
+    }
+  }
+  msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4 %neu  Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+}
