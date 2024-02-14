@@ -22,6 +22,20 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
    ** (Anmerkung: Teleport & spawn Flag kann nicht Gesetzt werden Spieleraccount wird benötigt)
 - [x] MapMaking & Misc Flags von Worldguard Hinzugefügt
 - [x] Kleiner Fix bei !rconpassgen behoben
+- [x] !mctodo Befehl Erstellt. 
+- [x] !mctodo fertig Label Coden 
+- [x] !mctodo Fixed Label Coden 
+- [x] Grundstruktur für Irc-Minecraft Spielerdatenbank geschrieben.
+- [x] !neuer spieler - Befehl geschrieben mit Passwort generator & LastPosgenerator 
+- [x] Passwortgenerator hinzugefügt 
+- [x] Positionsgenerator Hinzugefügt 
+- [x] Alias Sortlist erstellt. 
+- [x] Alias LastPos Erstellt 
+- [x] Inventargenerierung einbinden 
+- [x] Erstellung der Standarditems nach Registiertung 
+- [x] !mctodo list <fertig|fix|neu> erstellen 
+- [x] Alias GameData geschrieben 
+- [x] Alias Applecounter Geschrieben.
 - [ ] Allowed-placed-blocks flag nicht abgeschlossen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
