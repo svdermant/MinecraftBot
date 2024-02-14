@@ -117,10 +117,11 @@ alias todo-fix {
   var %fixedlabel 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]
   while (%x <= %maxlines) {
     if (%fixedlabel !isin $read(%todoliste,%x)) { inc %x }
-    if (%fixedlabel isin $read(%todoliste,%x)) {
+    if (%fixedlabel isin $read(%todoliste,%x)) { 
+      echo fixed ist in zeile %x
       msg %chan $gettok($read(%todoliste,%x),1-,32)
-      inc %fixed
       inc %x
+      inc %fixed
     }
   }
   msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4 %fixed  Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
