@@ -1,5 +1,14 @@
 ;;;;; IRC-MineCraft Aliasse ;;;;;
 
+alias botdir { return $mircdir }
+alias Spielerdb { return $botdir $+ Spielerdaten\ $+ $1 $+ .db }
+
+
+;;;--------------
+;;; Alias LastPos
+;;; Generiert eine Zufällige Startposition
+;;;--------------
+
 Alias LastPos {
   var %maxcords 3
   var %cordgen 1
@@ -25,6 +34,11 @@ Alias LastPos {
   echo -ag ->>>> %mcposition
 }
 
+;;;----------------
+;;; Alias Sortlist
+;;; Sortiert die Todoliste
+;;;---------------
+
 Alias sortlist {
   var %maxlines $lines(ircmc-todo.txt)
   echo -ag Lines: %maxlines
@@ -40,4 +54,20 @@ Alias sortlist {
     /write -l $+ %x ircmc-todo.txt $replace(%id,%idtoken,%newidtoken)
     inc %x
   }
+}
+
+;;;---------------
+;;; Alias Inventargen
+;;; Generiert das Spielerinventar anhand der Inventarslots
+;;; $1 = Spielername
+
+Alias inventargen {
+  var %maxinvslots $readini($Spielerdb($1), AccountInfo, InventarSlots)
+  echo Inventarslots für $1 sind %maxinvslots
+  var %x 1
+  while (%x <= %maxinvslots) {
+    writeini $Spielerdb($1) InventarSlot $+ %x Name AIR
+    writeini $Spielerdb($1) InventarSlot $+ %x Anzahl 0
+    inc %x
+  }  
 }

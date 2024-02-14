@@ -47,24 +47,26 @@ on 100:text:!mctodo*:#: {
   }
   if ($istok(%befehle,$2,46) == $true) && ($2 == fertig) {
     var %eintrag $read(ircmc-todo.txt,$3)
+    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
     if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
     if (%eintrag != $null) {
       var %neulabel 7[8ↈ13NEU8ↈ7,1]
       var %fertiglabel 7,1[9√7]
       var %zeile $3
-      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fertiglabel)
+      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fertiglabel,%date,$fulldate)
       msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fertiglabel gekennzeichnet.
     }
   }
   if ($istok(%befehle,$2,46) == $true) && ($2 == fixed) {
     var %eintrag $read(ircmc-todo.txt,$3)
+    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
     if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
     if (%eintrag != $null) {
       var %neulabel 7[8ↈ13NEU8ↈ7,1]
       var %fertiglabel 7,1[9√7]
       var %fixedlabel 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]
       var %zeile $3
-      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fixedlabel,%fertiglabel,%fixedlabel)
+      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fixedlabel,%fertiglabel,%fixedlabel,%date,$fulldate))
       msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fixedlabel gekennzeichnet.
     }
   }
@@ -114,6 +116,9 @@ on 1:text:!neuer Spieler:#: {
 
   ;;; Schreiben der Ersten Position
   writeini %botdir $+ %Spielerdatenordner $+ %Spieler $+ .db AccountInfo LastPos %mcposition
+
+  ;;; Generierung der Inventarslots
+  $inventargen(%Spieler)
 
   msg %Spieler Willkommen %Spieler beim Irc Minecraft.
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.
