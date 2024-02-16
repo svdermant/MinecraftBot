@@ -33,3 +33,7 @@
 7,1[9▒7] 4→7Wed Feb 14 23:24:53 20244← 7[9▒7,1] 14 ID: 4→9 33 15 4← 14 !chop tree - Zufälligen Baum Fällen erstellen. 7,1[9√7]
 7,1[9▒7] 4→7Wed Feb 14 23:26:04 20244← 7[9▒7,1] 14 ID: 4→9 34 15 4← 14 Drops für !chop tree schreiben die dann ins Spielerinventar geschrieben werden. 7[8ↈ13NEU8ↈ7,1]
 7,1[9▒7] 4→7Wed Feb 14 23:34:49 20244← 7[9▒7,1] 14 ID: 4→9 35 15 4← 14 ItemDatenbank erstellen name Item.db - (Befüllen mit Material, Name, Beschreibung, Haltbarkeit) 7[8ↈ13NEU8ↈ7,1]
+7,1[9▒7] 4→7Thu Feb 15 22:19:57 20244← 7[9▒7,1] 14 ID: 4→9 36 15 4← 14 !mcbook item <nameofitem> - Informationen werden anhand der ItemDatenbank im Channel oder gar Privat wiedergegeben. 7[8ↈ13NEU8ↈ7,1]
+7,1[9▒7] 4→7Fri Feb 16 06:54:10 20244← 7[9▒7,1] 14 ID: 4→9 37 15 4← 14 !inventar - Auflistung des Inventars als Private Nachricht 7[8ↈ13NEU8ↈ7,1]
+7,1[9▒7] 4→7Fri Feb 16 06:54:53 20244← 7[9▒7,1] 14 ID: 4→9 38 15 4← 14 Alias GetInventory - Zählt zusammen was im Spielerinventar sich befindet. 7[8ↈ13NEU8ↈ7,1]
+7,1[9▒7] 4→7Fri Feb 16 06:55:40 20244← 7[9▒7,1] 14 ID: 4→9 39 15 4← 14 Alias ShowInventar - Sendet das Inventar an den Empfänger. 7[8ↈ13NEU8ↈ7,1]

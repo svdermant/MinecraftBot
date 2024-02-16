@@ -31,6 +31,44 @@ Alias DisplayTree {
   }
 }
 
+;;;-------
+;;; Alias GetInventory
+;;; Zeigt das Spielerinventar an
+;;; $1 = Spielername
+;;;-------
+
+Alias GetInventory {
+  unset %Itemlist | Unset %Itemlist2
+  var %maxslots $readini($Spielerdb($1), AccountInfo, InventarSlots)
+  var %value 1
+  while (%value <= %maxslots) {
+    var %item $readini($Spielerdb($1), Inventarslot $+ %value, Name)
+    var %isitem $readini($GameData(Items), %item, Name)
+    var %Anzahl $readini($Spielerdb($1), Inventarslot $+ %value, Anzahl)
+    if ((%Anzahl != $null) && (%Anzahl >= 1)) {
+      if ($numtok(%itemlist,46) <= 20) { %itemList = $addtok(%itemList, 4 %Item $+ $chr(040) $+ %Anzahl $+ $chr(041), 46) } 
+      else { %itemlist2 = $addtok(%itemList2, 4 %Item $+ $chr(040) $+ %Anzahl $+ $chr(041), 46) }
+    }
+    inc %value
+  }
+}
+
+alias ShowInventar {
+  var %replacechar $chr(044) $chr(032)
+  %itemlist = $replace(%itemlist, $chr(046), %replacechar)
+  %itemlist2 = $replace(%itemlist2, $chr(046), %replacechar)
+  if (%itemlist != $null) {
+    msg $1 Inventar %Itemlist
+  }
+  if (%itemlist2 != $null) {
+    msg $1 %itemlist2
+  }
+  unset %Itemlist*
+}
+
+
+
+
 ;;;--------------
 ;;; Alias LastPos
 ;;; Generiert eine Zufällige Startposition

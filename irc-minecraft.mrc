@@ -161,3 +161,64 @@ on 1:text:!chop tree:#: {
   /timerdropdisplay1 1 %blocksize /msg $chan Mögliche Drops nach fällen des %treename : 7 %drops
   /halt
 }
+
+on *:Text:!mcbook*:*: {
+  var %item $3
+  var %t $target
+  echo -ag Ziel %t
+  set %isitem $replace(%item,_,$chr(32))
+  if ($2 == $null) || ($2 != item) && (%t == $me) { msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
+  if ($2 == $null) || ($2 != item) && (%t == $chan) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
+  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $me) { 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
+    /halt
+  }
+  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $chan) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
+    /halt
+  }
+  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $me) { 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert!.
+    var %type $readini($gameData(Items), %item, Type)
+    var %Name $readini($gameData(Items), %item, Name)
+    var %Desc $readini($gameData(Items), %item, Desc)
+    var %Dura $readini($gameData(Items), %item, Durability)
+    var %Hunger $readini($gameData(Items), %item, Hunger)
+    
+    ;;; Setze die Durability auf 0 wenn nicht vorhanden.
+    if (%dura == $null) { var %dura 0 }
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 6Type: 3,1[11,1 $+ %type $+ 3,1] 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7Name: 3,1[12,1 $+ %Name $+ 3,1] 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 14Beschreibung: 3,1[15,1 $+ %Desc $+ 3,1] 
+    if (%type == FOOD) { msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 15Sättigung: 3,1[15,1 %Hunger 3,1]  }
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10Haltbarkeit: 3,1[12,1 %Dura 3,1] 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    /halt
+  }
+  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $chan) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert!.
+    var %type $readini($gameData(Items), %item, Type)
+    var %Name $readini($gameData(Items), %item, Name)
+    var %Desc $readini($gameData(Items), %item, Desc)
+    var %Dura $readini($gameData(Items), %item, Durability)
+    var %Hunger $readini($gameData(Items), %item, Hunger)
+    
+    ;;; Setze die Durability auf 0 wenn nicht vorhanden.
+    if (%dura == $null) { var %dura 0 }
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 6Type: 3,1[11,1 $+ %type $+ 3,1] 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7Name: 3,1[12,1 $+ %Name $+ 3,1] 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 14Beschreibung: 3,1[15,1 $+ %Desc $+ 3,1] 
+    if (%type == FOOD) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 15Sättigung: 3,1[15,1 %Hunger 3,1]  }
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10Haltbarkeit: 3,1[12,1 %Dura 3,1] 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    /halt
+  }
+}
+
+on 1:text:!inventar:#: {
+  set -u5 %nick $nick
+  $getInventory(%nick)
+  $ShowInventar(%nick)
+}

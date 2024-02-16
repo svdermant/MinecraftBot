@@ -1,0 +1,118 @@
+;;;; Items Datenbank
+;;;; Struktur
+;;;; [MATERIAL]
+;;;; Type= (MaterialBlock,Food,TOOL,Weapon)
+;;;; Name=
+;;;; Desc=
+;;;; Durability=
+
+[ACACIA_LOG]
+Type=MaterialBlock
+Name=Acacia Log
+Desc=lässt sich als Stamm von Akazien nur in Savannen finden.
+Durability=2
+
+[ACACIA_LEAVES]
+Type=MaterialBlock
+Name=Acacia Leaves
+Desc=ist Bestandteil von Akazien und generiert in einer schirmartigen Form. Es ist ebenfalls biomabhängig gefärbt
+Durability=0.2
+
+[BIRCH_LOG]
+Type=MaterialBlock
+Name=Birch Log
+Desc=bildet den Stamm von Birken, die in Birkenwäldern zu finden sind. Selten gibt es Hochbirkenwälder mit besonders hohen Birken.
+Durability=2
+
+[BIRCH_LEAVES]
+Type=MaterialBlock
+Name=Birch Leaves
+Desc=bildet die Baumkrone von Birken. Es ist ebenfalls biomunabhängig gefärbt und besitzt immer die Farbe Grün
+Durability=0.2
+
+[CHERRY_LOG]
+Type=MaterialBlock
+Name=Cherry Log
+Desc=kommt nur im Kirschberghain vor, welches in Bergen liegt.
+Durability=2
+
+[CHERRY_LEAVES]
+Type=MaterialBlock
+Name=Cherry Leaves
+Desc=ist das Blattwerk des Kirschbaumes.
+Durability=0.2
+
+[DARK_OAK_LOG]
+Type=MaterialBlock
+Name=Dark Oak Log
+Desc=kommt nur im dunklen Wald vor. Die Schwarzeiche hat einen Vierfach-Stamm und ein besonders dichtes Blätterdach.
+Durability=2
+
+[DARK_OAK_LEAVES]
+Type=MaterialBlock
+Name=Dark Oak Leaves
+Desc=ist das Blattwerk der Schwarzeiche. Es ist biomabhängig gefärbt.
+Durability=0.2
+
+[JUNGLE_LOG]
+Type=MaterialBlock
+Name=Jungle Log
+Desc=kommt ausschließlich im Dschungel vor. Er ist Bestandteil von großen und kleinen Tropenbäumen.
+Durability=2
+
+[JUNGLE_LEAVES]
+Type=MaterialBlock
+Name=Jungle Leaves
+Desc=kommt im Dschungel bei Tropenbäumen vor. Es ist biomabhängig gefärbt.
+Durability=0.2
+
+[MANGROVE_LOG]
+Type=MaterialBlock
+Name=Mangrove Log
+Desc=kommt nur im Mangrovensumpf vor.
+Durability=2
+
+[MANGROVE_LEAVES]
+Type=MaterialBlock
+Name=Mangrove Leaves
+Desc=kommt im Mangrovensumpf an Mangrovenbäumen vor.
+Durability=0.2
+
+[MANGROVE_ROOTS]
+Type=MaterialBlock
+Name=Mangrove Roots
+Desc=sind dekorative Blöcke, die sich als Teil von Mangrovenbäumen bilden. Mangrovenwurzeln können, obwohl sie ein vollständiger Block sind, geflutet werden und lassen trotzdem dabei kein Wasser abfließen. 
+Durability=0.7
+
+[OAK_LOG]
+Type=MaterialBlock
+Name=Oak Log
+Desc=bildet den Stamm von Eichen und bei großen Eichen zusätzlich die dicken Äste.
+Durability=2
+
+[OAK_LEAVES]
+Type=MaterialBlock
+Name=Oak Leaves
+Desc=generiert als Teil von Eichen in Wäldern und Buschwerk im Dschungel. Es ist biomabhängig gefärbt.
+Durability=0.2
+
+[SPRUCE_LOG]
+Type=MaterialBlock
+Name=Spruce Log
+Desc=kommt als Bestandteil von Fichten in kalten Regionen vor. Es gibt normale und Riesenfichten mit einem Vierfach-Stamm.
+Durability=2
+
+[SPRUCE_LEAVES]
+Type=MaterialBlock
+Name=Spruce Leaves
+Desc=kommen bei Fichten vor. Sie sind biomunabhängig gefärbt und besitzen immer die Farbe Grün
+Durability=0.2
+
+;;;; Food Items
+
+[APPLE]
+Type=FOOD
+Name=Apple
+Desc=Ein Gewöhnlicher Apfel der bei Jedem Baum zu finden ist.
+Hunger=1
+Durability=1
