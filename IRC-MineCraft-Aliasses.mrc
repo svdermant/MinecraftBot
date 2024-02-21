@@ -86,7 +86,7 @@ Alias LastPos {
     inc %cordgen
   }
   echo -ag LastPos sind: x= %x y= %y z= %z 
-  set %mcposition %xpos %ypos %zpos
+  set %mcposition %x %y %z
   echo -ag ->>>> %mcposition
 }
 
