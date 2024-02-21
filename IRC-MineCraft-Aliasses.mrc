@@ -79,9 +79,9 @@ Alias LastPos {
   var %cordgen 1
   while (%cordgen <= %maxcords)  {
     echo -ag Durchgang %cordgen
-    var %x $rand(-500,500)
+    var %x $rand(-50,50)
     var %y $rand(-64,64)
-    var %z $rand(-500,500)
+    var %z $rand(-50,50)
     echo -ag x= %x y= %y z= %z
     inc %cordgen
   }

@@ -217,6 +217,62 @@ on *:Text:!mcbook*:*: {
   }
 }
 
+on *:text:!biomes:#: {
+  var %biomes plains desert forest taiga swamp jungle
+  var %firstbiome 1
+  while ($gettok(%biomes,%firstbiome,32)) {
+    var %biomename $v1
+    var %chunk 1
+    while (%chunk <= 50) {
+      var %xcords $rand(-50,50)
+      var %zcords $rand(-50,50)
+      var %chunklabel %xcords $+ / $+ %zcords
+      echo -ag for biome %biomename Chunk[ $+ %xcords $+ / $+ %zcords $+ ] was created
+      writeini $GameData(chunk) %chunklabel Name %biomename
+      inc %chunk
+
+      ;; check if a line with chunklabel alredy exists if this true generate new cords
+      ;; and write them to the file
+
+      var %existchunk $read($gamedata(chunk),w,*[ $+ %chunklabel $+ ]*)
+      if (%existchunk == $null) { inc %chunk }
+      if (%existchunk != $null) { 
+        echo -> %existchunk exists in file
+        var %xcords $rand(-50,50)
+        var %zcords $rand(-50,50)
+        var %chunklabel %xcords $+ / $+ %zcords
+        writeini $GameData(chunk) %chunklabel Name %biomename
+        inc %chunk
+        echo -ag for biome %biomename a new Chunk[ $+ %xcords $+ / $+ %zcords $+ ] was created
+      }
+    }
+    inc %firstbiome
+  }
+}
+
+on *:text:!explore*:#: { 
+  set -u3 %currentpos $readini($Spielerdb($nick),AccountInfo,LastPos)
+  set -u3 %cur-x $gettok(%currentpos,1,32)
+  set -u3 %cur-z $gettok(%currentpos,2,32)
+  Msg $chan Aktuelle Position %cur-x / %cur-z
+  if ($2 == N) && ($3 isnum) { 
+    set -u3 %newcur-x $calc(%cur-x + $3)
+    msg $chan Du bewegst dich $3 Blöcke nach Norden und erreicht somit chunk %newcur-x / %cur-z
+    writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+  }
+  if ($2 == S) && ($3 isnum) { 
+    set -u3 %newcur-x $calc(%cur-x - $3)
+    msg $chan Du bewegst dich $3 Blöcke nach Süden und erreicht somit chunk %newcur-x / %cur-z
+    writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+  }
+  set %chunklabel %newcur-x $+ / $+ %cur-z
+  set %biomename $readini($GameData(chunk), %chunklabel, Name)
+  if (%biomename == $null) { msg $chan you reached chunk[ $+ %chunklabel $+ $chr(93) }
+  if (%biomename != $null) {
+    msg $chan you have reached biome %biomename
+  }
+}
+
 on 1:text:!inventar:#: {
   set -u5 %nick $nick
   $getInventory(%nick)
