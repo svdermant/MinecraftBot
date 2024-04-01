@@ -184,7 +184,7 @@ on *:Text:!mcbook*:*: {
     var %Desc $readini($gameData(Items), %item, Desc)
     var %Dura $readini($gameData(Items), %item, Durability)
     var %Hunger $readini($gameData(Items), %item, Hunger)
-    
+
     ;;; Setze die Durability auf 0 wenn nicht vorhanden.
     if (%dura == $null) { var %dura 0 }
     msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]

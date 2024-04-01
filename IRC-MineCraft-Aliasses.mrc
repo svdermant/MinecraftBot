@@ -207,3 +207,19 @@ alias todo-neu {
   }
   msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 4,1 %neu 14,1 Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
+
+Alias Itemdbgen {
+  var %maxlines $lines(material-id.txt)
+  var %x 1
+  while (%x <= %maxlines) {
+    var %material $read(material-id.txt, %x)
+    var %name $replace(%material,_,$chr(32))
+    var %dura 2
+    writeini $GameData(items) %material Type MaterialBlock
+    writeini $GameData(items) %material Name %name
+    writeini $GameData(items) %material Desc Die Beschreibung für %material
+    writeini $GameData(items) %material Durability %dura
+    inc %x
+  }
+  echo -ag Itemsdb wurde Geschrieben.
+}
