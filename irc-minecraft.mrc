@@ -280,6 +280,15 @@ on *:text:!explore*:#: {
   }
 }
 
+on 100:text:!materialgen:#: {
+  var %maxmat $lines(material-id.txt)
+  msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+  msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Generiere 12,1 %maxmat 7,1 Items.....
+  msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 4,1Dies dauert einen Moment...
+  set %displaychan $chan
+  /timerdbgen1 1 5 /itemdbgen
+}
+
 on 1:text:!inventar:#: {
   set -u5 %nick $nick
   $getInventory(%nick)

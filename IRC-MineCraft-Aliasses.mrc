@@ -216,7 +216,49 @@ alias todo-neu {
   msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 4,1 %neu 14,1 Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
 
-Alias Itemdbgen {
+alias itemdbgen {
+
+  write $GameData(items) ;;;; Items Datenbank
+  write $GameData(items) ;;;; Struktur
+  write $GameData(items) ;;;; [MATERIAL]
+  write $GameData(items) ;;;; Type= (MaterialBlock,Food,TOOL,Weapon)
+  write $GameData(items) ;;;; Name=
+  write $GameData(items) ;;;; Desc=
+  write $GameData(items) ;;;; Durability=
+
+  set %letters a b c d e f g h i j k l m n o p q r s t u v w x y z _ ?
+  var %uppercase A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _ ?
+
+  var %textlen $lines(material-id.txt)
+  echo -ag Textlänge %textlen
+  var %x 1 
+  while (%x <= %textlen) {
+    set %replacetext $replace($read(material-id.txt,%x),$chr(32),_)
+    var %matlen $len(%replacetext)
+    var %b 1
+    while (%b <= %matlen) {
+      var %letter $right($left(%replacetext,%b),1)
+      var %isletter $istok(%letters,%letter,32)
+      var %letterpos $findtok(%letters,%letter,32)
+      var %repo $gettok(%uppercase,%letterpos,32))
+      var %text. $+ %b $+ %repo $+
+      var %textout $remove($addtok(%textout, %text. $+ %b $+ %repo $+, 32),%b)
+      inc %b
+    }
+    var %material $remove(%textout,$chr(32))
+    ;;write -l $+ %x C:\McraftBot_Data\materialID.db MaterialID= $+ %x Name= $+ %material
+    writeini $GameData(items) %material Type MaterialBlock
+    writeini $GameData(Items) %material Name $replace(%material,_,$chr(32))
+    writeini $GameData(Items) %material Desc Die Beschreibung zu %material
+    writeini $GameData(Items) %material Durability 2
+    unset %textout
+    inc %x
+  }
+  msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %textlen 9,1 Items/Materialien 10,1 Erstellt.
+  msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+}
+
+Alias Itemdbgen2 {
   var %maxlines $lines(material-id.txt)
   var %x 1
   while (%x <= %maxlines) {
