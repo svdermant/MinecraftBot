@@ -1,5 +1,13 @@
 ;;;;; IRC-MineCraft Aliasse ;;;;;
 
+alias Systemzeit {
+
+  var %systemzeit $asctime(hh:nn)
+  return %systemzeit
+
+}
+
+
 alias botdir { return $mircdir }
 alias Spielerdb { return $botdir $+ Spielerdaten\ $+ $1 $+ .db }
 alias GameData { return $botdir $+ Irc-MC\data\ $+ $1 $+ .db }

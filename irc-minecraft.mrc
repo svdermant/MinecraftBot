@@ -250,20 +250,27 @@ on *:text:!biomes:#: {
   }
 }
 
-on *:text:!explore*:#: { 
-  set -u3 %currentpos $readini($Spielerdb($nick),AccountInfo,LastPos)
-  set -u3 %cur-x $gettok(%currentpos,1,32)
-  set -u3 %cur-z $gettok(%currentpos,2,32)
-  Msg $chan Aktuelle Position %cur-x / %cur-z
-  if ($2 == N) && ($3 isnum) { 
-    set -u3 %newcur-x $calc(%cur-x + $3)
-    msg $chan Du bewegst dich $3 Blöcke nach Norden und erreicht somit chunk %newcur-x / %cur-z
-    writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+on *:text:!explore*:#: {
+  if ($exists($Spielerdb($nick)) == $false) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]  12EXPLORE-4ERROR Spieler $nick Existiert nicht!. 
+    msg $chan !explore ist nur für Registrierte Spieler nutzbar!
+    halt 
   }
-  if ($2 == S) && ($3 isnum) { 
-    set -u3 %newcur-x $calc(%cur-x - $3)
-    msg $chan Du bewegst dich $3 Blöcke nach Süden und erreicht somit chunk %newcur-x / %cur-z
-    writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+  if ($exists($Spielerdb($nick)) == $true) {
+    set -u3 %currentpos $readini($Spielerdb($nick),AccountInfo,LastPos)
+    set -u3 %cur-x $gettok(%currentpos,1,32)
+    set -u3 %cur-z $gettok(%currentpos,2,32)
+    Msg $chan Aktuelle Position %cur-x / %cur-z
+    if ($2 == N) && ($3 isnum) { 
+      set -u3 %newcur-x $calc(%cur-x + $3)
+      msg $chan Du bewegst dich $3 Blöcke nach Norden und erreicht somit chunk %newcur-x / %cur-z
+      writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+    }
+    if ($2 == S) && ($3 isnum) { 
+      set -u3 %newcur-x $calc(%cur-x - $3)
+      msg $chan Du bewegst dich $3 Blöcke nach Süden und erreicht somit chunk %newcur-x / %cur-z
+      writeini $Spielerdb($nick) Accountinfo LastPos $replace(%currentpos,%cur-x,%newcur-x)
+    }
   }
   set %chunklabel %newcur-x $+ / $+ %cur-z
   set %biomename $readini($GameData(chunk), %chunklabel, Name)
