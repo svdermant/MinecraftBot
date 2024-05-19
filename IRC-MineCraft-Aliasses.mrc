@@ -230,7 +230,7 @@ alias itemdbgen {
   var %uppercase A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _ ?
 
   var %textlen $lines(material-id.txt)
-  echo -ag Textlänge %textlen
+  echo -ag Anzahl der Materialien %textlen
   var %x 1 
   while (%x <= %textlen) {
     set %replacetext $replace($read(material-id.txt,%x),$chr(32),_)
@@ -257,6 +257,21 @@ alias itemdbgen {
   msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %textlen 9,1 Items/Materialien 10,1 Erstellt.
   msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
+
+set %semp $char(93)
+
+alias materialdesc {
+  var %maxmats $lines($GameData(materialdesc))
+  var %x 1
+  set %matarial $replace($read(material-id.txt, %x),$chr(32),_)
+  set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ $chr(59) $+ Desc=*), %matarial, MaterialID=, $chr(59), Desc=)
+  echo -ag The Description to Material %matarial is %newmatdesc
+  echo -ag --> %matarial
+  echo -ag --> %newmatdesc
+}
+
+;set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ *), %matarial, MaterialID=,$chr(59),Desc=)
+
 
 Alias Itemdbgen2 {
   var %maxlines $lines(material-id.txt)
