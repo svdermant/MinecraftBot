@@ -245,11 +245,19 @@ alias itemdbgen {
       var %textout $remove($addtok(%textout, %text. $+ %b $+ %repo $+, 32),%b)
       inc %b
     }
-    var %material $remove(%textout,$chr(32))
+    var -s %material $remove(%textout,$chr(32))
+    echo -ag -> %material
+    var %desc $materialdesc(%material)
+    if (%desc == $null) { 
+      msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %x 9,1 Items/Materialien 10,1 Erstellt.
+      msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+      halt
+    }
     ;;write -l $+ %x C:\McraftBot_Data\materialID.db MaterialID= $+ %x Name= $+ %material
     writeini $GameData(items) %material Type MaterialBlock
     writeini $GameData(Items) %material Name $replace(%material,_,$chr(32))
-    writeini $GameData(Items) %material Desc Die Beschreibung zu %material
+    writeini $GameData(Items) %material Desc %desc
+    ;;writeini $GameData(Items) %material Desc Die Beschreibung zu %material
     writeini $GameData(Items) %material Durability 2
     unset %textout
     inc %x
@@ -263,11 +271,13 @@ set %semp $char(93)
 alias materialdesc {
   var %maxmats $lines($GameData(materialdesc))
   var %x 1
-  set %matarial $replace($read(material-id.txt, %x),$chr(32),_)
+  set %matarial $1
+  ;;set %matarial $replace($read(material-id.txt, %x),$chr(32),_)
   set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ $chr(59) $+ Desc=*), %matarial, MaterialID=, $chr(59), Desc=)
-  echo -ag The Description to Material %matarial is %newmatdesc
-  echo -ag --> %matarial
-  echo -ag --> %newmatdesc
+  return %newmatdesc
+  ;;echo -ag The Description to Material %matarial is %newmatdesc
+  ;;echo -ag --> %matarial
+  ;;echo -ag --> %newmatdesc
 }
 
 ;set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ *), %matarial, MaterialID=,$chr(59),Desc=)

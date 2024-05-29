@@ -384,7 +384,7 @@ Alias checklog {
     set %te.1 $replace(%temp.rv4,$chr(32),.)
     set %te.1rem $gettok(%te.1,1,46)
     set %te.2rem $gettok(%te.1,4,46)
-    set %te.2rem.a $gettok (%te.1,5,46)
+    set %te.2rem.a $gettok(%te.1,5,46)
     set %te.2 $remtok(%te.1,%te.1rem,1,46)
     set %temp.rv3a $replace(%te.2,.,$chr(32))
     set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem,%te.2rem.a)

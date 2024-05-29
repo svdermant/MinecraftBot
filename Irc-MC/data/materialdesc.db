@@ -1,0 +1,69 @@
+
+MaterialID=Air;Desc=Die Luft in Minecraft ist kein Sichtbarer Block.
+MaterialID=Void_Air;Desc=Die Luft in Minecraft im Weltall ist ebenfals kein Sichbarer Block.
+MaterialID=Cave_Air;Desc=Die Luft in Minecrafthöhlen ist ebenfalls kein Sichtbarer Block.
+MaterialID=Stone;Desc=Ein Natürlicher Steinblock existiert in fast Jedem Biome oberhalb sowie Unterhalb.
+MaterialID=Stone_Stairs;Desc=Ein Steintreppe aus Pflastersteinen hergestellt. Rezept ersichtlich durch !mcbook recipe <itemname>
+MaterialID=Stone_Slab;Desc=Eine Einfache Steinstufe aus dem Steinmaterial gefertigt.
+MaterialID=Granite;Desc=Ein Rotbrauner Steinblock.
+MaterialID=Polished_Granite;Desc=Der Granitblock im polierten und geschliffenem Zustand
+MaterialID=Granite_Stairs;=Desc=Die Treppenstufen aus dem Material Granite
+MaterialID=Polished_Granite_Stairs;Desc=Die Treppenstufen aus dem Material Granite im geschliffenem und polierten Zustand
+MaterialID=Granite_Slab;Desc=Eine Steinstufe aus Granite
+MaterialID=Polished_Granite_Slab;Desc=Eine Steinstufe aus Granite im polierten und geschliffenem Zustand
+MaterialID=Granite_Wall;Desc=Eine Steinmauer aus dem Material Granite
+MaterialID=Diorite;Desc=Ein Steinblock aus Kalk und Mamor.
+MaterialID=Diorite_Stairs;Desc=Die Treppenstufen aus Diorite
+MaterialID=Diorite_Slab;Desc=Eine Steinstufe aus dem Material Diorite
+MaterialID=Diorite_Wall;Desc=Eine Steinmauer aus dem Material Diorite
+MaterialID=Polished_Diorite;Desc=Ein Steinblock aus Kalk und Mamor im geschliffenem und poliertem Zustand.
+MaterialID=Polished_Diorite_Slab;Desc=Eine Steinstufe aus dem Material Diorite im geschliffenem und poliertem Zustand.
+MaterialID=Polished_Diorite_Stairs;Desc=Die Treppenstufen aus Diorite im geschliffenem und poliertem Zustand.
+MaterialID=Andesite;Desc=Ein Steinblock aus dem Material Stein und Marmor.
+MaterialID=Andesite_Stairs;Desc=Die Treppenstufen aus Andesite
+MaterialID=Andesite_Slab;Desc=Eine Steinstufe aus Andesite.
+MaterialID=Andesite_Wall;Desc=Eine Steinmauer aus dem Material Andesite.
+MaterialID=Polished_Andesite;Desc=Der Andesite Steinblock im polierten und geschliffenem Zustand.
+MaterialID=Polished_Andesite_Stairs;Desc=Eine Treppenstufe aus poliertem und geschliffenem Andesite Material.
+MaterialID=Polished_Andesite_Slabs;Desc=Eine Steinstufe aus poliertem und geschliffenem Andesite Material.
+MaterialID=Smooth_Stone;Desc=Ein Glatter Steinblock.
+MaterialID=Deepslate;Desc=ist eine Gesteinsart. Er kann als dekorativer Block verwendet und in viele Varianten weiterverarbeitet werden.
+MaterialID=Reinforced_Deepslate;Desc=Ist eine Verhärtete Version des Tiefenschiefers der in Antiken Ruinen gefunden werden kann.
+MaterialID=Cobbled_Deepslate;Desc=funktioniert ähnlich wie Bruchstein, hat jedoch eine längere Abbauzeit. Bruchtiefenschiefer kann auch wie Schwarzstein zu Steinwerkzeugen, -waffen, Brauständen und Öfen weiterverarbeitet werden.
+MaterialID=Cobbled_Deepslate_Stairs;Desc=funktioniert ähnlich wie Bruchsteintreppen, hat jedoch eine Längere Abbauzeit.
+MaterialID=Cobbled_Deepslate_Slab;Desc=funktioniert ähnlich wie Bruchsteinstufen, hat jedoch eine längere Abbauzeit.
+MaterialID=Cobbled_Deepslate_Wall;Desc=funktioniert ähnlich wie Bruchsteinmauern, hat jedoch eine längere Abbauzeit.
+MaterialID=Polished_Deepslate;Desc=Der Tiefenschiefer im polierten und geschliffenem Zustand.
+MaterialID=Polished_Deepslate_Stairs;Desc=Die Tiefenschiefertreppen im polierten und geschliffenem Zustand.
+MaterialID=Polished_Deepslate_Slab;Desc=Die Tiefenschieferstufen im poliertem und geschliffenem Zustand.
+MaterialID=Polished_Deepslate_Wall;Desc=Die Tiefenschiefermauer im poliertem und geschliffenem Zustand.
+MaterialID=Deepslate_Tiles;Desc=Die Tiefenschieferfliesen sind ein Decoratiever Block.
+MaterialID=Deepslate_Tile_Stairs;Desc=Die Tiefenschiefertreppenfliesen ebenfalls ein Decorativer Block.
+MaterialID=Deepslate_Tile_Slab;Desc=Die Tiefenschieferstufe ist auch ein Decorativer Block.
+MaterialID=Deepslate_Tile_Wall;Desc=Die Tiefenschiefermauerfliesen sind ein Decorativer Block.
+MaterialID=Chiseled_Deepslate;Desc=Der gemeißelte Tiefenschieferblock.
+MaterialID=Cracked_Deepslate_Bricks;Desc=Dies sind Rissige Tiefenschieferziegel.
+MaterialID=Cracked_Deepslate_Tiles;Desc=Dies sind Rissige Tiefenschieferfliesen.
+MaterialID=Tuff;Desc=Der Tuffstein ist ein aus vulkanischer Asche geformtes Ziergestein, das in unterirdischen Blasen unter Y=16 vorkommt.
+MaterialID=Calcite;Desc=Der Kalzit ist ein Block, welcher um Amethystformationen oder in Steinlandschaften generiert wird. Er ist hell und gehört der Kategorie Baumaterial an.
+MaterialID=Dripstone_Block;Desc=Der Tropfsteinblock kommt in Unterirdischen Tropfsteinhöhlen vor.
+MaterialID=Pointed_Dripstone;Desc=Man nennt ihn auch Stalagtite oder Stalagnite je nach dem wo dieser sich in den Höhlen befindet. (Stalagmiten wachsen nach von unten nach oben, Stalagtiten wachsen von oben nach unten)
+MaterialID=Grass;Desc=Das Grass was standardmäßig über einen Erdblock wächst. Kann zusammen mit Behutsamkeit abgebaut werden.
+MaterialID=Grass_Path;Desc=Der Wegblock kann nur mit behutsamkeit abgebaut werden. 
+MaterialID=Mycelium;Desc=Ist eine Seltene und Coole variante des Erdblocks welcher aber nur in Pilzfeldern vorkommt.
+MaterialID=Dirt;Desc=Der Erdblock ist einer der Meisten Blöcke welcher in den Ersten schichten vorkommt.
+MaterialID=Coarse_Dirt;Desc=besitzt alle Eigenschaften der gewöhnlichen Erde, mit der Ausnahme, dass auf diesem Block weder Gras noch Myzel wachsen können. Grobe Erde ist etwas dunkler als normale Erde.
+MaterialID=Podzol;Desc=ist eine Variante von Erde. Er lässt sich nur mit einem mit Behutsamkeit verzauberten Werkzeug abbauen. Andernfalls erhält man Erde.
+MaterialID=Rooted_Dirt;Desc=Wurzelerde ist ein Erdblock der mit Wurzeln versäht ist. Und wird eine 5x5x5 Bereich unter einem Azaleabaum generiert.
+MaterialID=Mud;Desc=Der Schlamm ist ein dekorativer Block, der mit einer Wasserflasche auf Erde hergestellt wird. Schlamm lässt sich mit Hilfe von spitzen Tropfsteinen in Ton umwandeln.
+MaterialID=Mud_Bricks;Desc=Die Schlammziegel sind ein Decorativer Block aus Schlamm.
+MaterialID=Mud_Brick_Slab;Desc=Die Schlammstufe ist ein Decorativer Block aus Schlamm.
+MaterialID=Mud_Brick_Wall;Desc=Die Schlammziegelmauer ist ein Decorativer Block aus Schlamm.
+MaterialID=Cobblestone;Desc=Der Bruchstein ist eine Gesteinsart die man mit jeder Spitzhacke erhalten kann.
+MaterialID=Mossy_Cobblestone;Desc=Ist in dem Sinne auch der Bruchstein nur das dieser mit etwas Moos bedeckt ist.
+MaterialID=Mossy_Cobblestone_Stairs;Desc=Sind die Bruchsteintreppen mit etwas Moos bedeckt.
+MaterialID=Mossy_Cobblestone_Slab;Desc=Die Bruchsteinstufe die mit etwas Moos bedeckt ist.
+MaterialID=Moss_Block;Desc=ist ein dekorativer Block und hat die selbe Textur wie Moosteppiche.
+MaterialID=Moss_Carpet;Desc=Ein Teppich aus Moos.
+MaterialID=Oak_Planks;Desc=Die Eichenholzbretter sind dekorative Blöcke die aus dem Eichenstamm hergestellt werden können.
+MaterialID=Spruce_Planks;Desc=Die Fichtenholzbretter sind dekorative Blöcke die aus dem Fichtenstamm hergestellt werden können.
