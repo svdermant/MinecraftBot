@@ -203,7 +203,7 @@ alias todo-neu {
   var %maxlines $lines(%todoliste)
   echo -ag Zeilenanzahl %maxlines
   var %x 1
-  var %neu 0 
+  var %neu 0
   var %neulabel 7[8ↈ13NEU8ↈ7,1]
   while (%x <= %maxlines) {
     if (%neulabel !isin $read(%todoliste,%x)) { inc %x }
@@ -275,9 +275,9 @@ alias materialdesc {
   ;;set %matarial $replace($read(material-id.txt, %x),$chr(32),_)
   set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ $chr(59) $+ Desc=*), %matarial, MaterialID=, $chr(59), Desc=)
   return %newmatdesc
-  ;;echo -ag The Description to Material %matarial is %newmatdesc
-  ;;echo -ag --> %matarial
-  ;;echo -ag --> %newmatdesc
+  echo -ag The Description to Material %matarial is %newmatdesc
+  echo -ag --> %matarial
+  echo -ag --> %newmatdesc
 }
 
 ;set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ *), %matarial, MaterialID=,$chr(59),Desc=)

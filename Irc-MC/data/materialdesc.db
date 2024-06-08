@@ -1,4 +1,3 @@
-
 MaterialID=Air;Desc=Die Luft in Minecraft ist kein Sichtbarer Block.
 MaterialID=Void_Air;Desc=Die Luft in Minecraft im Weltall ist ebenfals kein Sichbarer Block.
 MaterialID=Cave_Air;Desc=Die Luft in Minecrafthöhlen ist ebenfalls kein Sichtbarer Block.
@@ -25,7 +24,7 @@ MaterialID=Andesite_Slab;Desc=Eine Steinstufe aus Andesite.
 MaterialID=Andesite_Wall;Desc=Eine Steinmauer aus dem Material Andesite.
 MaterialID=Polished_Andesite;Desc=Der Andesite Steinblock im polierten und geschliffenem Zustand.
 MaterialID=Polished_Andesite_Stairs;Desc=Eine Treppenstufe aus poliertem und geschliffenem Andesite Material.
-MaterialID=Polished_Andesite_Slabs;Desc=Eine Steinstufe aus poliertem und geschliffenem Andesite Material.
+MaterialID=Polished_Andesite_Slab;Desc=Eine Steinstufe aus poliertem und geschliffenem Andesite Material.
 MaterialID=Smooth_Stone;Desc=Ein Glatter Steinblock.
 MaterialID=Deepslate;Desc=ist eine Gesteinsart. Er kann als dekorativer Block verwendet und in viele Varianten weiterverarbeitet werden.
 MaterialID=Reinforced_Deepslate;Desc=Ist eine Verhärtete Version des Tiefenschiefers der in Antiken Ruinen gefunden werden kann.
@@ -41,10 +40,14 @@ MaterialID=Deepslate_Tiles;Desc=Die Tiefenschieferfliesen sind ein Decoratiever 
 MaterialID=Deepslate_Tile_Stairs;Desc=Die Tiefenschiefertreppenfliesen ebenfalls ein Decorativer Block.
 MaterialID=Deepslate_Tile_Slab;Desc=Die Tiefenschieferstufe ist auch ein Decorativer Block.
 MaterialID=Deepslate_Tile_Wall;Desc=Die Tiefenschiefermauerfliesen sind ein Decorativer Block.
+MaterialID=Deepslate_Bricks;Desc=Die Tiefenschieferziegel sind ein Decorativer Block.
+MaterialID=Deepslate_Brick_Stairs;Desc=Die Tiefenschieferziegeltreppen sind ein Decorativer Block.
+MaterialID=Deepslate_Brick_Slab;Desc=Die Tiefenschieferziegelstufe ist ein Decorativer Block.
+MaterialID=Deepslate_Brick_Wall;Desc=Die Tiefenschieferziegelmauer ist ein Decorativer Block.
 MaterialID=Chiseled_Deepslate;Desc=Der gemeißelte Tiefenschieferblock.
 MaterialID=Cracked_Deepslate_Bricks;Desc=Dies sind Rissige Tiefenschieferziegel.
 MaterialID=Cracked_Deepslate_Tiles;Desc=Dies sind Rissige Tiefenschieferfliesen.
-MaterialID=Tuff;Desc=Der Tuffstein ist ein aus vulkanischer Asche geformtes Ziergestein, das in unterirdischen Blasen unter Y=16 vorkommt.
+MaterialID=Tuff;Desc=Der Tuffstein ist ein aus vulkanischer Asche geformtes Ziergestein, das in unterirdischen Ebenen unter Y=16 vorkommt.
 MaterialID=Calcite;Desc=Der Kalzit ist ein Block, welcher um Amethystformationen oder in Steinlandschaften generiert wird. Er ist hell und gehört der Kategorie Baumaterial an.
 MaterialID=Dripstone_Block;Desc=Der Tropfsteinblock kommt in Unterirdischen Tropfsteinhöhlen vor.
 MaterialID=Pointed_Dripstone;Desc=Man nennt ihn auch Stalagtite oder Stalagnite je nach dem wo dieser sich in den Höhlen befindet. (Stalagmiten wachsen nach von unten nach oben, Stalagtiten wachsen von oben nach unten)
@@ -56,7 +59,9 @@ MaterialID=Coarse_Dirt;Desc=besitzt alle Eigenschaften der gewöhnlichen Erde, mi
 MaterialID=Podzol;Desc=ist eine Variante von Erde. Er lässt sich nur mit einem mit Behutsamkeit verzauberten Werkzeug abbauen. Andernfalls erhält man Erde.
 MaterialID=Rooted_Dirt;Desc=Wurzelerde ist ein Erdblock der mit Wurzeln versäht ist. Und wird eine 5x5x5 Bereich unter einem Azaleabaum generiert.
 MaterialID=Mud;Desc=Der Schlamm ist ein dekorativer Block, der mit einer Wasserflasche auf Erde hergestellt wird. Schlamm lässt sich mit Hilfe von spitzen Tropfsteinen in Ton umwandeln.
+MaterialID=Packed_Mud;Desc=Der Verpackte Schlamm ist ein Decorativer Block.
 MaterialID=Mud_Bricks;Desc=Die Schlammziegel sind ein Decorativer Block aus Schlamm.
+MaterialID=Mud_Brick_Stairs;Desc=Die Schlammziegeltreppen sind ein Decorativer Block aus Schlamm
 MaterialID=Mud_Brick_Slab;Desc=Die Schlammstufe ist ein Decorativer Block aus Schlamm.
 MaterialID=Mud_Brick_Wall;Desc=Die Schlammziegelmauer ist ein Decorativer Block aus Schlamm.
 MaterialID=Cobblestone;Desc=Der Bruchstein ist eine Gesteinsart die man mit jeder Spitzhacke erhalten kann.
@@ -67,3 +72,106 @@ MaterialID=Moss_Block;Desc=ist ein dekorativer Block und hat die selbe Textur wi
 MaterialID=Moss_Carpet;Desc=Ein Teppich aus Moos.
 MaterialID=Oak_Planks;Desc=Die Eichenholzbretter sind dekorative Blöcke die aus dem Eichenstamm hergestellt werden können.
 MaterialID=Spruce_Planks;Desc=Die Fichtenholzbretter sind dekorative Blöcke die aus dem Fichtenstamm hergestellt werden können.
+MaterialID=Birch_Planks;Desc=Die Birkenholzbretter sind dekorative Blöcke die aus dem Birkenstamm hergestellt werden können.
+MaterialID=Jungle_Planks;Desc=Die Jungelholzbretter sind dekorative Blöcke die aus dem Jungelstamm hergestellt werden können.
+MaterialID=Acacia_Planks;Desc=Die Acaciaholzbretter sind dekorative Blöcke die aus dem Acaciestamm hergestell werden können.
+MaterialID=Dark_oak_Planks;Desc=Die Schwarzeichenholzbretter sind dekorative Blöcke die aus dem Schwarzeichenstamm hergestellt werden können.
+MaterialID=Crimson_Planks;Desc=Die Crimsonholzbretter sind dekorative Blöcke die aus dem Crimsonstamm hergestell werden können.
+MaterialID=Warped_Planks;Desc=Die Warpedholzbretter sind dekorative Blöcke die aus dem Warpedstamm hergestellt werden können.
+MaterialID=Mangrove_Planks;Desc=Die Mangrovenholzbretter sind dekorative Blöcke die aus dem Mangrovenstamm hergestellt werden können.
+MaterialID=Oak_Sapling;Desc=Der Eichenbaumsetzling aus dem ein Eichenbaum wachsen kann.
+MaterialID=Spruce_Sapling;Desc=Der Fichtenbaumsetzling aus dem ein Fichtenbaum wachsen kann.
+MaterialID=Birch_Sapling;Desc=Der Birkenbaumsetzling aus dem ein Birkenbaum wachsen kann.
+MaterialID=Jungle_Sapling;Desc=Der Jungelbaumsetzling aus dem ein Jungelbaum wachsen kann.
+MaterialID=Acacia_Sapling;Desc=Der Acaciabaumsetzling aus dem ein Acaciabaum wachsen kann.
+MaterialID=Dark_Oak_Sapling;Desc=Der Schwarzeichenbaumsetzling aus dem die Schwarzeiche wachsen kann.
+MaterialID=Mangrove_Propagule=Desc;Der Mangrovenbaumsetzling aus dem ein Mangrovenbaum wachsen kann.
+MaterialID=Sugar_Cane;Desc=Hierbei handelt es sich um Zuckerrohr aus dem man Zucker für Kuchen gewinnen kann.
+MaterialID=Bedrock;Desc=Das Grundgestein (Bedrock) ein Block auf Ebene 1-3 der Unzerstörbar im Survival Mode ist.
+MaterialID=Sand;Desc=Wie soll man schon dazu sagen. Sand aus dem man Glasblöcke herstellen kann. (Anmerkung: Sand fällt herunter und man kann bei mehreren wenn man unterhalt steht ersticken.)
+MaterialID=Red_Sand;Desc=Ebenfalls Sand nur in Rote Farbe.
+MaterialID=Gravel;Desc=Kies ein Block aus dem zu 25% ein Feuerstein hervorkommt wenn man ihn mit eine Schaufel abbaut. Kann auch als Wegblock verwendet werden. (Anmerkung selbe verhalten wie bei Sand)
+MaterialID=Water;Desc=Fliesendes Wasser. Kann zur herstellung von Bruchstein verwendet werden sowie Obsidian.
+MaterialID=Water_Still;Desc=Stehendes Wasser. Kann als Bewässerung für Felder oder als Unendliche Wasserquelle verwendet werden.
+MaterialID=Bubble_Column;Desc=Eine Blasensäule verwendung derzeit Unbekannt.
+MaterialID=Lava;Desc=Heiß und Feurige Flüssigkeit zur verbrennung jeglicher Items.
+MaterialID=Lava_Stilll;Desc=Das gleiche gilt hier wie bei Lava.
+MaterialID=Magma_Block;Desc=Ein Magma Block. Dekorativ und schmerzend beim drüberlaufen.
+MaterialID=Obsidian;Desc=Ein Wiederstandsfähiger Block der Explosionen wiedersteht und in verbindung mit Lava und Wasser hergestellt werden kann.
+MaterialID=Crying_Obsidian;Desc=Weinender Obsidian ist ein schwarz-violetter Block, der Obsidian ähnelt und dazu violette Partikel erzeugt, die wie Tränen von ihm herabtropfen.
+MaterialID=Blackstone;Desc=ist eine Art Bruchstein und Basaltmischung, welche im Nether in Basaltdeltas und in Bastionsruinen gefunden wird.
+MaterialID=Blackstone_Stairs;Desc=Die Schwarzsteintreppen aus Schwarzstein.
+MaterialID=Blackstone_Wall;Desc=Die Schwarzsteinmauer aus Schwarzstein.
+MaterialID=Blackstone_Slab;Desc=Die Schwarzsteinstufe aus Schwarzstein.
+MaterialID=Polished_Blackstone;Desc=Schwarzstein im poliertem Zustand.
+MaterialID=Polished_Blackstone_Bricks;Desc=Schwarzsteinziegel im poliertem Zustand.
+MaterialID=Cracked_Polished_Blackstone_Bricks;Desc=Rissige polierte Schwarzsteinziegel.
+MaterialID=Chiseled_Polished_Blackstone;Desc=Gemeißelter polierter Schwarzstein.
+MaterialID=Polished_Blackstone_Brick_Slab;Desc=Eine Polierte Schwarzsteinziegelstufe.
+MaterialID=Polished_Blackstone_Brick_Stairs;Desc=Eine Polierte Schwarzsteinziegeltreppe.
+MaterialID=Polished_Blackstone_Brick_Wall;Desc=Eine Polierte Schwarzsteinziegelmauer.
+MaterialID=Polished_Blackstone_Stairs;Desc=Eine Polierte Schwarzsteintreppe.
+MaterialID=Polished_Blackstone_Slab;Desc=Eine Polierte Schwarzsteinstufe.
+MaterialID=Polished_Blackstone_Wall;Desc=Eine Polierte Schwarzsteinmauer.
+MaterialID=Coal_Ore;Desc=Kohleerz aus dem man Kohle mit jeder Spitzhacke gewinnen kann.
+MaterialID=Iron_Ore;Desc=Eisenerz kann mit eine Spitzhacke ab Materialstufe Stein abgebaut werden und im Ofen zu Eisenbarren geschmolzen werden.
+MaterialID=RedStone_Ore;Desc=Redstonerz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält dadurch Redstonestaub.
+MaterialID=Gold_Ore;Desc=Golderz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und im Ofen zu Goldbarren geschmolzen werden.
+MaterialID=Lais_Lazuli_Ore;Desc=Lapiserz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält Lapis Lazuli.
+MaterialID=Diamond_Ore;Desc=Diamanterz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält Diamanten.
+MaterialID=Emerald_Ore;Desc=Emeralderz kann mit einer Spitzhack ab Materialstufe Eisen abgebaut werden und man erhält Emerald.
+MaterialID=Copper_Ore;Desc=Kupfererz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält im Ofen durch schmelzen Kupferbarren.
+MaterialID=Deepslate_Coal_Ore;Desc=Tiefenschieferkohleerz aus dem man Kohle mit jeder Spitzhacke gewinnen kann.
+MaterialID=Deepslate_Iron_Ore;Desc=Tiefenschiefereisenerz kann mit eine Spitzhacke ab Materialstufe Stein abgebaut werden und im Ofen zu Eisenbarren geschmolzen werden.
+MaterialID=Deepslate_Redstone_Ore;Desc=Tiefenschieferredstonerz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält dadurch Redstonestaub.
+MaterialID=Deepslate_Gold_Ore;Desc=Tiefenschiefergolderz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und im Ofen zu Goldbarren geschmolzen werden.
+MaterialID=Deepslate_Lapis_Ore;Desc=Tiefenschieferlapiserz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält Lapis Lazuli.
+MaterialID=Deepslate_Diamond_Ore;Desc=Tiefenschieferdiamanterz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält Diamanten.
+MaterialID=Deepslate_Emerald_Ore;Desc=Tiefenschieferemeralderz kann mit einer Spitzhack ab Materialstufe Eisen abgebaut werden und man erhält Emerald.
+MaterialID=Deepslate_Copper_Ore;Desc=Kupfererz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält im Ofen durch schmelzen Kupferbarren.
+MaterialID=Nether_Quartz_Ore;Desc=Quarzerz aus dem Nether kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält Quarz.
+MaterialID=Nether_Gold_Ore;Desc=Golderz aus dem Nether kan mit einer Spitzhacke ab Materialstufe Eisen Abgebaut werden und man erhält im Ofem durch schmelzen Goldbarren.
+MaterialID=Raw_Iron_Block;Desc=Roheisen kann mit einer Steinspitzhacke abgebaut werden.
+MaterialID=Raw_Gold_Block;Desc=Rohgold kann mit einer Eisenspithacke abgebaut werden.
+MaterialID=Raw_Copper_Block;Desc=Rohkupfer kann mit einer Steinspitzhacke abgebaut werden.
+MaterialID=Coal_Block;Desc=Ein Kohleblock aus 9x Kohle herzgestellt.
+MaterialID=Iron_Block;Desc=Ein Eisenblock aus 9x Eisenbarren hergestellt.
+MaterialID=Copper_Block;Desc=Ein Kupferblock aus 9x Kupferbarren hergestellt.
+MaterialID=Exposed_Copper;Desc=Ausgesetzter Kupfer
+MaterialID=Weathered_Copper;Desc=Verwittertes Kupfer.
+MaterialID=Oxidized_Copper;Desc=Rostiger Kupfer.
+MaterialID=Cut_Copper;Desc=Geschnittener Kupfer.
+MaterialID=Exposed_Cut_Copper;Desc=Ausgesetztes geschnittenes Kupfer.
+MaterialID=Weathered_Cut_Copper;Desc=Verwittertes geschnittenes Kupfer.
+MaterialID=Oxidized_Cut_Copper;Desc=Rostiges geschnittenes Kupfer.
+MaterialID=Cut_Copper_Stairs;Desc=Geschnittene Kupfertreppen aus Kupfer.
+MaterialID=Exposed_Cut_Copper_Stairs;Desc=Ausgesetzte gesschnittene Kupfertreppen aus Kupfer.
+MaterialID=Weathered_Cut_Copper_Stairs;Desc=Verwitterte geschnittene Kupfertreppen aus Kupfer.
+MaterialID=Oxidized_Cut_Copper_Stairs;Desc=Rostige geschnittene Kupfertreppen aus Kupfer.
+MaterialID=Cut_Copper_Slab;Desc=Geschnittene Kupferstufen.
+MaterialID=Exposed_Cut_Copper_Slab;Desc=Ausgesetzte Geschnittene Kupferstufen.
+MaterialID=Weathered_Cut_Copper_Slab;Desc=Verwitterte geschnittene Kupferstufen.
+MaterialID=Oxidized_Cut_Copper_Slab;Desc=Rostige geschnittene Kupferstufen.
+MaterialID=Waxed_Copper_Block;Desc=Ein Gewachster Kupferblock.
+MaterialID=Waxed_Exposed_Copper;Desc=Ausgesetzter gewachstes Kupfer.
+MaterialID=Waxed_Weathered_Copper;Desc=Verwittertes gewachstes Kupfer.
+MaterialID=Waxed_Oxidized_Copper;Desc=Rostiges gewachstes Kupfer.
+MaterialID=Waxed_Cut_Copper;Desc=Geschnittenes gewachstes Kupfer.
+MaterialID=Waxed_Exposed_Cut_Copper;Desc=Gewachstes Ausgesetztes geschnittenes Kupfer.
+MaterialID=Waxed_Weathered_Cut_Copper;Desc=Gewachstes verwittertes geschnittenes Kupfer.
+MaterialID=Waxed_Oxidized_Cut_Copper;Desc=Gewachstes Rostiges geschnittenes Kupfer.
+MaterialID=Waxed_Cut_Copper_Stairs;Desc=Gewachste geschnittene Kupfertreppen.
+MaterialID=Waxed_Exposed_Cut_Copper_Stairs;Desc=Gewachste Ausgesetzte geschnittene Kupfertreppen.
+MaterialID=Waxed_Weathered_cut_copper_Stairs;Desc=Gewachste verwitterte geschnittene Kupfertreppen.
+MaterialID=Waxed_Oxidized_cut_copper_stairs;Desc=Gewachste rostige geschnittene Kupfertreppen.
+MaterialID=Waxed_Cut_Copper_Slab;Desc=Gewachste Geschnittene Kupferstufe.
+MaterialID=Waxed_Exposed_Cut_Copper_slab;Desc=Gewachste Ausgesetzte gesachnittene Kupferstufen.
+MaterialID=Waxed_Weathered_Cut_copper_Slab;Desc=Gewachste verwitterte geschnittene Kupferstufen.
+MaterialID=Waxed_oxidized_Cut_Copper_Slab;Desc=Gewachste rostige geschnittene Kupferstufen.
+MaterialID=Redstone_Block;Desc=Ein Rotfarbiger Glänzender Block hergestellt aus 9x Redstone.
+MaterialID=Gold_Block;Desc=Ein Goldglänzeder Block gefertigt aus 9x Goldnuggets.
+MaterialID=Lapis_Lazuli_Block;Desc=Ein Blauglänzender Block gefertigt aus 9x Lapislazuli.
+MaterialID=Diamond_Block;Desc=Ein Hellblauglänzender Block gefertigt aus 9x Diamanten.
+MaterialID=Emerald_Block;Desc=Ein Grünglänzender Block gefertigt aus 9x Emeralds
+MaterialID=Netherite_Block;Desc=Ein Dunkelfarbender Block gefertigt aus 9x Netherite.
+MaterialID=Smooth_Quartz;Desc=Ein Weiser Glatter Steinblock aus Quartz.
