@@ -1,4 +1,15 @@
-;;;;;;;;;; McraftBot ;;;;;;;; Commands
+;;;;;; MinecraftBot ;;;;;;;; V1.1b
+;;;;;; Author: Serkons
+;;;;;; Githubname: Svdermant
+;;;;;; GithubRepo: https://github.com/svdermant/MinecraftBot/
+;;;;;; Erstellungsdatum: 11. Juni . 2023
+
+;; ==== McraftBot ====
+;; Einleitung:
+;; Ein Mircbot zum Verwalten und Steuern eines MinecraftServers ab version 1.19.4 
+;;
+;; Befehle
+;; !help 
 
 ;;;;;;;;;;;;;;;;;;;;; ServerSettings Auslesen ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 on 100:text:!server settings:%m-channel: {
@@ -12,6 +23,7 @@ on 100:text:!server settings:%m-channel: {
   serverresult
 }
 
+;;;;;;;;;;;;;;;;;;;;; Todo Liste Anzeigen ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 on 1:text:!todo:#: {
   msg %m-channel %head003 4→11M14inecraftBot4←  %head003 0,1 Serkons/tOuly/Socid $+ 's 7[9Derzeitige Aufgaben7] %head003 
   ! msg %m-channel  7,1[9▒7] 4->11M14inecraftBot4<- 7[9Derzeitige Aufgaben7]:9 $2- $+ 4.
@@ -19,19 +31,31 @@ on 1:text:!todo:#: {
 
 }
 
-;;;;;;;;;;;;;; Youtube ;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;; Youtube Befehle ;;;;;;;;;;;;;;;
 on *:text:!yt:%m-channel: {  msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11Y14outube 11C14hannel4:10 https://www.youtube.com/@igamerpg 7[9▒7,1] }
 on *:text:!github:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
 on *:text:!twitch:%m-channel: {  msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11T14witch 11C14hannel4:10 https://twitch.tv/svdermand/ 7[9▒7,1] }
 on *:text:!gh:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG4.14de 9,1▬ 11G14ithub4:10 https://github.com/svdermant/MinecraftBot 77[9▒7,1] }
 
-;;;;;;;;;;;;;; Stream + Topic ;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;; Stream + Topic Befehl ;;;;;;;;;;;;;;;
 on *:text:!stream*:%m-channel: {
-  if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://www.youtube.com/@igamerpg 7[9▒7,1] |  /halt }
-  if ($2 != $null) {
-    set %topic-m-channel  7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]9 $2- $+ 4.0 Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot
-    topic %m-channel %topic-m-channel
-    msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews 8[>]9 $2- 8[<]
+  set %orginaltopic 7,1[9▒7]4 11W14illkommen im %m-channel - Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot 7,1[9▒7]4
+  if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] |  /halt }
+  if ($2 != $null) && ($2 == online) {
+    if ($3 == $null) { msg %m-channel 4,1STREAM FEHLER:12,1 Kein Twitchthema für den Stream gesetzt. | msg %m-channel 12,1 Setze den Stream wie folgt: 7,1 !stream online <text> | /halt }  
+    if ($3 != $null) { 
+      msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
+      msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews:
+      msg %b-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
+      topic %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
+      /halt
+    }
+  }
+  if ($2 != $null) && ($2 == offline)  {
+    set %orginaltopic 7,1[9▒7]4 11W14illkommen im %m-channel - Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot 7,1[9▒7]4
+    msg %m-channel 7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]11I14st 11OFF14line 7,1[9▒7]4 
+    topic %m-channel %orginaltopic
+    msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews: 7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]11I14st 11OFF14line 7,1[9▒7]4 
     /halt
   }
 }
@@ -89,27 +113,7 @@ on 100:text:!recreate*:%m-channel: {
   /timer1.1 1 2 /ausgabe
 }
 
-alias fm {
-  set %text $addtok(%text,$1-,32)
-  say %text
-  set %n1 $numtok(%text,32)
-  say Anzahl Tokens: %n1
-  set %begin 0
-  while (%begin <= %n1) {
-    set %fletter $left($gettok(%text,%begin,32),1)
-    set %letter 9 $+ %fletter $+ 
-    say Anfangsbuchstabe %letter
-    set %neutext $replace(%text,$left($gettok(%text,%begin,32),1),%letter)
-    inc %begin
-  }
-  say %neutext
-}
-
-alias ct {
-  return $regsubex($1-,/(?<= |^)(\S)/g,%c1\1 $+ %c2)
-}
-
-;;;;;; Say ;;;;;;;;;;;;;;;;;;
+;;;;;; Say (Servernachricht Verschicken) ;;;;;;;;;;;;;;;;;;
 
 on *:text:!say*:%m-channel: {
   if (%serverstarted == no) { msg $chan 4Fehler: 12!say4 Funktioniert nicht im Offline Mode! | /halt }
@@ -166,8 +170,12 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ help bot %head2.2 $+ %head.Z $+ eigt 11d14iese 11H14ilfe 11a14n4. %head2 
     msg %m-channel %head2 %head-2 $+ help %head2.2 $+ %head.Z $+ eigt 11d14ie 11A14llgemeine 11H14ilfe an4. %head2 
     msg %m-channel %head2 %head-2 $+ Todo %head2.2 $+ %head.T $+ odo 11L14iste 11A14ngzeigen4. %head2 
+    msg %m-channel %head2 %head-2 $+ mctodo add/del/fertig/fixed %head2.2 $+ %head.T $+ odo 11L14iste 11B14earbeiten4. %head2 
     msg %m-channel %head2 %head-2 $+ Server Settings %head2.2 $+ %head.z $+ eigt 11S14ervereinstellungen 11a14n4. %head2 
     msg %m-channel %head2 %head-2 $+ yt %head2.2 $+ %head.y $+ outube 11C14hannel 11v14on 11I14game11RPG %head2 
+    msg %m-channel %head2 %head-2 $+ gh %head2.2 $+ %head.G $+ ithub Repo von 11S14vdermant %head2
+    msg %m-channel %head2 %head-2 $+ Stream %head2.2 Online <text> %head.S tream 11T14opic 11s14etzen.
+    msg %m-channel %head2 %head-2 $+ Stream %head2.2 Offline %Head.T opic 11z14urücksetzen.
     msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %head.Z $+ eigt 11S14pielerliste 11i14m 11C14hannel 11a14n %head2 
     msg %m-channel %head2 %head-2 $+ set <params> %head2.2 $+ %head.s $+ ervereinstellungen 11ä14ndern4. %head2 
     msg %m-channel %head2 %head-2 $+ recreate <name> %head2.2 $+ %head.L $+ öscht 11d14ie 11A14ngegeben 11M14inecraft 11W14elt %head2 
@@ -189,6 +197,12 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ status %head2.2 $+ %head.Z $+ eigt 11d14en 11S14tatus 11d14es %head.S $+ ervers 11a14n4. %head2
     msg %m-channel %head2 %head-2 $+ clearlogs %head2.2 $+ %head.L $+ öscht 11d14en 11I14nhalt 11d14es %head.L $+ ogverzeichnisses 4. %head2 
     msg %m-channel %head2 %head-2 $+ rconpassgen %head2.2 $+ %head.G $+ eneriert 11e14in 11n14eues 11R14con11P14assword. (11S14erverneustart 11e14rforderlich)
+    msg %m-channel %head2 %head-2 $+ mcwhois %head2.2 $+ %head.L $+ istet 11d14ie 11O14nlinewhois 11a14uf. %head2 
+    msg %m-channel %head2 %head-2 $+ regexist %head2.2 $+ %head.P $+ 11r14üft 11o14b 11e14ine 11R14egion 11e14xistiert %head2 
+    msg %m-channel %head2 %head-2 $+ mapupdate (Plugin Bluemap benötigt) %head2.2 $+ %head.A $+ 14ktualisiert 11d14ie 11K14arte %head2 
+    msg %m-channel %head2 %head-2 $+ batchpfad %head2.2 $+ %head.S $+ etzt 11d14en 11B14atchpfad %head2 
+    msg %m-channel %head2 %head-2 $+ os %head2.2 $+ %head.B $+ 14etriebsystem 11a14nzeigen %head2
+    msg %m-channel %head2 %head-2 $+ version %head2.2 $+ %head.V $+ 14ersion 11a14nzeigen %head2
   }
   if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
     msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
@@ -295,6 +309,7 @@ on 100:text:!region*:%m-channel: {
   if ($2 == list) && ($3 == -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 != -w) && ($4 == $null) { msg %m-channel Es wurde kein Wert für den -w Parameter angegeben | halt }
   if ($2 == list) && ($3 == -w) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { msg %m-channel Die Welt $4 Existiert nicht, kann keine Regionen finden. | /halt }
+  if ($2 == list) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) && ($exists(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \) == $false)  { msg %m-channel Die Welt $4 Existiert nicht, kann keine Regionen finden. | /halt }
   if ($2 == list) && ($3 == -w) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1)) && (%wg  isin $finddir(%pfad $+ plugins\, WorldGuard, 1)) { 
     var %regionlist1 $getallYml(%pfad $+ \plugins\WorldGuard\worlds\ $+ $4 $+ \regions.yml,regions)
     if (%regionlist1 == $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Die Welt $4 hat derzeit Keine Regionen 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 | /halt }
@@ -376,7 +391,7 @@ on 100:text:!region*:%m-channel: {
     msg %m-channel 12Wird keine value angegeben so wird die Flag zurückgesetzt.
     /halt
   }  
-  if ($2 == flag) && ($3 == -w) && [%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
+  if ($2 == flag) && ($3 == -w) && (%regionsid != $null) && ($4 isin $finddir(%pfad, $+ $4 $+ *,1))  { 
     set %flag $5
     set %welt $4
     if ($flagcheck(%flag) == off) { 
@@ -4021,31 +4036,6 @@ on 100:text:!regexist*:%m-channel: {
   else { msg %m-channel region %region existiert nicht! }
 }
 
-;;;;; Some Stuff from Quims
-
-on 100:text:!regcheck*:#: {
-  var %world $2
-  var %region $3
-  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
-  set -s %regionlist $getallyml(%file,regions)
-  if ($istok(%regionlist,%region,32)) { msg #support region %region exists }
-  else { msg $chan region %region does'nt exist }
-}
-
-on *:text:!regset*:#: {
-  var %world $2
-  var %region $3
-  var %member $4
-  var %value $5
-  var  %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
-  var %regionlist $getallyml(%file,regions)
-  if (!$istok(%regionlist,%region,32)) { 
-    write $qt(%file) $str(@,4) $+ $3: $+ $crlf $+ $str(@,8) $+ $4: $5
-    convert@tospace %file
-  }
-  else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
-}
-
 ;;;;;;;; !spawnentity command ;;;;;;;;;;;;;;;
 
 on 100:text:!spawnentity*:%m-channel: {
@@ -4247,15 +4237,14 @@ on 100:text:!start:%m-channel:{
   /timer.checkstarted1 0 3 /checkstarted
 }
 
-Alias systempid {
-  if (%syspid == $null) || (!%syspid) { /set %syspid $read(%pfad $+ server.pid,1) }
-  /msg %m-channel   7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ %syspid $+ 07]
-}
-
 on 100:text:!status:%m-channel: { 
   if (%serverstarted == yes) && (%pid isnum) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄> 14ist 9ONLINE }
   if (%serverstarted == no) || (!%pid) { msg %m-channel 9→11M14inecraft9← 11S14erver 9◄>14 ist 4OFFLINE }
 }
+
+;;; Exit Event
+;;; Zurücksetzen einiger Variablen
+;; =============
 
 on 1:EXIT: {
   /unset %serverstarted
@@ -4301,6 +4290,8 @@ on 100:text:!mapupdate:%m-channel: {
 }
 
 ;;; Batchbefehl ;;;;;
+;; Setzt den Batchdateienpfad diese sollten im Serververzeichnis sein
+;; =================
 
 on 100:text:!batchpfad*:%m-channel: {
   if ($2 == $null) { msg %m-channel Bitte gebe den Pfad zu allen Batchdateien an diese sollten sich im MinecraftSerververzeichniss befinden }
@@ -4332,6 +4323,98 @@ on *:text:!lag:%m-channel: {
   set -u5 %tps3 7,1[4-7] 11S14peicher 11A14uslastung 11d14es4 11S14ervers 7[4-7]
   /timer.lagausgabe1 1 2 /lagausgabe
 }
+
+;;;; Aufgabenliste ;;;;
+
+on 100:text:!mctodo*:#: {
+  var %befehle add.del.fertig.fixed.list
+  if ($2 == $null) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Listen Ersteller v1.0 by Serkons - Die Befehle sind:
+    var %befehle add.del.fertig.fixed.list
+    var %maxbefehle $numtok(%befehle,46)
+    var %x 1
+    while (%x <= %maxbefehle) {
+      msg $chan 7,1[9▒7] 4→ $+ 7!mctodo $gettok(%befehle,%x,46) $iif($gettok(%befehle,%x,46) != list, <eintrag>, $chr(32)) 14 $iif($gettok(%befehle,%x,46) != list, $remove($read(todo-befehle.txt,w,$gettok(%befehle,%x,46) $+ *),$gettok(%befehle,%x,46),=), $replace($remove($read(todo-befehle.txt,w,$gettok(%befehle,%x,46) $+ *),=,list),Todoe,TodoListe))
+      inc %x
+    }
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == add) { 
+    set %todolines $lines(ircmc-todo.txt)
+    if (%todolines == $null) || (%todolines >= 0) { 
+      inc %todolines
+      ;;;msg $chan Zeile %todolines
+      write -l $+ %todolines ircmc-todo.txt 7,1[9▒7] 4→7 $+ $fulldate $+ 4← 7[9▒7,1] 14 ID: 4→9 %todolines 15 4← 14 $3- 7[8ↈ13NEU8ↈ7,1]
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Eintrag ID: %todolines 4HINZUGEFÜGT!
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Text: 14 $3-
+    }
+  }  
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == $null) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    msg $chan 7,1[9√7]14 = Fertig - 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]14 = Optimiert / Fehlerbehoben
+    play $chan ircmc-todo.txt
+    /halt
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fixed) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-fix
+    /halt
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fertig) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Fertige Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-fertig
+    /halt
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == neu) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+    set -u5 %chan $chan
+    $todo-neu
+    /halt
+  }
+
+  if ($istok(%befehle,$2,46) == $true) && ($2 == del) { 
+    var %eintragid $3
+    set %eintragstext $read(ircmc-todo.txt,%eintragid)
+    if (%eintragstext == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry einen Eintrag mit ID: 7 %eintragid $+  existiert nicht! | /halt }
+    ;;;msg $chan Eintragstoken: %eintragstokens
+    if (%eintragstext != $null) && (%tododel == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste  Soll der Eintrag: 7 $remove($gettok(%eintragstext,15-,32), 7[8ↈ13NEU8ↈ7,1],$chr(44))  wirklich Gelöscht werden?. Zur Bestätigung Befehl inerhalb von 5sec Erneut schreiben! | /set -u5 %tododel on | /halt }
+    if (%eintragstext != $null) && (%tododel == on) {
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Listeneintrag 7,1[9▒7] 4→11 $+ $remove($gettok(%eintragstext,15-,32), 7[8ↈ13NEU8ↈ7,1],$chr(44)) $+ 4← 7[9▒7,1] 7[4GELÖSCHT!7,1] 
+      /write -dl $+ %eintragid ircmc-todo.txt
+      /sortlist
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste wurde Sortiert. Siehe !mctodo list
+      /halt
+    }
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == fertig) {
+    var %eintrag $read(ircmc-todo.txt,$3)
+    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
+    if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
+    if (%eintrag != $null) {
+      var %neulabel 7[8ↈ13NEU8ↈ7,1]
+      var %fertiglabel 7,1[9√7]
+      var %zeile $3
+      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fertiglabel,%date,$fulldate)
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fertiglabel gekennzeichnet.
+    }
+  }
+  if ($istok(%befehle,$2,46) == $true) && ($2 == fixed) {
+    var %eintrag $read(ircmc-todo.txt,$3)
+    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
+    if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
+    if (%eintrag != $null) {
+      var %neulabel 7[8ↈ13NEU8ↈ7,1]
+      var %fertiglabel 7,1[9√7]
+      var %fixedlabel 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]
+      var %zeile $3
+      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fixedlabel,%fertiglabel,%fixedlabel,%date,$fulldate))
+      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fixedlabel gekennzeichnet.
+    }
+  }
+}
+
+on 1:text:!os:#: { msg $chan Ich laufe auf einem 4 $+ $osVersion $+   Buildnummer:  $+ $osBuild }
 
 on 100:text:!version:%m-channel: {
   /msg %m-channel  7,1[9▒7] 4→11M14inecraft4 11B14ot4 11V14ersion14,110 $ver 11,1C14odet 11b14y 11S14erkons4← 7[9▒7,1]

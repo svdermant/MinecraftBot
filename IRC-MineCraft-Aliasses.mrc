@@ -1,16 +1,29 @@
+;;;;;; MinecraftBot ;;;;;;;; V1.1b
+;;;;;; Author: Serkons
+;;;;;; Githubname: Svdermant
+;;;;;; GithubRepo: https://github.com/svdermant/MinecraftBot/
+;;;;;; Erstellungsdatum: 11. Juni . 2023
+
 ;;;;; IRC-MineCraft Aliasse ;;;;;
 
-alias Systemzeit {
+;;; Alias Systemzeit
+;; Gibt die Systemzeit Wieder...
+;;;;;;;;;;;;;;;;;;;;;;
 
+alias Systemzeit {
   var %systemzeit $asctime(hh:nn)
   return %systemzeit
-
 }
 
+
+;;; Standard verzeichnis Aliasse
 
 alias botdir { return $mircdir }
 alias Spielerdb { return $botdir $+ Spielerdaten\ $+ $1 $+ .db }
 alias GameData { return $botdir $+ Irc-MC\data\ $+ $1 $+ .db }
+
+;;; Alias Applecounter
+;;; Zählt Äpfel beim Baum.
 
 alias applecounter {
   var %x 1
@@ -41,7 +54,7 @@ Alias DisplayTree {
 
 ;;;-------
 ;;; Alias GetInventory
-;;; Zeigt das Spielerinventar an
+;;; Ermittelt das Spielerinventar an
 ;;; $1 = Spielername
 ;;;-------
 
@@ -61,6 +74,12 @@ Alias GetInventory {
   }
 }
 
+;;;-------
+;;; Alias ShowInventar
+;;; Zeigt das Spielerinventar an
+;;; $1 = Spielername
+;;;-------
+
 alias ShowInventar {
   var %replacechar $chr(044) $chr(032)
   %itemlist = $replace(%itemlist, $chr(046), %replacechar)
@@ -73,9 +92,6 @@ alias ShowInventar {
   }
   unset %Itemlist*
 }
-
-
-
 
 ;;;--------------
 ;;; Alias LastPos
@@ -177,7 +193,7 @@ alias todo-fix {
       inc %fixed
     }
   }
-  msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 4,1 %fixed 14,1 Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
+  msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 4,1 %fixed 14,1 Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
 
 alias todo-fertig {
@@ -216,8 +232,9 @@ alias todo-neu {
   msg %chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 4,1 %neu 14,1 Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
 
-alias itemdbgen {
+;;; Itemgenerierung
 
+alias itemdbgen {
   write $GameData(items) ;;;; Items Datenbank
   write $GameData(items) ;;;; Struktur
   write $GameData(items) ;;;; [MATERIAL]
@@ -267,6 +284,8 @@ alias itemdbgen {
 }
 
 set %semp $char(93)
+
+;; Materialbezeichnung.
 
 alias materialdesc {
   var %maxmats $lines($GameData(materialdesc))

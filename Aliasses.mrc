@@ -1,4 +1,15 @@
-;;;;;; Mcraft Bot ;;;;;;;; V1.0
+;;;;;; MinecraftBot ;;;;;;;; V1.1b
+;;;;;; Author: Serkons
+;;;;;; Githubname: Svdermant
+;;;;;; GithubRepo: https://github.com/svdermant/MinecraftBot/
+;;;;;; Erstellungsdatum: 11. Juni . 2023
+
+;;;;;; Minecraft Server Aliasses;;;;;
+
+;; ==== Starten des Bots =========
+;; Bei Erststart wird der Bot eingerichten und
+;; an den MinecraftServer Angepasst
+;; ======================
 
 on 1:START: {
   echo 12*** Willkommen zum Minecraftbot v1.0 by Serkons aka Rene ***
@@ -128,63 +139,93 @@ on 1:START: {
 
 }
 
+;; == Beim Beenden des Bots ===
+;; Variablen werden in der Vars.ini
+;; gespeichert.      
+;; =================
+
 on 1:EXIT: {
   /save -rv vars.ini
 }
 
+;; === Verbindungsevent ===
+;; Beim Verbinden zu einem Server 
+;; Werden Passwort und Name Automatisch Gesetzt
+;; === Verbindungsevent ===
+
 on 1:CONNECT: {
-  if ($me == $readini(system.dat, botinfo, botname)) {
-    /ns identify $readini(system.dat, botinfo, botpass)
-    /timer.join1 1 3 /join %m-channel
+  if ($sha1($read(version,l,2)) != aa790deb9ff60de7b621436e3066f94a6fb12ffc) || ($exists(version) == $false) {
+    echo -ag Das Copyright wurde Beschädigt.
+    /quit 4Warnung Coprigth fehlt oder Key ist Incorrect.
   }
-  if ($me != $readini(system.dat, botinfo, botname)) {
-    /nick $readini(system.dat, botinfo, botname)
-    /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)
+  if ($sha1($read(version,l,2)) != aa790deb9ff60de7b621436e3066f94a6fb12ffc) && ($exists(version) == $true) {
+    echo -ag Der Minecraftbot 11,1 $me  Ist Einsatzbereit!
+    if ($me == $readini(system.dat, botinfo, botname)) {
+      /ns identify $readini(system.dat, botinfo, botpass)
+      /timer.join1 1 3 /join %m-channel
+    }
+    if ($me != $readini(system.dat, botinfo, botname)) {
+      /nick $readini(system.dat, botinfo, botname)
+      /ns recover $readini(system.dat, botinfo, botname) $readini(system.dat, botinfo, botpass)
+    }
   }
 }
+;; == Raumbeitritt
+;; Hier wird Version und Key geprüft
+;; ==========
 
 on 1:JOIN:#:{
-  if ($sha1($read(version,l,2)) != 84d6ca7a78e14a4bfe036cdbad9153ef4e92d9d6) || ($exists(version) == $false) {
+  if ($sha1($read(version,l,2)) != aa790deb9ff60de7b621436e3066f94a6fb12ffc) || ($exists(version) == $false) {
     msg $chan Das Copyright wurde Beschädigt.
     /quit 4Warnung Coprigth fehlt oder Key ist Incorrect.
   }
+  if ($sha1($read(version,l,2)) != aa790deb9ff60de7b621436e3066f94a6fb12ffc) && ($exists(version) == $true) {
+    msg $chan Der Minecraftbot 11,1 $me  Ist Einsatzbereit!
+  }
 }
 
-;;;;;;;;; Systemcheck ;;;;;;;;;;;;;;
+;; === Systemcheck ====
+;; Hier werden die Standardwerte gesetzt und geprüft
+;; ================
 
 alias system_defaults_check {
-  set %Head-3 0,1
-  set %rcon [RCON Client /0:0:0:0:0:0:0:1
-  set %rcon2 Thread RCON Client /0:0:0:0:0:0:0:1 shutting down
-  set %rcon3 /INFO]:
-  set %valid-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.fuction-permission-level.gamemode.generate-structures.hide-online-players.level-name.max-players.motd.pvp.server-port.simulation-distance.spawn-animals.spawn-monsters.spawn-npcs.spawn-protection.white-list
-  set %true-false-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.gamemode.generate-structures.hide-online-players.level-name.spawn-animals.spawn-monsters.spawn-npcs.whitelist
-  set %level level-type
-  set %num-settings fuction-permission-level.max-players.server-port.simulation-distance.spawn-protection
-  set %moblist piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog
-  set %moblist2 hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart
-  set %moblist3 vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman
-  set %moblist4 zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite
-  set %moblist5 tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.ufferfish.anderingtrader
-  set %moblist6 amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
-  set %flaglist1 ability-pvp.allowed-cmds.block-break.block-place.block-trampling.blocked-cmds.build.respawn-anchor-explode.chest-access.chorus-fruit-teleport.coral-fade.creeper-explosion.crop-growth.damage-animals.deny-message.deny-spawn.ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.enderdragon-block-damage.enderman-grief.enderpearl.entity-item-frame-destroy
-  set %flaglist2 entity-painting-destroy.entry.entry-deny-message.exit.exit-deny-message.exit-override.lava-fire.lava-flow.leaf-decay.lighter.lightning.mythic-drops-unidentified-item.natural-health-regen.natural-hunger-drain.nonplayer-protection-domains.notify-enter
-  set %flaglist3 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup
-  set %flaglist4 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered
-  set %flaglist5 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage.copper-fade
-  set %thirdflags1 ability-pvp.allow-block-place.allow-block-break.allow-entity-damage.allow-entity-destroy.allow-entity-place.blocked-effects.chat-prefix
-  set %thirdflags2 chat-suffix.command-on-entry.command-on-exit.console-command-on-entry.console-command-on-exit.deny-block-break.deny-block-place.deny-entity-damage.deny-entity-destroy.deny-entity-place.disable-collision
-  set %thirdflags3 ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.fly
-  set %thirdflags4 fly-speed.frostwalker.give-effects.glide.godmode.item-durability.keep-exp.keep-inventory.mi-commands.mi-consumables.mi-tools.mi-weapons.min-class-level.mmo-abilities.mypet-damage.mypet-deny.mypet-fly.mypet-leash
-  set %thirdflags5 mythic-drops.mythic-drops-custom.mythic-drops-itentity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered.mythic-drops-unidentified-item.nether-portals.pvp-mode.respawn-anchor-explode.teleport-on-entry.teleport-on-exit.villager-trade.walk-speed.weight-rpg
-  set %moblists piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog.hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart.vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman.zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite.tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.pufferfish.wanderingtrader.amorstand.wolf.villager.boat.strider.witch.cod.spider.wither
-
-
+  if (%Head-3 == $null) || (%Head-3 != 0,1) { set %Head-3 0,1 }
+  if (%rcon != $null) || (%rcon == $null) { set %rcon [RCON Client /0:0:0:0:0:0:0:1 }
+  if (%rcon2 != $null) || (%rcon2 == $null) { set %rcon2 Thread RCON Client /0:0:0:0:0:0:0:1 shutting down }
+  if (%rcon3 != $null) || (%rcon3 == $null) { set %rcon3 /INFO]: }
+  if (%valid-settings != $null) || (%valid-settings == $null) { set %valid-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.fuction-permission-level.gamemode.generate-structures.hide-online-players.level-name.max-players.motd.pvp.server-port.simulation-distance.spawn-animals.spawn-monsters.spawn-npcs.spawn-protection.white-list }
+  if (%true-false-settings != $null) || (%true-false-settings == $null) { set %true-false-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.gamemode.generate-structures.hide-online-players.level-name.spawn-animals.spawn-monsters.spawn-npcs.whitelist }
+  if (%level != $null) || (%level == $null) { set %level level-type }
+  if (%num-settings != $null) || (%num-settings == $null) { set %num-settings fuction-permission-level.max-players.server-port.simulation-distance.spawn-protection }
+  if (%moblist != $null) || (%moblist == $null) { set %moblist piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog }
+  if (%moblist2 != $null) || (%moblist2 == $null) { set %moblist2 hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart }
+  if (%moblist3 != $null) || (%moblist3 == $null) { set %moblist3 vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman }
+  if (%moblist4 != $null) || (%moblist4 == $null) { set %moblist4 zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite }
+  if (%moblist5 != $null) || (%moblist5 == $null) { set %moblist5 tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.pufferfish.wanderingtrader }
+  if (%moblist6 != $null) || (%moblist6 == $null) { set %moblist6 amorstand.wolf.villager.boat.strider.witch.cod.spider.wither }
+  if (%flaglist1 != $null) || (%flaglist1 == $null) { set %flaglist1 ability-pvp.allowed-cmds.block-break.block-place.block-trampling.blocked-cmds.build.respawn-anchor-explode.chest-access.chorus-fruit-teleport.coral-fade.creeper-explosion.crop-growth.damage-animals.deny-message.deny-spawn.ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.enderdragon-block-damage.enderman-grief.enderpearl.entity-item-frame-destroy }
+  if (%flaglist2 != $null) || (%flaglist2 == $null) { set %flaglist2 entity-painting-destroy.entry.entry-deny-message.exit.exit-deny-message.exit-override.lava-fire.lava-flow.leaf-decay.lighter.lightning.mythic-drops-unidentified-item.natural-health-regen.natural-hunger-drain.nonplayer-protection-domains.notify-enter }
+  if (%flaglist3 != $null) || (%flaglist3 == $null) { set %flaglist3 exit-via-teleport.exp-drops.fall-damage.farewell.farewell-title.feed-amount.feed-delay.feed-max-hunger.feed-min-hunger.fire-spread.firework-damage.frosted-ice-form.frosted-ice-melt.game-mode.ghast-fireball.grass-growth.greeting.greeting-title.heal-amount.heal-delay.heal-max-health.heal-min-health.ice-form.ice-melt.interact.invincible.item-drop.item-frame-rotation.item-pickup }
+  if (%flaglist4 != $null) || (%flaglist4 == $null) { set %flaglist4 mi-commands.mi-consumables.mi-tools.mi-weapons.mmo-abilities.mob-damage.mob-spawning.mushroom-growth.mycelium-spread.mypet-damage.mypet-deny.mypet-fly.mypet-leash.mythic-drops.mythic-drops-custom.mythic-drops-identity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered }
+  if (%flaglist5 != $null) || (%flaglist5 == $null) { set %flaglist5 notify-leave.other-explosion.passthrough.pistons.potion-splash.pvp.pvp-mode.ravager-grief.receive-chat.respawn-anchors.ride.rock-growth.sculk-growth.send-chat.sleep.snow-fall.snow-melt.snowman-trails.soil-dry.spawn.teleport.teleport-message.time-lock.tnt.use.use-anvil.use-dripleaf.vehicle-destroy.vehicle-place.vine-growth.water-flow.weather-lock.wither-damage.copper-fade }
+  if (%thirdflags1 != $null) || (%thirdflags1 == $null) { set %thirdflags1 ability-pvp.allow-block-place.allow-block-break.allow-entity-damage.allow-entity-destroy.allow-entity-place.blocked-effects.chat-prefix }
+  if (%thirdflags2 != $null) || (%thirdflags2 == $null) { set %thirdflags2 chat-suffix.command-on-entry.command-on-exit.console-command-on-entry.console-command-on-exit.deny-block-break.deny-block-place.deny-entity-damage.deny-entity-destroy.deny-entity-place.disable-collision }
+  if (%thirdflags3 != $null) || (%thirdflags3 == $null) { set %thirdflags3 ecs-create-admin-shop.ecs-create-shop.ecs-remove-admin-shop.ecs-remove-shop.ecs-use-admin-shop.ecs-use-shop.fly }
+  if (%thirdflags4 != $null) || (%thirdflags4 == $null) { set %thirdflags4 fly-speed.frostwalker.give-effects.glide.godmode.item-durability.keep-exp.keep-inventory.mi-commands.mi-consumables.mi-tools.mi-weapons.min-class-level.mmo-abilities.mypet-damage.mypet-deny.mypet-fly.mypet-leash }
+  if (%thirdflags5 != $null) || (%thirdflags5 == $null) { set %thirdflags5 mythic-drops.mythic-drops-custom.mythic-drops-itentity-tome.mythic-drops-socket-effects.mythic-drops-socket-extender.mythic-drops-socket-gem.mythic-drops-tiered.mythic-drops-unidentified-item.nether-portals.pvp-mode.respawn-anchor-explode.teleport-on-entry.teleport-on-exit.villager-trade.walk-speed.weight-rpg }
+  if (%moblists != $null) || (%moblists == $null) { set %moblists piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog.hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart.vex.salmon.goat.ocelot.endercrystal.horse.vindicator.glowsquid.phantom.minecart.experienceorb.evoker.warden.squid.parrot.creeper.cavespider.enderman.zombifiedpiglin.magmacube.tadpole.chicken.ravager.hopperminecart.donkey.witherskeleton.strayskeleton.fox.slime.pillager.blaze.piglin.chestboat.endermite.tropicalfish.cat.pigzombie.zombie.mushroomcow.irongolem.guardian.polarbear.traderllama.ghast.sheep.tntminecart.skeletonhorse.illusioner.pufferfish.wanderingtrader.amorstand.wolf.villager.boat.strider.witch.cod.spider.wither }
 
   ;;;;Checke ob die Scripte geladen sind.
   load -rs Mcraft-Commands.mrc
+  load -rs Irc-minecraft.mrc
+  load -rs Irc-Minecraft-Aliasses.mrc
   /save -rv vars.ini
 }
+
+;; == Aliasse ===
+
+;;; => Alias allowd-placed-blocks <==
+;;; Prüft die Zugelassenen Blöcke und setzt diese
 
 alias allowed-placed-blocks {
   set -u7 %blocklist on
@@ -206,9 +247,22 @@ alias allowed-placed-blocks {
   }
 }
 
+;; Alias Spid (System Prozess ID) & systempid ====
+;; Definiert die PID bei Extremfall (Wenn nur 1 Java Anwendung läuft)
+;; =============
+
 alias spid {
   /run -ap %pfad $+ process.bat
 }
+
+Alias systempid {
+  if (%syspid == $null) || (!%syspid) { /set %syspid $read(%pfad $+ server.pid,1) }
+  /msg %m-channel   7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ %syspid $+ 07]
+}
+
+;; Alias Flagcheck =====
+;; Hier wird geprüft ob die Flag existiert
+;; Als returnwert kommt on bzw off
 
 alias flagcheck {
   if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true) || ($istok(%thirdflags1,$1,46) == $true) || ($istok(%thirdflags2,$1,46) == $true) || ($istok(%thirdflags3,$1,46) == $true) || ($istok(%thirdflags4,$1,46) == $true) || ($istok(%thirdflags5,$1,46) == $true)  { return on }
@@ -216,7 +270,13 @@ alias flagcheck {
 
 }
 
+;; Analyse Echos
 //echo -a $gettok(%lvl-tok,13-,46)
+;;==========
+
+;; == Alias Checklog-LVL ==
+;; Wird ausgeführt wenn gelevelte Mobs durch Checklog gelesen werden
+;; ===============
 
 alias checklog-lvl {
   set %lvl-log.r %temp.r
@@ -304,6 +364,11 @@ alias checklog-lvl {
   if (using isin %lvl-log.rv) && (%item != $null) { set %lvl-log.rv $replace(%lvl-log.rv,using,mit) | /unset %item }
   msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32) 0,1 %lvl-log.rv
 }
+
+;; === Alias Checklog ====
+;; Sämtliche Logvorgänge werden ausgegeben. 
+;; Inklusive Chatnachrichten und Fehlermeldungen.
+;; =======================
 
 Alias checklog {
   if ($exists(%mlog) == $false) { return }
@@ -439,11 +504,9 @@ Alias checklog {
   }
 }
 
-;;; Alias zum Betriebsystem Abfrage:
+;;; Aliasse zum Betriebsystem Abfrage:
 ;;; Ob es bei Linux auch geht keine Ahnung
 ;;; Quelle: https://forums.mirc.com/ubbthreads.php/topics/230837/Re:_Some_$os...._extra_identif
-
-on 1:text:!os:#: { msg $chan Ich laufe auf einem 4 $+ $osVersion $+   Buildnummer:  $+ $osBuild }
 
 alias osVersion { return $gettok($OSGET(Name),1,124) }
 alias osBuild { return $OSGet(Version) }
@@ -471,11 +534,19 @@ alias -l OSGet {
   return %r
 }
 
+;; Alias clearedlogs ====
+;; Zum Löschen der Serverlog datein wird dieser Aufgerufen.
+;; =====
 
 alias clearedlogs {
   if (!%clearlog) { msg %m-channel Zeit Abgelaufen }
 }
 
+;; Alias Checkstarted ====
+;; Wenn Server gestartet wird dieser 
+;; Die Fehler und Warnungen Zählen
+;; Funktioniert in verbindung mit Alias Checklog
+;; ======================
 
 alias checkstarted {
   var %done $read(%mLog, w, *[Server thread/INFO]: Done*)
@@ -490,6 +561,9 @@ alias checkstarted {
   }
 }
 
+;; == Alias plist ==
+;; Gibt die Online Spielerliste Wieder.
+;; ===============
 
 alias plist {
   set %plist $read(%pfad $+ help2.txt,l,1)
@@ -502,6 +576,10 @@ alias plist {
   if (!%mcwhois) { timersend1 1 4 /msg %m-channel %plist3 }
   if (%players1 != $null) && (!%mcwhois) { /timersend2 1 5 /msg %m-channel %playerlist1 }
 }
+
+;; === Alias Lagausgabe ===
+;; Wiedergibt die Serverauslastung im Channel
+;; ======
 
 alias lagausgabe {
   var %i 1
@@ -534,6 +612,10 @@ alias lagausgabe {
   /timer.ausgabe2 1 2 /lagausgabe2
 }
 
+;; == Alias Lagausgabe2 ===
+;; Resultiert das Ergebnis von Lagausgabe
+;; ==========
+
 alias lagausgabe2 {
   var %x 1
   var %zeilen2 $lines(lagres.txt)
@@ -557,6 +639,10 @@ alias serverresult {
   msg %m-channel 10,1 $+ %head003 7 NPC's erzeugen: 04 $+ %spawn-npcs %head002 7 Spawn Schutz: 12 $+ %spawn-protection 7Blöcke %head002 7 Privater Server: 04 $+ %white-list %head003
 }
 
+;; === Alias Ausgabe ===
+;; Wird zum Löschen von Welten benutzt.
+;; ================
+
 alias ausgabe {
   var %gomo $read(%pfad $+ task.txt, s,  java.exe)
   var %pid $replace(%gomo, $chr(32),.)
@@ -571,7 +657,9 @@ alias ausgabe {
   }
 }
 
-
+;; === Alias vault-ausgabe ====
+;; Konvertierung von Währungen auf einem Minecraftserver
+;; ================
 
 alias vault-ausgabe {
   var %Ecos $read(%pfad $+ vault-info.txt,l,2)
@@ -586,6 +674,10 @@ alias vault-ausgabe {
     /run rcon.exe -a localhost:25575 -p %rcon_password "vault-convert %econ1 %econ2"
   }
 }
+
+;; === Alias Zeitsteuerung-Tag & Zeitsteuerung-Nacht ===
+;; Hiermit wird die Minecraftserverzeit gesteuert.
+;; ======================
 
 alias zeitsteuerung-tag {
   if (%zeit == tag) {
@@ -612,21 +704,16 @@ alias zeitsteuerung-nacht {
   }
 }
 
+;; === Alias TPS && tpsausgabe ===
+;; Ticks Per Secound definiert die Auslastung des Servers
+;; ein wert unter 15 ist beängstigend
+;; =============
+
 alias tps {
   if (20 isin %newtag) { set %tagresult 10[11A4u7s9g10e13z14e8i7c12h9n6e3t9!4!9!10] }
   if (18 isin %newtag) { set %tagresult 11[12Normale Auslastung10] }
   if (20 isin %newlag) { set %tagresult2  10[11A4u7s9g10e13z14e8i7c12h9n6e3t9!3!9!10] }
   if (18 isin %newlag) { set %tagresult2 11[12Normale Auslastung10] }
-}
-
-alias scriptlines { 
-  var %x = 1 
-  while (%x <= $script(0)) {
-    set %script.lines $calc(%script.lines + $lines($script(%x))) 
-    inc %x 
-  } 
-  set %scriptlines %script.lines
-  unset %script.lines 
 }
 
 alias tpsausgabe {
@@ -639,8 +726,26 @@ alias tpsausgabe {
 }
 
 
+;; == Alias scriptlines ==
+;; Ermittelt die Anzahl der Zeilen des Gesamten Scriptes
+;; ===============
+
+alias scriptlines { 
+  var %x = 1 
+  while (%x <= $script(0)) {
+    set %script.lines $calc(%script.lines + $lines($script(%x))) 
+    inc %x 
+  } 
+  set %scriptlines %script.lines
+  unset %script.lines 
+}
 
 ;;; Some Stuff from Quims
+
+;;; == Alias GetAllyml ====
+;; Wird zum Auslesen der Regionen sowie
+;; Zum bearbeiten dieser Aufgerufen.
+;; =============
 
 alias getallyml { 
   ;;echo -sg >>
@@ -728,7 +833,6 @@ alias getallyml {
 }
 */
 
-
 alias getallyml-oldcode { 
   ;this is old code i had fixed it
   var %n,%t $2,%a 2,%s 0 
@@ -767,7 +871,6 @@ alias getallyml-oldcode {
   echo -ag %n 
 }
 
-
 alias setallyml {
   var %n,%t $2,%a 2,%s 0 
   while (%t != $null) && ($read($1,tnr,/^\x20{ $+ %s $+ $chr(125) $+ %t $+ :/)) {
@@ -802,17 +905,29 @@ alias convert@tospace {
   bwrite -c $qt($1-) 0 -1 &a
 }
 
-;;;; My Stuff
+;; Weitere Aliasse von mir (Serkons)
+
+;; == Alias Regcheck ==
+;; Prüft ob die Region existiert etc
+;; ==============
 
 alias regcheck {
   var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ $1 $+ \regions.yml
   return $istok($getallyml(%file,regions),$2,32)
 }
 
+;; == Alias Ver ====
+;; Gibt die Botversion wieder.
+;; =============
+
 Alias ver {
   var %version $read(version,l,1)
   return %version 
 }
+
+;; ===Allias McWhois ===
+;; Ermittelt die Whois eiones Onlinespielers
+;; ========== 
 
 alias mcwhois {
   if (%whoisnick isin %playerlist1) { 
@@ -833,6 +948,11 @@ alias mcwhois {
     ;;;/halt
   }
 }
+
+;; == Alias mcwout ===
+;; Gibt die Whois von mcwhois wieder
+;; Arbeitet mit Alias mcwhoisout zusammen.
+;; ==============
 
 Alias mcwout {
   set %mcplayerpos $remove($read(%pfad $+ whois- $+ %whoisnick $+ .txt, ntw, *Position*),§6,§r,$chr(44))
@@ -871,6 +991,10 @@ alias mcwhoisout {
   }
 }
 
+;; Alias Zeilenentfernen
+;; Der Name muss nicht erklärt werden .
+;; ==================
+
 alias Zeilenentfernen {
   var %maxlines $lines(material-id.txt)
   var %x 1
@@ -880,4 +1004,12 @@ alias Zeilenentfernen {
     write -l $+ %x newmats.txt %newvalue
     inc %x
   }
+}
+
+;; Alias ct ;;
+;; Farbigen Text schreiben.
+;; ======
+
+alias ct {
+  return $regsubex($1-,/(?<= |^)(\S)/g,%c1\1 $+ %c2)
 }

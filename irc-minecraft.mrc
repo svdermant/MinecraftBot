@@ -1,95 +1,15 @@
-;;;; Irc Minecraft coded by Serkons ;;;;;
+;;;;;; MinecraftBot ;;;;;;;; V1.1b
+;;;;;; Author: Serkons
+;;;;;; Githubname: Svdermant
+;;;;;; GithubRepo: https://github.com/svdermant/MinecraftBot/
+;;;;;; Erstellungsdatum: 11. Juni . 2023
+
+;;;; Irc Minecraft - Addon coded by Serkons ;;;;;
 ;;;; Version 1.0 ;;;;
 
-;;;; Aufgabenliste ;;;;
-
-on 100:text:!mctodo*:#: {
-  var %befehle add.del.fertig.fixed.list
-  if ($2 == $null) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Listen Ersteller v1.0 by Serkons - Die Befehle sind:
-    var %befehle add.del.fertig.fixed.list
-    var %maxbefehle $numtok(%befehle,46)
-    var %x 1
-    while (%x <= %maxbefehle) {
-      msg $chan 7,1[9▒7] 4→ $+ 7!mctodo $gettok(%befehle,%x,46) $iif($gettok(%befehle,%x,46) != list, <eintrag>, $chr(32)) 14 $iif($gettok(%befehle,%x,46) != list, $remove($read(todo-befehle.txt,w,$gettok(%befehle,%x,46) $+ *),$gettok(%befehle,%x,46),=), $replace($remove($read(todo-befehle.txt,w,$gettok(%befehle,%x,46) $+ *),=,list),Todoe,TodoListe))
-      inc %x
-    }
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == add) { 
-    set %todolines $lines(ircmc-todo.txt)
-    if (%todolines == $null) || (%todolines >= 0) { 
-      inc %todolines
-      ;;;msg $chan Zeile %todolines
-      write -l $+ %todolines ircmc-todo.txt 7,1[9▒7] 4→7 $+ $fulldate $+ 4← 7[9▒7,1] 14 ID: 4→9 %todolines 15 4← 14 $3- 7[8ↈ13NEU8ↈ7,1]
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Eintrag ID: %todolines 4HINZUGEFÜGT!
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Text: 14 $3-
-    }
-  }  
-  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == $null) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
-    msg $chan 7,1[9√7]14 = Fertig - 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]14 = Optimiert / Fehlerbehoben
-    play $chan ircmc-todo.txt
-    /halt
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fixed) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Fixed Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
-    set -u5 %chan $chan
-    $todo-fix
-    /halt
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == fertig) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Fertige Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
-    set -u5 %chan $chan
-    $todo-fertig
-    /halt
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == list) && ($3 == neu) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]14,1 Todo Liste Neue Einträge 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
-    set -u5 %chan $chan
-    $todo-neu
-    /halt
-  }
-
-  if ($istok(%befehle,$2,46) == $true) && ($2 == del) { 
-    var %eintragid $3
-    set %eintragstext $read(ircmc-todo.txt,%eintragid)
-    if (%eintragstext == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry einen Eintrag mit ID: 7 %eintragid $+  existiert nicht! | /halt }
-    ;;;msg $chan Eintragstoken: %eintragstokens
-    if (%eintragstext != $null) && (%tododel == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste  Soll der Eintrag: 7 $remove($gettok(%eintragstext,15-,32), 7[8ↈ13NEU8ↈ7,1],$chr(44))  wirklich Gelöscht werden?. Zur Bestätigung Befehl inerhalb von 5sec Erneut schreiben! | /set -u5 %tododel on | /halt }
-    if (%eintragstext != $null) && (%tododel == on) {
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Listeneintrag 7,1[9▒7] 4→11 $+ $remove($gettok(%eintragstext,15-,32), 7[8ↈ13NEU8ↈ7,1],$chr(44)) $+ 4← 7[9▒7,1] 7[4GELÖSCHT!7,1] 
-      /write -dl $+ %eintragid ircmc-todo.txt
-      /sortlist
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste wurde Sortiert. Siehe !mctodo list
-      /halt
-    }
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == fertig) {
-    var %eintrag $read(ircmc-todo.txt,$3)
-    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
-    if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
-    if (%eintrag != $null) {
-      var %neulabel 7[8ↈ13NEU8ↈ7,1]
-      var %fertiglabel 7,1[9√7]
-      var %zeile $3
-      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fertiglabel,%date,$fulldate)
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fertiglabel gekennzeichnet.
-    }
-  }
-  if ($istok(%befehle,$2,46) == $true) && ($2 == fixed) {
-    var %eintrag $read(ircmc-todo.txt,$3)
-    var %date $remove($gettok(%eintrag,2-6,32),←,→,47,4)
-    if (%eintrag == $null) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste 4FEHLER:14 Sorry ein Eintrag mit id 4 $3 14 existiert nicht | /halt }  
-    if (%eintrag != $null) {
-      var %neulabel 7[8ↈ13NEU8ↈ7,1]
-      var %fertiglabel 7,1[9√7]
-      var %fixedlabel 7,1[9▒7] 4→11F14i11X14Ed4← 7[9▒7,1]
-      var %zeile $3
-      write -l $+ %zeile ircmc-todo.txt $replace(%eintrag,%neulabel,%fixedlabel,%fertiglabel,%fixedlabel,%date,$fulldate))
-      msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Todo Liste - 14Der Eintrag wurde mit %fixedlabel gekennzeichnet.
-    }
-  }
-}
+;;; Beschreibung:
+;; Es dient zum Zeitvertreib und soll am ende Minecraft in Textform darstellen.
+;; =====================
 
 ;;;;;; Konto erstellung ;;;;;;;;
 
@@ -146,6 +66,8 @@ on 1:text:!neuer Spieler:#: {
   msg %Spieler Hier dein Spieleraccountkennwort:  $+ %pw  merke es dir gut.
 }
 
+;;; !chop Tree (Baum Fällen)
+
 on 1:text:!chop tree:#: {
   var %mctrees oaktree darkoaktree sprucetree acaciatree birchtree cherrytree jungletree mangrovetree
   var %maxtrees $numtok(%mctrees,32)
@@ -161,6 +83,9 @@ on 1:text:!chop tree:#: {
   /timerdropdisplay1 1 %blocksize /msg $chan Mögliche Drops nach fällen des %treename : 7 %drops
   /halt
 }
+
+;; MCBook Nachschlagewerk für Blöcke und Items
+;; =====================
 
 on *:Text:!mcbook*:*: {
   var %item $3
@@ -217,6 +142,8 @@ on *:Text:!mcbook*:*: {
   }
 }
 
+;;; Biome Generierung
+
 on *:text:!biomes:#: {
   var %biomes plains desert forest taiga swamp jungle
   var %firstbiome 1
@@ -250,6 +177,8 @@ on *:text:!biomes:#: {
   }
 }
 
+;;; Erkunden ;;;
+
 on *:text:!explore*:#: {
   if ($exists($Spielerdb($nick)) == $false) { 
     msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]  12EXPLORE-4ERROR Spieler $nick Existiert nicht!. 
@@ -280,6 +209,8 @@ on *:text:!explore*:#: {
   }
 }
 
+;;; Materialgenerierung ;;;
+
 on 100:text:!materialgen:#: {
   var %maxmat $lines(material-id.txt)
   msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
@@ -288,6 +219,8 @@ on 100:text:!materialgen:#: {
   set %displaychan $chan
   /timerdbgen1 1 5 /itemdbgen
 }
+
+;;; Spielerinventar ;;;
 
 on 1:text:!inventar:#: {
   set -u5 %nick $nick
