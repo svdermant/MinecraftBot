@@ -186,9 +186,6 @@ Ancient Debris
 Amethyst Block
 Budding Amethyst
 Amethyst Cluster
-Large Amethyst Bud
-Medium Amethyst Bud
-Small Amethyst Bud
 Oak Wood
 oak log
 Spruce Wood
@@ -235,7 +232,6 @@ Acacia Leaves
 Dark Oak Leaves
 Mangrove Leaves
 Azalea Leaves
-Flowering Azalea Leaves
 Sponge
 Wet Sponge
 Sandstone

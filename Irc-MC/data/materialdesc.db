@@ -117,7 +117,7 @@ MaterialID=Coal_Ore;Desc=Kohleerz aus dem man Kohle mit jeder Spitzhacke gewinne
 MaterialID=Iron_Ore;Desc=Eisenerz kann mit eine Spitzhacke ab Materialstufe Stein abgebaut werden und im Ofen zu Eisenbarren geschmolzen werden.
 MaterialID=RedStone_Ore;Desc=Redstonerz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält dadurch Redstonestaub.
 MaterialID=Gold_Ore;Desc=Golderz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und im Ofen zu Goldbarren geschmolzen werden.
-MaterialID=Lais_Lazuli_Ore;Desc=Lapiserz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält Lapis Lazuli.
+MaterialID=Lapis_Lazuli_Ore;Desc=Lapiserz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält Lapis Lazuli.
 MaterialID=Diamond_Ore;Desc=Diamanterz kann mit einer Spitzhacke ab Materialstufe Eisen abgebaut werden und man erhält Diamanten.
 MaterialID=Emerald_Ore;Desc=Emeralderz kann mit einer Spitzhack ab Materialstufe Eisen abgebaut werden und man erhält Emerald.
 MaterialID=Copper_Ore;Desc=Kupfererz kann mit einer Spitzhacke ab Materialstufe Stein abgebaut werden und man erhält im Ofen durch schmelzen Kupferbarren.
@@ -175,3 +175,80 @@ MaterialID=Diamond_Block;Desc=Ein Hellblauglänzender Block gefertigt aus 9x Diam
 MaterialID=Emerald_Block;Desc=Ein Grünglänzender Block gefertigt aus 9x Emeralds
 MaterialID=Netherite_Block;Desc=Ein Dunkelfarbender Block gefertigt aus 9x Netherite.
 MaterialID=Smooth_Quartz;Desc=Ein Weiser Glatter Steinblock aus Quartz.
+MaterialID=Chiseled_Quartz_Block;Desc=Ein gemeißelter Weiser Stein aus Quartz.
+MaterialID=Pillar_Quartz_Block;Desc=Ein Weißer Säulenblock aus Quartz.
+MaterialID=Block_Of_Quartz;Desc=Ein Weiser Quarztblock.
+MaterialID=Quartz_Bricks;Desc=Dies ist ein Ziegelblock aus dem Material Quartz.
+MaterialID=Smooth_Quartz_Stairs;Desc=Die Glatten Quartztreppen aus dem Material Quartz.
+MaterialID=Smooth_Quartz_Slab;Desc=Die Glatten Quartzstufen aus dem Material Quartz.
+MaterialID=Slime_Block;Desc=Ein Grüner Glibbriger Block auf den man Spingen kann.
+MaterialID=Ancient_Debris;Desc=Der Antiker Schutt ist ein seltenes Erz, das nur im Nether gefunden werden kann. Es ist das Ausgangsmaterial für die Herstellung der besten im Spiel verfügbaren Waffen, Rüstungen und Werkzeuge.
+MaterialID=Amethyst_Block;Desc=Der Amethystdrusenblock ist ein Block, welcher im Inneren von natürlich generierten Amethystgeoden (Amethystformationen) vorkommt.
+MaterialID=Budding_Amethyst;Desc=Der Amethystknospenblock ist ein Block, welcher im Inneren von Amethystgeoden vorkommt. 
+MaterialID=Amethyst_Cluster;Desc=Der Amethysthaufen ist die vierte, ausgewachsene Wachstumsstufe der Knospen.
+MaterialID=Amethyst_Bud;Desc=Die Amethystknospe ist ein Kristallblock mit 3 Wachstumsstufen. Wenn dieser mit einer Seite des Amethystknospenblocks verbunden ist, wächst er mit der Zeit zur nächst größeren Wachstumsstufe heran.
+MaterialID=Oak_Wood;Desc=Eichenholz kann von einem Eichenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Oak_Log;Desc=Eichenstammholz kann von einem Eichenstamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Spruce_Wood;Desc=Fichtenholz kann von einem Fichtenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Spruce_Log;Desc=Fichtenstammholz kann von einem Fichtenstamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Birch_Wood;Desc=Birkenholz kann von einem Birkenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Birch_Log;Desc=Birkenstammholz kann von einem Birkenstamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Jungle_Wood;Desc=Jungleholz kann von einem Tropenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Jungle_Log;Desc=Jungelstammholz kann von einem Tropenstamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Acacia_Wood;Desc=Acaciaholz kann von einem Acaciabaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Acacia_Log;Desc=Acaciastammholz kann von einem Acaciastamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Dark_Oak_Wood;Desc=Schwarzeichenholz kann von einer Schwarzeiche gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Dark_Oak_Log;Desc=Schwarzeichenstammholz kann von einem Schwarzeichenstamm gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Warped_Stem;Desc=Wirrbaumholz kann von einem Wirrbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Crimson_Stem;Desc=Karmesinholz kann von einem Karmesinbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Mangrove_Log;Desc=Mangrovenholz kann von einem Mangrovenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Mangrove_Roots;Desc=Die Wurzeln des Mangrovenbaums können ebenfalls von einem Mangrovenbaum gewonnen werden. Mit Bloßer Hand oder mit einer Axt abbaubar.
+MaterialID=Muddy_Mangrove_Roots=Matschige Wurzeln des Mangrovenbaums.
+MaterialID=Stripped_Oak_Log;Desc=Geschnitzter Eichenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Eichenstamm.
+MaterialID=Stripped_Spruce_Log;Desc=Geschnitzter Fichtenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Fichtenstamm.
+MaterialID=Stripped_Birch_Log;Desc=Geschnitzter Birkenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Birkenstamm.
+MaterialID=Stripped_Jungle_Log;Desc=Geschnitzter Tropenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Tropenstamm.
+MaterialID=Stripped_Acacia_Log;Desc=Geschnitzter Acaciastamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Acaciastamm.
+MaterialID=Stripped_Dark_oak_log;Desc=Geschnitzter Schwarzeichenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Schwarzeichenstamm.
+MaterialID=Stripped_Warped_Stem;Desc=Geschnitzter Wirrstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Wirrstamm.
+MaterialID=Stripped_Crimson_Stem;Desc=Geschnitzter Karmesinstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Karmesinstamm.
+MaterialID=Stripped_Mangrove_Log;Desc=Geschnitzter Mangrovenstamm erhält man durch Rechtsklick mit einer Axt in der Hand auf einen Mangrovenstamm.
+MaterialID=Warped_Hyphae;Desc=Wirrstiel kommt nur in Wirrwald im Nether vor.
+MaterialID=Crimson_Hyphae;Desc=Karmesinstiel kommt nurm im Karmesinwald im Nether vor.
+MaterialID=Stripped_Oak_Wood;Desc=Geschnitztes Eichenstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Eichenstammholz.
+MaterialID=Stripped_Spruce_Wood;Desc=Geschnitztes Fichtenstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Fichtenstammholz.
+MaterialID=Stripped_Birch_Wood;Desc=Geschnitztes Birkenstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Birkenstammholz.
+MaterialID=Stripped_Jungle_Wood;Desc=Geschnitztes Tropenstammholz  erhält man durch Rechtsklick mit einer Axt in der Hand auf Tropenstammholz.
+MaterialID=Stripped_Acacia_Wood;Desc=Geschitztes Acaciastammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Acaciastammholz.
+MaterialID=Stripped_Dark_Oak_Wood;Desc=Geschnitztes Schwarzeichenstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Schwarzeichenstammholz.
+MaterialID=Stripped_Warped_Hyphae;Desc=Geschnitztes Wirrstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Wirrstammholz.
+MaterialID=Stripped_Crimson_Hyphae;Desc=Geschnitztes Karmesinstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Karmesinstammholz.
+MaterialID=Stripped_Mangrove_Wood;Desc=Geschnitztes Mangrovenstammholz erhält man durch Rechtsklick mit einer Axt in der Hand auf Mangrovenstammholz.
+MaterialID=Oak_Leaves;Desc=Das Eichenlaub gewinnt man indem man eine Schere auf Eichenlaub verwendet. Wächst an Eichenbäumen.
+MaterialID=Spruce_Leaves;Desc=Das Fichtenlaub gewinnt man indem man eine Schere auf Fichtenlaub verwendet. Wächst an Fichtenbäumen.
+MaterialID=Birch_Leaves;Desc=Das Birkenlaub gewinnt man indem man eine Schere auf Birkenlaub verwendet. Wächst an Birkenbäumen.
+MaterialID=Jungle_Leaves;Desc=Das Tropenlaub gewinnt man indem man eine Schere auf Tropenlaub verwendet. Wächst an Tropenbäumen.
+MaterialID=Acacia_Leaves;Desc=Das Acacialaub gewinnt man indem man eine Schere auf Acacialaub verwendet. Wächst an Acaciabäumen.
+MaterialID=Dark_Oak_Leaves;Desc=Das Schwarzeichenlaub gewinnt man indem man eine Schere auf Schwarzeichenlaub verwendet. Wächst an Schwarzeichenbäumen.
+MaterialID=Mangrove_Leaves;Desc=Das Mangrovenlaub gewinnt man indem man eine Schere auf Mangrovenlaub verwendet. Wächst an Mangrovenbäumen.
+MaterialID=Azalea_Leaves;Desc=Das Azalealaub gewinnt man indem man eine Schere auf Azalealaub verwendet. Wächst an Azaleabäumen.
+MaterialID=Sponge;Desc=Der Schwamm. Er kann verwendet werden um einen mit Wassergefüllten bereich zu reinigen. Er verwandelt sich dann in einen Nassen Schwamm.
+MaterialID=Wet_Sponge;Desc=Der Nasse Schwamm ist das Endprodukt vom Schwamm.
+MaterialID=SandStone;Desc=Sandstein ist ein Dekorativer Baublock den man aus 4x Sand erhält.
+MaterialID=Chiseled_Sandstone;Desc=Gemeißelter Sandstein ist ein Block, der an Wüstentempeln natürlich zu finden ist. Er wird aus zwei Sandsteinstufen hergestellt.
+MaterialID=Cut_Sandstone;Desc=Geschnittener Sandstein wird aus vier normalen Sandsteinen hergestellt. Er ist in Wüstendörfern und Wüstentempeln natürlich vorzufinden.
+MaterialID=Sandstone_Stairs;Desc=Eine Sandsteintreppe wird erstellt, indem man 6 Blöcke des gewünschten Materials in Form einer Treppe in das Handwerksfeld legt. Dadurch erhält man 4 Treppen des entsprechenden Materials.
+MaterialID=Smooth_Sandstone;Desc=Glatter Sandstein stellt man her indem man Sandstein in einem Ofen erhitzt. Er ist in Wüstendörfern natürlich vorzufinden.
+MaterialID=Smooth_Sandstone_Stairs;Desc=Eine Glatte Sandsteintreppe wird erstellt, indem man 6 Blöcke des gewünschten Materials in Form einer Treppe in das Handwerksfeld legt. Dadurch erhält man 4 Treppen des entsprechenden Materials.
+MaterialID=Smooth_Sandstone_Slab;Desc=Die Glatten Sandsteinstufen werden mit 3x Glatten Sandstein inform einer Linie in der Handwerksbank platziert, dadurch erhält man 6 Glatte Sandsteinstufen.
+MaterialID=Cut_Sandstone_Slab;Desc=Die Sandsteinstufen werden mit 3x Sandstein inform einer Linie in der Handwerksbank platziert, dadurch erhält man 6 Sandsteinstufen.
+MaterialID=SandStone_Wall;Desc=Die Sandsteinmauer erhält man indem man 6x Sandstein im unteren bereich der Handwerksbank füllt.
+MaterialID=Red_Sandstone;Desc=Roter Sandstein erhält man durch 4x Roten Sand im Handwerksfenster.
+MaterialID=Chiseled_Red_Sandstone;Desc=Gemeißelter Roter Sandstein bekommt man durch 2 Rote Sandsteinstufen in der Handwerksbank. eigt die Umrisse eines Withers. Er kann nur durch Herstellung im Handwerksfeld erhalten werden. 
+MaterialID=Cut_Red_Sandstone;Desc=Geschnittener Roter Sandstein wird aus vier normalen roten Sandsteinen hergestellt. Er ist nicht natürlich zu finden.
+MaterialID=Red_Sandstone_Stairs;Desc=Eine Sandsteintreppe wird erstellt, indem man 6 Blöcke des gewünschten Materials in Form einer Treppe in das Handwerksfeld legt. Dadurch erhält man 4 Treppen des entsprechenden Materials.
+MaterialID=Smooth_Red_Sandstone;Desc=Glatter roter Sandstein wird durch Schmelzen von Rotem Sandstein im Ofen hergestellt.
+MaterialID=Smooth_Red_Sandstone_Stairs;Desc=Eine Sandsteintreppe wird erstellt, indem man 6 Blöcke des gewünschten Materials in Form einer Treppe in das Handwerksfeld legt. Dadurch erhält man 4 Treppen des entsprechenden Materials.
+MaterialID=Smooth_Red_Sandstone_Slab;Desc=Die Glatten Roten Sandsteinstufen werden mit 3x Glatten Roten Sandsteinen inform einer Linie in der Handwerksbank platziert, dadurch erhält man 6 Rote Sandsteinstufen.
+MaterialID=Cut_Red_Sandstone_Slab;Desc=Die geschnittenen Roten Sandsteinstufen werden mit 3x Geschnittenen Roten Sandsteinen inform einer Linie in der Handwerksbank platziert, dadurch erhält man 6 Geschnittene Rote Sandsteinstufen.
+MaterialID=Red_Sandstone_Wall;Desc=Die Rote Sandsteinmauer erhält man durch 6x Roten Sandstein im unteren Bereich der Handwerksbank.

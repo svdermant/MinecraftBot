@@ -40,11 +40,13 @@ on *:text:!gh:%m-channel: { msg %m-channel  7,1[9▒7] 11I14game11RPG
 ;;;;;;;;;;;;;; Stream + Topic Befehl ;;;;;;;;;;;;;;;
 on *:text:!stream*:%m-channel: {
   set %orginaltopic 7,1[9▒7]4 11W14illkommen im %m-channel - Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot 7,1[9▒7]4
-  if ($2 == $null)  { msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] |  /halt }
+  if ($2 == $null)  { msg %m-channel %offlinemsg %onlinemsg /halt }
   if ($2 != $null) && ($2 == online) {
     if ($3 == $null) { msg %m-channel 4,1STREAM FEHLER:12,1 Kein Twitchthema für den Stream gesetzt. | msg %m-channel 12,1 Setze den Stream wie folgt: 7,1 !stream online <text> | /halt }  
     if ($3 != $null) { 
       msg %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
+      set %onlinemsg 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
+      unset %offlinemsg
       msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews:
       msg %b-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
       topic %m-channel 7,1[9▒7]4 11S14tream 11i14st 11j14etzt 9◄>[ 11ON14line 9]<►11 https://twitch.tv/svdermand/ 7[9▒7,1] 11T14hema: 7 $+ $3- 
@@ -55,6 +57,8 @@ on *:text:!stream*:%m-channel: {
     set %orginaltopic 7,1[9▒7]4 11W14illkommen im %m-channel - Syncrone Live Map http://igamerpg.de:8123/ - Asyncrone Live Map http://igamerpg.de:8100/#world Mcraft Bot Aktualisiert demnächst - Open Source : https://github.com/svdermant/MinecraftBot 7,1[9▒7]4
     msg %m-channel 7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]11I14st 11OFF14line 7,1[9▒7]4 
     topic %m-channel %orginaltopic
+    set %offlinemsg 7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]11I14st 11OFF14line 7,1[9▒7]4 
+    unset %onlinemsg
     msg %b-Channel  7,1[9▒7] 4-> 7#11M14inecraft 4<- 7,1[9▒7] 11T14opic 11N14ews: 7,1[9▒7] 4->11T14witch-11S14tream4<- 7[9▒7]11I14st 11OFF14line 7,1[9▒7]4 
     /halt
   }

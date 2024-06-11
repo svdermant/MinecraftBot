@@ -264,8 +264,9 @@ alias itemdbgen {
     }
     var -s %material $remove(%textout,$chr(32))
     echo -ag -> %material
-    var %desc $materialdesc(%material)
+    var -s %desc $materialdesc(%material)
     if (%desc == $null) { 
+      dec %x
       msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %x 9,1 Items/Materialien 10,1 Erstellt.
       msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
       halt
@@ -279,7 +280,7 @@ alias itemdbgen {
     unset %textout
     inc %x
   }
-  msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %textlen 9,1 Items/Materialien 10,1 Erstellt.
+  msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 10,1 Es wurden erfolgreich 12,1 %x 9,1 Items/Materialien 10,1 Erstellt.
   msg %displaychan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] Datenbankgenerierung 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
 }
 
@@ -292,7 +293,7 @@ alias materialdesc {
   var %x 1
   set %matarial $1
   ;;set %matarial $replace($read(material-id.txt, %x),$chr(32),_)
-  set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ $chr(59) $+ Desc=*), %matarial, MaterialID=, $chr(59), Desc=)
+  set %newmatdesc $remove($read($GameData(materialdesc), w, * $+ %matarial $+ *), MaterialID=, %matarial $+ , $chr(61), DESC, $chr(59))
   return %newmatdesc
   echo -ag The Description to Material %matarial is %newmatdesc
   echo -ag --> %matarial

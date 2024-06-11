@@ -188,6 +188,8 @@ on 1:JOIN:#:{
 ;; Hier werden die Standardwerte gesetzt und geprüft
 ;; ================
 
+
+
 alias system_defaults_check {
   if (%Head-3 == $null) || (%Head-3 != 0,1) { set %Head-3 0,1 }
   if (%rcon != $null) || (%rcon == $null) { set %rcon [RCON Client /0:0:0:0:0:0:0:1 }
