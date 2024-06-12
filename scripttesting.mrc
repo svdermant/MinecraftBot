@@ -29,3 +29,37 @@ on *:text:@region*:%m-channel: {
 
 ;; Suchmechanismus in HashTable
 $hfind(materialien,ACACIA_BOAT,0,n,echo -ag Data $hget(materialien,$1)).data
+
+;;;;; Some Stuff from Quims
+
+on 100:text:!regcheck*:#: {
+  var %world $2
+  var %region $3
+  var -s %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  set -s %regionlist $getallyml(%file,regions)
+  if ($istok(%regionlist,%region,32)) { msg #support region %region exists }
+  else { msg $chan region %region does'nt exist }
+}
+
+on *:text:!regset*:#: {
+  var %world $2
+  var %region $3
+  var %member $4
+  var %value $5
+  var  %file %pfad $+ plugins\WorldGuard\worlds\ $+ %world $+ \regions.yml
+  var %regionlist $getallyml(%file,regions)
+  if (!$istok(%regionlist,%region,32)) { 
+    write $qt(%file) $str(@,4) $+ $3: $+ $crlf $+ $str(@,8) $+ $4: $5
+    convert@tospace %file
+  }
+  else noop $setallyml(%file,regions, %region,$5). [ $+ [ $4 ] ]
+}
+
+alias plugins {
+  var %maxpl $findfile(%pfad $+ plugins/, *.jar,0)
+  var %x 1
+  while (%x <= %maxpl) {
+    echo -ag Pluginname: $findfile(%pfad $+ plugins/, *.jar,%x)
+    inc %x
+  }
+}
