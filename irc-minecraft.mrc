@@ -91,18 +91,16 @@ on *:Text:!mcbook*:*: {
   var %item $3
   var %t $target
   echo -ag Ziel %t
+  var %com $2
+  var %commands item.itemlist
   set %isitem $replace(%item,_,$chr(32))
-  if ($2 == $null) || ($2 != item) && (%t == $me) { msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
-  if ($2 == $null) || ($2 != item) && (%t == $chan) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
-  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $me) { 
-    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
+  if ($istok(%commands,$2,46) == $true) && (%t == $chan) && (%com == itemlist) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Es gibt insgesamt 4 $ini($GameData(items),0)  Gegenstände/Blöcke.
     /halt
   }
-  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $chan) { 
-    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
-    /halt
+  if ($istok(%commands,$2,46) == $true) && (%t == $me) && (%com == itemlist) { msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Es gibt insgesamt 4 $ini($GameData(items),0)  Gegenstände/Blöcke.
+    /halt 
   }
-  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $me) { 
+  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $me) && ($istok(%commands,$2,46) == $true) && (%com == item) { 
     msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert!.
     var %type $readini($gameData(Items), %item, Type)
     var %Name $readini($gameData(Items), %item, Name)
@@ -121,7 +119,7 @@ on *:Text:!mcbook*:*: {
     msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
     /halt
   }
-  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $chan) { 
+  if ($readini($GameData(Items), %item, Name) == %isitem) && (%t == $chan) && (%isitem != $null) && ($istok(%commands,$2,46) == $true) && (%com == item) { 
     msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert!.
     var %type $readini($gameData(Items), %item, Type)
     var %Name $readini($gameData(Items), %item, Name)
@@ -140,6 +138,18 @@ on *:Text:!mcbook*:*: {
     msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7,1MC-Book14,1 Item 3,1[15,1 $+ %item $+ 3,1] 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1]
     /halt
   }
+  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $me) && ($istok(%commands,$2,46) == $true) && (%com == item) { 
+    msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
+    /halt
+  }
+  if ($readini($GameData(Items), %item, Name) == $null) && (%t == $chan) && ($istok(%commands,$2,46) == $true) && (%com == item) { 
+    msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book Das Item 4 $+ %item  Existiert nicht.
+    /halt
+  } 
+  if ($2 == $null) || ($istok(%commands,$2,46) == $false) && (%t == $chan) { msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock itemlist - Wieviele Items sind vorhanden. | msg $chan 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
+  if ($2 == $null) || ($istok(%commands,$2,46) == $false) && (%t == $me) { msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock itemlist - Wieviele Items sind vorhanden. | msg $nick 7,1[9▒7] 4→11I14rC-11M14inecraft4← 7[9▒7,1] 7MC-Book 4FEHLER:  Richtige Parameter 7!mcbock item <itemname>. | /halt }
+
+
 }
 
 ;;; Biome Generierung
