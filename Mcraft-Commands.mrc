@@ -139,23 +139,6 @@ on *:text:!bday:%m-channel: {
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 Gruß dein Script Kollege ;)"
 }
 
-alias mwts {
-  if (days isin $1-) { return days }
-  if (wks isin $1-) { return wks }
-  if (hrs isin $1-) { return hrs }
-  if (mins isin $1-) { return mins }
-  if (secs isin $1-) { return secs }
-}
-
-alias mwts1 {
-  if (days isin $1-) { return %f1 T %f2 age }
-  if (wks isin $1-) { return %f1 W %f2 ochen }
-  if (hrs isin $1-) { return %f1 S %f2 tunden }
-  if (mins isin $1-) { return %f1 M %f2 inuten }
-  if (secs isin $1-) { return %f1 S %f2 Sekunden }
-}
-
-
 on 1:text:!lines:#: {
   /scriptlines
   msg $chan Aktuell besteht $me aus %scriptlines Scriptzeilen!
