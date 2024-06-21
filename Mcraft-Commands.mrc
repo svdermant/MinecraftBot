@@ -139,6 +139,22 @@ on *:text:!bday:%m-channel: {
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 Gruß dein Script Kollege ;)"
 }
 
+alias mwts {
+  if (days isin $1-) { return days }
+  if (wks isin $1-) { return wks }
+  if (hrs isin $1-) { return hrs }
+  if (mins isin $1-) { return mins }
+  if (secs isin $1-) { return secs }
+}
+
+alias mwts1 {
+  if (days isin $1-) { return %f1 T %f2 age }
+  if (wks isin $1-) { return %f1 W %f2 ochen }
+  if (hrs isin $1-) { return %f1 S %f2 tunden }
+  if (mins isin $1-) { return %f1 M %f2 inuten }
+  if (secs isin $1-) { return %f1 S %f2 Sekunden }
+}
+
 
 on 1:text:!lines:#: {
   /scriptlines
@@ -3971,27 +3987,19 @@ on 100:text:!region*:%m-channel: {
       /halt
     }
     if (%currentflag == allow-block-place) && ($6- != $null) {
-      var %materialids $6-
-      var %maxmaterials $lines(material-id.txt)
-      var %x 1
-      while (%x <= %maxmaterials) {
-        var %matids $addtok(%matids, $remove($read(material-id.txt,%x),%x,=), 32)
-        inc %x
-      }
-      echo -ag Materialtokens sind: %matids
-      echo -ag Anzahl der Mattokens: $numtok(%matids,32)
-      echo -ag Länge der Variable matid ist: $len(%matids)
-      var %materialtokens $numtok(%materialids,32)
+      if ($chr(32) isin $6-) || ($chr(44) !isin $6) { msg %m-channel Bitte verwende keine Leerzeichen in den Materialien und Trenne mehrere mit einem , | /halt }
+      var %matids $replace($6-,$chr(44),$chr(32))
+      var %materialtokens $numtok(%matids,32)
       var %y 1
       while (%y <= %materialtokens) {
-        if ($istok(%matids,$gettok(%materialids,%y,32),32) == $true) { set %materiallist $replace($addtok(%materiallist,$gettok(%materialids,%y,32),46),.,$chr(44)) }
-        if ($istok(%matids,$gettok(%materialids,%y,32),32) == $false) { set %invalidmats $replace($addtok(%invalidmats,$gettok(%materialids,%y,32),46),.,$chr(44)) }
+        var -s %item $gettok(%matids,%y,32)
+        if ($read(material-id.txt,tnw,%item)) %materiallist = $replace($addtok(%materiallist,$replace(%item,$chr(32),$chr(44)),32),$chr(32),$chr(44))
+        else %invalidmats = $addtok(%invalidmats,$replace(%item,.,$chr(44)),32)
         inc %y
       }
-      if (%materiallist != $null) { msg $chan Die Werte für die Flag %currentflag sind wie Folgt: 4 $+ %materiallist  und werden gesetzt. }
+      if (%materiallist != $null) { msg $chan Die Werte für die Flag allowed-placed-blocks sind wie Folgt: 4 $+ %materiallist  und werden gesetzt. }
       /timer.allowed-block-place1 1 3 /allowed-placed-blocks
     }
-
 
     if ($2 == flag) && ($3 != -w) && (%regionsid == $null) && ($4 !isin $finddir(%pfad, $+ $4 $+ *,1)) {
       msg %m-channel Die Welt $5 Existiert nicht. Indemfalle gibt es auch keine Region namens $3

@@ -244,7 +244,7 @@ alias allowed-placed-blocks {
     /unset %regionsid
     /timerwg.reload1 1 3 //run rcon.exe -a localhost:25575 -p %rcon_password "wg reload"
     /set -u8 %tps4 3[7Worldguardconfiguration wurden neu geladen3]
-    /unset %materiallist
+    ;;/unset %materiallist
     /halt
   }
 }
