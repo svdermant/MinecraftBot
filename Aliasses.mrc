@@ -993,6 +993,22 @@ alias mcwhoisout {
   }
 }
 
+;; Alias Plugins
+;; Listet die Plugins auf
+
+alias plugins {
+  var %maxpl $findfile(%pfad $+ plugins\, *.jar,0,1)
+  var %x 1
+  while (%x <= %maxpl) {
+    var %pl %pfad $+ plugins\
+    set %plugins $addtok(%plugins,$remove($findfile(%pfad $+ plugins\, *.jar,%x,1),%pl,.jar),32)
+    inc %x
+  }
+  msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 14(12 $+ %maxpl $+ 14) 14[11S10erver 11P10ugins14]: 
+  msg %m-channel $replace(%plugins,$chr(32),$chr(44) $+ $chr(32))
+  unset %plugins
+}
+
 ;; Alias Zeilenentfernen
 ;; Der Name muss nicht erklärt werden .
 ;; ==================

@@ -22,6 +22,10 @@ on *:text:!farben:#: {
 
 } 
 
+on 100:text:!plugins:%m-channel:{
+  $plugins
+}
+
 ;; Anziegen der Plugin Prozessid im Log ;;;
 ;; ========
 
