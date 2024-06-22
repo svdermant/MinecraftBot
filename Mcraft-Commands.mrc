@@ -19,11 +19,34 @@ on *:text:!farben:#: {
   set %f3 $chr(3) $+ $rand(1,15)
 
   /timerfcode1 1 4 /msg $chan Farben wurden gändert code ist: %f1 1 %f2 2 %f3 3
-
 } 
 
+;; !map ;;
+;; Postet die Links für die jeweiligen karten
+
+on 100:text:!map:%m-channel: {
+  $plugins(map)
+  echo -ag - Check for Mapdetect: %mapdetect
+  echo -ag - Check For Dynmap is in Pluginlist: $iif(dynmap isin %pluginlist, true)
+  echo -ag - Check For Bluemap is in Pluginlist: $iif(Bluemap isin %pluginlist, true)
+  if (dynmap isin %pluginlist) { 
+    set %dynmapport $remove($read(%pfad $+ plugins\dynmap\configuration.txt,w,*webserver-port:*),webserver-port:,$chr(32))
+    set %hostnamedny $remove($server,irc.)
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 Livemap: http:// $+ %hostnamedny $+ : $+ %dynmapport $+ / 
+  }
+  if (bluemap isin %pluginlist) {
+    set %webport $remove($read(%pfad $+ plugins\BlueMap\webserver.conf,w,*port:*),port:,$chr(32))
+    set %hostname $remove($server,irc.)
+    set %world $remove($read(%mProp,w,*Level-Name=*),level-name=)
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 Asycrone Livemap: http:// $+ %hostname $+ : $+ %webport $+ / $+ $chr(35) $+ %world
+  }
+  else {
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 4FEHLER14,1 Dynmap oder BlueMap fehlt! Installiere die Plugins Nach!
+  }
+}
+
 on 100:text:!plugins:%m-channel:{
-  $plugins
+  $plugins(list)
 }
 
 ;; Anziegen der Plugin Prozessid im Log ;;;
@@ -4034,7 +4057,19 @@ on *:text:!mcwhois*:#: {
   /timercheck.mcwhois1 1 4 /mcwhois %whoisnick
 }
 
+on *:join:#: {
 
+  msg $chan ich bin da
+
+}
+
+on *:text:*hangup*:#: {
+  /msg $chan Hay
+}
+
+on *:action:*hangup*:#: {
+  /msg $chan Hay
+}
 
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
 
@@ -4114,9 +4149,10 @@ on 100:text:!startlog*:%m-channel: {
   if ($2 isnum) && ($2 >= 1) && ($2 <= 60) && ($findfile(%pfad $+ logs\, *.*, 0) == 0) { msg %m-channel Das Verzeichnis %pfad $+ logs\ enthält keine latest.log 4LOGGING ABGEBROCHEN! | /msg %m-channel Prüfe ob die Latest.log im Verezeichnis existiert. | msg %m-channel Falls nicht Starte den Server über !start und führe !startlog <zeit>  erneut aus! | /halt } 
   if ($2 isnum) && ($2 >= 1) && ($2 <= 60) && ($findfile(%pfad $+ logs\, *.*, 0) > 0) { 
     /timer.checklog1 0 $2 /checklog
+    /timer.chatlog1 0 2 /chatlog
     /set %warn 0
     /set %err 0
-    /msg %m-channel Chatlog wird gestartet.
+    /msg %m-channel ServerLog ( $+ 4 $2  $+ 's verzögerung ) und ChatLog werden Gestartet.
     /halt
   }
   else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
@@ -4136,17 +4172,20 @@ on 100:text:*:%clearchan: {
   if (%clearlog == on) && ($1 == nein) { /msg %m-channel Löschvorgang Abbgebrochen | /timerclearlogs1 off }
 }
 
-on 100:text:!stoplog:%m-channel: {
+on 100:text:!stoplogging:%m-channel: {
   set %ti 0
   set %maxtimer $timer(0)
   while (%maxtimer  >= %ti) {
     if ($timer(%maxtimer).type == online) && ($timer(%maxtimer)name == .checklog1) && ($timer(%maxtimer).com == /checklog) {
-      msg %m-channel Timer aktiv
-      msg %m-channel Logging wird gestoppt 
+      /timer $+ $timer(%maxtimer)name off
+    }
+    if ($timer(%maxtimer).type == online) && ($timer(%maxtimer)name == .chatlog1) && ($timer(%maxtimer).com == /chatlog) {
       /timer $+ $timer(%maxtimer)name off
     }
     dec %maxtimer
   }
+  msg %m-channel Timer aktiv
+  msg %m-channel Logging wird gestoppt 
 }
 
 ;;; Rcon Password Generator

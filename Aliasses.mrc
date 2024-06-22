@@ -367,6 +367,41 @@ alias checklog-lvl {
   msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,11,1 $+ $chr(32) 0,1 %lvl-log.rv
 }
 
+;; Alias ChatLog ;;
+;; Chat ist jetzt getrennt vom Serverlog
+;; Später bekommt Chatlog noch eigenen Channel mal sehen ....
+
+alias ChatLog {
+  if ($exists(%pfad $+ Logs\ChatLog.txt) == $false) { return }
+  var %ic $lines(%pfad $+ Logs\ChatLog.txt)
+  var %csev 11S10erver
+  var %cLoading Loading
+  var %ingamechat Async Chat Thread
+  var %cEnabling Enabling
+  var %cnamed Named entity
+  set %cscom issued server command
+  set %clogin [<ip address withheld>] logged in
+  set %cloginip logged in 
+  var %cleft left the game
+  set %csec [Not Secure] [Server]
+  set %ccp Craft-Planer-Thread
+  set %ccp2 [Craft-Planer-Thread]
+  if (%tempc.r != $read(%pfad $+ Logs\ChatLog.txt,%ic)) {
+    set %tempc.r $read(%pfad $+ Logs\ChatLog.txt, %ic)
+    if (Lvl isin %tempc.r) { /checklog-lvl | /halt }
+    set %tempc.rv $remove(%tempc.r, [<ip address withheld>], $time)
+    set %tempc.rv2 %Head-3 $replace( $+ %tempc.rv, left the game, 4Verlies den Server, $&
+      /INFO]:, /INFO]:, [Async Chat Thread, 14[11M10C-11C11hat14])
+    if (MC $+ $chr(45) $+ CHAT isin %tempc.r) || (%ingamechat isin %tempc.r) { 
+      set %cte.3rem $remtok(%tempc.rv2,$gettok(%tempc.rv2,2,32),1,32)
+      set %ctemp4 $remtok(%cte.3rem,$gettok(%cte.3rem,4,32),1,32) 
+      set %ctemp.rv3mchat $remtok(%ctemp4,$gettok(%ctemp4,3,32),1,32)
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat, $gettok(%ctemp.rv3mchat,1,32),32) 7,1[9▒7] 
+      /halt
+    }
+  }
+}
+
 ;; === Alias Checklog ====
 ;; Sämtliche Logvorgänge werden ausgegeben. 
 ;; Inklusive Chatnachrichten und Fehlermeldungen.
@@ -460,13 +495,18 @@ Alias checklog {
     set %temp.rv3 $replace($remtok(%te.2,$gettok(%te.2,4,46),46),.,$chr(32)) 
     set %temp.rv3lag $replace($remtok(%te.2,$gettok(%te.2,2,46),46),.,$chr(32))
     set %temp.rv3a $remove(%temp.rv4,%te.2rem, - $+ $chr(32) - $+ $chr(32),%te.1rem)
-    if (MC $+ $chr(45) $+ CHAT isin %temp.r) || (%igchat isin %temp.r) { 
-      var %te.3rem $gettok(%te.1,5,46)
-      var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
-      var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,%te.3rem)
-      var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
-      set %temp.rv3mchat $replace(%temp.rv3b,.,$chr(32))
-      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%temp.rv3mchat, $gettok(%temp.rv3mchat,1,32), 32) 7,1[9▒7] 
+
+    ;; Chatlog wird getrennt Eigenes Alias === Dies ist Backupcode ;;;
+    ;;;  var %te.3rem $gettok(%te.1,5,46)
+    ;;;  var %temp4 $remtok(%te.1,$gettok(%te.1,4,46),46) 
+    ;;;  var %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,%te.3rem)
+    ;;;  var %temp.rv3b $remove(%temp4,%te.1rem,%te.3rem)
+    ;;;  set %temp.rv3mchat $replace(%temp.rv3b,.,$chr(32))
+    ;;;  msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%temp.rv3mchat, $gettok(%temp.rv3mchat,1,32), 32) 7,1[9▒7] 
+    ;; Chatlog wird getrennt Eigenes Alias === Dies ist Backupcode ;;;
+
+    if (MC $+ $chr(45) $+ CHAT isin %temp.r) || (%igchat isin %temp.r) {
+      write %pfad $+ Logs\ChatLog.txt %temp.r
       /halt
     }
     if (%named isin %temp.r) { 
@@ -496,7 +536,7 @@ Alias checklog {
     if (%say isin %temp.r) {  return | /halt }
     if (Timings isin %temp.rv4) || (Flushing isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,2,46),$chr(32) $+ -)  | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
-    if (Closing Server isin %temp.rv4) { unset %pid | set %serverstarted no | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /timer.dellogs1 1 3 /run -ap cmd.exe /c DEL %pfad $+ logs\*.* /Q /F | /halt }
+    if (Closing Server isin %temp.rv4) { unset %pid | set !%serverstarted no | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /timer.dellogs1 1 3 /run -ap cmd.exe /c DEL %pfad $+ logs\*.* /Q /F | /halt }
     if (%start == on) || (%stop == on) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -)  | /halt }
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
@@ -997,17 +1037,31 @@ alias mcwhoisout {
 ;; Listet die Plugins auf
 
 alias plugins {
-  var %maxpl $findfile(%pfad $+ plugins\, *.jar,0,1)
-  var %x 1
-  while (%x <= %maxpl) {
-    var %pl %pfad $+ plugins\
-    set %plugins $addtok(%plugins,$remove($findfile(%pfad $+ plugins\, *.jar,%x,1),%pl,.jar),32)
-    inc %x
+  if ($1 == list) {
+    var %maxpl $findfile(%pfad $+ plugins\, *.jar,0,1)
+    var %x 1
+    while (%x <= %maxpl) {
+      var %pl %pfad $+ plugins\
+      set %plugins $addtok(%plugins,$remove($findfile(%pfad $+ plugins\, *.jar,%x,1),%pl,.jar),32)
+      inc %x
+    }
+    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 14(12 $+ %maxpl $+ 14) 14[11S10erver 11P10ugins14]: 
+    msg %m-channel $replace(%plugins,$chr(32),$chr(44) $+ $chr(32))
+    unset %plugins
   }
-  msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 14(12 $+ %maxpl $+ 14) 14[11S10erver 11P10ugins14]: 
-  msg %m-channel $replace(%plugins,$chr(32),$chr(44) $+ $chr(32))
-  unset %plugins
+  if ($1 == map) {
+    var %maxplmap $findfile(%pfad $+ plugins\, *.jar,0,1)
+    var %x 1
+    while (%x <= %maxplmap) {
+      var %pl %pfad $+ plugins\
+      set %pluginsmap $addtok(%pluginsmap,$remove($findfile(%pfad $+ plugins\, *.jar,%x,1),%pl,.jar),32)
+      inc %x
+    }
+    set -u5 %pluginlist %pluginsmap
+    unset %pluginsmap
+  }
 }
+
 
 ;; Alias Zeilenentfernen
 ;; Der Name muss nicht erklärt werden .
