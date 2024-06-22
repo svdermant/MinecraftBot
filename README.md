@@ -35,7 +35,7 @@ Aufgabe die abgeschlossen sind, sind mit einem Haken gekennzeichnet.
 - [x] Erstellung der Standarditems nach Registiertung 
 - [x] !mctodo list <fertig|fix|neu> erstellen 
 - [x] Alias GameData geschrieben 
-- [x] Alias Applecounter Geschrieben.
+- [x] Alias Applecounter Geschrieben.gu
 - [ ] Allowed-placed-blocks flag nicht abgeschlossen
 - [ ] Komplettes Styleumstellung Anpassung an das Style vom GTA-Bot (Nicht bei github verfügbar)
 
@@ -97,7 +97,8 @@ Ich rate davon aber ab. Ich empfehle den !stop Befehl oder den Server ingame via
 A Thanks to the following people that helped me to get any features..
 
 1. Quims of (irc.swiftirc.net) he helps me to get data from the regions.yml of worldguard.
-2. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
+2. Once again thanks to Ouims from **irc.swiftirc.net** for fixing the error with the alias **allow-block-place**
+3. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
 
 # Derzeitige Einschränkungen des Bots:
 Aufgrung der Funktionsweise des Clienten Mircs ist es mir nicht möglich gewisse Daten aus einer yml Datei zu lesen.
