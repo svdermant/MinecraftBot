@@ -98,7 +98,7 @@ A Thanks to the following people that helped me to get any features..
 
 1. Quims of (irc.swiftirc.net) he helps me to get data from the regions.yml of worldguard.
 2. Once again thanks to Ouims from **irc.swiftirc.net** for fixing the error with the alias **allow-block-place**
-3. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen.
+3. SoCId mein Alter Script Kollege und Styler der auch mit am MinecraftBot arbeitet er übernimmt gegebenfalls bugfixes und Grafische Styles der Ausgaben von den Vorhandenen Befehlen..
 
 # Derzeitige Einschränkungen des Bots:
 Aufgrung der Funktionsweise des Clienten Mircs ist es mir nicht möglich gewisse Daten aus einer yml Datei zu lesen.

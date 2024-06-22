@@ -515,7 +515,6 @@ alias osBuild { return $OSGet(Version) }
 alias osSP { return SP $+ $OSGet(ServicePackMajorVersion) }
 alias osReg { return $OSGet(RegisteredUser) }
 
-
 alias -l OSGet {
   var %r
   if ($com(osLoc)) { .comclose osLoc }

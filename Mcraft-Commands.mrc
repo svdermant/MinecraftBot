@@ -12,17 +12,19 @@
 ;; !help 
 
 ;; Anziegen der Plugin Prozessid im Log ;;;
-;;
+;; ========
 
 on 100:text:!ppid*:#: {
   if ($2 == on) { 
 
     msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] Plugin ProzessID wird angezeigt
     set %ppid on
+
   }
   if ($2 == off) {
     msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 7,1[9▒7] Plugin ProzessID wird ausgeblendet
     set %ppid off
+
   }
 }
 
