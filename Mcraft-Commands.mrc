@@ -11,6 +11,17 @@
 ;; Befehle
 ;; !help 
 
+;; Farben ändern:
+
+on *:text:!farben:#: {
+  set %f1 $chr(3) $+ $rand(1,15)
+  set %f2 $chr(3) $+ $rand(1,15)
+  set %f3 $chr(3) $+ $rand(1,15)
+
+  /timerfcode1 1 4 /msg $chan Farben wurden gändert code ist: %f1 1 %f2 2 %f3 3
+
+} 
+
 ;; Anziegen der Plugin Prozessid im Log ;;;
 ;; ========
 
@@ -4012,7 +4023,7 @@ on 100:text:!region*:%m-channel: {
 ;;;; Whois Command ;;;;
 
 on *:text:!mcwhois*:#: {
-  set -u4 %mcwhois on
+  set -u8 %mcwhois on
   //run -ap %pfad $+ players.bat
   /timercheck.plist1 1 2 /plist
   set %whoisnick $2

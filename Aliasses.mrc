@@ -936,13 +936,14 @@ alias mcwhois {
     ;;;$mcwhois($2)
     ;;;/timer1 1 3 /mcwhoisout
     ;;;/halt
-    set -u6 %mcwhois on 
+    set -u7 %mcwhois on 
     write -l1 %pfad $+ mcwhois.bat rcon.exe -a localhost:25575 -p %rcon_password " $+ whois %whoisnick $+ " > whois- $+ %whoisnick $+ .txt
     //run -ap %pfad $+ mcwhois.bat 
     ;;/timer.mcwhois1 1 2 /remove %pfad $+ mcwhois.bat
     echo ag -> whois %whoisnick
     /timerout1 1 2 /mcwout %whoisnick
     /timerwhoissend1 1 4 /mcwhoisout
+    /timerde.mcwhois /remove %pfad $+ mcwhois.bat
   }
   else {
     msg %m-channel Sorry aber der Spieler $2 ist nicht im Spiel eingeloggt oder exisiert nicht.
