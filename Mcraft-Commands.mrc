@@ -194,7 +194,7 @@ on *:text:!bday:%m-channel: {
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7 Gruß dein Script Kollege ;)"
 }
 
-on 1:text:!lines:#: {
+on 100:text:!lines:%m-channel: {
   /scriptlines
   msg $chan Aktuell besteht $me aus %scriptlines Scriptzeilen!
 }
