@@ -452,6 +452,8 @@ Alias checklog {
     set %te.1rem $gettok(%te.1,1,46)
     set %te.2rem $gettok(%te.1,4,46)
     set %te.2rem.a $gettok(%te.1,5,46)
+    if (%te.2rem.a isnum) { set %te.2rem.aPID 7,1[4PPID7]: 9,1 %te.2rem.a 14,1 }
+    set %te.1 $reptok(%te.1,%te.2rem.a,%te.2rem.aPID,1,46)
     set %te.2 $remtok(%te.1,%te.1rem,1,46)
     set %temp.rv3a $replace(%te.2,.,$chr(32))
     set %temp.rv3 $remove(%temp.rv2, %te.1rem, %rcon, %rcon2, %time, %rcon3,]:,te.2rem,%te.2rem.a)
@@ -480,7 +482,6 @@ Alias checklog {
     if (/WARN isin %temp.r) { inc %warn }
     if (/ERROR isin %temp.r) { inc %err }
     if (%mcwhois == on) { /halt }
-    if (%Loading isin %temp.r) || (Loaded! isin %temp.r) || (%Enabling isin %temp.r) || (Disabling isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$gettok(%te.1,5,46),$chr(32) $+ -) %tps3 | /halt }
     if (%plisten == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (%flagset == on) && (%tps3 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %tps3 | /halt }
     if (%flagset == on) && (%tps4 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /unset %tps4 | /halt }
@@ -492,7 +493,6 @@ Alias checklog {
     if (%login isin %temp.r) || (%loginip isin %temp.r) { var %log 9meldet sich an mit | var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | var %logtext $replace($gettok(%temp.r,4,32),[,$chr(32),],$chr(32),:,$chr(32)) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $gettok(%logtext, 1, 32) 9hat sich eingeloggt. | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
-    ;;;if (%say isin %temp.r) {  var %cls $gettok(%te.1,2,46) | var %say.msg $remove(%temp.rv4,%cls,[Not Secure] [Rcon]) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
     if (%say isin %temp.r) {  return | /halt }
     if (Timings isin %temp.rv4) || (Flushing isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,2,46),$chr(32) $+ -)  | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
@@ -501,8 +501,8 @@ Alias checklog {
     if (%tps == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $iif(%command != $null, -, %command) %tps3 | /halt }
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
     set %cls $gettok(%te.1,2,46)
-    if (SlimeFun isin %temp.rv4) || (Postal isin %temp.rv4) || (BlueMap isin %temp.rv4) || (BlockRegen isin %temp.rv4) || (Essentials isin %temp.rv4) || (Vault isin %temp.rv4)  { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$chr(91) $+ $chr(93), $chr(32) $+ -,$gettok(%te.1,5,46)) $iif(%command != $null, -, %command) %tps3 | /halt }
-    msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $remove(%temp.rv4,%cls,$chr(91) $+ $chr(93), $chr(32) $+ -,$gettok(%te.1,5-,46)) $iif(%command != $null, -, %command) %tps3
+    if (%ppid == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $iif(%te.2rem.a isnum, $remove($remtok($instok($remtok(%temp.rv4,%te.2rem.a,0,32),%te.2rem.aPID,4,32),-,0,32),%cls),$iif(%te.2rem.a !isnum, $remove(%temp.rv4,%cls))) $iif(%command != $null, -, %command) %tps3 | /halt }
+    if (%ppid == off) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $iif(%te.2rem.a isnum, $remove($remtok($remtok(%temp.rv4,%te.2rem.a,1,32),-,0,32),%cls),$iif(%te.2rem.a !isnum, $remove(%temp.rv4,%cls))) $iif(%command != $null, -, %command) | /halt }
   }
 }
 
