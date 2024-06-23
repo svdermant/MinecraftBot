@@ -203,87 +203,90 @@ on 100:text:!lines:%m-channel: {
 
 ;;;; Hilfe für den Bot ;;;;;;;
 
-on *:text:!help*:%m-channel: {
-  if ($left($1,5) == !help) && ($2 == $null) { 
-    msg %m-channel %head2 8----- 11H14elp 8------ 11S14eite 091 4/ 0944 8-------- %head2
-    msg %m-channel %head2 04Vault $+ %F3 $+ : %F1 $+ V $+ %F2 $+ ault %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help vault %head2
-    msg %m-channel %head2 04WorldGuard $+ %F3 $+ : %F1 $+ W $+ %F2 $+ orldGuard %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help WorldGuard %head2
-    msg %m-channel %head2 04Protocollib $+ %F3 $+ : %F1 $+ P $+ %F2 $+ rotocollib %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help ProtocollIb %head2
-    msg %m-channel %head2 04MythicLib $+ %F3 $+ : %F1 $+ M $+ %F2 $+ ythicLibe %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help MythicLib %head2
-    msg %m-channel %head2 04Citizens $+ %F3 $+ : %F1 $+ C $+ %F2 $+ itizens %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help Citizens %head2
-    msg %m-channel %head2 04MMoCore $+ %F3 $+ : %F1 $+ M $+ %F2 $+ MOCore %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help mmocore %head2
-    msg %m-channel %head2 04Multiverse-Core $+ %F3 $+ : %F1 $+ M $+ %F2 $+ ultiverse $+ %F3 $+ - %F1 $+ C $+ %F2 $+ ore %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help Multiverse-Core %head2
-    msg %m-channel %head2 04Essentials $+ %F3 $+ : %F1 $+ E $+ %F2 $+ ssentials %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help Essentials %head2
-    msg %m-channel %head2 %F1 $+ A $+ %F2 $+ chtung %head2 %F1 $+ d $+ %F2 $+ ie %F1 $+ O $+ %F2 $+ benstehenden %F1 $+ B $+ %F2 $+ efehle %F1 $+ d $+ %F2 $+ ienen %F1 $+ z $+ %F2 $+ um %F1 $+ S $+ %F2 $+ teuern %F1 $+ u $+ %F2 $+ nd %F1 $+ v $+ %F2 $+ erwalten %F1 $+ d $+ %F2 $+ es %F1 $+ M $+ %F2 $+ inecraft %F1 $+ S $+ %F2 $+ ervers %head2
-    msg %m-channel %head2 %F1 $+ U $+ %F2 $+ m %F1 $+ d $+ %F2 $+ ie 0024. %F1 $+ H $+ %F2 $+ ilfseite %F1 $+ e $+ %F2 $+ inzublenden %F1 $+ s $+ %F2 $+ chreibe %Head-2 $+ help 2 %head2
-    msg %m-channel %head2 %F1 $+ D $+ %F2 $+ er %F1 $+ B $+ %F2 $+ ot %F1 $+ h $+ %F2 $+ at %F1 $+ a $+ %F2 $+ nsich %F1 $+ n $+ %F2 $+ och %F1 $+ a $+ %F2 $+ ndere %F1 $+ B $+ %F2 $+ efehle %F1 $+ d $+ %F2 $+ ie %F1 $+ u $+ %F2 $+ nter7:  %Head-2 $+ help bot %F1 $+ z $+ %F2 $+ u %F1 $+ f $+ %F2 $+ inden %F1 $+ s $+ %F2 $+ ind4. %head2
-    halt
-  }
-  if ($left($1,5) == !help) && ($2 == vault) {
-    msg %m-channel %head2 8----- %F1 $+ H $+ %F2 $+ elp 8------  %F1 $+ S $+ %F2 $+ eite 091 4/ 091 8--------  %head2 
-    msg %m-channel %head2 %head-2 $+ vault info7:  %F1 $+ Z $+ %F2 $+ eige  %F1 $+ I $+ %F2 $+ nformationen  %F1 $+ ü $+ %F2 $+ ber  %F1 $+ V $+ %F2 $+ aul %head2 
-    msg %m-channel %head2 %head-2 $+ vault-convert7:  %F1 $+ C $+ %F2 $+ onvertiert  %F1 $+ a $+ %F2 $+ lle  %F1 $+ D $+ %F2 $+ aten  %F1 $+ v $+ %F2 $+ on  %F1 $+ E $+ %F2 $+ conomy1  %F1 $+ u $+ %F2 $+ nd  %F1 $+ S $+ %F2 $+ peichert  %F1 $+ s $+ %F2 $+ ie  %F1 $+ i $+ %F2 $+ n  %F1 $+ E $+ %F2 $+ conomy2 %head2 
-    halt
-  }
-  if ($left($1,5) == !help) && ($2 == Bot) {
-    msg %m-channel %head2  %F1 $+ B $+ %F2 $+ ot %F1 $+ B $+ %F2 $+ efehle4:  %head2 
-    msg %m-channel %head2 %head-2 $+ help bot %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt  %F1 $+ d $+ %F2 $+ iese  %F1 $+ H $+ %F2 $+ ilfe  %F1 $+ a $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ help %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ llgemeine %F1 $+ H $+ %F2 $+ ilfe %F1 $+ Z $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ Todo %head2.2 $+ %F1 $+ T $+ %F2 $+ odo %F1 $+ L $+ %F2 $+ iste %F1 $+ A $+ %F2 $+ ngzeigen4. %head2 
-    msg %m-channel %head2 %head-2 $+ mctodo add/del/fertig/fixed %head2.2 $+ %F1 $+ T $+ %F2 $+ odo %F1 $+ L $+ %F2 $+ iste %F1 $+ B $+ %F2 $+ earbeiten4. %head2 
-    msg %m-channel %head2 %head-2 $+ Server Settings %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ S $+ %F2 $+ ervereinstellungen %F1 $+ a $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ yt %head2.2 $+ %F1 $+ Y $+ %F2 $+ outube %F1 $+ C $+ %F2 $+ hannel %F1 $+ v $+ %F2 $+ on %F1 $+ I $+ %F2 $+ game $+ %F2 $+ RPG %head2 
-    msg %m-channel %head2 %head-2 $+ gh %head2.2 $+ %F1 $+ G $+ %F2 $+ ithub %F1 $+ R $+ %F2 $+ epo von %F1 $+ S $+ %F2 $+ vdermant %head2
-    msg %m-channel %head2 %head-2 $+ Stream %head2.2 Online <text> %F1 $+ S $+ %F2 $+ tream %F1 $+ T $+ %F2 $+ opic %F1 $+ s $+ %F2 $+ etzen.
-    msg %m-channel %head2 %head-2 $+ Stream %head2.2 Offline %F1 $+ T $+ %F2 $+ opic %F1 $+ z $+ %F2 $+ urücksetzen.
-    msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ S $+ %F2 $+ pielerliste %F1 $+ i $+ %F2 $+ m %F1 $+ C $+ %F2 $+ hannel %F1 $+ a $+ %F2 $+ n %head2 
-    msg %m-channel %head2 %head-2 $+ set <params> %head2.2 $+%F1 $+ S $+ %F2 $+ ervereinstellungen %F1 $+ ä $+ %F2 $+ ndern4. %head2 
-    msg %m-channel %head2 %head-2 $+ recreate <name> %head2.2 $+ %F1 $+ L $+ %F2 $+ öscht %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ ngegeben %F1 $+ M $+ %F2 $+ inecraft %F1 $+ W $+ %F2 $+ elt %head2 
-    msg %m-channel %head2 %head-2 $+ say <text> %head2.2 $+ %F1 $+ E $+ %F2 $+ ine %F1 $+ N $+ %F2 $+ achricht %F1 $+ a $+ %F2 $+ n %F1 $+ d $+ %F2 $+ en %F1 $+ M $+ %F2 $+ inecraftServer %F1 $+ S $+ %F2 $+ enden4. %head2 
-    msg %m-channel %head2 %head-2 $+ give %head2.2 $+ %F1 $+ G $+ %F2 $+ egenstand %F1 $+ G $+ %F2 $+ eben4. %head2 
-    msg %m-channel %head2 %head-2 $+ Spawnentity %head2.2 $+ %F1 $+ M $+ %F2 $+ onster %F1 $+ E $+ %F2 $+ rzeugen %head2 
-    msg %m-channel %head2 %head-2 $+ Stop %head2.2 $+ %F1 $+ S $+ %F2 $+ erver %F1 $+ S $+ %F2 $+ toppen %head2 
-    msg %m-channel %head2 %head-2 $+ start %head2.2 $+ %F1 $+ S $+ %F2 $+ erver %F1 $+ S $+ %F2 $+ tarten %head2 
-    msg %m-channel %head2 %head-2 $+ slay <player> %head2.2 $+ %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ S $+ %F2 $+ chlagen %head2 
-    msg %m-channel %head2 %head-2 $+ heal <player> %head2.2 $+ %F1 $+ E $+ %F2 $+ inen %F1 $+ s $+ %F2 $+ pieler %F1 $+ H $+ %F2 $+ eilen %head2 
-    msg %m-channel %head2 %head-2 $+ god <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ pieler %F1 $+ A $+ %F2 $+ ktivieren %head2 
-    msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ ieler %F1 $+ d $+ %F2 $+ eaktivieren %head2 
-    msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlog & %F1 $+ C $+ %F2 $+ hatLog %F1 $+ a $+ %F2 $+ ktivieren 7( $+ %F1 $+ B $+ %F2 $+ ei %F1 $+ z $+ %F2 $+ eit %F1 $+ e $+ %F2 $+ ine %F1 $+ Z $+ %F2 $+ eit %F1 $+ i $+ %F2 $+ n 4sec %F1 $+ a $+ %F2 $+ ngeben %F1 $+ b $+ %F2 $+ is %F1 $+ m $+ %F2 $+ aximal 09607) %head2 
-    msg %m-channel %head2 %head-2 $+ stoplogging %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlogging & %F1 $+ C $+ %F2 $+ hatlogging %F1 $+ a $+ %F2 $+ bschalten %head2 
-    msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ D $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ pielerliste %F1 $+ a $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ Zeitsteuerung %head2.2 $+  %F1 $+ S $+ %F2 $+ yncronisiert %F1 $+ Z $+ %F2 $+ pielzeit %F1 $+ m $+ %F2 $+ it %F1 $+ R $+ %F2 $+ ealzeit %head2 
-    msg %m-channel %head2 %head-2 $+ TPS %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ T $+ %F2 $+ icks %F1 $+ P $+ %F2 $+ er %F1 $+ S $+ %F2 $+ ekunde %F1 $+ a $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ lag %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ uslastung %F1 $+ d $+ %F2 $+ es %F1 $+ S $+ %F2 $+ ervers %F1 $+ a $+ %F2 $+ n4. %head2 
-    msg %m-channel %head2 %head-2 $+ status %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ en %F1 $+ S $+ %F2 $+ tatus %F1 $+ d $+ %F2 $+ es %F1 $+ S $+ %F2 $+ ervers %F1 $+ a $+ %F2 $+ n4. %head2
-    msg %m-channel %head2 %head-2 $+ clearlogs %head2.2 $+ %F1 $+ L $+ %F2 $+ öscht %F1 $+ d $+ %F2 $+ en %F1 $+ I $+ %F2 $+ nhalt %F1 $+ d $+ %F2 $+ es %F1 $+ L $+ %F2 $+ ogverzeichnisses 4. %head2 
-    msg %m-channel %head2 %head-2 $+ rconpassgen %head2.2 $+ %F1 $+ G $+ %F2 $+ eneriert %F1 $+ e $+ %F2 $+ in %F1 $+ n $+ %F2 $+ eues %F1 $+ R $+ %F2 $+ con $+ %F1 $+ P $+ %F2 $+ assword. ( $+ %F1 $+ S $+ %F2 $+ erverneustart %F1 $+ E $+ %F2 $+ rforderlich)
-    msg %m-channel %head2 %head-2 $+ mcwhois %head2.2 $+ %F1 $+ L $+ %F2 $+ istet %F1 $+ d $+ %F2 $+ ie %F1 $+ O $+ %F2 $+ nlinewhois %F1 $+ a $+ %F2 $+ uf. %head2 
-    msg %m-channel %head2 %head-2 $+ regexist %head2.2 $+ %F1 $+ P $+ %F2 $+ rüft %F1 $+ o $+ %F2 $+ b %F1 $+ e $+ %F2 $+ ine %F1 $+ R $+ %F2 $+ egion %F1 $+ e $+ %F2 $+ xistiert %head2 
-    msg %m-channel %head2 %head-2 $+ map %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ L $+ %F2 $+ ive $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ a $+ %F2 $+ n. %F1 $+ W $+ %F2 $+ enn ( %F1 $+ B $+ %F2 $+ lue $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ o $+ %F2 $+ der %F1 $+ D $+ %F2 $+ ynmap %F1 $+ V $+ %F2 $+ orhanden %F1 $+ i $+ %F2 $+ st) %head2 
-    msg %m-channel %head2 %head-2 $+ mapupdate (Plugin Bluemap benötigt) %head2.2 $+ %F1 $+ A $+ %F2 $+ ktualisiert %F1 $+ d $+ %F2 $+ ie %F1 $+ K $+ %F2 $+ arte %head2 
-    msg %m-channel %head2 %head-2 $+ batchpfad %head2.2 $+ %F1 $+ s $+ %F2 $+ etzt %F1 $+ d $+ %F2 $+ en %F1 $+ B $+ %F2 $+ atchpfad %head2 
-    msg %m-channel %head2 %head-2 $+ os %head2.2 $+ %F1 $+ B $+ %F2 $+ etriebsystem %F1 $+ a $+ %F2 $+ nzeigen %head2
-    msg %m-channel %head2 %head-2 $+ Plugins %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ erverplugins %F1 $+  a $+ %F2 $+ n. %head2
-    msg %m-channel %head2 %head-2 $+ version %head2.2 $+ %F1 $+ V $+ %F2 $+ ersion %F1 $+ a $+ %F2 $+ nzeigen %head2
+on *:text:!help*:#: {
+  if ($chan == %m-channel-chat) { msg $chan Sorry Fehler | /halt }
+  if ($chan == %m-channel) {
+    if ($left($1,5) == !help) && ($2 == $null) { 
+      msg %m-channel %head2 8----- 11H14elp 8------ 11S14eite 091 4/ 0944 8-------- %head2
+      msg %m-channel %head2 04Vault $+ %F3 $+ : %F1 $+ V $+ %F2 $+ ault %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help vault %head2
+      msg %m-channel %head2 04WorldGuard $+ %F3 $+ : %F1 $+ W $+ %F2 $+ orldGuard %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help WorldGuard %head2
+      msg %m-channel %head2 04Protocollib $+ %F3 $+ : %F1 $+ P $+ %F2 $+ rotocollib %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help ProtocollIb %head2
+      msg %m-channel %head2 04MythicLib $+ %F3 $+ : %F1 $+ M $+ %F2 $+ ythicLibe %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help MythicLib %head2
+      msg %m-channel %head2 04Citizens $+ %F3 $+ : %F1 $+ C $+ %F2 $+ itizens %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help Citizens %head2
+      msg %m-channel %head2 04MMoCore $+ %F3 $+ : %F1 $+ M $+ %F2 $+ MOCore %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help mmocore %head2
+      msg %m-channel %head2 04Multiverse-Core $+ %F3 $+ : %F1 $+ M $+ %F2 $+ ultiverse $+ %F3 $+ - %F1 $+ C $+ %F2 $+ ore %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ : %Head-2 $+ help Multiverse-Core %head2
+      msg %m-channel %head2 04Essentials $+ %F3 $+ : %F1 $+ E $+ %F2 $+ ssentials %F1 $+ B $+ %F2 $+ efehle  $+ %F3 $+ :  %Head-2 $+ help Essentials %head2
+      msg %m-channel %head2 %F1 $+ A $+ %F2 $+ chtung %head2 %F1 $+ d $+ %F2 $+ ie %F1 $+ O $+ %F2 $+ benstehenden %F1 $+ B $+ %F2 $+ efehle %F1 $+ d $+ %F2 $+ ienen %F1 $+ z $+ %F2 $+ um %F1 $+ S $+ %F2 $+ teuern %F1 $+ u $+ %F2 $+ nd %F1 $+ v $+ %F2 $+ erwalten %F1 $+ d $+ %F2 $+ es %F1 $+ M $+ %F2 $+ inecraft %F1 $+ S $+ %F2 $+ ervers %head2
+      msg %m-channel %head2 %F1 $+ U $+ %F2 $+ m %F1 $+ d $+ %F2 $+ ie 0024. %F1 $+ H $+ %F2 $+ ilfseite %F1 $+ e $+ %F2 $+ inzublenden %F1 $+ s $+ %F2 $+ chreibe %Head-2 $+ help 2 %head2
+      msg %m-channel %head2 %F1 $+ D $+ %F2 $+ er %F1 $+ B $+ %F2 $+ ot %F1 $+ h $+ %F2 $+ at %F1 $+ a $+ %F2 $+ nsich %F1 $+ n $+ %F2 $+ och %F1 $+ a $+ %F2 $+ ndere %F1 $+ B $+ %F2 $+ efehle %F1 $+ d $+ %F2 $+ ie %F1 $+ u $+ %F2 $+ nter7:  %Head-2 $+ help bot %F1 $+ z $+ %F2 $+ u %F1 $+ f $+ %F2 $+ inden %F1 $+ s $+ %F2 $+ ind4. %head2
+      halt
+    }
+    if ($left($1,5) == !help) && ($2 == vault) {
+      msg %m-channel %head2 8----- %F1 $+ H $+ %F2 $+ elp 8------  %F1 $+ S $+ %F2 $+ eite 091 4/ 091 8--------  %head2 
+      msg %m-channel %head2 %head-2 $+ vault info7:  %F1 $+ Z $+ %F2 $+ eige  %F1 $+ I $+ %F2 $+ nformationen  %F1 $+ ü $+ %F2 $+ ber  %F1 $+ V $+ %F2 $+ aul %head2 
+      msg %m-channel %head2 %head-2 $+ vault-convert7:  %F1 $+ C $+ %F2 $+ onvertiert  %F1 $+ a $+ %F2 $+ lle  %F1 $+ D $+ %F2 $+ aten  %F1 $+ v $+ %F2 $+ on  %F1 $+ E $+ %F2 $+ conomy1  %F1 $+ u $+ %F2 $+ nd  %F1 $+ S $+ %F2 $+ peichert  %F1 $+ s $+ %F2 $+ ie  %F1 $+ i $+ %F2 $+ n  %F1 $+ E $+ %F2 $+ conomy2 %head2 
+      halt
+    }
+    if ($left($1,5) == !help) && ($2 == Bot) {
+      msg %m-channel %head2  %F1 $+ B $+ %F2 $+ ot %F1 $+ B $+ %F2 $+ efehle4:  %head2 
+      msg %m-channel %head2 %head-2 $+ help bot %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt  %F1 $+ d $+ %F2 $+ iese  %F1 $+ H $+ %F2 $+ ilfe  %F1 $+ a $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ help %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ llgemeine %F1 $+ H $+ %F2 $+ ilfe %F1 $+ Z $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ Todo %head2.2 $+ %F1 $+ T $+ %F2 $+ odo %F1 $+ L $+ %F2 $+ iste %F1 $+ A $+ %F2 $+ ngzeigen4. %head2 
+      msg %m-channel %head2 %head-2 $+ mctodo add/del/fertig/fixed %head2.2 $+ %F1 $+ T $+ %F2 $+ odo %F1 $+ L $+ %F2 $+ iste %F1 $+ B $+ %F2 $+ earbeiten4. %head2 
+      msg %m-channel %head2 %head-2 $+ Server Settings %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ S $+ %F2 $+ ervereinstellungen %F1 $+ a $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ yt %head2.2 $+ %F1 $+ Y $+ %F2 $+ outube %F1 $+ C $+ %F2 $+ hannel %F1 $+ v $+ %F2 $+ on %F1 $+ I $+ %F2 $+ game $+ %F2 $+ RPG %head2 
+      msg %m-channel %head2 %head-2 $+ gh %head2.2 $+ %F1 $+ G $+ %F2 $+ ithub %F1 $+ R $+ %F2 $+ epo von %F1 $+ S $+ %F2 $+ vdermant %head2
+      msg %m-channel %head2 %head-2 $+ Stream %head2.2 Online <text> %F1 $+ S $+ %F2 $+ tream %F1 $+ T $+ %F2 $+ opic %F1 $+ s $+ %F2 $+ etzen.
+      msg %m-channel %head2 %head-2 $+ Stream %head2.2 Offline %F1 $+ T $+ %F2 $+ opic %F1 $+ z $+ %F2 $+ urücksetzen.
+      msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ S $+ %F2 $+ pielerliste %F1 $+ i $+ %F2 $+ m %F1 $+ C $+ %F2 $+ hannel %F1 $+ a $+ %F2 $+ n %head2 
+      msg %m-channel %head2 %head-2 $+ set <params> %head2.2 $+%F1 $+ S $+ %F2 $+ ervereinstellungen %F1 $+ ä $+ %F2 $+ ndern4. %head2 
+      msg %m-channel %head2 %head-2 $+ recreate <name> %head2.2 $+ %F1 $+ L $+ %F2 $+ öscht %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ ngegeben %F1 $+ M $+ %F2 $+ inecraft %F1 $+ W $+ %F2 $+ elt %head2 
+      msg %m-channel %head2 %head-2 $+ say <text> %head2.2 $+ %F1 $+ E $+ %F2 $+ ine %F1 $+ N $+ %F2 $+ achricht %F1 $+ a $+ %F2 $+ n %F1 $+ d $+ %F2 $+ en %F1 $+ M $+ %F2 $+ inecraftServer %F1 $+ S $+ %F2 $+ enden4. %head2 
+      msg %m-channel %head2 %head-2 $+ give %head2.2 $+ %F1 $+ G $+ %F2 $+ egenstand %F1 $+ G $+ %F2 $+ eben4. %head2 
+      msg %m-channel %head2 %head-2 $+ Spawnentity %head2.2 $+ %F1 $+ M $+ %F2 $+ onster %F1 $+ E $+ %F2 $+ rzeugen %head2 
+      msg %m-channel %head2 %head-2 $+ Stop %head2.2 $+ %F1 $+ S $+ %F2 $+ erver %F1 $+ S $+ %F2 $+ toppen %head2 
+      msg %m-channel %head2 %head-2 $+ start %head2.2 $+ %F1 $+ S $+ %F2 $+ erver %F1 $+ S $+ %F2 $+ tarten %head2 
+      msg %m-channel %head2 %head-2 $+ slay <player> %head2.2 $+ %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ S $+ %F2 $+ chlagen %head2 
+      msg %m-channel %head2 %head-2 $+ heal <player> %head2.2 $+ %F1 $+ E $+ %F2 $+ inen %F1 $+ s $+ %F2 $+ pieler %F1 $+ H $+ %F2 $+ eilen %head2 
+      msg %m-channel %head2 %head-2 $+ god <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ pieler %F1 $+ A $+ %F2 $+ ktivieren %head2 
+      msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ ieler %F1 $+ d $+ %F2 $+ eaktivieren %head2 
+      msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlog & %F1 $+ C $+ %F2 $+ hatLog %F1 $+ a $+ %F2 $+ ktivieren 7( $+ %F1 $+ B $+ %F2 $+ ei %F1 $+ z $+ %F2 $+ eit %F1 $+ e $+ %F2 $+ ine %F1 $+ Z $+ %F2 $+ eit %F1 $+ i $+ %F2 $+ n 4sec %F1 $+ a $+ %F2 $+ ngeben %F1 $+ b $+ %F2 $+ is %F1 $+ m $+ %F2 $+ aximal 09607) %head2 
+      msg %m-channel %head2 %head-2 $+ stoplogging %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlogging & %F1 $+ C $+ %F2 $+ hatlogging %F1 $+ a $+ %F2 $+ bschalten %head2 
+      msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ D $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ pielerliste %F1 $+ a $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ Zeitsteuerung %head2.2 $+  %F1 $+ S $+ %F2 $+ yncronisiert %F1 $+ Z $+ %F2 $+ pielzeit %F1 $+ m $+ %F2 $+ it %F1 $+ R $+ %F2 $+ ealzeit %head2 
+      msg %m-channel %head2 %head-2 $+ TPS %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ T $+ %F2 $+ icks %F1 $+ P $+ %F2 $+ er %F1 $+ S $+ %F2 $+ ekunde %F1 $+ a $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ lag %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ A $+ %F2 $+ uslastung %F1 $+ d $+ %F2 $+ es %F1 $+ S $+ %F2 $+ ervers %F1 $+ a $+ %F2 $+ n4. %head2 
+      msg %m-channel %head2 %head-2 $+ status %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ en %F1 $+ S $+ %F2 $+ tatus %F1 $+ d $+ %F2 $+ es %F1 $+ S $+ %F2 $+ ervers %F1 $+ a $+ %F2 $+ n4. %head2
+      msg %m-channel %head2 %head-2 $+ clearlogs %head2.2 $+ %F1 $+ L $+ %F2 $+ öscht %F1 $+ d $+ %F2 $+ en %F1 $+ I $+ %F2 $+ nhalt %F1 $+ d $+ %F2 $+ es %F1 $+ L $+ %F2 $+ ogverzeichnisses 4. %head2 
+      msg %m-channel %head2 %head-2 $+ rconpassgen %head2.2 $+ %F1 $+ G $+ %F2 $+ eneriert %F1 $+ e $+ %F2 $+ in %F1 $+ n $+ %F2 $+ eues %F1 $+ R $+ %F2 $+ con $+ %F1 $+ P $+ %F2 $+ assword. ( $+ %F1 $+ S $+ %F2 $+ erverneustart %F1 $+ E $+ %F2 $+ rforderlich)
+      msg %m-channel %head2 %head-2 $+ mcwhois %head2.2 $+ %F1 $+ L $+ %F2 $+ istet %F1 $+ d $+ %F2 $+ ie %F1 $+ O $+ %F2 $+ nlinewhois %F1 $+ a $+ %F2 $+ uf. %head2 
+      msg %m-channel %head2 %head-2 $+ regexist %head2.2 $+ %F1 $+ P $+ %F2 $+ rüft %F1 $+ o $+ %F2 $+ b %F1 $+ e $+ %F2 $+ ine %F1 $+ R $+ %F2 $+ egion %F1 $+ e $+ %F2 $+ xistiert %head2 
+      msg %m-channel %head2 %head-2 $+ map %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ L $+ %F2 $+ ive $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ a $+ %F2 $+ n. %F1 $+ W $+ %F2 $+ enn ( %F1 $+ B $+ %F2 $+ lue $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ o $+ %F2 $+ der %F1 $+ D $+ %F2 $+ ynmap %F1 $+ V $+ %F2 $+ orhanden %F1 $+ i $+ %F2 $+ st) %head2 
+      msg %m-channel %head2 %head-2 $+ mapupdate (Plugin Bluemap benötigt) %head2.2 $+ %F1 $+ A $+ %F2 $+ ktualisiert %F1 $+ d $+ %F2 $+ ie %F1 $+ K $+ %F2 $+ arte %head2 
+      msg %m-channel %head2 %head-2 $+ batchpfad %head2.2 $+ %F1 $+ s $+ %F2 $+ etzt %F1 $+ d $+ %F2 $+ en %F1 $+ B $+ %F2 $+ atchpfad %head2 
+      msg %m-channel %head2 %head-2 $+ os %head2.2 $+ %F1 $+ B $+ %F2 $+ etriebsystem %F1 $+ a $+ %F2 $+ nzeigen %head2
+      msg %m-channel %head2 %head-2 $+ Plugins %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ erverplugins %F1 $+  a $+ %F2 $+ n. %head2
+      msg %m-channel %head2 %head-2 $+ version %head2.2 $+ %F1 $+ V $+ %F2 $+ ersion %F1 $+ a $+ %F2 $+ nzeigen %head2
 
-  }
-  if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
-    msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
-    msg %m-channel 8Unterhalb sind die Worldguard Befehle:
-    msg %m-channel %head2 %head-2 $+ allowfire [<world>] - %F1 $+ E $+ %F2 $+ rlaubt %F1 $+ d $+ %F2 $+ ie %F1 $+ F $+ %F2 $+ euerausbreitung  %F1 $+ T $+ %F2 $+ emporär %head2
-    msg %m-channel %head2 %head-2 $+ god <player> - %F1 $+ g $+ %F2 $+ ottmode %F1 $+ f $+ %F2 $+ ür %F1 $+ S $+ %F2 $+ pieler %F1 $+ e $+ %F2 $+ in4/ $+ %F1 $+ A $+ %F2 $+ uschalten. %head2
-    msg %m-channel %head2 %head-2 $+ halt-activity - %F1 $+ S $+ %F2 $+ toppt %F1 $+ j $+ %F2 $+ egliche %F1 $+ B $+ %F2 $+ ewegung %F1 $+ a $+ %F2 $+ uf %F1 $+ d $+ %F2 $+ em %F1 $+ S $+ %F2 $+ erver %F1 $+ u $+ %F2 $+ nd %F1 $+ F $+ %F2 $+ riert %F1 $+ s $+ %F2 $+ ie %F1 $+ e $+ %F2 $+ in. %head2
-    msg %m-channel %head2 %head-2 $+ stopfire [<world>] - %F1 $+ F $+ %F2 $+ euerausbreitung %F1 $+ d $+ %F2 $+ eaktivieren %head2
-    msg %m-channel %head2 %head-2 $+ slay <player> - %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ S $+ %F2 $+ chlagen %head2
-    msg %m-channel %head2 %head-2 $+ heal <player> - %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ H $+ %F2 $+ eilen %head2
-    msg %m-channel %head2 %F1 $+ U $+ %F2 $+ m %F1 $+ d $+ %F2 $+ ie 2. %F1 $+ H $+ %F2 $+ ilfseite %F1 $+ e $+ %F2 $+ inzublenden %F1 $+ s $+ %F2 $+ chreibe 7!help Worldguard 2 %head2
-    haltdef
-  }
-  if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == 2) {
-    msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 022 7/ 0228--------
-    msg %m-channel %head2 %head-2 $+ region - %F1 $+ V $+ %F2 $+ erwaltung %F1 $+ u $+ %F2 $+ nd %F1 $+ e $+ %F2 $+ instellungsparameter %F1 $+ f $+ %F2 $+ ür %F1 $+ e $+ %F2 $+ ine %F1 $+ R $+ %F2 $+ egion. %head2
-    msg %m-channel %head2 %head-2 $+ locate - %F1 $+ L $+ %F2 $+ okaliesiert %F1 $+ B $+ %F2 $+ Iome/ $+ %F1 $+ P $+ %F2 $+ Oi/ $+ %F1 $+ S $+ %F2 $+ trukturen %head2
-    msg %m-channel %head2 %head-2 $+ Worldguard - %F1 $+ W $+ %F2 $+ eitere %F1 $+ B $+ %F2 $+ efehle %F1 $+ z $+ %F2 $+ u %F1 $+ W $+ %F2 $+ orldguard %head2
+    }
+    if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
+      msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
+      msg %m-channel 8Unterhalb sind die Worldguard Befehle:
+      msg %m-channel %head2 %head-2 $+ allowfire [<world>] - %F1 $+ E $+ %F2 $+ rlaubt %F1 $+ d $+ %F2 $+ ie %F1 $+ F $+ %F2 $+ euerausbreitung  %F1 $+ T $+ %F2 $+ emporär %head2
+      msg %m-channel %head2 %head-2 $+ god <player> - %F1 $+ g $+ %F2 $+ ottmode %F1 $+ f $+ %F2 $+ ür %F1 $+ S $+ %F2 $+ pieler %F1 $+ e $+ %F2 $+ in4/ $+ %F1 $+ A $+ %F2 $+ uschalten. %head2
+      msg %m-channel %head2 %head-2 $+ halt-activity - %F1 $+ S $+ %F2 $+ toppt %F1 $+ j $+ %F2 $+ egliche %F1 $+ B $+ %F2 $+ ewegung %F1 $+ a $+ %F2 $+ uf %F1 $+ d $+ %F2 $+ em %F1 $+ S $+ %F2 $+ erver %F1 $+ u $+ %F2 $+ nd %F1 $+ F $+ %F2 $+ riert %F1 $+ s $+ %F2 $+ ie %F1 $+ e $+ %F2 $+ in. %head2
+      msg %m-channel %head2 %head-2 $+ stopfire [<world>] - %F1 $+ F $+ %F2 $+ euerausbreitung %F1 $+ d $+ %F2 $+ eaktivieren %head2
+      msg %m-channel %head2 %head-2 $+ slay <player> - %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ S $+ %F2 $+ chlagen %head2
+      msg %m-channel %head2 %head-2 $+ heal <player> - %F1 $+ E $+ %F2 $+ inen %F1 $+ S $+ %F2 $+ pieler %F1 $+ H $+ %F2 $+ eilen %head2
+      msg %m-channel %head2 %F1 $+ U $+ %F2 $+ m %F1 $+ d $+ %F2 $+ ie 2. %F1 $+ H $+ %F2 $+ ilfseite %F1 $+ e $+ %F2 $+ inzublenden %F1 $+ s $+ %F2 $+ chreibe 7!help Worldguard 2 %head2
+      haltdef
+    }
+    if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == 2) {
+      msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 022 7/ 0228--------
+      msg %m-channel %head2 %head-2 $+ region - %F1 $+ V $+ %F2 $+ erwaltung %F1 $+ u $+ %F2 $+ nd %F1 $+ e $+ %F2 $+ instellungsparameter %F1 $+ f $+ %F2 $+ ür %F1 $+ e $+ %F2 $+ ine %F1 $+ R $+ %F2 $+ egion. %head2
+      msg %m-channel %head2 %head-2 $+ locate - %F1 $+ L $+ %F2 $+ okaliesiert %F1 $+ B $+ %F2 $+ Iome/ $+ %F1 $+ P $+ %F2 $+ Oi/ $+ %F1 $+ S $+ %F2 $+ trukturen %head2
+      msg %m-channel %head2 %head-2 $+ Worldguard - %F1 $+ W $+ %F2 $+ eitere %F1 $+ B $+ %F2 $+ efehle %F1 $+ z $+ %F2 $+ u %F1 $+ W $+ %F2 $+ orldguard %head2
+    }
   }
 }
 
@@ -4143,6 +4146,7 @@ on 100:text:!startlog*:%m-channel: {
     /timer.chatlog1 0 2 /chatlog
     /set %warn 0
     /set %err 0
+    /set %chatmess 0
     /msg %m-channel ServerLog ( $+ 4 $2  $+ 's verzögerung ) und ChatLog werden Gestartet.
     set %m-channel-chat $chr(35) $+ MC-Chat $+ $rand(100,1000) $+ $rand(A,z) $+ $rand(A,z)
     msg %m-channel Chatnachrichten Werden jetzt im %m-channel-chat gepostet.
@@ -4182,6 +4186,7 @@ on 100:text:!stoplogging:%m-channel: {
   msg %m-channel Logging wird gestoppt verlasse %m-channel-chat
   /part %m-channel-chat $ct(Systemlog & Chatlog deaktiviert)
   /unset %m-channel-chat
+  /timer.dellogs1 1 3 /run -ap cmd.exe /c DEL %pfad $+ logs\*.* /Q /F 
 }
 
 ;;; Rcon Password Generator
@@ -4280,6 +4285,7 @@ on 100:text:!stop:%m-channel:{
   set -u15 %stop on
   set %warn 0
   set %err 0
+  set %chatmess 0
   unset %syspid
   remove %pfad $+ server.pid
 }
@@ -4291,6 +4297,7 @@ on 100:text:!start:%m-channel:{
   set %serverstarted yes
   /set %warn 0
   /set %err 0
+  /set %chatmess 0
   //run -ap %pfad $+ start.bat
   //run -ap %pfad $+ process.bat
   //set %syspid $read(%pfad $+ server.pid, 1)
