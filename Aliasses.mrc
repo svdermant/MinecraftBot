@@ -262,6 +262,14 @@ Alias systempid {
   /msg %m-channel   7[9!7] 7,1[9BotPID: 08 $+ %pid $+ 07] 7[9!7] 7,1[9SystemPID: 08 $+ %syspid $+ 07]
 }
 
+;; Alias PlugCheck
+;; Prüft ob das Plugin existiert oder nicht!
+
+Alias PlugCheck {
+  if ($1 isin %ServerPLs) { return true }
+  if ($1 !isin %ServerPLs) || (%ServerPLs == $null) { return false }
+}
+
 ;; Alias Flagcheck =====
 ;; Hier wird geprüft ob die Flag existiert
 ;; Als returnwert kommt on bzw off
@@ -269,7 +277,6 @@ Alias systempid {
 alias flagcheck {
   if ($istok(%flaglist1,$1,46) == $true) || ($istok(%flaglist2,$1,46) == $true) || ($istok(%flaglist3,$1,46) == $true) || ($istok(%flaglist4,$1,46) == $true) || ($istok(%flaglist5,$1,46) == $true) || ($istok(%thirdflags1,$1,46) == $true) || ($istok(%thirdflags2,$1,46) == $true) || ($istok(%thirdflags3,$1,46) == $true) || ($istok(%thirdflags4,$1,46) == $true) || ($istok(%thirdflags5,$1,46) == $true)  { return on }
   if ($istok(%flaglist1,$1,46) == $false) || ($istok(%flaglist2,$1,46) == $false) || ($istok(%flaglist3,$1,46) == $false) || ($istok(%flaglist4,$1,46) == $false) || ($istok(%flaglist5,$1,46) == $false) || ($istok(%thirdflags1,$1,46) == $false) || ($istok(%thirdflags2,$1,46) == $false) || ($istok(%thirdflags3,$1,46) == $false) || ($istok(%thirdflags4,$1,46) == $false) || ($istok(%thirdflags5,$1,46) == $false) { return off }
-
 }
 
 ;; Analyse Echos
@@ -398,11 +405,22 @@ alias ChatLog {
       set %ctemp4 $remtok(%cte.3rem,$gettok(%cte.3rem,4,32),1,32) 
       set %ctemp.rv3mchat $remtok(%ctemp4,$gettok(%ctemp4,3,32),1,32)
 
-      set %messtime $gettok(%tempc.rv,1,32)
-      set %sender $gettok(%tempc.rv,7,32)
-      set %message $deltok(%tempc.rv,1-7,32) 
+      ;;; Für Server Ohne Chatmanager
+      if ($PlugCheck(TownyChat) == false) {
+        set %messtime $gettok(%tempc.rv,1,32)
+        set %sender $gettok(%tempc.rv,7,32)
+        set %message $deltok(%tempc.rv,1-7,32)
+      }
+
+      ;;; Für Server mit Towny Chatmanager
+      if ($PlugCheck(TownyChat) == true) {
+        set %messtime $gettok(%tempc.rv,1,32)
+        set %sender $gettok(%tempc.rv,10,32)
+        set %message $deltok(%tempc.rv,1-10,32)     
+      }
+
       msg %m-channel-chat 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 14[11M10C-11C11hat14]10=14[11N10achricht14] 7,1[9▒7]
-      msg %m-channel-chat 14[11A10bsender14]:10 $ct($remove(%sender,<,>))
+      msg %m-channel-chat 14[11A10bsender14]:10 $ct($remove(%sender,<,>,:))
       msg %m-channel-chat 14[11G10esendet14 11U10m14]:10 %messtime
       msg %m-channel-chat 14[11N10achricht14]:10 $ct(%message)
       msg %m-channel-chat 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 ===========
@@ -629,6 +647,10 @@ alias checkstarted {
     ;;/timerspid1 1 2 /spid
     if (%warn >= 1) || (%err >= 1) { msg %m-channel %head2 4ACHTUNG11 Es gab einige Warnungen/Fehler. Überprüfe die Console für Details  %head2 }
     /timer.checkstarted1 off
+    if (%ServerPLs != $null) { 
+      /unset %ServerPLs
+      $GeneratePlugins
+    }
   }
 }
 
@@ -1060,6 +1082,19 @@ alias mcwhoisout {
       msg %m-channel 9 ►  %mout 
       inc %x
     }
+  }
+}
+
+;; Alias GeneratePlugins
+;; Generiert die Plugins nach Serverstart
+
+Alias GeneratePlugins {
+  var %maxServerPL $findfile(%pfad $+ plugins\, *.jar,0,1)
+  var %px 1
+  while (%px <= %maxServerPL) {
+    var %spl %pfad $+ plugins\
+    set %ServerPLs $addtok(%ServerPLs,$remove($findfile(%pfad $+ plugins\, *.jar,%px,1),%spl,.jar),32)
+    inc %px
   }
 }
 

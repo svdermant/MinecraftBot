@@ -4288,6 +4288,10 @@ on 100:text:!stop:%m-channel:{
   set %chatmess 0
   unset %syspid
   remove %pfad $+ server.pid
+  if (%ServerPLs != $null) { 
+    /unset %ServerPLs
+    $GeneratePlugins
+  }
 }
 
 ;;;;;;;;; Server Starten  ;;;;;;;;;;;;;
