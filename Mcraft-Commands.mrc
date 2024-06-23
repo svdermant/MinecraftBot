@@ -246,8 +246,8 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ heal <player> %head2.2 $+ %F1 $+ E $+ %F2 $+ inen %F1 $+ s $+ %F2 $+ pieler %F1 $+ H $+ %F2 $+ eilen %head2 
     msg %m-channel %head2 %head-2 $+ god <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ pieler %F1 $+ A $+ %F2 $+ ktivieren %head2 
     msg %m-channel %head2 %head-2 $+ ungod <player> %head2.2 $+ %F1 $+ U $+ %F2 $+ nsterblichkeit %F1 $+ b $+ %F2 $+ ei %F1 $+ S $+ %F2 $+ ieler %F1 $+ d $+ %F2 $+ eaktivieren %head2 
-    msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+ %F1 $+ C $+ %F2 $+ hatlog %F1 $+ a $+ %F2 $+ ktivieren 7( $+ %F1 $+ B $+ %F2 $+ ei %F1 $+ z $+ %F2 $+ eit %F1 $+ e $+ %F2 $+ ine %F1 $+ Z $+ %F2 $+ eit %F1 $+ i $+ %F2 $+ n 4sec %F1 $+ a $+ %F2 $+ ngeben %F1 $+ b $+ %F2 $+ is %F1 $+ m $+ %F2 $+ aximal 09607) %head2 
-    msg %m-channel %head2 %head-2 $+ stoplog <zeit> %head2.2 $+ %F1 $+ C $+ %F2 $+ hatlog %F1 $+ a $+ %F2 $+ bschalten %head2 
+    msg %m-channel %head2 %head-2 $+ startlog <zeit> %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlog & %F1 $+ C $+ %F2 $+ hatLog %F1 $+ a $+ %F2 $+ ktivieren 7( $+ %F1 $+ B $+ %F2 $+ ei %F1 $+ z $+ %F2 $+ eit %F1 $+ e $+ %F2 $+ ine %F1 $+ Z $+ %F2 $+ eit %F1 $+ i $+ %F2 $+ n 4sec %F1 $+ a $+ %F2 $+ ngeben %F1 $+ b $+ %F2 $+ is %F1 $+ m $+ %F2 $+ aximal 09607) %head2 
+    msg %m-channel %head2 %head-2 $+ stoplogging %head2.2 $+ %F1 $+ S $+ %F2 $+ erverlogging & %F1 $+ C $+ %F2 $+ hatlogging %F1 $+ a $+ %F2 $+ bschalten %head2 
     msg %m-channel %head2 %head-2 $+ playerlist %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ D $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ pielerliste %F1 $+ a $+ %F2 $+ n4. %head2 
     msg %m-channel %head2 %head-2 $+ Zeitsteuerung %head2.2 $+  %F1 $+ S $+ %F2 $+ yncronisiert %F1 $+ Z $+ %F2 $+ pielzeit %F1 $+ m $+ %F2 $+ it %F1 $+ R $+ %F2 $+ ealzeit %head2 
     msg %m-channel %head2 %head-2 $+ TPS %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ T $+ %F2 $+ icks %F1 $+ P $+ %F2 $+ er %F1 $+ S $+ %F2 $+ ekunde %F1 $+ a $+ %F2 $+ n4. %head2 
@@ -257,10 +257,13 @@ on *:text:!help*:%m-channel: {
     msg %m-channel %head2 %head-2 $+ rconpassgen %head2.2 $+ %F1 $+ G $+ %F2 $+ eneriert %F1 $+ e $+ %F2 $+ in %F1 $+ n $+ %F2 $+ eues %F1 $+ R $+ %F2 $+ con $+ %F1 $+ P $+ %F2 $+ assword. ( $+ %F1 $+ S $+ %F2 $+ erverneustart %F1 $+ E $+ %F2 $+ rforderlich)
     msg %m-channel %head2 %head-2 $+ mcwhois %head2.2 $+ %F1 $+ L $+ %F2 $+ istet %F1 $+ d $+ %F2 $+ ie %F1 $+ O $+ %F2 $+ nlinewhois %F1 $+ a $+ %F2 $+ uf. %head2 
     msg %m-channel %head2 %head-2 $+ regexist %head2.2 $+ %F1 $+ P $+ %F2 $+ rüft %F1 $+ o $+ %F2 $+ b %F1 $+ e $+ %F2 $+ ine %F1 $+ R $+ %F2 $+ egion %F1 $+ e $+ %F2 $+ xistiert %head2 
+    msg %m-channel %head2 %head-2 $+ map %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ L $+ %F2 $+ ive $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ a $+ %F2 $+ n. %F1 $+ W $+ %F2 $+ enn ( %F1 $+ B $+ %F2 $+ lue $+ %F1 $+ M $+ %F2 $+ ap %F1 $+ o $+ %F2 $+ der %F1 $+ D $+ %F2 $+ ynmap %F1 $+ V $+ %F2 $+ orhanden %F1 $+ i $+ %F2 $+ st) %head2 
     msg %m-channel %head2 %head-2 $+ mapupdate (Plugin Bluemap benötigt) %head2.2 $+ %F1 $+ A $+ %F2 $+ ktualisiert %F1 $+ d $+ %F2 $+ ie %F1 $+ K $+ %F2 $+ arte %head2 
     msg %m-channel %head2 %head-2 $+ batchpfad %head2.2 $+ %F1 $+ s $+ %F2 $+ etzt %F1 $+ d $+ %F2 $+ en %F1 $+ B $+ %F2 $+ atchpfad %head2 
     msg %m-channel %head2 %head-2 $+ os %head2.2 $+ %F1 $+ B $+ %F2 $+ etriebsystem %F1 $+ a $+ %F2 $+ nzeigen %head2
+    msg %m-channel %head2 %head-2 $+ Plugins %head2.2 $+ %F1 $+ Z $+ %F2 $+ eigt %F1 $+ d $+ %F2 $+ ie %F1 $+ S $+ %F2 $+ erverplugins %F1 $+  a $+ %F2 $+ n. %head2
     msg %m-channel %head2 %head-2 $+ version %head2.2 $+ %F1 $+ V $+ %F2 $+ ersion %F1 $+ a $+ %F2 $+ nzeigen %head2
+
   }
   if ($left($1,5) == !help) && ($2 == WorldGuard) && ($3 == $null) {
     msg %m-channel 8-----7 WorldGuard Help 8------ 7Seite 021 7/ 0228--------
@@ -4055,20 +4058,6 @@ on *:text:!mcwhois*:#: {
   /timercheck.plist1 1 2 /plist
   set %whoisnick $2
   /timercheck.mcwhois1 1 4 /mcwhois %whoisnick
-}
-
-on *:join:#: {
-
-  msg $chan ich bin da
-
-}
-
-on *:text:*hangup*:#: {
-  /msg $chan Hay
-}
-
-on *:action:*hangup*:#: {
-  /msg $chan Hay
 }
 
 ;;;;;;;;; !give Command ;;;;;;;;;;;;;;;
