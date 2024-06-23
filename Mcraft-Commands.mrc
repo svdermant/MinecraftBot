@@ -181,8 +181,8 @@ on *:text:!say*:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 7(3Abgeschickt7)
   ;;;/run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
   /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2- "
-  /timersays3 1 3 /msg $chan 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 0,1 14[11S10erver 11E10vent14] ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2-
 }
+
 on *:text:!bday:%m-channel: {
   /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9  11(3Abgeschickt11)
   /run rcon.exe -a localhost:25575 -p %rcon_password "broadcast &8[&9IRC-CHAT&8] &1|&2[  &2]&1| &7  ♥ Herzlichen   "

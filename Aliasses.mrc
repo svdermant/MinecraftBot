@@ -386,6 +386,7 @@ alias ChatLog {
   set %csec [Not Secure] [Server]
   set %ccp Craft-Planer-Thread
   set %ccp2 [Craft-Planer-Thread]
+  set %sec2 [Not Secure] [Rcon]
   if (%tempc.r != $read(%pfad $+ Logs\ChatLog.txt,%ic)) {
     set %tempc.r $read(%pfad $+ Logs\ChatLog.txt, %ic)
     if (Lvl isin %tempc.r) { /checklog-lvl | /halt }
@@ -399,6 +400,16 @@ alias ChatLog {
       msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat, $gettok(%ctemp.rv3mchat,1,32),32) 7,1[9▒7] 
       /halt
     }
+    if (%sec isin %temp.r) || (%sec2 isin %temp.r) {
+      set %cte.3rem-rcon $remtok(%tempc.rv2,$gettok(%tempc.rv2,2,32),1,32)
+      set %ctemp4-rcon $deltok(%cte.3rem-rcon,2-6,32)
+      set %rconprefix 14,1◄►[
+      set %rconsuffix 14,1]◄►
+      set %rconchatlabel 14,1IRC-CHAT
+      set %ctemp.rv3mchat-rcon $puttok($puttok($puttok(%ctemp4-rcon,%rconprefix,2,32),%rconsuffix,4,32),%rconmiddle,6,32)
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat-rcon, $gettok(%ctemp.rv3mchat-rcom,1,32),32) 7,1[9▒7] 
+      /halt
+    } 
   }
 }
 
@@ -420,6 +431,7 @@ Alias checklog {
   set %loginip logged in 
   var %left left the game
   set %sec [Not Secure] [Server]
+  set %sec2 [Not Secure] [Rcon]
   set %cp Craft-Planer-Thread
   set %cp2 [Craft-Planer-Thread]
   if (%temp.r != $read(%mlog, %i)) {
@@ -529,11 +541,16 @@ Alias checklog {
     if (%blocklist == on) && (%tps4 != $null) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps4 | /unset %tps4 | /halt }
     if (%regselect == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /halt }
     if (%god == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 Spieler %p in den Godmodus gesetzt | /timer.ungod1 1 3 /unset %god | /halt }
-    if (%sec isin %temp.r) { var %say.msg $remove(%temp.rv4, - $+ $chr(32) - $+ $chr(32),%te.1rem) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %say.msg %tps3 | /halt }
+    if (%sec isin %temp.r) || (%sec2 isin %temp.r) { 
+      ;; Rcon Chatnachricht wird an Chatlog geschickt.
+
+      write %pfad $+ Logs\ChatLog.txt %temp.r
+      /halt
+    }
     if (%login isin %temp.r) || (%loginip isin %temp.r) { var %log 9meldet sich an mit | var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | var %logtext $replace($gettok(%temp.r,4,32),[,$chr(32),],$chr(32),:,$chr(32)) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $gettok(%logtext, 1, 32) 9hat sich eingeloggt. | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
-    if (%say isin %temp.r) {  return | /halt }
+    if (%say isin %temp.r) { return | /halt }
     if (Timings isin %temp.rv4) || (Flushing isin %temp.rv4) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,2,46),$chr(32) $+ -)  | /halt }
     if (%laglag == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 %tps3 | /unset %laglag | /halt }
     if (Closing Server isin %temp.rv4) { unset %pid | set %serverstarted no | var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | msg %m-channel 7,1[4!7] 11 I14game11RPG 7]4▬7[ 9→11M14inecraft9← 11S14erver 4◄>14 wurde 4gestopt <► 7[4!7] | /timer.dellogs1 1 3 /run -ap cmd.exe /c DEL %pfad $+ logs\*.* /Q /F | /halt }
@@ -542,7 +559,7 @@ Alias checklog {
     if (version isin %temp.rv3) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,$gettok(%te.1,5,46)) %tps3 | /halt }
     set %cls $gettok(%te.1,2,46)
     if (%ppid == on) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $iif(%te.2rem.a isnum, $remove($remtok($instok($remtok(%temp.rv4,%te.2rem.a,0,32),%te.2rem.aPID,4,32),-,0,32),%cls),$iif(%te.2rem.a !isnum, $remove(%temp.rv4,%cls))) $iif(%command != $null, -, %command) %tps3 | /halt }
-    if (%ppid == off) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $iif(%te.2rem.a isnum, $remove($remtok($remtok(%temp.rv4,%te.2rem.a,1,32),-,0,32),%cls),$iif(%te.2rem.a !isnum, $remove(%temp.rv4,%cls))) $iif(%command != $null, -, %command) | /halt }
+    if (%ppid == off) { msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $+ $iif(%te.2rem.a isnum, $remove($remtok($remtok(%temp.rv4,%te.2rem.a,1,32),-,0,32),%cls),$iif(%te.2rem.a !isnum, $remove(%temp.rv4,%cls))) $iif(%command != $null, -, %command) %tps3 | /halt }
   }
 }
 
