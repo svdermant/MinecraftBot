@@ -14,11 +14,13 @@
 ;; Farben ändern:
 
 on *:text:!farben:#: {
-  set %f1 $chr(3) $+ $rand(1,15)
-  set %f2 $chr(3) $+ $rand(1,15)
-  set %f3 $chr(3) $+ $rand(1,15)
-
-  /timerfcode1 1 4 /msg $chan Farben wurden gändert code ist: %f1 1 %f2 2 %f3 3
+  set %f1 $chr(3) $+ $rand(3,15) 
+  set %f2 $chr(3) $+ $rand(3,15) 
+  set %f3 $chr(3) $+ $rand(3,15)
+  set %b1 $chr(31)
+  set %b2 $chr(2)
+  var %text Farben wurden Geändert
+  /timerfcode1 1 4 /msg $chan $ct(%text) 
 } 
 
 ;; !map ;;
@@ -178,7 +180,7 @@ on *:text:!say*:%m-channel: {
   if (%serverstarted == no) { msg $chan 4Fehler: 12!say4 Funktioniert nicht im Offline Mode! | /halt }
   ;;/set -u15 %say 7[11N14ot 11S14ecure7] 0[11r14Con0] 9◄7[11 I14RC4-11C14HAT7 ]9►......
   /set -u20 %say [Not Secure] [Rcon]
-  /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $2- 7(3Abgeschickt7)
+  /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $ct($2-) 7(3Abgeschickt7)
   ;;;/run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
   /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2- "
 }
@@ -4142,6 +4144,9 @@ on 100:text:!startlog*:%m-channel: {
     /set %warn 0
     /set %err 0
     /msg %m-channel ServerLog ( $+ 4 $2  $+ 's verzögerung ) und ChatLog werden Gestartet.
+    set %m-channel-chat $chr(35) $+ MC-Chat $+ $rand(100,1000) $+ $rand(A,z) $+ $rand(A,z)
+    msg %m-channel Chatnachrichten Werden jetzt im %m-channel-chat gepostet.
+    /join %m-channel-chat 
     /halt
   }
   else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
@@ -4174,7 +4179,9 @@ on 100:text:!stoplogging:%m-channel: {
     dec %maxtimer
   }
   msg %m-channel Timer aktiv
-  msg %m-channel Logging wird gestoppt 
+  msg %m-channel Logging wird gestoppt verlasse %m-channel-chat
+  /part %m-channel-chat $ct(Systemlog & Chatlog deaktiviert)
+  /unset %m-channel-chat
 }
 
 ;;; Rcon Password Generator

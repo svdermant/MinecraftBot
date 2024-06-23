@@ -397,7 +397,16 @@ alias ChatLog {
       set %cte.3rem $remtok(%tempc.rv2,$gettok(%tempc.rv2,2,32),1,32)
       set %ctemp4 $remtok(%cte.3rem,$gettok(%cte.3rem,4,32),1,32) 
       set %ctemp.rv3mchat $remtok(%ctemp4,$gettok(%ctemp4,3,32),1,32)
-      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat, $gettok(%ctemp.rv3mchat,1,32),32) 7,1[9▒7] 
+
+      set %messtime $gettok(%tempc.rv,1,32)
+      set %sender $gettok(%tempc.rv,7,32)
+      set %message $deltok(%tempc.rv,1-7,32) 
+      msg %m-channel-chat 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 14[11M10C-11C11hat14]10=14[11N10achricht14] 7,1[9▒7]
+      msg %m-channel-chat 14[11A10bsender14]:10 $ct($remove(%sender,<,>))
+      msg %m-channel-chat 14[11G10esendet14 11U10m14]:10 %messtime
+      msg %m-channel-chat 14[11N10achricht14]:10 $ct(%message)
+      msg %m-channel-chat 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 ===========
+      ;;;msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat, $gettok(%ctemp.rv3mchat,1,32),32) 7,1[9▒7] 
       /halt
     }
     if (%sec isin %temp.r) || (%sec2 isin %temp.r) {
@@ -407,7 +416,7 @@ alias ChatLog {
       set %rconsuffix 14,1]◄►
       set %rconchatlabel 14,1IRC-CHAT
       set %ctemp.rv3mchat-rcon $puttok($puttok($puttok(%ctemp4-rcon,%rconprefix,2,32),%rconsuffix,4,32),%rconmiddle,6,32)
-      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat-rcon, $gettok(%ctemp.rv3mchat-rcom,1,32),32) 7,1[9▒7] 
+      msg %m-channel-chat 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $remtok(%ctemp.rv3mchat-rcon, $gettok(%ctemp.rv3mchat-rcom,1,32),32) 7,1[9▒7] 
       /halt
     } 
   }
@@ -547,6 +556,7 @@ Alias checklog {
       write %pfad $+ Logs\ChatLog.txt %temp.r
       /halt
     }
+    if (Thread RCON Client isin %temp.r) && (shutting down isin %temp.r) { /halt }
     if (%login isin %temp.r) || (%loginip isin %temp.r) { var %log 9meldet sich an mit | var %log2 9meldet sich an mit14,1 | var %cls $gettok(%te.1,2,46) | var %logtext $replace($gettok(%temp.r,4,32),[,$chr(32),],$chr(32),:,$chr(32)) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1 $gettok(%logtext, 1, 32) 9hat sich eingeloggt. | /halt } 
     if (%left isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]14,1  $remove(%temp.rv4,%cls,%te.1rem) 14,1 | /halt } 
     if (%scom isin %temp.r) { var %cls $gettok(%te.1,2,46) | msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]0,1 $remove(%temp.rv4,%cls,%te.1rem) | /halt }
@@ -1100,5 +1110,13 @@ alias Zeilenentfernen {
 ;; ======
 
 alias ct {
-  return $regsubex($1-,/(?<= |^)(\S)/g,%c1\1 $+ %c2)
+  return $regsubex($1-,/(?<= |^)(\S)/g,%f2 $+ %b2 $+ %b1\1 $+ %f1 $+ %b2 $+ %b1)
+}
+
+;; Alias ub ;;
+;; Text Fett und Unterstrichen
+;; ======
+
+alias ub {
+  return $regsubex($1-,/(?<= |^)(\S)/g,%b1\1 $+ %b1)
 }
