@@ -530,7 +530,7 @@ Alias checklog {
       write %pfad $+ Logs\ChatLog.txt %temp.r
       var -s %maxchatlines $lines(%pfad $+ Logs\ChatLog.txt)
       inc %chatmess
-      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $ct( %chatmess Neue Chatnachricht in) %m-channel-chat $ct(Gepostet. Gesamt:) 7,1[9 %maxchatlines 7] 
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $ct( %chatmess $iif(%chatmess >= 1,Neue Chatnachricht in,Neue Chatnachrichten in) ) %m-channel-chat $ct(Gepostet. Gesamt:) 7,1[9 %maxchatlines 7] 
       /halt
     }
     if (%named isin %temp.r) { 
