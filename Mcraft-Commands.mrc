@@ -12,6 +12,35 @@
 ;; !help 
 
 ;; Farben ändern:
+[Variablenchecker]
+;; !checkvar ;;
+;; Prüft ob eine Variable gesetzt wurde oder nicht...
+
+on 100:text:!checkvar*:%m-channel: {
+  set %cvar $2
+  if ($2 == rcon_password) { 
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 $ct(Variablen Checker:)
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 $ct(Aus Sicherheitsgründen wird der wert dieser Variabe nicht angezeigt)
+    /halt
+  }
+  set %varcount $var($chr(37) $+ $2 $+ $chr(42),0)
+  if (%varcount == 1) {
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 $ct(Variablen Checker:)
+    msg %m-channel $ct(Die Variable) 7 $+ $chr(37) $+ $2 $ct(Gibt es) 12 $+ $var($chr(37) $+ %cvar $+ $chr(42),0) $ct(mal und hat den Wert:) 4 $var($chr(37) $+ %cvar $+ $chr(42),1).value
+  }
+  if (%varcount > 1) {
+    msg %m-channel 7,1[9▒7] 11I14game11RPG 4→11M14inecraft4← 7[9▒7,1]0,1 $ct(Variablen Checker:)
+    msg %m-channel $ct(Die Variable) 7 $+ $chr(37) $+ $2 $ct(Gibt es) 12 $+ $var($chr(37) $+ %cvar $+ $chr(42),0) $ct(mal)   
+    msg %m-channel $ct(Folgende Daten werden ausgelesen)
+    set %maxcount $var($chr(37) $+ %cvar $+ $chr(42),0)
+    var %x 1
+    while (%x <= %maxcount) {
+      msg %m-channel $ct(Die Variable) 7 $+ $var($chr(37) $+ %cvar $+ $chr(42),%x) $ct(hat den Wert:) $iif($var($chr(37) $+ %cvar $+ $chr(42),%x).value != $null,$var($chr(37) $+ %cvar $+ $chr(42),%x).value, 12N/A)
+      inc %x
+    }
+  }
+}
+
 
 on *:text:!farben:#: {
   set %f1 $chr(3) $+ $rand(3,15) 
@@ -176,11 +205,11 @@ on 100:text:!recreate*:%m-channel: {
 
 ;;;;;; Say (Servernachricht Verschicken) ;;;;;;;;;;;;;;;;;;
 
-on *:text:!say*:%m-channel: {
+on *:text:!say*:%m-channel-chat: {
   if (%serverstarted == no) { msg $chan 4Fehler: 12!say4 Funktioniert nicht im Offline Mode! | /halt }
   ;;/set -u15 %say 7[11N14ot 11S14ecure7] 0[11r14Con0] 9◄7[11 I14RC4-11C14HAT7 ]9►......
   /set -u20 %say [Not Secure] [Rcon]
-  /timersays1 1 3 /msg %m-channel 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $ct($2-) 7(3Abgeschickt7)
+  /timersays1 1 3 /msg %m-channel-chat 7,1[9▒7] 11S14erver 11N14achricht4:7 7,1[4Broadcast7]9 $ct($2-) 7(3Abgeschickt7)
   ;;;/run rcon.exe -a localhost:25575 -p %rcon_password "say &8[&9IRC-CHAT&8] &1|&2[ $+ &3 $+ $nick $+ &2]&1| &7 $2-"
   /timersays2 1 3 /run rcon.exe -a localhost:25575 -p %rcon_password "say ◄►[ IRC-CHAT ]◄►  $nick  ◄► $2- "
 }
@@ -4152,6 +4181,10 @@ on 100:text:!startlog*:%m-channel: {
     msg %m-channel Chatnachrichten Werden jetzt im %m-channel-chat gepostet.
     /join %m-channel-chat 
     /halt
+    if (%ServerPLs != $null) { 
+      /unset %ServerPLs
+      $GeneratePlugins
+    }
   }
   else { msg %m-channel Die Sekunden dürfen nicht größer als 60s betragen } 
 }

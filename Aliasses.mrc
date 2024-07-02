@@ -1,4 +1,4 @@
-;;;;;; MinecraftBot ;;;;;;;; V1.1b
+n;;;;;; MinecraftBot ;;;;;;;; V1.1b
 ;;;;;; Author: Serkons
 ;;;;;; Githubname: Svdermant
 ;;;;;; GithubRepo: https://github.com/svdermant/MinecraftBot/
@@ -197,7 +197,7 @@ alias system_defaults_check {
   if (%rcon3 != $null) || (%rcon3 == $null) { set %rcon3 /INFO]: }
   if (%valid-settings != $null) || (%valid-settings == $null) { set %valid-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.fuction-permission-level.gamemode.generate-structures.hide-online-players.level-name.max-players.motd.pvp.server-port.simulation-distance.spawn-animals.spawn-monsters.spawn-npcs.spawn-protection.white-list }
   if (%true-false-settings != $null) || (%true-false-settings == $null) { set %true-false-settings allow-nether.level-type.allow-flight.broadcast-console-to-ops.broadcast-rcon-to-ops.debug.difficulty.enable-command-block.enable-rcon.enable-status.enforce-secure-profile.enforce-whitelist.force-gamemode.gamemode.generate-structures.hide-online-players.level-name.spawn-animals.spawn-monsters.spawn-npcs.whitelist }
-  if (%level != $null) || (%level == $null) { set %level level-type }
+  if (%level != $null) || (%level == $null) { set %level $read(%mProp,w,level-name*) }
   if (%num-settings != $null) || (%num-settings == $null) { set %num-settings fuction-permission-level.max-players.server-port.simulation-distance.spawn-protection }
   if (%moblist != $null) || (%moblist == $null) { set %moblist piglinbrute.snowman.panda.bee.axolotl.zoglin.cow.furnaceminecart.pig.spawnerminecart.allay.skeleton.llama.mule.bat.husk.frog }
   if (%moblist2 != $null) || (%moblist2 == $null) { set %moblist2 hoglin.zombiehorse.rabbit.silverfish.zombievillager.giant.drowned.enderdragon.dolphin.elderguardian.stray.shulker.turtle.chestminecart }
@@ -548,7 +548,7 @@ Alias checklog {
       write %pfad $+ Logs\ChatLog.txt %temp.r
       var -s %maxchatlines $lines(%pfad $+ Logs\ChatLog.txt)
       inc %chatmess
-      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $ct( %chatmess $iif(%chatmess >= 1,Neue Chatnachricht in,Neue Chatnachrichten in) ) %m-channel-chat $ct(Gepostet. Gesamt:) 7,1[9 %maxchatlines 7] 
+      msg %m-channel 7,1[9▒7] 4→11M14inecraft4← 7[9▒7,1]9,1 $ct( %chatmess $iif(%chatmess >= 1,Neue Chatnachrichten in,Neue Chatnachricht in) ) %m-channel-chat $ct(Gepostet. Gesamt:) 7,1[9 %maxchatlines 7] 
       /halt
     }
     if (%named isin %temp.r) { 
@@ -726,7 +726,7 @@ alias serverresult {
   msg %m-channel 10,1 $+ %head003 7 Nether Erlauben: 4 $+ %allow-nether  %head002 7 Flugmodus Aktiv: 4 $+ %allow-flight %head002 7 Ausgabe der Consolenbefehle zu Ops senden: 4 $+ %settings.5.result %head002 7 RCON Befehle an OPS senden: 4 %broadcast-rcon-to-ops %head003 
   msg %m-channel 10,1 $+ %head003 7 Debug Modus: 8 $+ %debug %head002 7 Schwierigkeitsgrad: 8 $+ %difficulty %head002 7 Befehlsblöcke erlauben: 4 $+ %enable-command-block %head002 7 Remotezugriff: 4 $+ %enable-rcon %head002 7 Server in der Serverliste anzeigen: 4 $+ %enable-status %head003
   msg %m-channel 10,1 $+ %head003 7Nur Mojang Accounts: 4 $+ %enforce-secure-profile %head002 7 Privater Zugang: 4 $+ %enforce-whitelist %head002 7 Erzwungener Spielmodus: 8 $+ %force-gamemode %head002 7 Funktionslevel: 8 $+ %function-permission-level %head003 
-  msg %m-channel 10,1 $+ %head003 7Spielmodus: 8 $+ %gamemode %head002 7 Strukturen erzeugen: 4 $+ %generate-structures %head002 7 Online Spieler verstecken: 4 $+ %hide-online-players %head002 7 Hauptwelt: 8 $+ %level %head003 
+  msg %m-channel 10,1 $+ %head003 7Spielmodus: 8 $+ %gamemode %head002 7 Strukturen erzeugen: 4 $+ %generate-structures %head002 7 Online Spieler verstecken: 4 $+ %hide-online-players %head002 7 Hauptwelt: 8 $+ %level-name %head003 
   msg %m-channel 10,1 $+ %head003 7 Seed: 4 $iif(%level-seed == $null, 4 Zufällig  , $+ %level-seed) %head002 7 Welttyp: 8 $+ $remove(%level-type,minecraft\:) %head002 7 Max Spieler: 12 $+ %max-players %head002 7 Weltgrenze liegt bei: 12 $+ %max-world-size 7Blöcken %head002 7 MOTD: 8 $+ %motd %head002 7 PVP: 4 $+ %pvp %head003
   msg %m-channel 10,1 $+ %head003 7Serverport: 12 $+ %server-port %head002 7 Simulationsentfernung: 12 %simulation-distance %head002 7 Tiere erzeugen: 04 $+ %spawn-animals %head002 7 Monster erzeugen: 04 $+ %spawn-monsters %head003
   msg %m-channel 10,1 $+ %head003 7 NPC's erzeugen: 04 $+ %spawn-npcs %head002 7 Spawn Schutz: 12 $+ %spawn-protection 7Blöcke %head002 7 Privater Server: 04 $+ %white-list %head003
